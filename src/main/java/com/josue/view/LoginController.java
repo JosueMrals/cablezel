@@ -2,6 +2,7 @@
 package com.josue.view;
 
 
+import com.josue.dao.GenericDao;
 import com.josue.modelo.Conexion;
 import java.net.URL;
 import java.sql.SQLException;
@@ -9,13 +10,12 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.josue.modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -39,7 +39,23 @@ public class LoginController implements Initializable {
     
     @FXML
     void iniciarSesion(ActionEvent evt) {
-        Conexion con = new Conexion();
+        try{
+            Usuario us = new Usuario();
+            us.setId(1L);
+            us.setNombres("Yesser");
+            us.setApellidos("Miranda");
+            us.setNick("yesser97");
+            us.setClave("12345678");
+
+            GenericDao.getInstance().insertar(us);
+        }
+        catch(Exception e)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+
+        /*Conexion con = new Conexion();
         
         try {
             ResultSet rs = con.CONSULTAR("SELECT * FROM usuarios WHERE usuario='" + cjUser.getText().trim() + "' AND contrasena='" + cjPassword.getText().trim() + "'; ");
@@ -50,7 +66,7 @@ public class LoginController implements Initializable {
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     
 }
