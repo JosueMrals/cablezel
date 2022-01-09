@@ -2,8 +2,11 @@
 package com.josue.view;
 
 
+import com.josue.cablezelmnv.Main;
 import com.josue.dao.GenericDao;
 import com.josue.modelo.Conexion;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -14,8 +17,11 @@ import java.util.logging.Logger;
 import com.josue.modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -68,5 +74,10 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }
-    
+
+
+    public void mostrarRegistrar(ActionEvent actionEvent) {
+
+
+    }
 }

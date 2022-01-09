@@ -8,6 +8,7 @@ module com.josue.cablezelmnv {
 
     opens com.josue.cablezelmnv to javafx.fxml,javafx.graphics;
     opens com.josue.view to javafx.fxml;
+    opens com.josue.modelo to Usuario;
     requires javafx.graphicsEmpty;
     requires java.base;
     requires org.hibernate.orm.core;

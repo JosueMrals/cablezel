@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.SignUpController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.SignUpController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,16 +15,16 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="68.0" layoutY="293.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="164.0" text="Registrar" />
-            <TextField layoutX="54.0" layoutY="100.0" prefHeight="28.0" prefWidth="192.0" />
-            <Label layoutX="82.0" layoutY="52.0" prefHeight="28.0" prefWidth="136.0" text="Hello , Friend">
+            <Button fx:id="txtRegistrar" layoutX="68.0" layoutY="293.0" mnemonicParsing="false" onAction="#registrarUsuarios" prefHeight="41.0" prefWidth="164.0" text="Registrar" />
+            <TextField fx:id="txtNombres" layoutX="54.0" layoutY="100.0" prefHeight="28.0" prefWidth="192.0" promptText="Nombres" />
+            <Label layoutX="82.0" layoutY="56.0" prefHeight="28.0" prefWidth="136.0" text="Hello , Friend">
                <font>
                   <Font name="HP Simplified Light" size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="54.0" layoutY="142.0" prefHeight="28.0" prefWidth="192.0" />
-            <TextField layoutX="54.0" layoutY="180.0" prefHeight="28.0" prefWidth="192.0" />
-            <TextField layoutX="54.0" layoutY="223.0" prefHeight="28.0" prefWidth="192.0" />
+            <TextField fx:id="txtApellidos" layoutX="54.0" layoutY="142.0" prefHeight="28.0" prefWidth="192.0" promptText="Apellidos" />
+            <TextField fx:id="txtNick" layoutX="54.0" layoutY="180.0" prefHeight="28.0" prefWidth="192.0" promptText="Usuario" />
+            <TextField fx:id="txtClave" layoutX="54.0" layoutY="223.0" prefHeight="28.0" prefWidth="192.0" promptText="Contraseña" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(80,178,255);" GridPane.columnIndex="1">
