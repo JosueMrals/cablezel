@@ -1,5 +1,6 @@
 package com.josue.cablezelmnv;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger;
 import javafx.application.Application;
@@ -24,10 +25,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
          
         try {
-            FXMLLoader loader = new FXMLLoader();
-            GridPane padre = loader.load(getClass().getResourceAsStream("/fxml/SignUp.fxml"));
-            // AnchorPane root = loader.load(getClass().getResourceAsStream("/fxml/SignUp.fxml"));
-            Scene scene = new Scene(padre);
+            //FXMLLoader loader = new FXMLLoader();
+           // GridPane padre = loader.load(getClass().getResourceAsStream("/fxml/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main_Interface.fxml"));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
             primaryStage.setTitle("Hello Word");
             primaryStage.setScene(scene);
             primaryStage.show();
