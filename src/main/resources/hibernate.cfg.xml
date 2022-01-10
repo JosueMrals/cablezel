@@ -7,8 +7,8 @@
 
         <property name="connection.url">jdbc:postgresql://localhost:5432/cablezel</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
-        <property name="connection.username">yesser</property> <!-- DB User -->
-        <property name="connection.password">Ingeniero.1</property> <!-- DB Password -->
+        <property name="connection.username">cablezel</property> <!-- DB User -->
+        <property name="connection.password">1234</property> <!-- DB Password -->
 
         <property name="dialect">org.hibernate.dialect.PostgreSQL92Dialect</property> <!-- DB Dialect -->
         <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->

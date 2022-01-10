@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.MainInterfaceController">
+   <children>
+      <Pane prefHeight="1101.0" prefWidth="259.0" style="-fx-background-color: rgb(80,178,255);">
+         <children>
+            <Label layoutX="35.0" layoutY="32.0" prefHeight="49.0" prefWidth="176.0" text="CABLEZEL" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Arial Black" size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="391.0" prefHeight="49.0" prefWidth="176.0" text="Dashboard" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="489.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="176.0" text="Contratos" textAlignment="CENTER" textFill="#6b6f7e" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="440.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="176.0" text="Clientes" textAlignment="CENTER" textFill="#6b6f7e" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="538.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="176.0" text="Facturar" textAlignment="CENTER" textFill="#6b6f7e" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="587.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="176.0" text="Gestiones" textAlignment="CENTER" textFill="#6b6f7e" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="81.0" layoutY="216.0" prefHeight="49.0" prefWidth="176.0" text="poxs44" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Separator layoutX="23.0" layoutY="809.0" prefWidth="200.0" />
+            <Button layoutX="43.0" layoutY="834.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="160.0" text="Cerrar Sesión" />
+            <ImageView fitHeight="122.0" fitWidth="130.0" layoutX="62.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/user78.png" />
+            </ImageView>
+         </children>
+      </Pane>
+      <Separator layoutX="256.0" layoutY="2.0" orientation="VERTICAL" prefHeight="1098.0" prefWidth="0.0" />
+      <Pane layoutX="256.0" layoutY="2.0" prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: rgb(56,57,61)black;">
+         <children>
+            <ImageView fitHeight="202.0" fitWidth="259.0" layoutX="61.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/antena-parabolica256.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+   </children>
+</AnchorPane>
