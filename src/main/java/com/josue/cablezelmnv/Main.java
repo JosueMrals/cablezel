@@ -7,11 +7,13 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -32,6 +34,7 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Hello Word");
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
             primaryStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
