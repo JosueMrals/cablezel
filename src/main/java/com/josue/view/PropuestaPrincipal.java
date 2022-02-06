@@ -34,18 +34,19 @@ public class PropuestaPrincipal implements Initializable {
     public void cambiarStyle(Object o)
     {
         Label etiqueta = (Label) o;
-        etiqueta.setFont(new Font("System Bold", 24.0));
+        etiqueta.setFont(new Font("System Regular", 16.0));
+
     }
 
     public void quitarStyle(Object o)
     {
         Label etiqueta = (Label) o;
-        etiqueta.setFont(new Font("System Bold", 20.0));
+        etiqueta.setFont(new Font("System Regular", 16.0));
     }
 
     public void mostrar_clientes(MouseEvent mouseEvent) {
         cambiarStyle(lbClientes);
-        quitarStyle(lbContratos);1
+        quitarStyle(lbContratos);
         quitarStyle(lbDashboard);
         quitarStyle(lbGestiones);
         try {
