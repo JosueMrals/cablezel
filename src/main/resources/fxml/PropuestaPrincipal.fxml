@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.Button?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+   <left>
+      <Pane prefHeight="1101.0" prefWidth="254.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="58.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Arial Black" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDashboard" layoutX="64.0" layoutY="385.0" prefHeight="49.0" prefWidth="175.0" text="Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbContratos" layoutX="62.0" layoutY="489.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="176.0" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbClientes" layoutX="64.0" layoutY="440.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="176.0" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbFacturar" layoutX="62.0" layoutY="538.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="176.0" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbGestiones" layoutX="62.0" layoutY="587.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="176.0" text="Gestiones" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="95.0" layoutY="118.0" prefHeight="49.0" prefWidth="68.0" text="poxs44" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="74.0" fitWidth="106.0" layoutX="84.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/user78.png" />
+            </ImageView>
+            <Label fx:id="lbGestiones1" layoutX="53.0" layoutY="986.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="176.0" text="Cerrar Sesion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="140.0" layoutX="31.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/antena-parabolica256.png" />
+               </image>
+            </ImageView>
+
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

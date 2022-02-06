@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.MainInterfaceController">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.MainInterfaceController">
    <children>
-      <Pane prefHeight="1101.0" prefWidth="259.0" style="-fx-background-color: rgb(80,178,255);">
+      <Pane fx:id="panel_vertical" prefHeight="1101.0" prefWidth="259.0" style="-fx-background-color: rgb(80,178,255);">
          <children>
             <Label layoutX="35.0" layoutY="32.0" prefHeight="49.0" prefWidth="176.0" text="CABLEZEL" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <font>
@@ -52,7 +52,7 @@
          </children>
       </Pane>
       <Separator layoutX="256.0" layoutY="2.0" orientation="VERTICAL" prefHeight="1098.0" prefWidth="0.0" />
-      <Pane layoutX="256.0" layoutY="2.0" prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: rgb(56,57,61)black;">
+      <Pane fx:id="panel_horizontal" layoutX="256.0" layoutY="2.0" prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: rgb(56,57,61)black;">
          <children>
             <ImageView fitHeight="202.0" fitWidth="259.0" layoutX="61.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                <image>

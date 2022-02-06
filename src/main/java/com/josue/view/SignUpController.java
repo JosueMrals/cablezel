@@ -3,12 +3,16 @@ package com.josue.view;
 
 import com.josue.dao.GenericDao;
 import com.josue.modelo.Usuario;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +22,7 @@ public class SignUpController implements Initializable {
     @FXML TextField txtApellidos;
     @FXML TextField txtNick;
     @FXML TextField txtClave;
+    @FXML Label txtCerrar;
 
 
     @Override
@@ -56,5 +61,10 @@ public class SignUpController implements Initializable {
 
 
 
+    }
+
+    @FXML
+    public void cerrarRegistrarseMouseClick(MouseEvent mouseEvent) {
+        Platform.exit();
     }
 }

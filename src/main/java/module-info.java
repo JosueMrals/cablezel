@@ -13,4 +13,8 @@ module com.josue.cablezelmnv {
     requires java.base;
     requires org.hibernate.orm.core;
     requires java.persistence;
+    requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.javafx;
+    // add icon pack modules
+
 }
