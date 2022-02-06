@@ -35,7 +35,6 @@ public class PropuestaPrincipal implements Initializable {
     {
         Label etiqueta = (Label) o;
         etiqueta.setFont(new Font("System Bold", 24.0));
-        etiqueta.setTextFill(new Color(107.0, 111.0, 126.0));
     }
 
     public void quitarStyle(Object o)
@@ -46,7 +45,7 @@ public class PropuestaPrincipal implements Initializable {
 
     public void mostrar_clientes(MouseEvent mouseEvent) {
         cambiarStyle(lbClientes);
-        quitarStyle(lbContratos);
+        quitarStyle(lbContratos);1
         quitarStyle(lbDashboard);
         quitarStyle(lbGestiones);
         try {
