@@ -47,6 +47,11 @@
             <artifactId>ikonli-bootstrapicons-pack</artifactId>
             <version>12.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome-pack</artifactId>
+            <version>12.3.0</version>
+        </dependency>
 
     </dependencies>
     <build>
