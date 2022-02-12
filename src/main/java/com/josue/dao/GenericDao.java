@@ -45,4 +45,28 @@ public class GenericDao {
         }
         return retorno;
     }
+
+    public boolean eliminar(Object o)
+    {
+        boolean retorno = false;
+        Session session = factory.openSession();
+        try {
+            transaccion = session.beginTransaction();
+            session.delete(o);
+            transaccion.commit();
+            retorno = true;
+        }
+        catch (Exception e)
+        {
+            transaccion.rollback();
+            retorno = false;
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        return retorno;
+
+    }
+
 }

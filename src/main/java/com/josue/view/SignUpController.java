@@ -24,7 +24,6 @@ public class SignUpController implements Initializable {
     @FXML TextField txtClave;
     @FXML Label txtCerrar;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
