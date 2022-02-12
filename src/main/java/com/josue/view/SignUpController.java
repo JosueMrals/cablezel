@@ -24,7 +24,6 @@ public class SignUpController implements Initializable {
     @FXML TextField txtClave;
     @FXML Label txtCerrar;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -45,6 +44,7 @@ public class SignUpController implements Initializable {
             us.setClave(clave);
 
             GenericDao.getInstance().insertar(us);
+            //GenericDao.getInstance().eliminar(us);
 
             txtNombres.clear();
             txtApellidos.clear();
@@ -58,8 +58,6 @@ public class SignUpController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
-
-
 
     }
 
