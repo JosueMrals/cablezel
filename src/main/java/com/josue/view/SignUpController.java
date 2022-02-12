@@ -23,6 +23,10 @@ public class SignUpController implements Initializable {
     @FXML TextField txtNick;
     @FXML TextField txtClave;
     @FXML Label txtCerrar;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3f3e01762a6f5cd0dc7e62ed624ba3178c8629d
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

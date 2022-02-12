@@ -1,5 +1,6 @@
 package com.josue.view;
 
+<<<<<<< HEAD
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,6 +34,16 @@ public class MainInterfaceController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+=======
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
+
+public class MainInterfaceController {
+
+
+    public void mostrar_clientes(MouseEvent mouseEvent) {
+>>>>>>> f3f3e01762a6f5cd0dc7e62ed624ba3178c8629d
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Mostrando clientes" , ButtonType.OK);
         alert.showAndWait();
