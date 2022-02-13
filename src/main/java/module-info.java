@@ -17,5 +17,6 @@ module com.josue.cablezelmnv {
     requires org.kordamp.ikonli.javafx;
     // add icon pack modules
     requires org.kordamp.ikonli.fontawesome;
+    requires org.kordamp.bootstrapfx.core;
 
 }
