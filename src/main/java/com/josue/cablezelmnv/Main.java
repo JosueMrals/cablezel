@@ -26,7 +26,7 @@ public class Main extends Application {
         try {
             //FXMLLoader loader = new FXMLLoader();
            // GridPane padre = loader.load(getClass().getResourceAsStream("/fxml/SignUp.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
             Pane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setTitle("Interfaz Principal");

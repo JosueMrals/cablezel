@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+<BorderPane fx:id="panelPadre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
    <left>
       <Pane prefHeight="1101.0" prefWidth="254.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
          <children>
@@ -71,15 +70,6 @@
       </Pane>
    </left>
    <center>
-      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="137.0" fitWidth="140.0" layoutX="31.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/antena-parabolica256.png" />
-               </image>
-            </ImageView>
-
-         </children>
-      </Pane>
+      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
