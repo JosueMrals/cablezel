@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 /**
  *
  * @author Josh
@@ -26,8 +25,14 @@ public class Main extends Application {
         try {
             //FXMLLoader loader = new FXMLLoader();
            // GridPane padre = loader.load(getClass().getResourceAsStream("/fxml/SignUp.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
-            Pane root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            FXMLLoader cargadorclientes = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+
+            BorderPane root = loader.load();
+            Pane clientes = cargadorclientes.load();
+
+            root.setCenter(clientes);
+
             Scene scene = new Scene(root);
             primaryStage.setTitle("Interfaz Principal");
             primaryStage.setScene(scene);
