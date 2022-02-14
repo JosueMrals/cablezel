@@ -51,7 +51,7 @@
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-users" iconSize="22" layoutX="14.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-text-o" iconSize="22" layoutX="16.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-cogs" iconSize="22" layoutX="15.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="571.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="571.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -70,6 +70,6 @@
       </Pane>
    </left>
    <center>
-      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

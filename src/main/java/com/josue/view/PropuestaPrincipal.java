@@ -16,8 +16,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.kordamp.desktoppanefx.scene.layout.DesktopPane;
-import org.kordamp.desktoppanefx.scene.layout.InternalWindow;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -25,11 +23,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PropuestaPrincipal extends Application implements Initializable {
+    public BorderPane panelPadre;
     @FXML Label lbDashboard;
     @FXML Label lbContratos;
     @FXML Label lbClientes;
     @FXML Label lbGestiones;
-    private static int count = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,24 +37,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
     @Override
     public void start(Stage stage) throws Exception {
 
-        DesktopPane desktopPane = new DesktopPane();
-        Button newWindow = new Button("New Window");
-        newWindow.setOnAction(e -> {
-            InternalWindow window = new InternalWindow(
-                    "window-" + count,
-                    new FontIcon("mdi-application:20"),
-                    "Title " + count++,
-                    new Label("Content"));
-            desktopPane.addInternalWindow(window);
-        });
-
-        BorderPane mainPane = new BorderPane();
-        mainPane.setPrefSize(800, 600);
-        mainPane.setTop(newWindow);
-        mainPane.setCenter(desktopPane);
-
-        stage.setScene(new Scene(mainPane));
-        stage.show();
     }
 
     public void mostrar_contratos(MouseEvent mouseEvent) {
@@ -82,8 +62,9 @@ public class PropuestaPrincipal extends Application implements Initializable {
         quitarStyle(lbGestiones);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
-            Pane root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,4 +97,14 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
 
+    public void mostrar_usuarios(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
