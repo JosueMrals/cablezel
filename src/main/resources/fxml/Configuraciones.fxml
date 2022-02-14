@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="53.0" layoutY="6.0" prefHeight="1070.0" prefWidth="1277.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Tipos de Contratos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-style: none; -fx-background-color: white;">
+                     <children>
+                        <Label layoutX="479.0" layoutY="29.0" prefHeight="35.0" prefWidth="238.0" text="Tipos de Contratos">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="132.0" layoutY="98.0" prefHeight="42.0" prefWidth="130.0" text="Tipo de contrato">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="132.0" layoutY="241.0" prefHeight="42.0" prefWidth="130.0" text="Descripcion">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="132.0" layoutY="175.0" prefHeight="42.0" prefWidth="180.0" text="Cantidad de televisores">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="132.0" layoutY="140.0" prefHeight="25.0" prefWidth="359.0" style="-fx-border-style: none; -fx-background-color: white;" />
+                        <TextField layoutX="132.0" layoutY="214.0" prefHeight="25.0" prefWidth="359.0" style="-fx-border-style: none; -fx-background-color: white;" />
+                        <TextArea layoutX="132.0" layoutY="280.0" prefHeight="110.0" prefWidth="360.0" />
+                        <Separator layoutX="132.0" layoutY="163.0" prefHeight="13.0" prefWidth="360.0" />
+                        <Separator layoutX="132.0" layoutY="235.0" prefHeight="13.0" prefWidth="360.0" />
+                        <TableView layoutX="89.0" layoutY="530.0" prefHeight="416.0" prefWidth="1039.0">
+                          <columns>
+                            <TableColumn prefWidth="308.0" text="Tipo de Contrato" />
+                            <TableColumn prefWidth="141.0" text="Cantidad de Televisores" />
+                              <TableColumn prefWidth="449.0" text="Descripcion" />
+                          </columns>
+                        </TableView>
+                        <TextField layoutX="89.0" layoutY="500.0" prefHeight="25.0" prefWidth="389.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="482.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
+                        <Label layoutX="89.0" layoutY="458.0" prefHeight="42.0" prefWidth="180.0" text="Buscar Contrato">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <FontIcon iconLiteral="fa-file-text-o" iconSize="200" layoutX="822.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Barrios">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: White;">
+                     <children>
+                        <Label layoutX="537.0" layoutY="38.0" text="Barrios">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="133.0" layoutY="131.0" prefHeight="26.0" prefWidth="157.0" text="Nombre del barrio">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="133.0" layoutY="156.0" prefHeight="25.0" prefWidth="287.0" style="-fx-border-style: none; -fx-background-color: White;" />
+                        <Separator layoutX="133.0" layoutY="179.0" prefHeight="10.0" prefWidth="289.0" />
+                        <Label layoutX="133.0" layoutY="189.0" prefHeight="26.0" prefWidth="157.0" text="Descripcion">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="133.0" layoutY="215.0" prefHeight="74.0" prefWidth="298.0" />
+                        <TableView layoutX="136.0" layoutY="547.0" prefHeight="354.0" prefWidth="984.0">
+                          <columns>
+                            <TableColumn prefWidth="65.0" text="Id" />
+                              <TableColumn prefWidth="292.0" text="Nombre del barrio" />
+                              <TableColumn prefWidth="292.0" text="Descripcion" />
+                          </columns>
+                        </TableView>
+                        <Pagination layoutX="406.0" layoutY="930.0" prefHeight="66.0" prefWidth="407.0" />
+                        <TextField layoutX="137.0" layoutY="512.0" prefHeight="25.0" prefWidth="345.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="489.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

@@ -31,7 +31,7 @@ public class Main extends Application {
             BorderPane root = loader.load();
             Pane clientes = cargadorclientes.load();
 
-            root.setCenter(clientes);
+            //ATENTO root.setCenter(clientes);
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("Interfaz Principal");

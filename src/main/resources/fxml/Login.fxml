@@ -6,7 +6,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="154.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.LoginController">
    <children>
-      <GridPane alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="236.0" prefWidth="426.0">
+      <GridPane alignment="CENTER" prefHeight="246.0" prefWidth="436.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="87.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="389.0" minWidth="10.0" prefWidth="340.0" />
