@@ -3,6 +3,9 @@ package com.josue.view;
 
 import com.josue.dao.GenericDao;
 import com.josue.modelo.Usuario;
+import com.josue.service.GenericServiceImpl;
+import com.josue.service.IGenericService;
+import com.josue.util.HibernateUtil;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +33,9 @@ public class SignUpController implements Initializable {
     }
 
     public void registrarUsuarios(ActionEvent actionEvent) {
+
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
+
         String nombres = txtNombres.getText();
         String apellidos = txtApellidos.getText();
         String usuario = txtNick.getText();
@@ -43,13 +49,16 @@ public class SignUpController implements Initializable {
             us.setNick(usuario);
             us.setClave(clave);
 
-            GenericDao.getInstance().insertar(us);
+            //Guardar
+            usuarioService.save(us);
+
+            //GenericDao.getInstance().insertar(us);
 
             txtNombres.clear();
             txtApellidos.clear();
             txtNick.clear();
             txtApellidos.clear();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El usuario se inserto correctamente " , ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El usuario se inserto correctamente." , ButtonType.OK);
             alert.showAndWait();
         }
         catch (Exception e)
@@ -58,12 +67,12 @@ public class SignUpController implements Initializable {
             alert.showAndWait();
         }
 
-
-
     }
 
     @FXML
     public void cerrarRegistrarseMouseClick(MouseEvent mouseEvent) {
         Platform.exit();
     }
+
+
 }

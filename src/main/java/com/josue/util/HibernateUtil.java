@@ -1,4 +1,4 @@
-package com.josue.dao;
+package com.josue.util;
 
 
 import org.hibernate.HibernateException;
