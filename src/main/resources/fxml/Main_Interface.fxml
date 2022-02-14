@@ -49,6 +49,7 @@
             <ImageView fitHeight="122.0" fitWidth="130.0" layoutX="62.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/user78.png" />
             </ImageView>
+            <Button layoutX="4.0" layoutY="651.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="252.0" text="Button" />
          </children>
       </Pane>
       <Separator layoutX="256.0" layoutY="2.0" orientation="VERTICAL" prefHeight="1098.0" prefWidth="0.0" />
