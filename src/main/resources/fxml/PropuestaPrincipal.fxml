@@ -14,7 +14,7 @@
                   <Font name="Arial Black" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="lbDashboard" layoutX="16.0" layoutY="322.0" prefHeight="49.0" prefWidth="255.0" styleClass="texto" stylesheets="@../css/style.css" text=" Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbDashboard" layoutX="16.0" layoutY="322.0" prefHeight="49.0" prefWidth="234.0" styleClass="texto" stylesheets="@../css/style.css" text=" Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -23,22 +23,22 @@
                </graphic>
 
             </Label>
-            <Label fx:id="lbContratos" layoutX="50.0" layoutY="444.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="213.0" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbContratos" layoutX="50.0" layoutY="444.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbClientes" layoutX="50.0" layoutY="384.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="212.0" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbClientes" layoutX="50.0" layoutY="384.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="202.0" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbFacturar" layoutX="50.0" layoutY="506.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbFacturar" layoutX="50.0" layoutY="506.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbGestiones" layoutX="50.0" layoutY="649.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="215.0" styleClass="texto" stylesheets="@../css/style.css" text="Configuracion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbGestiones" layoutX="50.0" layoutY="649.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Configuracion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -51,7 +51,7 @@
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-users" iconSize="22" layoutX="14.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-text-o" iconSize="22" layoutX="16.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-cogs" iconSize="22" layoutX="15.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="571.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="571.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="202.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
