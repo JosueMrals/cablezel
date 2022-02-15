@@ -47,7 +47,6 @@ public class LoginController implements Initializable {
     void iniciarSesion(ActionEvent evt) {
         try{
             Usuario us = new Usuario();
-            us.setId(1L);
             us.setNombres("Yesser");
             us.setApellidos("Miranda");
             us.setNick("yesser97");
