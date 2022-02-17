@@ -21,11 +21,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
-    @FXML TextField txtNombres;
-    @FXML TextField txtApellidos;
-    @FXML TextField txtNick;
-    @FXML TextField txtClave;
-    @FXML Label txtCerrar;
+    @FXML
+    TextField txtNombres;
+    @FXML
+    TextField txtApellidos;
+    @FXML
+    TextField txtNick;
+    @FXML
+    TextField txtClave;
+    @FXML
+    Label txtCerrar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,7 +48,6 @@ public class SignUpController implements Initializable {
 
         try {
             Usuario us = new Usuario();
-            us.setId(1L);
             us.setNombres(nombres);
             us.setApellidos(apellidos);
             us.setNick(usuario);
@@ -60,9 +64,7 @@ public class SignUpController implements Initializable {
             txtApellidos.clear();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El usuario se inserto correctamente." , ButtonType.OK);
             alert.showAndWait();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
