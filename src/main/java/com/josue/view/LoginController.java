@@ -4,7 +4,6 @@ package com.josue.view;
 
 import com.josue.cablezelmnv.Main;
 import com.josue.dao.GenericDao;
-import com.josue.modelo.Conexion;
 
 import java.io.IOException;
 import java.net.URL;
