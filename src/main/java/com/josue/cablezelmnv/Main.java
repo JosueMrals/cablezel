@@ -11,6 +11,9 @@ import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -52,6 +55,8 @@ public class Main extends Application {
 
         //Show All
         List<Usuario> clienteUsuario = clienteService.getAll();
+
+
         if (clienteUsuario != null) {
             for (Usuario c : clienteUsuario) {
                 System.out.println("Nombre: " + c.getNombres().toString());

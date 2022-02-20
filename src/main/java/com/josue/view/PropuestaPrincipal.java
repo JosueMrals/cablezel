@@ -40,6 +40,14 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_contratos(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cambiarStyle(Object o)
@@ -71,10 +79,8 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-
-
-
     public void mostrar_facturar(MouseEvent mouseEvent) {
+
     }
 
     public void mostrar_gestiones(MouseEvent mouseEvent) {
