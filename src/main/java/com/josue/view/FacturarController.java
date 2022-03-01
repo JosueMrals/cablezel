@@ -1,2 +1,4 @@
-package com.josue.view;public class FacturarController {
+package com.josue.view;
+
+public class FacturarController {
 }
