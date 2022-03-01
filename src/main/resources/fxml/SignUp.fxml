@@ -13,7 +13,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="txtRegistrar" layoutX="68.0" layoutY="293.0" mnemonicParsing="false" onAction="#registrarUsuarios" prefHeight="41.0" prefWidth="164.0" text="Registrar" />
             <TextField fx:id="txtNombres" layoutX="54.0" layoutY="100.0" prefHeight="28.0" prefWidth="192.0" promptText="Nombres" />
@@ -26,7 +26,7 @@
             <TextField fx:id="txtNick" layoutX="54.0" layoutY="180.0" prefHeight="28.0" prefWidth="192.0" promptText="Usuario" />
             <TextField fx:id="txtClave" layoutX="54.0" layoutY="223.0" prefHeight="28.0" prefWidth="192.0" promptText="Contraseña" />
          </children>
-      </AnchorPane>
+      </Pane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(80,178,255);" GridPane.columnIndex="1">
          <children>
             <Label layoutX="83.0" layoutY="145.0" prefHeight="28.0" prefWidth="136.0" text="Hola papasito">

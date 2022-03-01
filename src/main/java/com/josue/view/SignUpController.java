@@ -1,21 +1,15 @@
 package com.josue.view;
 
-
-import com.josue.dao.GenericDao;
 import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,17 +23,15 @@ public class SignUpController implements Initializable {
     TextField txtNick;
     @FXML
     TextField txtClave;
-    @FXML
-    Label txtCerrar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void registrarUsuarios(ActionEvent actionEvent) {
+    public void registrarUsuarios() {
 
-        IGenericService<Usuario> usuarioService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.getSessionFactory());
 
         String nombres = txtNombres.getText();
         String apellidos = txtApellidos.getText();
@@ -72,7 +64,7 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    public void cerrarRegistrarseMouseClick(MouseEvent mouseEvent) {
+    public void cerrarRegistrarseMouseClick() {
         Platform.exit();
     }
 

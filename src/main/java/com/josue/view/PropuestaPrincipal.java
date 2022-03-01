@@ -70,7 +70,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         quitarStyle(lbGestiones);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 
@@ -89,7 +89,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         quitarStyle(lbDashboard);
         quitarStyle(lbClientes);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Gestiones.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Configuraciones.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -105,7 +105,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     public void mostrar_usuarios(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 
