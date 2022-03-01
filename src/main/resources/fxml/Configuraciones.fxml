@@ -53,6 +53,7 @@
                            </font>
                         </Label>
                         <FontIcon iconLiteral="fa-file-text-o" iconSize="200" layoutX="822.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Button layoutX="348.0" layoutY="408.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" text="Guardar" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -88,6 +89,12 @@
                         <Pagination layoutX="406.0" layoutY="930.0" prefHeight="66.0" prefWidth="407.0" />
                         <TextField layoutX="137.0" layoutY="512.0" prefHeight="25.0" prefWidth="345.0" />
                         <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="489.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Label layoutX="137.0" layoutY="479.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Barrio">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="282.0" layoutY="356.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" text="Guardar" />
                      </children></AnchorPane>
             </content>
           </Tab>
