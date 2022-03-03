@@ -1,100 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <children>
-      <TabPane layoutX="53.0" layoutY="6.0" prefHeight="1070.0" prefWidth="1277.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="53.0" layoutY="6.0" prefHeight="692.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Tipos de Contratos">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-style: none; -fx-background-color: white;">
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="1229.0" style="-fx-border-style: none; -fx-background-color: white;">
                      <children>
-                        <Label layoutX="479.0" layoutY="29.0" prefHeight="35.0" prefWidth="238.0" text="Tipos de Contratos">
+                        <Label layoutX="205.0" layoutY="25.0" prefHeight="45.0" prefWidth="261.0" text="Tipos de Contratos">
                            <font>
-                              <Font size="26.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label layoutX="132.0" layoutY="98.0" prefHeight="42.0" prefWidth="130.0" text="Tipo de contrato">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="132.0" layoutY="241.0" prefHeight="42.0" prefWidth="130.0" text="Descripcion">
+                        <Label layoutX="48.0" layoutY="100.0" prefHeight="23.0" prefWidth="130.0" text="Tipo de contrato">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="132.0" layoutY="175.0" prefHeight="42.0" prefWidth="180.0" text="Cantidad de televisores">
+                        <Label layoutX="48.0" layoutY="220.0" prefHeight="23.0" prefWidth="130.0" text="Descripcion">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="132.0" layoutY="140.0" prefHeight="25.0" prefWidth="359.0" style="-fx-border-style: none; -fx-background-color: white;" />
-                        <TextField layoutX="132.0" layoutY="214.0" prefHeight="25.0" prefWidth="359.0" style="-fx-border-style: none; -fx-background-color: white;" />
-                        <TextArea layoutX="132.0" layoutY="280.0" prefHeight="110.0" prefWidth="360.0" />
-                        <Separator layoutX="132.0" layoutY="163.0" prefHeight="13.0" prefWidth="360.0" />
-                        <Separator layoutX="132.0" layoutY="235.0" prefHeight="13.0" prefWidth="360.0" />
-                        <TableView layoutX="89.0" layoutY="530.0" prefHeight="416.0" prefWidth="1039.0">
+                        <Label layoutX="48.0" layoutY="160.0" prefHeight="28.0" prefWidth="180.0" text="Cantidad de televisores">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtTipoContrato" layoutX="48.0" layoutY="125.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;" />
+                        <TextField fx:id="txtCantidadTv" layoutX="48.0" layoutY="185.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;" />
+                        <TextArea fx:id="txtDescripcionContrato" layoutX="48.0" layoutY="245.0" prefHeight="75.0" prefWidth="300.0" />
+                        <Separator layoutX="48.0" layoutY="145.0" prefHeight="13.0" prefWidth="300.0" />
+                        <Separator layoutX="48.0" layoutY="205.0" prefHeight="13.0" prefWidth="300.0" />
+                        <TableView fx:id="tvTipoContrato" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
                           <columns>
-                            <TableColumn prefWidth="308.0" text="Tipo de Contrato" />
-                            <TableColumn prefWidth="141.0" text="Cantidad de Televisores" />
-                              <TableColumn prefWidth="449.0" text="Descripcion" />
+                            <TableColumn fx:id="colTipoContrato" prefWidth="176.0" text="Tipo de Contrato" />
+                            <TableColumn fx:id="colCantidadTv" prefWidth="156.0" text="Cantidad de Televisores" />
+                              <TableColumn prefWidth="412.0" text="Descripcion" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="89.0" layoutY="500.0" prefHeight="25.0" prefWidth="389.0" />
-                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="482.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
-                        <Label layoutX="89.0" layoutY="458.0" prefHeight="42.0" prefWidth="180.0" text="Buscar Contrato">
+                        <TextField layoutX="450.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="800.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
+                        <Label layoutX="450.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Contrato">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <FontIcon iconLiteral="fa-file-text-o" iconSize="200" layoutX="822.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                        <Button layoutX="348.0" layoutY="408.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" text="Guardar" />
+                        <FontIcon iconLiteral="fa-file-text-o" iconSize="50" layoutX="48.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.42857360839844" />
+                        <Button fx:id="btnGuardarContrato" layoutX="185.0" layoutY="335.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="162.0" text="Guardar" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                        <Separator layoutX="415.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" />
+
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Barrios">
+          <Tab text="Lista de Barrios">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: White;">
+              <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="1220.0" style="-fx-background-color: White;">
                      <children>
-                        <Label layoutX="537.0" layoutY="38.0" text="Barrios">
+                        <Label layoutX="205.0" layoutY="25.0" text="Lista de Barrios" textAlignment="CENTER">
                            <font>
-                              <Font size="26.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label layoutX="133.0" layoutY="131.0" prefHeight="26.0" prefWidth="157.0" text="Nombre del barrio">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="133.0" layoutY="156.0" prefHeight="25.0" prefWidth="287.0" style="-fx-border-style: none; -fx-background-color: White;" />
-                        <Separator layoutX="133.0" layoutY="179.0" prefHeight="10.0" prefWidth="289.0" />
-                        <Label layoutX="133.0" layoutY="189.0" prefHeight="26.0" prefWidth="157.0" text="Descripcion">
+                        <Label layoutX="48.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Nombre del barrio">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="133.0" layoutY="215.0" prefHeight="74.0" prefWidth="298.0" />
-                        <TableView layoutX="136.0" layoutY="547.0" prefHeight="354.0" prefWidth="984.0">
+                        <TextField fx:id="txtNombreBarrio" layoutX="48.0" layoutY="125.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: White;" />
+                        <Separator layoutX="48.0" layoutY="145.0" prefHeight="10.0" prefWidth="300.0" />
+                        <Label layoutX="48.0" layoutY="160.0" prefHeight="26.0" prefWidth="157.0" text="Descripcion">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtDescripcionBarrio" layoutX="48.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0" />
+                        <TableView fx:id="tvBarrios" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
                           <columns>
-                            <TableColumn prefWidth="65.0" text="Id" />
-                              <TableColumn prefWidth="292.0" text="Nombre del barrio" />
-                              <TableColumn prefWidth="292.0" text="Descripcion" />
+                              <TableColumn fx:id="colNombreBarrio" prefWidth="300.0" text="Nombre del Barrio" />
+                              <TableColumn fx:id="colDescripcionBarrio" prefWidth="444.0" text="Descripcion del Barrio" />
                           </columns>
+
                         </TableView>
-                        <Pagination layoutX="406.0" layoutY="930.0" prefHeight="66.0" prefWidth="407.0" />
-                        <TextField layoutX="137.0" layoutY="512.0" prefHeight="25.0" prefWidth="345.0" />
-                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="489.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                        <Label layoutX="137.0" layoutY="479.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Barrio">
+                        <TextField layoutX="450.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="800.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Label layoutX="450.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Barrio">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="282.0" layoutY="356.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" text="Guardar" />
+                        <Button fx:id="btnGuardarBarrio" layoutX="185.0" layoutY="280.0" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="43.0" prefWidth="160.0" text="Guardar" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect></Button>
+                        <Separator layoutX="415.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="264.0" prefWidth="0.0" />
                      </children></AnchorPane>
             </content>
           </Tab>

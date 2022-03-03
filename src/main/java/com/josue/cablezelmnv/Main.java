@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.System.Logger;
 import java.util.List;
 
+import com.josue.modelo.Barrio;
 import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
@@ -51,10 +52,10 @@ public class Main extends Application {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        IGenericService<Usuario> clienteService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.getSessionFactory());
+        //IGenericService<Usuario> clienteService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.getSessionFactory());
 
         //Show All
-        List<Usuario> clienteUsuario = clienteService.getAll();
+        //List<Usuario> clienteUsuario = clienteService.getAll();
 
         /* if (clienteUsuario != null) {
             for (Usuario c : clienteUsuario) {
@@ -64,6 +65,15 @@ public class Main extends Application {
                 System.out.println("----------------------------------");
             }
         } */
+
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        List<Barrio> clienteBarrio = barrioService.getAll();
+        if (clienteBarrio != null) {
+            for (Barrio b : clienteBarrio) {
+                System.out.println(b.getNombre_barrio());
+                System.out.println(b.getDescripcion());
+            }
+        }
     }
 
     /**
