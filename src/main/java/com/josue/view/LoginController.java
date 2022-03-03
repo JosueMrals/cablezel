@@ -3,7 +3,6 @@ package com.josue.view;
 
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,14 +36,12 @@ public class LoginController implements Initializable {
     @FXML TableView<Usuario> table;
     @FXML TableColumn<Usuario, String> colNombre;
     @FXML TableColumn<Usuario, String> colApellidos;
-    @FXML TableColumn<Usuario, String> colNick;
     private ObservableList<Usuario> usuarios;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         IGenericService<Usuario> clienteService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
 
-        //colNick.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Nick"));
         usuarios = FXCollections.observableArrayList(clienteService.getAll());
         colNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Nombres"));
         colApellidos.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Apellidos"));
@@ -64,8 +61,6 @@ public class LoginController implements Initializable {
 
             //Guardar
             usuarioService.save(us);
-
-            //GenericDao.getInstance().insertar(us);
 
         }
         catch(Exception e)

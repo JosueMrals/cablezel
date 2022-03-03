@@ -17,6 +17,7 @@
         <property name="format_sql">true</property> <!-- Show SQL formatted -->
 
         <mapping class="com.josue.modelo.Usuario"/>
+        <mapping class="com.josue.modelo.Barrio"/>
 
     </session-factory>
 </hibernate-configuration>
