@@ -28,8 +28,8 @@ public class BarrioController implements Initializable {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
 
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("Nombre del Barrio"));
-        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
+        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvBarrios.setItems(barrios);
     }
     public void guardarBarrio() {

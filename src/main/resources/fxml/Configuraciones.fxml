@@ -88,9 +88,10 @@
                         <TextField fx:id="txtDescripcionBarrio" layoutX="48.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0" />
                         <TableView fx:id="tvBarrios" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
                           <columns>
-                              <TableColumn fx:id="colNombreBarrio" prefWidth="300.0" />
-                              <TableColumn fx:id="colDescripcionBarrio" prefWidth="444.0" />
+                              <TableColumn fx:id="colNombreBarrio" prefWidth="300.0" text="Nombre del Barrio" />
+                              <TableColumn fx:id="colDescripcionBarrio" prefWidth="444.0" text="Descripcion del Barrio" />
                           </columns>
+
                         </TableView>
                         <TextField layoutX="450.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
                         <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="800.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" />
