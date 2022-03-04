@@ -1,6 +1,7 @@
 package com.josue.view;
 
 import com.josue.modelo.Barrio;
+import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
@@ -18,19 +19,35 @@ public class BarrioController implements Initializable {
 
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
-    @FXML Button btnGuardarBarrio;
     @FXML TableView<Barrio> tvBarrios;
     @FXML TableColumn<Barrio, String> colNombreBarrio;
     @FXML TableColumn<Barrio, String > colDescripcionBarrio;
 
+    @FXML TextField txtCodigo;
+    @FXML TextField txtTipoContrato;
+    @FXML TextField txtCantidadTv;
+    @FXML TextField txtDescripcionContrato;
+    @FXML TableColumn<TipoContrato, String> colCodigo;
+    @FXML TableColumn<TipoContrato, String> colTipoContrato;
+    @FXML TableColumn<TipoContrato, String> colCantidadTv;
+    @FXML TableColumn<TipoContrato, String> colDescripcionTipoContrato;
+    @FXML TableView<TipoContrato> tvTipoContrato;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
         colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
         colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvBarrios.setItems(barrios);
+
+        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+        ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("cod_tipocontrato"));
+        colTipoContrato.setCellValueFactory(new PropertyValueFactory<>("tipo_contrato"));
+        colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
+        colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tvTipoContrato.setItems(tpContrato);
     }
     public void guardarBarrio() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
@@ -54,5 +71,36 @@ public class BarrioController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    public void guardarTipoContrato() {
+        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+
+        String cod_tipocontrato = txtCodigo.getText();
+        String tipo_contrato = txtTipoContrato.getText();
+        String cantidad_tv = txtCantidadTv.getText();
+        String descripcion = txtDescripcionContrato.getText();
+
+        try{
+            TipoContrato tc = new TipoContrato();
+            tc.setCod_tipoContrato(cod_tipocontrato);
+            tc.setTipo_contrato(tipo_contrato);
+            tc.setCantidad_tv(cantidad_tv);
+            tc.setDescripcion(descripcion);
+
+            tpContratoService.save(tc);
+
+            txtCodigo.clear();
+            txtTipoContrato.clear();
+            txtCantidadTv.clear();
+            txtDescripcionContrato.clear();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);
+            alert.showAndWait();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+
     }
 }
