@@ -7,9 +7,9 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <children>
-      <TabPane layoutX="53.0" layoutY="6.0" prefHeight="692.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="68.0" layoutY="57.0" prefHeight="692.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Tipos de Contratos">
             <content>
