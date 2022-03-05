@@ -24,12 +24,12 @@ public class TipoContrato extends Identificador{
 
     }
 
-    public String getCod_tipoContrato() {
+    public String getCod_tipocontrato() {
         return cod_tipocontrato;
     }
 
-    public void setCod_tipoContrato(String cod_tipoContrato) {
-        this.cod_tipocontrato = cod_tipoContrato;
+    public void setCod_tipocontrato(String cod_tipocontrato) {
+        this.cod_tipocontrato = cod_tipocontrato;
     }
 
     public String getTipo_contrato() {
@@ -40,20 +40,20 @@ public class TipoContrato extends Identificador{
         this.tipo_contrato = tipo_contrato;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getCantidad_tv() {
         return cantidad_tv;
     }
 
     public void setCantidad_tv(String cantidad_tv) {
         this.cantidad_tv = cantidad_tv;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 

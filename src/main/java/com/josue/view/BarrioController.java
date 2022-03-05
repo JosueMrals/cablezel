@@ -83,7 +83,7 @@ public class BarrioController implements Initializable {
 
         try{
             TipoContrato tc = new TipoContrato();
-            tc.setCod_tipoContrato(cod_tipocontrato);
+            tc.setCod_tipocontrato(cod_tipocontrato);
             tc.setTipo_contrato(tipo_contrato);
             tc.setCantidad_tv(cantidad_tv);
             tc.setDescripcion(descripcion);
