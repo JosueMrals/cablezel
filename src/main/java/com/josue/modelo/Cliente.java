@@ -1,44 +1,61 @@
 package com.josue.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "clientes")
 
 public class Cliente extends Identificador{
 
-    @Column (name = "NumeroCedula", length = 16) /*Tamaño con guiones*/
+    //Relation to Barrio table
+    @ManyToOne
+    @JoinColumn(name = "BarrioId", referencedColumnName = "id")
+    private Barrio barrio;
+
+    public Barrio getBarrio() {
+        return barrio;
+    }
+
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
+    }
+
+    //Relation to Contrato table
+    @ManyToOne
+    @JoinColumn (name = "ContratoId", referencedColumnName = "id")
+    private Contrato contrato;
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
+    //Cliente table
+    @Column (name = "num_cedula")
     private String num_cedula;
 
-    @Column (name = "PrimerNombre", length = 50)
+    @Column (name = "primer_nombre")
     private String primer_nombre;
 
-    @Column (name = "SegundoNombre", length = 50)
+    @Column (name = "segundo_nombre")
     private String segundo_nombre;
 
-    @Column (name = "PrimerApellido", length = 50)
+    @Column (name = "primer_apellido")
     private String primer_apellido;
 
-    @Column (name = "SegundoApellido", length = 50)
+    @Column (name = "segundo_apellido")
     private String segundo_apellido;
 
-    @Column (name = "Direccion", length = 100)
+    @Column (name = "direccion")
     private String direccion;
 
-    @Column (name = "Barrio")
-    private String cod_barrio;
-
-    @Column (name = "TipoCliente")
-    private String id_tipo_cliente;
-
-    @Column (name = "Numero de Telefono", length = 15)
+    @Column (name = "num_telefono")
     private String num_telefono;
 
-    public String getNum_cedula() {
-        return num_cedula;
-    }
+    public String getNum_cedula() { return num_cedula; }
 
     public void setNum_cedula(String num_cedula) {
         this.num_cedula = num_cedula;
@@ -90,22 +107,6 @@ public class Cliente extends Identificador{
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getCod_barrio() {
-        return cod_barrio;
-    }
-
-    public void setCod_barrio(String cod_barrio) {
-        this.cod_barrio = cod_barrio;
-    }
-
-    public String getId_tipo_cliente() {
-        return id_tipo_cliente;
-    }
-
-    public void setId_tipo_cliente(String id_tipo_cliente) {
-        this.id_tipo_cliente = id_tipo_cliente;
     }
 
     public Cliente(){

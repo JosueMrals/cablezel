@@ -1,13 +1,12 @@
 package com.josue.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "barrios")
 
 public class Barrio extends Identificador{
+
     @Column (name = "nombre_barrio", length = 50)
     private String nombre_barrio;
 

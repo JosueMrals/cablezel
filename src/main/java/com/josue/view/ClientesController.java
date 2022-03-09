@@ -58,8 +58,8 @@ public class ClientesController implements Initializable {
             cl.setPrimer_apellido(primerapellido);
             cl.setSegundo_apellido(segundo_apellido);
             cl.setDireccion(direccion);
-            cl.setCod_barrio(barrio);
-            cl.setId_tipo_cliente(tipocliente);
+            //cl.setCod_barrio(barrio);
+            //cl.setId_tipo_cliente(tipocliente);
             cl.setNum_telefono(numtelefono);
 
             clienteService.save(cl);
