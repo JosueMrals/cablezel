@@ -102,4 +102,15 @@ public class PropuestaPrincipal extends Application implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void editar_tipocontratos(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editar/EditarTipoContrato.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

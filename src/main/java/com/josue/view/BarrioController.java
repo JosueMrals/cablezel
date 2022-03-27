@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +34,9 @@ public class BarrioController implements Initializable {
     @FXML TableColumn<TipoContrato, String> colCantidadTv;
     @FXML TableColumn<TipoContrato, String> colDescripcionTipoContrato;
     @FXML TableView<TipoContrato> tvTipoContrato;
+    @FXML Button btnLimpiarContrato;
+    @FXML Button btnGuardarContrato;
+    @FXML Button btnEditarContrato;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,6 +53,7 @@ public class BarrioController implements Initializable {
         colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
+        colocarImagenBotones();
     }
     public void guardarBarrio() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
@@ -68,7 +74,7 @@ public class BarrioController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Nuevo Barrio Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
     }
@@ -98,9 +104,23 @@ public class BarrioController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
 
+    }
+
+    private void colocarImagenBotones() {
+        URL linkLimpiar = getClass().getResource("/images/dust.png");
+        URL linkGuardar = getClass().getResource("/images/floppy-disk.png");
+        URL linkEditar = getClass().getResource("/images/editar.png");
+
+        Image imagenLimpiar = new Image(linkLimpiar.toString(),24,24,false,true);
+        Image imagenGuardar = new Image(linkGuardar.toString(),24,24,false,true);
+        Image imagenEditar = new Image(linkEditar.toString(),24,24,false,true);
+
+        btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
+        btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));
+        btnEditarContrato.setGraphic(new ImageView(imagenEditar));
     }
 }

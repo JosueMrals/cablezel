@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <children>
       <TabPane layoutX="68.0" layoutY="57.0" prefHeight="692.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -35,9 +35,18 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtTipoContrato" layoutX="48.0" layoutY="185.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;" />
-                        <TextField fx:id="txtCantidadTv" layoutX="48.0" layoutY="245.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;" />
-                        <TextField fx:id="txtDescripcionContrato" layoutX="48.0" layoutY="305.0" prefHeight="75.0" prefWidth="300.0" />
+                        <TextField fx:id="txtTipoContrato" layoutX="38.0" layoutY="183.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
+                        <TextField fx:id="txtCantidadTv" layoutX="38.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
+                        <TextField fx:id="txtDescripcionContrato" alignment="TOP_LEFT" layoutX="45.0" layoutY="305.0" prefHeight="75.0" prefWidth="300.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
                         <Separator layoutX="48.0" layoutY="205.0" prefHeight="13.0" prefWidth="300.0" />
                         <Separator layoutX="48.0" layoutY="265.0" prefHeight="13.0" prefWidth="300.0" />
                         <TableView fx:id="tvTipoContrato" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
@@ -56,20 +65,38 @@
                            </font>
                         </Label>
                         <FontIcon iconLiteral="fa-file-text-o" iconSize="50" layoutX="48.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.42857360839844" />
-                        <Button fx:id="btnGuardarContrato" layoutX="185.0" layoutY="395.0" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="42.0" prefWidth="162.0" style="-fx-background-color: green; -fx-border-style: none;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="btnGuardarContrato" layoutX="265.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="35.0" prefWidth="35.0" style="-fx-border-style: none; -fx-background-color: white;" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="20.0" />
-                           </font></Button>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <Separator layoutX="415.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" />
                         <Label layoutX="48.0" layoutY="100.0" text="Codigo">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtCodigo" layoutX="48.0" layoutY="125.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;" />
+                        <TextField fx:id="txtCodigo" layoutX="38.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
                         <Separator layoutX="48.0" layoutY="145.0" prefWidth="300.0" />
+                        <Button fx:id="btnLimpiarContrato" alignment="CENTER" layoutX="310.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: white;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button fx:id="btnEditarContrato" alignment="CENTER" layoutX="220.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: white;" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
 
-                     </children></AnchorPane>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor></AnchorPane>
             </content>
           </Tab>
           <Tab text="Lista de Barrios">
@@ -86,14 +113,20 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtNombreBarrio" layoutX="48.0" layoutY="125.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: White;" />
+                        <TextField fx:id="txtNombreBarrio" layoutX="38.0" layoutY="123.0" prefHeight="6.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: White;">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
                         <Separator layoutX="48.0" layoutY="145.0" prefHeight="10.0" prefWidth="300.0" />
                         <Label layoutX="48.0" layoutY="160.0" prefHeight="26.0" prefWidth="157.0" text="Descripcion">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtDescripcionBarrio" layoutX="48.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0" />
+                        <TextField fx:id="txtDescripcionBarrio" alignment="TOP_LEFT" layoutX="48.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font></TextField>
                         <TableView fx:id="tvBarrios" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
                           <columns>
                               <TableColumn fx:id="colNombreBarrio" prefWidth="300.0" text="Nombre del Barrio" />
@@ -108,9 +141,9 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnGuardarBarrio" layoutX="185.0" layoutY="280.0" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: green; -fx-border-style: none;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="btnGuardarBarrio" layoutX="206.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: green; -fx-border-style: none;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="18.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
