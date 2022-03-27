@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+<BorderPane fx:id="panelPadre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
    <left>
       <Pane prefHeight="1101.0" prefWidth="254.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
          <children>
@@ -15,7 +14,7 @@
                   <Font name="Arial Black" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="lbDashboard" layoutX="16.0" layoutY="322.0" prefHeight="49.0" prefWidth="255.0" styleClass="texto" stylesheets="@../css/style.css" text=" Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbDashboard" layoutX="16.0" layoutY="322.0" prefHeight="49.0" prefWidth="234.0" styleClass="texto" stylesheets="@../css/style.css" text=" Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -24,22 +23,22 @@
                </graphic>
 
             </Label>
-            <Label fx:id="lbContratos" layoutX="50.0" layoutY="444.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="213.0" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbContratos" layoutX="50.0" layoutY="444.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbClientes" layoutX="50.0" layoutY="384.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="212.0" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbClientes" layoutX="50.0" layoutY="384.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="202.0" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbFacturar" layoutX="50.0" layoutY="506.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbFacturar" layoutX="50.0" layoutY="506.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lbGestiones" layoutX="50.0" layoutY="649.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="215.0" styleClass="texto" stylesheets="@../css/style.css" text="Configuracion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbGestiones" layoutX="50.0" layoutY="672.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="203.0" styleClass="texto" stylesheets="@../css/style.css" text="Configuracion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -51,14 +50,14 @@
             </Label>
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-users" iconSize="22" layoutX="14.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-text-o" iconSize="22" layoutX="16.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <FontIcon iconColor="#fffdfd" iconLiteral="fa-cogs" iconSize="22" layoutX="15.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="571.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="214.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <FontIcon iconColor="#fffdfd" iconLiteral="fa-cogs" iconSize="22" layoutX="15.0" layoutY="703.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label fx:id="lbFacturar1" layoutX="50.0" layoutY="569.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="202.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-circle-o" iconSize="70" layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="72.0" />
-            <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-plus" iconSize="22" layoutX="14.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-plus" iconSize="22" layoutX="14.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-money" iconSize="22" layoutX="14.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-arrow-circle-o-up" iconSize="28" layoutX="13.0" layoutY="1076.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Label fx:id="lbGestiones2" layoutX="60.0" layoutY="1042.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="135.0" styleClass="texto" stylesheets="@../css/style.css" text="Cerrar sesion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
@@ -67,19 +66,16 @@
                </font>
             </Label>
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-sign-out" iconSize="28" layoutX="214.0" layoutY="1076.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label fx:id="lbFacturar11" layoutX="49.0" layoutY="619.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="202.0" styleClass="texto" stylesheets="@../css/style.css" text="Reportes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-pdf-o" iconSize="22" layoutX="14.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </Pane>
    </left>
    <center>
-      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="137.0" fitWidth="140.0" layoutX="31.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/antena-parabolica256.png" />
-               </image>
-            </ImageView>
-
-         </children>
-      </Pane>
+      <Pane prefHeight="355.0" prefWidth="1344.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

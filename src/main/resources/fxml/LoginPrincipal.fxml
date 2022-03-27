@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="385.0" style="-fx-background-color: #164F95;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FontIcon fill="WHITE" iconLiteral="fa-user-circle" iconSize="70" layoutX="145.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="79.0" />
+      <Label layoutX="154.0" layoutY="109.0" text="Login" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="131.0" layoutY="184.0" prefHeight="40.0" prefWidth="159.0" promptText="     Nick" style="-fx-background-color: #164F95; -fx-border-style: none;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Separator layoutX="96.0" layoutY="224.0" prefWidth="200.0" />
+      <FontIcon iconColor="WHITE" iconLiteral="fa-user-o" iconSize="20" layoutX="96.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Separator layoutX="96.0" layoutY="277.0" prefWidth="200.0" />
+      <FontIcon iconColor="WHITE" iconLiteral="fa-lock" iconSize="24" layoutX="99.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="17.14285659790039" />
+      <Button layoutX="98.0" layoutY="377.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #003980;" text="Login" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <CheckBox layoutX="83.0" layoutY="323.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="Recordar" textFill="WHITE" />
+      <Button layoutX="200.0" layoutY="316.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: #164F95;" text="Olvide la contraseña?" textFill="WHITE" />
+      <PasswordField layoutX="130.0" layoutY="239.0" prefHeight="35.0" prefWidth="159.0" promptText="     Password" style="-fx-background-color: #164F95; -fx-border-style: none;">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+   </children>
+</Pane>

@@ -5,12 +5,14 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ClientesController">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ClientesController">
    <children>
-      <Pane layoutX="50.0" layoutY="39.0" prefHeight="1055.0" prefWidth="1248.0">
+      <AnchorPane layoutX="50.0" layoutY="39.0" prefHeight="1055.0" prefWidth="1248.0">
          <children>
-            <TextField layoutX="92.0" layoutY="62.0" prefHeight="38.0" prefWidth="387.0" promptText="Ejemplo 610-060700-1004J" style="-fx-border-style: none; -fx-background-color: White;" />
-            <TextField layoutX="92.0" layoutY="126.0" prefHeight="38.0" prefWidth="387.0" promptText="Juan" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="txtNumCedula" layoutX="92.0" layoutY="62.0" prefHeight="38.0" prefWidth="387.0" promptText="Ejemplo 610-060700-1004J" style="-fx-border-style: none; -fx-background-color: White;" />
+            <TextField fx:id="txtPrimerNombre" layoutX="92.0" layoutY="126.0" prefHeight="38.0" prefWidth="387.0" promptText="Juan" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
             <Separator layoutX="92.0" layoutY="93.0" prefHeight="4.0" prefWidth="387.0" />
             <Separator layoutX="92.0" layoutY="162.0" prefHeight="4.0" prefWidth="387.0" />
             <Label layoutX="92.0" layoutY="83.0" prefHeight="57.0" prefWidth="307.0" text="Primer nombre">
@@ -18,8 +20,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField layoutX="92.0" layoutY="209.0" prefHeight="38.0" prefWidth="387.0" promptText="Antonio (Opcional)" style="-fx-border-style: none; -fx-background-color: White;" />
-            <TextField layoutX="92.0" layoutY="288.0" prefHeight="38.0" prefWidth="387.0" promptText="Ruiz" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="txtSegundoNombre" layoutX="92.0" layoutY="209.0" prefHeight="38.0" prefWidth="387.0" promptText="Antonio (Opcional)" style="-fx-border-style: none; -fx-background-color: White;" />
+            <TextField fx:id="txtPrimerApellido" layoutX="92.0" layoutY="288.0" prefHeight="38.0" prefWidth="387.0" promptText="Ruiz" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
             <Separator layoutX="92.0" layoutY="323.0" prefHeight="4.0" prefWidth="387.0" />
             <Label layoutX="92.0" layoutY="164.0" prefHeight="57.0" prefWidth="307.0" text="Segundo nombre">
                <font>
@@ -32,8 +34,8 @@
                </font>
             </Label>
             <Separator layoutX="92.0" layoutY="245.0" prefHeight="4.0" prefWidth="387.0" />
-            <TextField layoutX="92.0" layoutY="371.0" prefHeight="38.0" prefWidth="387.0" promptText="Bandera" style="-fx-border-style: none; -fx-background-color: White;" />
-            <TextField layoutX="646.0" layoutY="373.0" prefHeight="38.0" prefWidth="387.0" promptText="87675432" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="txtSegundoApellido" layoutX="92.0" layoutY="371.0" prefHeight="38.0" prefWidth="387.0" promptText="Bandera" style="-fx-border-style: none; -fx-background-color: White;" />
+            <TextField fx:id="txtNumTelefono" layoutX="646.0" layoutY="373.0" prefHeight="38.0" prefWidth="387.0" promptText="87675432" style="-fx-border-width: 0; -fx-background-color: #FFFFFF;" />
             <Separator layoutX="646.0" layoutY="407.0" prefHeight="4.0" prefWidth="387.0" />
             <Label layoutX="92.0" layoutY="321.0" prefHeight="57.0" prefWidth="307.0" text="Segundo Apellido ">
                <font>
@@ -56,7 +58,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextArea layoutX="646.0" layoutY="80.0" prefHeight="99.0" prefWidth="460.0" />
+            <TextArea id="txtDireccion" fx:id="txtDireccion" layoutX="646.0" layoutY="80.0" prefHeight="99.0" prefWidth="460.0" />
             <Label layoutX="646.0" layoutY="35.0" prefHeight="57.0" prefWidth="307.0" text="Direccion">
                <font>
                   <Font size="16.0" />
@@ -67,16 +69,30 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ComboBox editable="true" layoutX="646.0" layoutY="209.0" prefHeight="38.0" prefWidth="387.0" style="-fx-border-color: none; -fx-background-color: white;" />
+            <ComboBox fx:id="cbBarrio" layoutX="646.0" layoutY="209.0" prefHeight="38.0" prefWidth="387.0" style="-fx-border-color: none; -fx-background-color: white;" >
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="1"/>
+                  </FXCollections>
+               </items>
+            </ComboBox>
             <Label layoutX="646.0" layoutY="237.0" prefHeight="57.0" prefWidth="307.0" text="Tipo de cliente">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <Separator layoutX="646.0" layoutY="247.0" prefHeight="4.0" prefWidth="387.0" />
-            <ComboBox editable="true" layoutX="646.0" layoutY="289.0" prefHeight="38.0" prefWidth="387.0" style="-fx-border-color: none; -fx-background-color: white;" />
+            <ComboBox fx:id="cbTipoCliente" layoutX="646.0" layoutY="289.0" prefHeight="38.0" prefWidth="387.0" style="-fx-border-color: none; -fx-background-color: white;" >
+            <items>
+               <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="1"/>
+                  <String fx:value="2"/>
+                  <String fx:value="3"/>
+               </FXCollections>
+            </items>
+            </ComboBox>
             <Separator layoutX="646.0" layoutY="328.0" prefHeight="4.0" prefWidth="387.0" />
-            <TableView layoutX="87.0" layoutY="532.0" prefHeight="423.0" prefWidth="1140.0" stylesheets="@../css/style.css">
+            <TableView fx:id="tvClientes" layoutX="87.0" layoutY="532.0" prefHeight="423.0" prefWidth="1140.0" stylesheets="@../css/style.css">
               <columns>
                 <TableColumn prefWidth="132.0" style="-fx-background-color: White;" text="Nº Cedula" />
                 <TableColumn prefWidth="107.0" style="-fx-background-color: White;" text="Primer Nombre" />
@@ -90,7 +106,7 @@
               </columns>
             </TableView>
             <Pagination layoutX="469.0" layoutY="927.0" prefHeight="82.0" prefWidth="253.0" />
-            <Button layoutX="907.0" layoutY="429.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
+            <Button layoutX="907.0" layoutY="429.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -103,6 +119,6 @@
                </font>
             </Label>
          </children>
-      </Pane>
+      </AnchorPane>
    </children>
 </Pane>

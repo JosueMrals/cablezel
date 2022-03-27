@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="581.0" layoutY="29.0" prefHeight="70.0" prefWidth="106.0" text="Usuarios">
+         <font>
+            <Font size="26.0" />
+         </font></Label>
+      <TableView layoutX="139.0" layoutY="572.0" prefHeight="409.0" prefWidth="1083.0">
+        <columns>
+          <TableColumn prefWidth="136.0" text="Nick" />
+          <TableColumn minWidth="0.0" prefWidth="241.0" text="Nombres" />
+            <TableColumn prefWidth="182.0" text="Apellidos" />
+            <TableColumn prefWidth="235.0" text="Clave" />
+            <TableColumn prefWidth="288.0" text="Cargo" />
+        </columns>
+      </TableView>
+      <TextField layoutX="139.0" layoutY="538.0" prefHeight="25.0" prefWidth="368.0" promptText="Poxs44" />
+      <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="516.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label layoutX="139.0" layoutY="499.0" prefHeight="38.0" prefWidth="118.0" text="Buscar Usuario">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="213.0" layoutY="105.0" prefHeight="38.0" prefWidth="61.0" text="Nick">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="213.0" layoutY="183.0" prefHeight="38.0" prefWidth="106.0" text="Nombres">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="249.0" prefHeight="38.0" prefWidth="89.0" text="Apellidos">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="322.0" prefHeight="38.0" prefWidth="106.0" text="Contraseña">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="787.0" layoutY="105.0" prefHeight="38.0" prefWidth="61.0" text="Rol">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="213.0" layoutY="143.0" prefHeight="25.0" prefWidth="270.0" promptText="Poxs44" style="-fx-border-style: none; -fx-background-color: white;" />
+      <TextField layoutX="213.0" layoutY="215.0" prefHeight="25.0" prefWidth="270.0" promptText="Roberto" style="-fx-background-color: white; -fx-border-style: noone;" />
+      <ComboBox layoutX="787.0" layoutY="143.0" prefWidth="150.0" />
+      <TextField layoutX="213.0" layoutY="281.0" prefHeight="25.0" prefWidth="270.0" promptText="Molinares" style="-fx-background-color: white; -fx-border-style: none;" />
+      <TextField layoutX="213.0" layoutY="363.0" prefHeight="25.0" prefWidth="276.0" promptText="Jorjito75#" style="-fx-background-color: white; -fx-border-style: none;" />
+      <Separator layoutX="213.0" layoutY="168.0" prefHeight="3.0" prefWidth="270.0" />
+      <Separator layoutX="213.0" layoutY="239.0" prefHeight="3.0" prefWidth="270.0" />
+      <Separator layoutX="213.0" layoutY="305.0" prefHeight="3.0" prefWidth="270.0" />
+      <Separator layoutX="213.0" layoutY="388.0" prefHeight="3.0" prefWidth="276.0" />
+      <Label layoutX="787.0" layoutY="183.0" prefHeight="38.0" prefWidth="118.0" text="Descripcion">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="788.0" layoutY="215.0" prefHeight="113.0" prefWidth="293.0" promptText="USO " />
+   </children>
+</Pane>

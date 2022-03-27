@@ -3,8 +3,9 @@ package com.josue.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table(name="usuarios")
-public class Usuario extends Identificador<Long>{
+@Table(name = "usuarios")
+public class Usuario extends Identificador {
+
     @Column(name = "nombres", length = 40)
     private String Nombres;
 
@@ -17,13 +18,11 @@ public class Usuario extends Identificador<Long>{
     @Column(name = "clave", length = 40)
     private String Clave;
 
-    public Usuario()
-    {
+    public Usuario() {
 
     }
 
-    public Usuario(String Nombres, String Apellidos, String Nick, String Clave)
-    {
+    public Usuario(String Nombres, String Apellidos, String Nick, String Clave) {
         this.Nombres = Nombres;
         this.Apellidos = Apellidos;
         this.Nick = Nick;

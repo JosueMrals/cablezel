@@ -17,6 +17,12 @@
         <property name="format_sql">true</property> <!-- Show SQL formatted -->
 
         <mapping class="com.josue.modelo.Usuario"/>
+        <mapping class="com.josue.modelo.Barrio"/>
+        <mapping class="com.josue.modelo.TipoContrato"/>
+        <mapping class="com.josue.modelo.Cliente"/>
+        <mapping class="com.josue.modelo.DetalleFactura"/>
+        <mapping class="com.josue.modelo.Factura"/>
+        <mapping class="com.josue.modelo.Contrato"/>
 
     </session-factory>
 </hibernate-configuration>

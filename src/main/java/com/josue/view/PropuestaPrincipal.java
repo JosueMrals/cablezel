@@ -1,25 +1,24 @@
 package com.josue.view;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PropuestaPrincipal implements Initializable {
+public class PropuestaPrincipal extends Application implements Initializable {
+    public BorderPane panelPadre;
     @FXML Label lbDashboard;
     @FXML Label lbContratos;
     @FXML Label lbClientes;
@@ -30,14 +29,26 @@ public class PropuestaPrincipal implements Initializable {
 
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+
+    }
+
     public void mostrar_contratos(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cambiarStyle(Object o)
     {
         Label etiqueta = (Label) o;
         etiqueta.setFont(new Font("System Regular", 16.0));
-
     }
 
     public void quitarStyle(Object o)
@@ -51,21 +62,19 @@ public class PropuestaPrincipal implements Initializable {
         quitarStyle(lbContratos);
         quitarStyle(lbDashboard);
         quitarStyle(lbGestiones);
+
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Registrando");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void mostrar_facturar(MouseEvent mouseEvent) {
+
     }
 
     public void mostrar_gestiones(MouseEvent mouseEvent) {
@@ -74,14 +83,32 @@ public class PropuestaPrincipal implements Initializable {
         quitarStyle(lbDashboard);
         quitarStyle(lbClientes);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Gestiones.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            //stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Gestionando");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            FXMLLoader Loader = new FXMLLoader(getClass().getResource("/fxml/Configuraciones.fxml"));
+            Pane configuraciones = Loader.load();
+            panelPadre.setCenter(configuraciones);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrar_usuarios(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editar_tipocontratos(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editar/EditarTipoContrato.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
