@@ -7,90 +7,96 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <children>
-      <TabPane layoutX="68.0" layoutY="57.0" prefHeight="692.0" prefWidth="1220.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Tipos de Contratos">
             <content>
-              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="1229.0" style="-fx-border-style: none; -fx-background-color: white;">
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
                      <children>
-                        <Label layoutX="205.0" layoutY="25.0" prefHeight="45.0" prefWidth="261.0" text="Tipos de Contratos">
+                        <Label layoutX="30.0" layoutY="160.0" prefHeight="23.0" prefWidth="130.0" text="Tipo de contrato">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="280.0" prefHeight="23.0" prefWidth="130.0" text="Descripcion">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="30.0" layoutY="220.0" prefHeight="28.0" prefWidth="180.0" text="Cantidad de televisores">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="86.0" layoutY="30.0" prefHeight="45.0" prefWidth="261.0" text="Tipos de Contratos">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label layoutX="48.0" layoutY="160.0" prefHeight="23.0" prefWidth="130.0" text="Tipo de contrato">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="48.0" layoutY="280.0" prefHeight="23.0" prefWidth="130.0" text="Descripcion">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="48.0" layoutY="220.0" prefHeight="28.0" prefWidth="180.0" text="Cantidad de televisores">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtTipoContrato" layoutX="38.0" layoutY="183.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtTipoContrato" layoutX="20.0" layoutY="183.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <TextField fx:id="txtCantidadTv" layoutX="38.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtCantidadTv" layoutX="20.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <TextField fx:id="txtDescripcionContrato" alignment="TOP_LEFT" layoutX="45.0" layoutY="305.0" prefHeight="75.0" prefWidth="300.0">
+                        <TextField fx:id="txtDescripcionContrato" alignment="TOP_LEFT" layoutX="32.0" layoutY="305.0" prefHeight="75.0" prefWidth="300.0">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <Separator layoutX="48.0" layoutY="205.0" prefHeight="13.0" prefWidth="300.0" />
-                        <Separator layoutX="48.0" layoutY="265.0" prefHeight="13.0" prefWidth="300.0" />
-                        <TableView fx:id="tvTipoContrato" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
+                        <Separator layoutX="30.0" layoutY="205.0" prefHeight="13.0" prefWidth="300.0" />
+                        <Separator layoutX="30.0" layoutY="265.0" prefHeight="13.0" prefWidth="300.0" />
+                        <TableView fx:id="tvTipoContrato" layoutX="400.0" layoutY="160.0" prefHeight="338.0" prefWidth="707.0">
                           <columns>
-                              <TableColumn fx:id="colCodigo" prefWidth="109.0" text="Codigo" />
-                            <TableColumn fx:id="colTipoContrato" prefWidth="148.0" text="Tipo de Contrato" />
-                            <TableColumn fx:id="colCantidadTv" prefWidth="153.0" text="Cantidad de Televisores" />
-                              <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="334.0" text="Descripcion" />
+                              <TableColumn fx:id="colCodigo" prefWidth="65.0" text="Codigo" />
+                            <TableColumn fx:id="colTipoContrato" prefWidth="110.0" text="Tipo de Contrato" />
+                            <TableColumn fx:id="colCantidadTv" prefWidth="120.0" text="Nro de Televisores" />
+                              <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="410.0" text="Descripcion" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="450.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
-                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="800.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
-                        <Label layoutX="450.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Contrato">
+                        <TextField layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="755.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
+                        <Label layoutX="400.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Contrato">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <FontIcon iconLiteral="fa-file-text-o" iconSize="50" layoutX="48.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.42857360839844" />
-                        <Button fx:id="btnGuardarContrato" layoutX="265.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="35.0" prefWidth="35.0" style="-fx-border-style: none; -fx-background-color: white;" textAlignment="CENTER" textFill="WHITE">
+                        <FontIcon iconLiteral="fa-file-text-o" iconSize="50" layoutX="30.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="45.42857360839844" />
+                        <Button fx:id="btnGuardarContrato" layoutX="221.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="50.0" prefWidth="50.0" style="-fx-border-style: none; -fx-background-color: white;" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="16.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Separator layoutX="415.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" />
-                        <Label layoutX="48.0" layoutY="100.0" text="Codigo">
+                        <Separator layoutX="360.0" layoutY="100.0" orientation="VERTICAL" prefHeight="300.0" prefWidth="0.0" />
+                        <Label layoutX="30.0" layoutY="100.0" text="Codigo">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtCodigo" layoutX="38.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtCodigo" layoutX="20.0" layoutY="123.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <Separator layoutX="48.0" layoutY="145.0" prefWidth="300.0" />
-                        <Button fx:id="btnLimpiarContrato" alignment="CENTER" layoutX="310.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: white;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="btnEditarContrato" alignment="CENTER" layoutX="220.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: white;" textAlignment="CENTER">
+                        <Separator layoutX="30.0" layoutY="145.0" prefWidth="300.0" />
+                        <Button fx:id="btnLimpiarContrato" alignment="CENTER" layoutX="281.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: white; -fx-border-style: none;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                        <Button fx:id="btnEditarContrato" alignment="CENTER" layoutX="161.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: white; -fx-border-style: none;" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Button>
 
                      </children>
@@ -101,47 +107,47 @@
           </Tab>
           <Tab text="Lista de Barrios">
             <content>
-              <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="1220.0" style="-fx-background-color: White;">
+              <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1220.0" style="-fx-background-color: White;">
                      <children>
-                        <Label layoutX="205.0" layoutY="25.0" text="Lista de Barrios" textAlignment="CENTER">
+                        <Label layoutX="86.0" layoutY="30.0" text="Lista de Barrios" textAlignment="CENTER">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label layoutX="48.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Nombre del barrio">
+                        <Label layoutX="30.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="131.0" text="Nombre del barrio">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtNombreBarrio" layoutX="38.0" layoutY="123.0" prefHeight="6.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: White;">
+                        <TextField fx:id="txtNombreBarrio" layoutX="20.0" layoutY="123.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: White;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <Separator layoutX="48.0" layoutY="145.0" prefHeight="10.0" prefWidth="300.0" />
-                        <Label layoutX="48.0" layoutY="160.0" prefHeight="26.0" prefWidth="157.0" text="Descripcion">
+                        <Separator layoutX="30.0" layoutY="145.0" prefHeight="10.0" prefWidth="300.0" />
+                        <Label layoutX="30.0" layoutY="160.0" prefHeight="26.0" prefWidth="84.0" text="Descripcion">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtDescripcionBarrio" alignment="TOP_LEFT" layoutX="48.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0">
+                        <TextField fx:id="txtDescripcionBarrio" alignment="TOP_LEFT" layoutX="32.0" layoutY="190.0" prefHeight="74.0" prefWidth="300.0">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <TableView fx:id="tvBarrios" layoutX="450.0" layoutY="160.0" prefHeight="355.0" prefWidth="745.0">
+                        <TableView fx:id="tvBarrios" layoutX="400.0" layoutY="160.0" prefHeight="338.0" prefWidth="707.0">
                           <columns>
-                              <TableColumn fx:id="colNombreBarrio" prefWidth="300.0" text="Nombre del Barrio" />
-                              <TableColumn fx:id="colDescripcionBarrio" prefWidth="444.0" text="Descripcion del Barrio" />
+                              <TableColumn fx:id="colNombreBarrio" prefWidth="213.0" text="Nombre del Barrio" />
+                              <TableColumn fx:id="colDescripcionBarrio" prefWidth="493.0" text="Descripcion del Barrio" />
                           </columns>
 
                         </TableView>
-                        <TextField layoutX="450.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
-                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="800.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                        <Label layoutX="450.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Barrio">
+                        <TextField layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="755.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Label layoutX="400.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Barrio">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnGuardarBarrio" layoutX="206.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: green; -fx-border-style: none;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="btnGuardarBarrio" layoutX="192.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: green; -fx-border-style: none;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -151,7 +157,7 @@
                            <effect>
                               <Glow />
                            </effect></Button>
-                        <Separator layoutX="415.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="264.0" prefWidth="0.0" />
+                        <Separator layoutX="360.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="300.0" prefWidth="0.0" />
                      </children></AnchorPane>
             </content>
           </Tab>

@@ -54,6 +54,8 @@ public class BarrioController implements Initializable {
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
         colocarImagenBotones();
+        textoDescripcionBotones();
+
     }
     public void guardarBarrio() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
@@ -122,5 +124,11 @@ public class BarrioController implements Initializable {
         btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
         btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));
         btnEditarContrato.setGraphic(new ImageView(imagenEditar));
+    }
+
+    private void textoDescripcionBotones() {
+        btnLimpiarContrato.setTooltip(new Tooltip("Limpiar"));
+        btnGuardarContrato.setTooltip(new Tooltip("Guardar"));
+        btnEditarContrato.setTooltip(new Tooltip("Editar"));
     }
 }
