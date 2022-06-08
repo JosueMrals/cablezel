@@ -117,9 +117,9 @@ public class BarrioController implements Initializable {
         URL linkGuardar = getClass().getResource("/images/floppy-disk.png");
         URL linkEditar = getClass().getResource("/images/editar.png");
 
-        Image imagenLimpiar = new Image(linkLimpiar.toString(),24,24,false,true);
-        Image imagenGuardar = new Image(linkGuardar.toString(),24,24,false,true);
-        Image imagenEditar = new Image(linkEditar.toString(),24,24,false,true);
+        Image imagenLimpiar = new Image(linkLimpiar.toString(),30,30,false,true);
+        Image imagenGuardar = new Image(linkGuardar.toString(),30,30,false,true);
+        Image imagenEditar = new Image(linkEditar.toString(),30,30,false,true);
 
         btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
         btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));

@@ -74,6 +74,19 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_facturar(MouseEvent mouseEvent) {
+        cambiarStyle(lbClientes);
+        quitarStyle(lbContratos);
+        quitarStyle(lbDashboard);
+        quitarStyle(lbGestiones);
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

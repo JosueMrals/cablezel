@@ -6,9 +6,9 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<BorderPane fx:id="panelPadre" prefHeight="717.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+<BorderPane fx:id="panelPadre" minHeight="717.0" minWidth="1366.0" prefHeight="717.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
    <left>
-      <Pane prefHeight="925.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
+      <Pane minHeight="717.0" minWidth="240.0" prefHeight="717.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
@@ -88,7 +88,7 @@
                </cursor>
             </Label>
             <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-circle-o" iconSize="70" layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="72.0" />
-            <Label fx:id="lbGestiones2" layoutX="5.0" layoutY="667.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Cerrar sesion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbGestiones2" alignment="BOTTOM_LEFT" layoutX="5.0" layoutY="681.0" onMouseClicked="#mostrar_gestiones" prefHeight="35.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Cerrar sesion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
@@ -111,6 +111,6 @@
       </Pane>
    </left>
    <center>
-      <Pane prefHeight="717.0" prefWidth="1338.0" style="-fx-background-color: White;" BorderPane.alignment="TOP_LEFT" />
+      <Pane prefHeight="717.0" prefWidth="1338.0" style="-fx-background-color: White;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
