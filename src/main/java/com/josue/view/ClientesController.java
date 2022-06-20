@@ -1,9 +1,12 @@
 package com.josue.view;
 
+import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -26,7 +29,7 @@ public class ClientesController implements Initializable {
     @FXML
     TextArea txtDireccion;
     @FXML
-    ComboBox cbBarrio;
+    ComboBox<Barrio> cbBarrio;
     @FXML
     ComboBox cbTipoCliente;
     @FXML
@@ -34,6 +37,11 @@ public class ClientesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        var barrios = obtenerBarrios();
+        cbBarrio = new ComboBox<Barrio> ();
+        cbBarrio.setValue(null);
+        cbBarrio.setItems(barrios);
+        System.out.println("Se agregó...!");
 
     }
 
@@ -46,8 +54,8 @@ public class ClientesController implements Initializable {
         String primerapellido = txtPrimerApellido.getText();
         String segundo_apellido = txtSegundoApellido.getText();
         String direccion = txtDireccion.getText();
-        String barrio = cbBarrio.getValue().toString();
-        String tipocliente = cbTipoCliente.getValue().toString();
+        Barrio barrio = cbBarrio.getValue();
+        String tipocontrato = cbTipoCliente.getValue().toString();
         String numtelefono = txtNumTelefono.getText();
 
         try{
@@ -58,8 +66,8 @@ public class ClientesController implements Initializable {
             cl.setPrimer_apellido(primerapellido);
             cl.setSegundo_apellido(segundo_apellido);
             cl.setDireccion(direccion);
-            //cl.setCod_barrio(barrio);
-            //cl.setId_tipo_cliente(tipocliente);
+            cl.setBarrio(barrio);
+            //cl.setContrato(tipocontrato);
             cl.setNum_telefono(numtelefono);
 
             clienteService.save(cl);
@@ -82,5 +90,13 @@ public class ClientesController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public ObservableList<Barrio> obtenerBarrios() {
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
+
+        return barrios;
+    }
+
 
 }

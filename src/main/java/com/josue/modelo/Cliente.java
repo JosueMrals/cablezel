@@ -1,5 +1,8 @@
 package com.josue.modelo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.persistence.*;
 
 @Entity
@@ -116,6 +119,12 @@ public class Cliente extends Identificador{
     @Override
     public String toString() {
         return "Cliente{}";
+    }
+
+    public ObservableList<Cliente> getClientes() {
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+
+        return obs;
     }
 
 

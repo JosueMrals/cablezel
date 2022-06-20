@@ -91,13 +91,9 @@
                </font>
             </Label>
             <ComboBox fx:id="cbBarrio" layoutX="500.0" layoutY="120.0" prefHeight="25.0" prefWidth="387.0" style="-fx-border-color: none; -fx-background-color: white;">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="1" />
-                  </FXCollections>
-               </items>
+
             </ComboBox>
-            <Label layoutX="500.0" layoutY="150.0" text="Tipo de cliente">
+            <Label layoutX="500.0" layoutY="150.0" text="Tipo de Contrato">
                <font>
                   <Font size="16.0" />
                </font>

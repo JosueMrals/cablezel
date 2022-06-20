@@ -9,105 +9,81 @@
 <BorderPane fx:id="panelPadre" minHeight="717.0" minWidth="1366.0" prefHeight="717.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
    <left>
       <Pane minHeight="717.0" minWidth="240.0" prefHeight="717.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font name="Arial Black" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbDashboard" layoutX="5.0" layoutY="206.0" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text=" Dashboard" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon fill="#f8f6f6" iconColor="WHITE" iconLiteral="fa-tasks" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="iconos" wrappingWidth="24.0" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-
-            </Label>
-            <Label fx:id="lbContratos" layoutX="5.0" layoutY="306.0" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-text-o" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label fx:id="lbClientes" layoutX="5.0" layoutY="256.0" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-users" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label fx:id="lbFacturar" layoutX="5.0" layoutY="356.0" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-money" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label fx:id="lbGestiones" layoutX="5.0" layoutY="506.0" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Configuracion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-cogs" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label layoutX="85.0" layoutY="130.0" prefHeight="49.0" prefWidth="85.0" text="Admin" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbFacturar1" layoutX="5.0" layoutY="406.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-plus" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-circle-o" iconSize="70" layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="72.0" />
-            <Label fx:id="lbGestiones2" alignment="BOTTOM_LEFT" layoutX="5.0" layoutY="681.0" onMouseClicked="#mostrar_gestiones" prefHeight="35.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Cerrar sesion" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-sign-out" iconSize="28" strokeType="OUTSIDE" strokeWidth="0.0" />
-               </graphic>
-            </Label>
-            <Label fx:id="lbFacturar11" layoutX="5.0" layoutY="456.0" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="235.0" styleClass="texto" stylesheets="@../css/style.css" text="Reportes" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <graphic>
-                  <FontIcon iconColor="#fffdfd" iconLiteral="fa-file-pdf-o" iconSize="22" strokeType="OUTSIDE" strokeWidth="0.0" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </children>
+         <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <font>
+               <Font name="Arial Black" size="22.0" />
+            </font>
+         </Label>
+         <Label layoutX="85.0" layoutY="130.0" prefHeight="49.0" prefWidth="85.0" text="Admin" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+         <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-circle-o" iconSize="70" layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="72.0" />
+         <Button fx:id="btnConfig" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnSalir" alignment="BASELINE_LEFT" contentDisplay="BOTTOM" layoutX="5.0" layoutY="667.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnReportes" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="8.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Reportes" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnUsuarios" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#mostrar_usuarios" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Usuarios" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnFacturar" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnContratos" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnClientes" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="256.0" mnemonicParsing="false" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
+         <Button fx:id="btnInicio" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="#7487ab">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
       </Pane>
    </left>
    <center>
