@@ -38,7 +38,6 @@ public class ClientesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         var barrios = obtenerBarrios();
-        cbBarrio = new ComboBox<Barrio> ();
         cbBarrio.setValue(null);
         cbBarrio.setItems(barrios);
         System.out.println("Se agregó...!");
