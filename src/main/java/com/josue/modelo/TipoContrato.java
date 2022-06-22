@@ -55,11 +55,15 @@ public class TipoContrato extends Identificador{
         this.descripcion = descripcion;
     }
 
-
     public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv) {
         this.cod_tipocontrato = cod_tipoContrato;
         this.tipo_contrato = tipo_contrato;
         this.descripcion = descripcion;
         this.cantidad_tv = cantidad_tv;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " " + tipo_contrato;
     }
 }
