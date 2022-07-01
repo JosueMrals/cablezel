@@ -35,11 +35,11 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtTipoContrato" layoutX="20.0" layoutY="183.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtTipoContrato" layoutX="20.0" layoutY="180.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
-                        <TextField fx:id="txtCantidadTv" layoutX="20.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtCantidadTv" layoutX="20.0" layoutY="240.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>
@@ -78,7 +78,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtCodigo" layoutX="20.0" layoutY="123.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
+                        <TextField fx:id="txtCodigo" layoutX="20.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
                            </font></TextField>

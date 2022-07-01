@@ -40,6 +40,7 @@ public class Barrio extends Identificador{
 
     @Override
     public String toString() {
-        return "Barrio{}";
+
+        return getId() + " " + nombre_barrio;
     }
 }

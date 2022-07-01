@@ -4,8 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -19,10 +18,15 @@ import java.util.ResourceBundle;
 
 public class PropuestaPrincipal extends Application implements Initializable {
     public BorderPane panelPadre;
-    @FXML Label lbDashboard;
-    @FXML Label lbContratos;
-    @FXML Label lbClientes;
-    @FXML Label lbGestiones;
+    @FXML Button btnConfig;
+    @FXML Button btnReportes;
+    @FXML Button btnInicio;
+    @FXML Button btnClientes;
+    @FXML Button btnContratos;
+    @FXML Button btnUsuarios;
+    @FXML Button btnFacturar;
+    @FXML Button btnSalir;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,23 +49,23 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void cambiarStyle(Object o)
+    /*public void cambiarStyle(Object o)
     {
-        Label etiqueta = (Label) o;
-        etiqueta.setFont(new Font("System Regular", 16.0));
+        Button btnConfig  = (Button) o;
+        btnConfig.setFont(new Font("System Regular", 16.0));
     }
 
     public void quitarStyle(Object o)
     {
         Label etiqueta = (Label) o;
         etiqueta.setFont(new Font("System Regular", 16.0));
-    }
+    }*/
 
     public void mostrar_clientes(MouseEvent mouseEvent) {
-        cambiarStyle(lbClientes);
-        quitarStyle(lbContratos);
-        quitarStyle(lbDashboard);
-        quitarStyle(lbGestiones);
+        //cambiarStyle(lbClientes);
+        //quitarStyle(lbContratos);
+        //quitarStyle(lbDashboard);
+        //quitarStyle(lbGestiones);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
@@ -74,10 +78,10 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_facturar(MouseEvent mouseEvent) {
-        cambiarStyle(lbClientes);
-        quitarStyle(lbContratos);
-        quitarStyle(lbDashboard);
-        quitarStyle(lbGestiones);
+        //cambiarStyle(lbClientes);
+        //quitarStyle(lbContratos);
+        //quitarStyle(lbDashboard);
+        //quitarStyle(lbGestiones);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
@@ -91,10 +95,10 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_gestiones(MouseEvent mouseEvent) {
-        cambiarStyle(lbGestiones);
-        quitarStyle(lbContratos);
-        quitarStyle(lbDashboard);
-        quitarStyle(lbClientes);
+        //cambiarStyle(lbGestiones);
+        //quitarStyle(lbContratos);
+        //quitarStyle(lbDashboard);
+        //quitarStyle(lbClientes);
         try {
             FXMLLoader Loader = new FXMLLoader(getClass().getResource("/fxml/Configuraciones.fxml"));
             Pane configuraciones = Loader.load();

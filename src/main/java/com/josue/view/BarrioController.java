@@ -38,10 +38,14 @@ public class BarrioController implements Initializable {
     @FXML Button btnGuardarContrato;
     @FXML Button btnEditarContrato;
 
+    ObservableList<Barrio> listaBarrios;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
+        listaBarrios = barrios;
         colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
         colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvBarrios.setItems(barrios);
@@ -53,10 +57,20 @@ public class BarrioController implements Initializable {
         colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
+
         colocarImagenBotones();
         textoDescripcionBotones();
 
     }
+
+    public ObservableList<Barrio> getListaBarrios() {
+         return listaBarrios;
+    }
+
+    public void setListaBarrios(ObservableList<Barrio> listaBarrios) {
+        this.listaBarrios = listaBarrios;
+    }
+
     public void guardarBarrio() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
 
