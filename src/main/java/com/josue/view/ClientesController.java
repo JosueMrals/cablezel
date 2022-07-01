@@ -2,6 +2,7 @@ package com.josue.view;
 
 import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
+import com.josue.modelo.Contrato;
 import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
@@ -40,7 +41,7 @@ public class ClientesController implements Initializable {
     @FXML
     ComboBox<Barrio> cbBarrio;
     @FXML
-    ComboBox<TipoContrato> cbTipoCliente;
+    ComboBox<Contrato> cbTipoCliente;
     @FXML
     TextField txtNumTelefono;
 
@@ -62,7 +63,7 @@ public class ClientesController implements Initializable {
         cbBarrio.setPromptText("Seleccione un barrio");
 
         // Inicializar el comboBox de tipos de contrato
-        var tiposContrato = obtenerTiposContrato();
+        var tiposContrato = obtenerContrato();
         cbTipoCliente.setValue(null);
         cbTipoCliente.setItems(tiposContrato);
         cbTipoCliente.setPromptText("Seleccione un tipo de contrato");
@@ -85,7 +86,7 @@ public class ClientesController implements Initializable {
         String segundo_apellido = txtSegundoApellido.getText();
         String direccion = txtDireccion.getText();
         Barrio barrio = cbBarrio.getValue();
-        String tipocontrato = cbTipoCliente.getValue().toString();
+        Contrato tipocontrato = cbTipoCliente.getValue();
         String numtelefono = txtNumTelefono.getText();
 
         // Crear el cliente
@@ -98,7 +99,7 @@ public class ClientesController implements Initializable {
             cl.setSegundo_apellido(segundo_apellido);
             cl.setDireccion(direccion);
             cl.setBarrio(barrio);
-            //cl.setContrato(tipocontrato);
+            cl.setContrato(tipocontrato);
             cl.setNum_telefono(numtelefono);
 
             // Guardar el cliente
@@ -143,8 +144,8 @@ public class ClientesController implements Initializable {
      * @throws Exception
      * @author Yesser
      */
-    private ObservableList<TipoContrato> obtenerTiposContrato() {
-        var tiposContrato = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory())
+    private ObservableList<Contrato> obtenerContrato() {
+        var tiposContrato = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory())
                 .getAll();
         return FXCollections.observableArrayList(tiposContrato);
     }
