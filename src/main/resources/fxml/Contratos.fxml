@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<AnchorPane prefHeight="792.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Contratos">
+   <children>
+      <Label layoutX="206.0" layoutY="58.0" text="Contrato ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="142.0" text="Fecha de contrato ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="473.0" layoutY="178.0" prefHeight="27.0" prefWidth="374.0" />
+      <Label layoutX="473.0" layoutY="142.0" text="Nombre del cliente ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="78.0" layoutY="178.0" prefHeight="27.0" prefWidth="269.0" />
+      <TextArea layoutX="78.0" layoutY="248.0" prefHeight="74.0" prefWidth="282.0" />
+      <Label layoutX="78.0" layoutY="221.0" text="Descripcion ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="330.0" text="Tipo de Contrato">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="77.0" layoutY="357.0" prefWidth="150.0" />
+      <Label layoutX="426.0" layoutY="396.0" text="Resumen ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="134.0" layoutY="487.0" prefHeight="25.0" prefWidth="79.0" text="Cedula ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="684.0" layoutY="609.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="172.0" text="Agregar contrato ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="522.0" layoutY="487.0" prefHeight="27.0" prefWidth="150.0" text="Segundo Nombre">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="487.0" prefHeight="27.0" prefWidth="135.0" text="Primer nombre">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <FontIcon iconLiteral="fa-search" layoutX="856.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="14.142857551574707">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </FontIcon>
+      <FontIcon iconLiteral="fa-file-text-o" layoutX="107.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </FontIcon>
+   </children>
+</AnchorPane>
