@@ -17,6 +17,9 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Josue on 09/05/2016.
+ */
 public class BarrioController implements Initializable {
 
     @FXML TextField txtNombreBarrio;

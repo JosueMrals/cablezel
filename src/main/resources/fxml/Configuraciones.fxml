@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -58,7 +58,7 @@
                           </columns>
                         </TableView>
                         <TextField layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
-                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="755.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="19.571428298950195" />
+                        <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="754.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="19.571428298950195" />
                         <Label layoutX="400.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Contrato">
                            <font>
                               <Font size="16.0" />
