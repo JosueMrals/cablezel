@@ -25,7 +25,7 @@ public class Cliente extends Identificador{
 
     //Relation to Contrato table
     @ManyToOne
-    @JoinColumn (name = "ContratoId", referencedColumnName = "id")
+    @JoinColumn(name = "ContratoId", referencedColumnName = "id")
     private Contrato contrato;
 
     public Contrato getContrato() {

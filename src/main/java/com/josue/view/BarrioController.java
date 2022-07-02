@@ -28,6 +28,7 @@ public class BarrioController implements Initializable {
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
     @FXML TextField txtCantidadTv;
+    @FXML TextField txtPreciocontrato;
     @FXML TextField txtDescripcionContrato;
     @FXML TableColumn<TipoContrato, String> colCodigo;
     @FXML TableColumn<TipoContrato, String> colTipoContrato;
@@ -101,6 +102,7 @@ public class BarrioController implements Initializable {
         String cod_tipocontrato = txtCodigo.getText();
         String tipo_contrato = txtTipoContrato.getText();
         String cantidad_tv = txtCantidadTv.getText();
+        String precio = txtPreciocontrato.getText();
         String descripcion = txtDescripcionContrato.getText();
 
         try{
@@ -108,6 +110,7 @@ public class BarrioController implements Initializable {
             tc.setCod_tipocontrato(cod_tipocontrato);
             tc.setTipo_contrato(tipo_contrato);
             tc.setCantidad_tv(cantidad_tv);
+            tc.setPrecio_contrato(precio);
             tc.setDescripcion(descripcion);
 
             tpContratoService.save(tc);
@@ -115,6 +118,7 @@ public class BarrioController implements Initializable {
             txtCodigo.clear();
             txtTipoContrato.clear();
             txtCantidadTv.clear();
+            txtPreciocontrato.clear();
             txtDescripcionContrato.clear();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);

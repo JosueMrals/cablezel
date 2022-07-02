@@ -3,7 +3,6 @@ package com.josue.view;
 import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
 import com.josue.modelo.Contrato;
-import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
@@ -12,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.hibernate.SessionFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,8 +39,6 @@ public class ClientesController implements Initializable {
     @FXML
     ComboBox<Barrio> cbBarrio;
     @FXML
-    ComboBox<Contrato> cbTipoCliente;
-    @FXML
     TextField txtNumTelefono;
 
     /**
@@ -61,12 +57,6 @@ public class ClientesController implements Initializable {
         cbBarrio.setItems(barrios);
 
         cbBarrio.setPromptText("Seleccione un barrio");
-
-        // Inicializar el comboBox de tipos de contrato
-        var tiposContrato = obtenerContrato();
-        cbTipoCliente.setValue(null);
-        cbTipoCliente.setItems(tiposContrato);
-        cbTipoCliente.setPromptText("Seleccione un tipo de contrato");
     }
 
     /**
@@ -86,7 +76,6 @@ public class ClientesController implements Initializable {
         String segundo_apellido = txtSegundoApellido.getText();
         String direccion = txtDireccion.getText();
         Barrio barrio = cbBarrio.getValue();
-        Contrato tipocontrato = cbTipoCliente.getValue();
         String numtelefono = txtNumTelefono.getText();
 
         // Crear el cliente
@@ -99,7 +88,6 @@ public class ClientesController implements Initializable {
             cl.setSegundo_apellido(segundo_apellido);
             cl.setDireccion(direccion);
             cl.setBarrio(barrio);
-            cl.setContrato(tipocontrato);
             cl.setNum_telefono(numtelefono);
 
             // Guardar el cliente
@@ -113,7 +101,6 @@ public class ClientesController implements Initializable {
             txtSegundoApellido.clear();
             txtDireccion.clear();
             cbBarrio.getSelectionModel().clearSelection();
-            cbTipoCliente.getSelectionModel().clearSelection();
             txtNumTelefono.clear();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." , ButtonType.OK);
@@ -134,7 +121,6 @@ public class ClientesController implements Initializable {
     public ObservableList<Barrio> obtenerBarrios() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-
         return barrios;
     }
 
@@ -144,10 +130,10 @@ public class ClientesController implements Initializable {
      * @throws Exception
      * @author Yesser
      */
-    private ObservableList<Contrato> obtenerContrato() {
-        var tiposContrato = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory())
-                .getAll();
-        return FXCollections.observableArrayList(tiposContrato);
+    private ObservableList<Contrato> obtenerContratos() {
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
+        ObservableList<Contrato> contratos = FXCollections.observableArrayList(contratoService.getAll());
+        return contratos;
     }
 
 
