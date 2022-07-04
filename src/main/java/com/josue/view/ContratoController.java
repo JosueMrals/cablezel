@@ -29,7 +29,8 @@ public class ContratoController implements Initializable {
     @FXML TableColumn<Contrato, String> colDescripcion;
     @FXML TableColumn<Contrato, String> colTipo;
     @FXML TableColumn<Contrato, String> colCliente;
-    @FXML TableView<Contrato> tvContrato;
+    // se crea variable con el mismo nombre que el FXML
+    @FXML TableView<Contrato> tvContratos;
 
     String[] clientesAutocomplete = {};
 
@@ -57,7 +58,7 @@ public class ContratoController implements Initializable {
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         colTipo.setCellValueFactory(new PropertyValueFactory<>("tipocontrato_id"));
         colCliente.setCellValueFactory(new PropertyValueFactory<>("cliente_id"));
-        tvContrato.setItems(listaContratos);
+        tvContratos.setItems(listaContratos);
     }
 
     private String[] obtenerClientes() {
