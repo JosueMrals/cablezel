@@ -47,13 +47,14 @@ public class BarrioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-        listaBarrios = barrios;
-        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
-        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tvBarrios.setItems(barrios);
+        llenarBarrio();  // llenar la tabla de barrios
+        llenarTipoContrato(); // llenar la tabla de tipo de contrato
 
+        colocarImagenBotones(); // colocar imagenes a los botones
+        textoDescripcionBotones(); // colocar texto a los botones
+
+    }
+    public void llenarTipoContrato() { // llenar la tabla de tipo de contrato
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("cod_tipocontrato"));
@@ -61,10 +62,15 @@ public class BarrioController implements Initializable {
         colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
+    }
 
-        colocarImagenBotones();
-        textoDescripcionBotones();
-
+    public void llenarBarrio() { // llenar la tabla de barrios
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
+        listaBarrios = barrios;
+        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
+        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tvBarrios.setItems(barrios);
     }
 
     public ObservableList<Barrio> getListaBarrios() {
@@ -93,6 +99,8 @@ public class BarrioController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Nuevo Barrio Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
+
+            llenarBarrio();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -126,6 +134,9 @@ public class BarrioController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
+
+            llenarTipoContrato();
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();

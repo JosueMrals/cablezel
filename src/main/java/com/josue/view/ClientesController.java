@@ -2,7 +2,6 @@ package com.josue.view;
 
 import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
-import com.josue.modelo.Contrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
@@ -43,10 +42,6 @@ public class ClientesController implements Initializable {
 
     /**
      * Initializes the controller class.
-     * @return void
-     * @param url
-     * @param resourceBundle
-     * @throws Exception
      * @author Josue
      */
     @Override
@@ -59,12 +54,6 @@ public class ClientesController implements Initializable {
         cbBarrio.setPromptText("Seleccione un barrio");
     }
 
-    /**
-     * Obtiene todos los barrios de la base de datos
-     * @return void
-     * @throws Exception
-     * @author Josue
-     */
     public void registrarClientes(){
         // Obtener los datos del formulario
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
@@ -106,6 +95,9 @@ public class ClientesController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." , ButtonType.OK);
             alert.showAndWait();
 
+
+
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -115,7 +107,6 @@ public class ClientesController implements Initializable {
     /**
      * Obtiene los barrios de la base de datos
      * @return ObservableList<Barrio>
-     * @throws Exception
      * @author Yesser
      */
     public ObservableList<Barrio> obtenerBarrios() {
@@ -123,18 +114,5 @@ public class ClientesController implements Initializable {
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
         return barrios;
     }
-
-    /**
-     * Obtiene los tipos de contrato de la base de datos
-     * @return ObservableList<TipoContrato>
-     * @throws Exception
-     * @author Yesser
-     */
-    private ObservableList<Contrato> obtenerContratos() {
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
-        ObservableList<Contrato> contratos = FXCollections.observableArrayList(contratoService.getAll());
-        return contratos;
-    }
-
 
 }
