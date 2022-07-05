@@ -76,7 +76,7 @@ public class ContratoController implements Initializable {
     public void registrarContratos() { //Registrar contrato
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory()); //Crear el objeto contrato
 
-        LocalDate fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
+        var fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
         String descripcion = txtDescripcion.getText(); //Descripcion del contrato
         TipoContrato tipoContrato = cbTipocontrato.getValue(); //Tipo de contrato
         String nombreCliente = txtNombreCliente.getText(); //Nombre del cliente

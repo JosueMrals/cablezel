@@ -1,12 +1,12 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table (name = "contrato")
-
-public class Contrato extends Identificador{
+public class Contrato extends Identificador implements Serializable {
 
     //Relation to TipoContrato table
     @ManyToOne

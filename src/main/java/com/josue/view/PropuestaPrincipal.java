@@ -15,8 +15,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PropuestaPrincipal extends Application implements Initializable {
+     // crear una variable static para los registros con Log4j en el sistema
+    static final Logger logger = LogManager.getLogger(PropuestaPrincipal.class);
+
     public BorderPane panelPadre;
     @FXML Button btnConfig;
     @FXML Button btnReportes;
@@ -63,6 +68,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -79,6 +85,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
     }
@@ -117,6 +124,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 

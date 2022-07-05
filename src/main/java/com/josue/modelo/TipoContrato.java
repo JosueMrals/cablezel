@@ -1,11 +1,12 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tipo_contrato")
 
-public class TipoContrato extends Identificador{
+public class TipoContrato extends Identificador implements Serializable {
 
     @Column (name = "cod_tipocontrato")
     private String cod_tipocontrato;

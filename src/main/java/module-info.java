@@ -17,5 +17,6 @@ module com.josue.cablezelmnv {
     requires org.kordamp.ikonli.javafx;
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires org.apache.logging.log4j;
 
 }
