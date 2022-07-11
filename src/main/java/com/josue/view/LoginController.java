@@ -29,10 +29,9 @@ public class LoginController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML TextField cjUser;
-    @FXML PasswordField cjPassword;
-    @FXML Button btnLogin;
-    @FXML Label lblError;
+    @FXML TextField txtNombreUsuario;
+    @FXML PasswordField txtPassword;
+    @FXML Button btnEntrar;
     @FXML TableView<Usuario> table;
     @FXML TableColumn<Usuario, String> colNombre;
     @FXML TableColumn<Usuario, String> colApellidos;
@@ -40,12 +39,7 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        IGenericService<Usuario> clienteService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
 
-        usuarios = FXCollections.observableArrayList(clienteService.getAll());
-        colNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Nombres"));
-        colApellidos.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Apellidos"));
-        table.setItems(usuarios);
     }
 
     @FXML
@@ -54,10 +48,10 @@ public class LoginController implements Initializable {
         IGenericService<Usuario> usuarioService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
         try{
             Usuario us = new Usuario();
-            us.setNombres("Yesser");
-            us.setApellidos("Miranda");
-            us.setNick("yesser97");
-            us.setClave("12345678");
+            us.setNombrecompleto("Victor Zeledon");
+            us.setNickusuario("poxs44");
+            us.setPassword("poxs44");
+            us.setEmail("vzeledon7@gmail.com");
 
             //Guardar
             usuarioService.save(us);

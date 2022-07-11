@@ -5,11 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,23 +36,8 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     }
 
-    /*public void cambiarStyle(Object o)
-    {
-        Button btnConfig  = (Button) o;
-        btnConfig.setFont(new Font("System Regular", 16.0));
-    }
-
-    public void quitarStyle(Object o)
-    {
-        Label etiqueta = (Label) o;
-        etiqueta.setFont(new Font("System Regular", 16.0));
-    }*/
 
     public void mostrar_clientes(MouseEvent mouseEvent) {
-        //cambiarStyle(lbClientes);
-        //quitarStyle(lbContratos);
-        //quitarStyle(lbDashboard);
-        //quitarStyle(lbGestiones);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
@@ -67,10 +50,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_facturar(MouseEvent mouseEvent) {
-        //cambiarStyle(lbClientes);
-        //quitarStyle(lbContratos);
-        //quitarStyle(lbDashboard);
-        //quitarStyle(lbGestiones);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
@@ -84,10 +63,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     public void mostrar_gestiones(MouseEvent mouseEvent) {
-        //cambiarStyle(lbGestiones);
-        //quitarStyle(lbContratos);
-        //quitarStyle(lbDashboard);
-        //quitarStyle(lbClientes);
         try {
             FXMLLoader Loader = new FXMLLoader(getClass().getResource("/fxml/Configuraciones.fxml"));
             Pane configuraciones = Loader.load();
@@ -120,9 +95,9 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void editar_tipocontratos(MouseEvent mouseEvent) {
+    public void login(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/editar/EditarTipoContrato.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 

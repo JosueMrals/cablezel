@@ -24,12 +24,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
          
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 
             BorderPane root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Interfaz Principal");
+            primaryStage.setTitle("Inicio de Sesion");
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
             primaryStage.show();
@@ -43,9 +43,8 @@ public class Main extends Application {
         List<Usuario> clienteUsuario = clienteService.getAll();
         if (clienteUsuario != null) {
             for (Usuario c : clienteUsuario) {
-                System.out.println("Nombre: " + c.getNombres());
-                System.out.println("Apellidos: " + c.getApellidos());
-                System.out.println("Nombre de Usuario: " + c.getNick());
+                System.out.println("Nombre Completo: " + c.getNombrecompleto());
+                System.out.println("Nombre de Usuario: " + c.getNickusuario());
                 System.out.println("------------------------------------");
             }
         }
