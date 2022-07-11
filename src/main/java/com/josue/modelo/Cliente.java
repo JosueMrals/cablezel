@@ -118,7 +118,7 @@ public class Cliente extends Identificador{
 
     @Override
     public String toString() {
-        return "Cliente{}";
+        return "Cliente " + getId() + ": " + getPrimer_nombre() + " " + getSegundo_nombre() + " " + getPrimer_apellido() + " " + getSegundo_apellido();
     }
 
     public ObservableList<Cliente> getClientes() {

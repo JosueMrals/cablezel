@@ -6,6 +6,8 @@ import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 
 public class ContratoController implements Initializable {
@@ -56,8 +59,24 @@ public class ContratoController implements Initializable {
         ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipocontrato_id"));
-        colCliente.setCellValueFactory(new PropertyValueFactory<>("cliente_id"));
+        //colTipo.setCellValueFactory(new PropertyValueFactory<>("tipocontrato_id"));
+        colTipo.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Contrato, String>, ObservableValue<String>>() {
+                    @Override
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
+                        return new ReadOnlyObjectWrapper(param.getValue().getTipocontrato().getTipo_contrato());
+                    }
+                }
+        );
+        colCliente.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Contrato, String>, ObservableValue<String>>() {
+                    @Override
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
+                        return new ReadOnlyObjectWrapper(param.getValue().getCliente().toString());
+                    }
+                }
+        );
+        //colCliente.setCellValueFactory(new PropertyValueFactory<>("cliente_id"));
         tvContratos.setItems(listaContratos);
     }
 
@@ -76,7 +95,7 @@ public class ContratoController implements Initializable {
     public void registrarContratos() { //Registrar contrato
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory()); //Crear el objeto contrato
 
-        LocalDate fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
+        var fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
         String descripcion = txtDescripcion.getText(); //Descripcion del contrato
         TipoContrato tipoContrato = cbTipocontrato.getValue(); //Tipo de contrato
         String nombreCliente = txtNombreCliente.getText(); //Nombre del cliente
