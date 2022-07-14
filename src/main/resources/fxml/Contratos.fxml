@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<AnchorPane prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ContratoController">
+<AnchorPane prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ContratoController">
    <children>
       <Label layoutX="102.0" layoutY="33.0" text="Contrato ">
          <font>
@@ -54,7 +54,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <FontIcon iconLiteral="fa-file-text-o" layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <FontIcon iconLiteral="fa-file-text-o" layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="">
          <font>
             <Font size="64.0" />
          </font>

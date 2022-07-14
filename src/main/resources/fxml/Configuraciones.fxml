@@ -169,6 +169,7 @@
                               <Glow />
                            </effect></Button>
                         <Separator layoutX="360.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="300.0" prefWidth="0.0" />
+                        <FontIcon layoutX="32.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
