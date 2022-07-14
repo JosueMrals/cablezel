@@ -9,6 +9,7 @@ import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import com.josue.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,11 +23,10 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 
-            BorderPane root = loader.load();
+            AnchorPane root = loader.load();
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("Inicio de Sesion");

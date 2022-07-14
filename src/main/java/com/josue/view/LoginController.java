@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.josue.cablezelmnv.Main;
 import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
@@ -15,9 +16,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,10 +43,10 @@ public class LoginController implements Initializable {
     @FXML TableColumn<Usuario, String> colNombre;
     @FXML TableColumn<Usuario, String> colApellidos;
     private ObservableList<Usuario> usuarios;
+    public static Boolean login = false;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
     }
 
     @FXML
@@ -67,8 +74,18 @@ public class LoginController implements Initializable {
     }
 
 
-    public void mostrarRegistrar(ActionEvent actionEvent) {
-
-
+    public void mostrarPrincipal(ActionEvent actionEvent) {
+        try {
+            // ocultar la ventana actual
+            ((Node)actionEvent.getSource()).getScene().getWindow().hide();
+            //Cargar el archivo fxml y crear un nuevo stage para mostrar el formulario principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 }

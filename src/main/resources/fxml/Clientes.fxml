@@ -94,15 +94,12 @@
             <Separator layoutX="500.0" layoutY="145.0" prefHeight="4.0" prefWidth="387.0" />
             <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1280.0" stylesheets="@../css/style.css">
               <columns>
-                <TableColumn prefWidth="106.0" style="-fx-background-color: White;" text="Nº Cedula" />
-                <TableColumn prefWidth="116.0" style="-fx-background-color: White;" text="Primer Nombre" />
-                  <TableColumn prefWidth="106.0" style="-fx-background-color: White;" text="Segundo Nombre" />
-                  <TableColumn prefWidth="108.0" style="-fx-background-color: White;" text="Primer Apellido" />
-                  <TableColumn prefWidth="112.0" style="-fx-background-color: White;" text="Segundo Apellido" />
-                  <TableColumn prefWidth="253.0" style="-fx-background-color: White;" text="Direccion" />
-                  <TableColumn prefWidth="110.0" style="-fx-background-color: White;" text="Barrio" />
-                  <TableColumn prefWidth="138.0" style="-fx-background-color: White;" text="Tipo de Cliente" />
-                  <TableColumn prefWidth="230.0" style="-fx-background-color: White;" text="Nº de telefono" />
+                <TableColumn fx:id="colCedula" prefWidth="143.0" style="-fx-background-color: White;" text="Nº de Cedula" />
+                <TableColumn fx:id="colNombre" prefWidth="255.0" style="-fx-background-color: White;" text="Nombre Completo" />
+                  <TableColumn fx:id="colDireccion" prefWidth="240.0" style="-fx-background-color: White;" text="Direccion" />
+                  <TableColumn fx:id="colBarrio" prefWidth="273.0" style="-fx-background-color: White;" text="Barrio" />
+                  <TableColumn fx:id="colTipoCliente" prefWidth="198.0" style="-fx-background-color: White;" text="Tipo de Cliente" />
+                  <TableColumn fx:id="colTelefono" prefWidth="169.0" style="-fx-background-color: White;" text="Nº de Telefono" />
               </columns>
             </TableView>
             <Button layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,24 +22,21 @@ import java.util.ResourceBundle;
  * </p>
  */
 public class ClientesController implements Initializable {
-    @FXML
-    TableView tvClientes;
-    @FXML
-    TextField txtNumCedula;
-    @FXML
-    TextField txtPrimerNombre;
-    @FXML
-    TextField txtSegundoNombre;
-    @FXML
-    TextField txtPrimerApellido;
-    @FXML
-    TextField txtSegundoApellido;
-    @FXML
-    TextArea txtDireccion;
-    @FXML
-    ComboBox<Barrio> cbBarrio;
-    @FXML
-    TextField txtNumTelefono;
+    @FXML TextField txtNumCedula;
+    @FXML TextField txtPrimerNombre;
+    @FXML TextField txtSegundoNombre;
+    @FXML TextField txtPrimerApellido;
+    @FXML TextField txtSegundoApellido;
+    @FXML TextArea txtDireccion;
+    @FXML ComboBox<Barrio> cbBarrio;
+    @FXML TextField txtNumTelefono;
+    @FXML TableColumn<Cliente, String> colCedula;
+    @FXML TableColumn<Cliente, String> colNombre;
+    @FXML TableColumn<Cliente, String> colDireccion;
+    @FXML TableColumn<Cliente, String> colBarrio;
+    @FXML TableColumn<Cliente, String> colTelefono;
+    @FXML TableColumn<Cliente, String> colTipoCliente;
+    @FXML TableView<Cliente> tvClientes;
 
     /**
      * Initializes the controller class.
@@ -46,12 +44,29 @@ public class ClientesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        listarBarrios();
+        llenarClientes();
+    }
+
+    public void listarBarrios(){
         // Inicializar el comboBox de barrios
         var barrios = obtenerBarrios();
         cbBarrio.setValue(null);
         cbBarrio.setItems(barrios);
 
         cbBarrio.setPromptText("Seleccione un barrio");
+    }
+
+    public void llenarClientes() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<Cliente>(Cliente.class, HibernateUtil.getSessionFactory());
+        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+        colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("primer_nombre" + "segundo_nombre" + "primer_apellido" + "segundo_apellido"));
+        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
+        tvClientes.setItems(clientes);
+
     }
 
     public void registrarClientes(){

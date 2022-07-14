@@ -32,7 +32,7 @@
                   <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="105.0" prefHeight="25.0" prefWidth="245.0" promptText="Contraseña" />
                   <PasswordField fx:id="txtFullPassword" layoutX="148.0" layoutY="499.0" prefWidth="245.0" promptText="Contraseña" />
                   <Hyperlink layoutX="145.0" layoutY="146.0" text="Olvidé mi contraseña" />
-                  <Button fx:id="btnEntrar" layoutX="338.0" layoutY="145.0" mnemonicParsing="false" style="-fx-background-color: #24A0ED;" text="Entrar" textFill="WHITE">
+                  <Button fx:id="btnEntrar" layoutX="338.0" layoutY="145.0" mnemonicParsing="false" onAction="#mostrarPrincipal" style="-fx-background-color: #24A0ED;" text="Entrar" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

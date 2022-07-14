@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -24,7 +26,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
     @FXML Button btnUsuarios;
     @FXML Button btnFacturar;
     @FXML Button btnSalir;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,7 +99,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public void login(MouseEvent mouseEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-            Pane registrarse = loader.load();
+            AnchorPane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 
         } catch (IOException e) {
