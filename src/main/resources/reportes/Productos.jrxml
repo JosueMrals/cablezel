@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" pageWidth="793" pageHeight="540" columnWidth="753" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0712142b-42e8-4bf2-8457-ab3d34c123da">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CablezelConecction"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#595757">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#B0ABAB">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Empty Dataset1" uuid="723c2e68-36a5-4c5b-b051-036e6287be24">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexioncablezel"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value="ZmFjdHVyYXMgQVMgLDQ4LDI1LDk4NTAxYjhiLTcwNjYtNDE1NC05MmMyLTM0ZTBjNDdmZDk3OTs="/>
+		<parameter name="ORACLE_REF_CURSOR" class="interface java.sql.ResultSet" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[SELECT id_factura,
+	num_factura,
+	total,
+	fecha_factura,
+	id_cliente,
+	detalle_factura,
+	id_usuario
+FROM facturas]]>
+		</queryString>
+		<field name="id_factura" class="java.lang.Integer"/>
+		<field name="num_factura" class="java.lang.Integer"/>
+		<field name="total" class="java.lang.Float"/>
+		<field name="fecha_factura" class="java.sql.Date"/>
+		<field name="id_cliente" class="java.lang.Integer"/>
+		<field name="id_detalle_factura" class="java.lang.Integer"/>
+		<field name="id_usuario" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="DatasetTabla" uuid="3859aa1e-ec7c-472f-9f80-0fe8ac20ebe0">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CablezelConecction"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT primer_nombre ,
+clientes.num_cedula 
+FROM clientes]]>
+		</queryString>
+		<field name="primer_nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="primer_nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="primer_nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="clientes"/>
+		</field>
+		<field name="num_cedula" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="num_cedula"/>
+			<property name="com.jaspersoft.studio.field.label" value="num_cedula"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="clientes"/>
+		</field>
+	</subDataset>
+	<parameter name="ORACLE_REF_CURSOR" class="interface java.sql.ResultSet" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[Select clientes.primer_nombre from clientes]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="14" width="180" height="22" uuid="f7a25825-ad83-4c1f-9bcd-ad6b3daba758"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CABLEZEL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="73">
+			<staticText>
+				<reportElement x="255" y="0" width="243" height="20" uuid="161019c2-40fa-4702-88d7-6a9a50f92d65"/>
+				<textElement textAlignment="Center">
+					<font fontName="Monospaced" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prop.Victor Manuel Zeledon Martinez]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="19" width="338" height="20" uuid="22199a3c-b7bf-43e3-923e-653d5409f9d9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Dialog" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Les ofrece Servicio de Televisión por Cable con una Buena Señal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="36" width="338" height="20" uuid="28ecb4ad-f92e-4500-ac1f-1b3ada5437ef"/>
+				<textElement textAlignment="Center">
+					<font fontName="Dialog" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Direccion.: Fte. a modulos del Mercado Municipal, Siuna RACCN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="54" width="338" height="16" uuid="194ff5ea-82a6-4093-9be6-143120e4ecf4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Dialog" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ruc:6102008480004X // Telf: 2794-2011]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="600" y="21" width="100" height="30" uuid="37164657-f8db-48de-996f-196d471744e6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="255" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="0" width="180" height="25" uuid="dccfb46a-dbd0-4c74-a346-af0dce828800"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE CAJA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="20" width="140" height="25" uuid="4470273d-ddc7-4d12-96b9-102ce4562047"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="22" width="234" height="38" uuid="d59b4bc6-8166-417d-8f58-0132272dae8c"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente : ____________________]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="70" y="70" width="568" height="150" uuid="6746a408-d8c9-4f65-9373-299e987101d2">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DatasetTabla" uuid="98d9bd3a-631d-4a8b-9da9-29aafbc5e6ea">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="142" uuid="267c5213-0790-4dd7-8b56-7282741cbf68">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" uuid="8de36230-8219-4018-b7b6-62bd04c6b586"/>
+								<text><![CDATA[id_contrato]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="142" height="30" uuid="90fcffbb-b0d1-428a-8a52-29e923341f51"/>
+								<textFieldExpression><![CDATA[$F{primer_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="142" uuid="ea1354da-3402-4543-8316-6796704c4ff8">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" uuid="571c9e84-dd1c-466f-a0a6-efcf99c41e90"/>
+								<text><![CDATA[cantidad_meses]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="142" height="30" uuid="478de05f-91f3-471f-a3a6-166527e3fc57"/>
+								<textFieldExpression><![CDATA[$F{num_cedula}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="142" uuid="5472903d-d323-418c-88f5-4b64adfc330a">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" uuid="1e7f727c-ba2e-416b-8c3e-5e10c44d9ed9"/>
+								<text><![CDATA[total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
+					</jr:column>
+					<jr:column width="142" uuid="e0530cf5-318a-4412-bd22-70600001b2be">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" uuid="30617692-ebb3-4cdb-97e9-9e28af52c134"/>
+								<text><![CDATA[descripcion]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement x="553" y="19" width="50" height="20" uuid="032aa2da-09e8-41ba-82b4-7a4369604521"/>
+				<text><![CDATA[Sub-Total :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="553" y="39" width="120" height="20" uuid="660e4210-cd52-408e-a8b8-ec8e5bc2fc08"/>
+				<text><![CDATA[Descuento :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="59" width="78" height="20" uuid="3705d14a-bbbe-4d04-a16c-06ad1a7f3681"/>
+				<text><![CDATA[Total General :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="31" width="176" height="28" uuid="29cfbbfc-d78c-47e7-b193-4cad13bedbd0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario: _____________________]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="86" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>
