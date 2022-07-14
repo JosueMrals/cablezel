@@ -6,59 +6,59 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class Usuario extends Identificador {
 
-    @Column(name = "nombres", length = 40)
-    private String Nombres;
+    @Column(name = "nombrecompleto", length = 40)
+    private String nombrecompleto;
 
-    @Column(name = "apellidos", length = 40)
-    private String Apellidos;
+    @Column(name = "nickusuario", length = 40)
+    private String nickusuario;
 
-    @Column(name = "nick", length = 40)
-    private String Nick;
+    @Column(name = "password", length = 40)
+    private String password;
 
-    @Column(name = "clave", length = 40)
-    private String Clave;
+    @Column(name = "email", length = 40)
+    private String email;
 
     public Usuario() {
 
     }
 
-    public Usuario(String Nombres, String Apellidos, String Nick, String Clave) {
-        this.Nombres = Nombres;
-        this.Apellidos = Apellidos;
-        this.Nick = Nick;
-        this.Clave = Clave;
+    public Usuario(String nombrecompleto, String password, String nickusuario, String email) {
+        this.nombrecompleto = nombrecompleto;
+        this.password = password;
+        this.nickusuario = nickusuario;
+        this.email = email;
     }
 
-    public String getNombres() {
-        return Nombres;
+    public String getNombrecompleto() {
+        return nombrecompleto;
     }
 
-    public void setNombres(String nombres) {
-        Nombres = nombres;
+    public void setNombrecompleto(String nombrecompleto) {
+        this.nombrecompleto = nombrecompleto;
     }
 
-    public String getApellidos() {
-        return Apellidos;
+    public String getNickusuario() {
+        return nickusuario;
     }
 
-    public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+    public void setNickusuario(String nickusuario) {
+        this.nickusuario = nickusuario;
     }
 
-    public String getNick() {
-        return Nick;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNick(String nick) {
-        Nick = nick;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getClave() {
-        return Clave;
+    public String getEmail() {
+        return email;
     }
 
-    public void setClave(String clave) {
-        Clave = clave;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
