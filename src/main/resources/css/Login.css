@@ -1,0 +1,15 @@
+#btnEntrar {
+    -fx-text-fill: white;
+    -fx-padding: 0.7em 1.7em;
+    -fx-font-size: 15px;
+    -fx-border-style: 1px solid #e8e8e8;
+    -fx-border-radius: 0.5em;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, 6, 6);
+}
+
+#btnEntrar:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, -5, -5);
+}

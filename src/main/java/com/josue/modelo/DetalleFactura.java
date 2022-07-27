@@ -15,7 +15,7 @@ public class DetalleFactura extends Identificador{
     @Column (name = "total_pagar")
     private Float total_pagar;
 
-    @Column (name = "descricion")
+    @Column (name = "descripcion")
     private String descripcion;
 
     public Integer getCantidad_meses() {

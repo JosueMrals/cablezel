@@ -13,9 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,8 +38,6 @@ public class ContratoController implements Initializable {
     ObservableList<Cliente> listaClientes;
     String nombreCliente;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) { // Inicializar el comboBox de tipo contrato
         var tipoContratos = obtenerTipoContratos(); //obtener los tipos de contrato de la base de datos
@@ -59,9 +55,8 @@ public class ContratoController implements Initializable {
         ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        //colTipo.setCellValueFactory(new PropertyValueFactory<>("tipocontrato_id"));
         colTipo.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Contrato, String>, ObservableValue<String>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
                         return new ReadOnlyObjectWrapper(param.getValue().getTipocontrato().getTipo_contrato());
@@ -69,14 +64,13 @@ public class ContratoController implements Initializable {
                 }
         );
         colCliente.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Contrato, String>, ObservableValue<String>>() {
+                new Callback<>() {
                     @Override
                     public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
                         return new ReadOnlyObjectWrapper(param.getValue().getCliente().toString());
                     }
                 }
         );
-        //colCliente.setCellValueFactory(new PropertyValueFactory<>("cliente_id"));
         tvContratos.setItems(listaContratos);
     }
 
@@ -120,6 +114,7 @@ public class ContratoController implements Initializable {
             dpFechacontrato.setValue(null); //Fecha de contrato
             txtDescripcion.setText(null); //Descripcion del contrato
             cbTipocontrato.setValue(null);  //Tipo de contrato
+            txtNombreCliente.setText(null); //Nombre del cliente
 
             llenarContrato();
 

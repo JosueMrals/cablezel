@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -59,7 +58,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public void mostrar_facturar(MouseEvent mouseEvent) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FacturarPrincipal.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 

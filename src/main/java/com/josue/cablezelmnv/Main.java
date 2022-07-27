@@ -31,7 +31,8 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Inicio de Sesion");
             primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
+            primaryStage.setMaximized(false);
+            primaryStage.centerOnScreen();
             primaryStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

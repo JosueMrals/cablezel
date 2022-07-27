@@ -85,6 +85,7 @@ public class ClientesController implements Initializable {
         // Crear el cliente
         try{
             Cliente cl = new Cliente();
+
             cl.setNum_cedula(numcedula);
             cl.setPrimer_nombre(primernombre);
             cl.setSegundo_nombre(segundonombre);
