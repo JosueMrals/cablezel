@@ -75,6 +75,16 @@ public class ContratoController implements Initializable {
     }
 
     public void registrarContratos() { //Registrar contrato
+        // Validar que los campos no esten vacios
+        if (dpFechacontrato.getValue() == null || txtDescripcion.getText().isEmpty() || cbTipocontrato.getValue() == null || txtNombreCliente.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al registrar contrato");
+            alert.setContentText("Por favor, complete todos los campos");
+            alert.showAndWait();
+            return;
+        }
+
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory()); //Crear el objeto contrato
 
         var fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
