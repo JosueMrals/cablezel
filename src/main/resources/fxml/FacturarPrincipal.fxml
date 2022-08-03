@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="1126.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturarPrincipalController">
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<AnchorPane prefHeight="717.0" prefWidth="1126.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturarPrincipalController">
    <children>
-      <TableView layoutX="20.0" layoutY="189.0" prefHeight="304.0" prefWidth="1088.0">
+      <TableView fx:id="tvBuscarClientes" layoutX="20.0" layoutY="189.0" prefHeight="304.0" prefWidth="1088.0">
         <columns>
-          <TableColumn prefWidth="77.0" text="N.Contrato " />
-          <TableColumn prefWidth="124.0" text="Tipo de contrato " />
-            <TableColumn prefWidth="298.0" text="Cliente" />
-            <TableColumn prefWidth="101.0" text="Precio Contrato" />
+          <TableColumn fx:id="colNumContrato" maxWidth="87.0" prefWidth="87.0" resizable="false" text="N. Contrato " />
+          <TableColumn fx:id="colTipoContrato" maxWidth="150.0" prefWidth="150.0" resizable="false" text="Tipo de contrato " />
+           <TableColumn fx:id="colCliente" maxWidth="581.0" prefWidth="400.0" resizable="false" text="Cliente" />
+           <TableColumn fx:id="colPrecioContrato" maxWidth="589.0" prefWidth="182.0" resizable="false" text="Precio Contrato" />
+            <TableColumn fx:id="colAccion" maxWidth="535.0" prefWidth="535.0" resizable="false" text="Accion" />
         </columns>
       </TableView>
       <Label layoutX="20.0" layoutY="121.0" text="Buscar Cliente">
@@ -21,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="20.0" layoutY="145.0" prefHeight="25.0" prefWidth="403.0" />
+      <TextField fx:id="txtBuscarCliente" layoutX="20.0" layoutY="145.0" prefHeight="25.0" prefWidth="403.0" />
       <Label layoutX="72.0" layoutY="29.0" text="Facturar ">
          <font>
             <Font size="30.0" />

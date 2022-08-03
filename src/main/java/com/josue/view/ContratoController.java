@@ -5,6 +5,7 @@ import com.josue.modelo.Contrato;
 import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
+import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -36,7 +37,6 @@ public class ContratoController implements Initializable {
     String[] clientesAutocomplete = {};
 
     ObservableList<Cliente> listaClientes;
-    String nombreCliente;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { // Inicializar el comboBox de tipo contrato
@@ -44,7 +44,7 @@ public class ContratoController implements Initializable {
         cbTipocontrato.setValue(null); //Seleccionar nulo por defecto
         cbTipocontrato.setItems(tipoContratos); //Setear los tipos de contrato en el comboBox
         cbTipocontrato.setPromptText("Seleccione un tipo de contrato"); //Seleccione un tipo de contrato
-        clientesAutocomplete = obtenerClientes(); //obtener los clientes de la base de datos
+        clientesAutocomplete = GlobalUtil.obtenerClientes(); //obtener los clientes de la base de datos
         TextFields.bindAutoCompletion(txtNombreCliente,clientesAutocomplete); //AutoCompletar el campo de nombre de cliente
 
         llenarContrato(); //Llenar la tabla de contratos
@@ -72,18 +72,6 @@ public class ContratoController implements Initializable {
                 }
         );
         tvContratos.setItems(listaContratos);
-    }
-
-    private String[] obtenerClientes() {
-        var clientes = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory()).getAll(); //obtener los clientes de la base de datos
-        var listaC = FXCollections.observableArrayList(clientes); //convertir la lista de clientes a un observableList
-        listaClientes = listaC; //guardar la lista de clientes en una variable global
-        var clientesAutocomplete = new String[clientes.size()]; //crear un arreglo de string con el tamaño de los clientes
-        for (int i = 0; i < clientes.size(); i++) { //recorrer el arreglo de clientes
-            clientesAutocomplete[i] = clientes.get(i).getPrimer_nombre() + " " + clientes.get(i).getSegundo_nombre()
-            + " " +  clientes.get(i).getPrimer_apellido() + " " +  clientes.get(i).getSegundo_apellido(); //agregar el nombre de cada cliente al arreglo de string
-        }
-        return clientesAutocomplete; //retornar el arreglo de string con los nombres de los clientes
     }
 
     public void registrarContratos() { //Registrar contrato
