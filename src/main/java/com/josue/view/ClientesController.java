@@ -2,20 +2,16 @@ package com.josue.view;
 
 import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
-import com.josue.modelo.Contrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -61,18 +57,14 @@ public class ClientesController implements Initializable {
     }
 
     public void llenarClientes() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<Cliente>(Cliente.class, HibernateUtil.getSessionFactory());
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                getSessionFactory());
         ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
         colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
         colNombre.setCellValueFactory(
-                new Callback<>() {
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Cliente, String> param) {
-                        return new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
-                                + " " + param.getValue().getSegundo_nombre() + " " +
-                                param.getValue().getPrimer_apellido() + " " + param.getValue().getSegundo_apellido());
-                    }
-                }
+                param -> new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
+                        + " " + param.getValue().getSegundo_nombre() + " " +
+                        param.getValue().getPrimer_apellido() + " " + param.getValue().getSegundo_apellido())
         );
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
@@ -82,8 +74,22 @@ public class ClientesController implements Initializable {
     }
 
     public void registrarClientes(){
+
+        //Validar que los campos no esten vacios
+        if(txtNumCedula.getText().isEmpty() || txtPrimerNombre.getText().isEmpty() || txtPrimerApellido.
+                getText().isEmpty() || txtDireccion.getText().isEmpty() || txtNumTelefono.getText().isEmpty()
+                || cbBarrio.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al registrar cliente");
+            alert.setContentText("Por favor, complete todos los campos");
+            alert.showAndWait();
+            return;
+        }
+
         // Obtener los datos del formulario
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class,
+                HibernateUtil.getSessionFactory());
 
         String numcedula = txtNumCedula.getText();
         String primernombre = txtPrimerNombre.getText();
@@ -121,7 +127,8 @@ public class ClientesController implements Initializable {
             cbBarrio.getSelectionModel().clearSelection();
             txtNumTelefono.clear();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." , ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." ,
+                    ButtonType.OK);
             alert.showAndWait();
 
             llenarClientes();
@@ -139,9 +146,9 @@ public class ClientesController implements Initializable {
      * @author Yesser
      */
     public ObservableList<Barrio> obtenerBarrios() {
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-        return barrios;
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.
+                getSessionFactory());
+        return FXCollections.observableArrayList(barrioService.getAll());
     }
 
 }

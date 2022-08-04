@@ -75,8 +75,10 @@ public class ContratoController implements Initializable {
     }
 
     public void registrarContratos() { //Registrar contrato
+
         // Validar que los campos no esten vacios
-        if (dpFechacontrato.getValue() == null || txtDescripcion.getText().isEmpty() || cbTipocontrato.getValue() == null || txtNombreCliente.getText().isEmpty()) {
+        if (dpFechacontrato.getValue() == null || txtDescripcion.getText().isEmpty() || cbTipocontrato.getValue()
+                == null || txtNombreCliente.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error al registrar contrato");
@@ -85,7 +87,8 @@ public class ContratoController implements Initializable {
             return;
         }
 
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory()); //Crear el objeto contrato
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class,
+                HibernateUtil.getSessionFactory()); //Crear el objeto contrato
 
         var fecha_contrato = dpFechacontrato.getValue(); //Fecha de contrato
         String descripcion = txtDescripcion.getText(); //Descripcion del contrato
@@ -94,8 +97,9 @@ public class ContratoController implements Initializable {
 
         Cliente cliente = null; //Crear un cliente nulo
         for (Cliente c : listaClientes) { //Recorrer la lista de clientes
-            if ((c.getPrimer_nombre() + " " + c.getSegundo_nombre() + " " + c.getPrimer_apellido() + " " + c.getSegundo_apellido()).equals(nombreCliente)) {
-                cliente = c; //Si el nombre del cliente es igual al nombre del cliente de la lista de clientes, guardar el cliente en una variable global
+            if ((c.getPrimer_nombre() + " " + c.getSegundo_nombre() + " " + c.getPrimer_apellido() + " " +
+                    c.getSegundo_apellido()).equals(nombreCliente)) {
+                cliente = c;
             }
         }
 
@@ -116,7 +120,8 @@ public class ContratoController implements Initializable {
 
             llenarContrato();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente", ButtonType.OK); //Crear una alerta de confirmación
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente",
+                    ButtonType.OK); //Crear una alerta de confirmación
             alert.show(); //Mostrar el mensaje de confirmación
 
         }
@@ -124,7 +129,8 @@ public class ContratoController implements Initializable {
     catch(Exception e)
 
         {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error al registrar el contrato" + e.getMessage(), ButtonType.OK); //Crear una alerta de confirmación
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error al registrar el contrato" +
+                    e.getMessage(), ButtonType.OK); //Crear una alerta de confirmación
             alert.showAndWait(); //Mostrar el mensaje de confirmación
 
         }
@@ -139,7 +145,8 @@ public class ContratoController implements Initializable {
      */
 
     public ObservableList<TipoContrato> obtenerTipoContratos() { //Obtener los tipos de contrato de la base de datos
-        IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory()); //Crear una instancia de la clase GenericServiceImpl
+        IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class,
+                HibernateUtil.getSessionFactory()); //Crear una instancia de la clase GenericServiceImpl
         return FXCollections.observableArrayList(tipocontratosService.getAll());
     }
 
