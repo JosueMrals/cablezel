@@ -105,7 +105,6 @@
                 <TableColumn fx:id="colNombre" prefWidth="255.0" style="-fx-background-color: White;" text="Nombre Completo" />
                   <TableColumn fx:id="colDireccion" prefWidth="240.0" style="-fx-background-color: White;" text="Direccion" />
                   <TableColumn fx:id="colBarrio" prefWidth="273.0" style="-fx-background-color: White;" text="Barrio" />
-                  <TableColumn fx:id="colTipoCliente" prefWidth="198.0" style="-fx-background-color: White;" text="Tipo de Cliente" />
                   <TableColumn fx:id="colTelefono" prefWidth="169.0" style="-fx-background-color: White;" text="Nº de Telefono" />
               </columns>
             </TableView>

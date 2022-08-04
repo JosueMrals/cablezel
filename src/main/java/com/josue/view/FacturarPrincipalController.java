@@ -37,7 +37,7 @@ public class FacturarPrincipalController implements Initializable {
     @FXML TableColumn<Contrato, String> colTipoContrato;
     @FXML
     TableColumn<Contrato, String> colCliente;
-    @FXML TableColumn<TipoContrato, String> colPrecioContrato;
+    @FXML TableColumn<Contrato, String> colPrecioContrato;
     @FXML TextField txtBuscarCliente;
     @FXML TableView<Contrato> tvBuscarClientes;
 
@@ -75,6 +75,14 @@ public class FacturarPrincipalController implements Initializable {
                 }
         );
 
+        colPrecioContrato.setCellValueFactory(
+                new Callback<>() {
+                    @Override
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
+                        return new ReadOnlyObjectWrapper(param.getValue().getTipocontrato().getPrecio_contrato());
+                    }
+                }
+        );
 
         tvBuscarClientes.setItems(contratos);
     }

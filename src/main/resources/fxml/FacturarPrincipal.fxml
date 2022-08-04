@@ -9,16 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 <AnchorPane prefHeight="717.0" prefWidth="1126.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturarPrincipalController">
    <children>
       <TableView fx:id="tvBuscarClientes" layoutX="20.0" layoutY="189.0" prefHeight="304.0" prefWidth="1088.0">
         <columns>
           <TableColumn fx:id="colNumContrato" maxWidth="87.0" prefWidth="87.0" resizable="false" text="N. Contrato " />
           <TableColumn fx:id="colTipoContrato" maxWidth="150.0" prefWidth="150.0" resizable="false" text="Tipo de contrato " />
-           <TableColumn fx:id="colCliente" maxWidth="581.0" prefWidth="400.0" resizable="false" text="Cliente" />
-           <TableColumn fx:id="colPrecioContrato" maxWidth="589.0" prefWidth="182.0" resizable="false" text="Precio Contrato" />
-            <TableColumn fx:id="colAccion" maxWidth="535.0" prefWidth="535.0" resizable="false" text="Accion" />
+           <TableColumn fx:id="colCliente" maxWidth="482.0" prefWidth="482.0" resizable="false" text="Cliente" />
+           <TableColumn fx:id="colPrecioContrato" maxWidth="202.0" prefWidth="202.0" resizable="false" text="Precio Contrato" />
+            <TableColumn fx:id="colAccion" maxWidth="164.0" prefWidth="164.0" resizable="false" text="Accion" />
         </columns>
       </TableView>
       <Label layoutX="20.0" layoutY="121.0" text="Buscar Cliente">
@@ -40,7 +39,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <FontIcon iconLiteral="fa-file-text-o" iconSize="50" layoutX="20.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <FontIcon iconLiteral="fa-search" iconSize="25" layoutX="432.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

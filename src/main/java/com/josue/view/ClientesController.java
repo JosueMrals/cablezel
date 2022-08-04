@@ -2,15 +2,19 @@ package com.josue.view;
 
 import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
+import com.josue.modelo.Contrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +39,6 @@ public class ClientesController implements Initializable {
     @FXML TableColumn<Cliente, String> colDireccion;
     @FXML TableColumn<Cliente, String> colBarrio;
     @FXML TableColumn<Cliente, String> colTelefono;
-    @FXML TableColumn<Cliente, String> colTipoCliente;
     @FXML TableView<Cliente> tvClientes;
 
     /**
@@ -61,7 +64,16 @@ public class ClientesController implements Initializable {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<Cliente>(Cliente.class, HibernateUtil.getSessionFactory());
         ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
         colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("primer_nombre" + "segundo_nombre" + "primer_apellido" + "segundo_apellido"));
+        colNombre.setCellValueFactory(
+                new Callback<>() {
+                    @Override
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Cliente, String> param) {
+                        return new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
+                                + " " + param.getValue().getSegundo_nombre() + " " +
+                                param.getValue().getPrimer_apellido() + " " + param.getValue().getSegundo_apellido());
+                    }
+                }
+        );
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
@@ -101,6 +113,7 @@ public class ClientesController implements Initializable {
             // Limpiar el formulario
             txtNumCedula.clear();
             txtPrimerNombre.clear();
+            txtSegundoNombre.clear();
             txtSegundoApellido.clear();
             txtPrimerApellido.clear();
             txtSegundoApellido.clear();
@@ -111,7 +124,7 @@ public class ClientesController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." , ButtonType.OK);
             alert.showAndWait();
 
-
+            llenarClientes();
 
 
         } catch (Exception e) {
