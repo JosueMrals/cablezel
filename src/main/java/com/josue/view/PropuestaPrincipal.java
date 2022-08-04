@@ -82,7 +82,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     public void mostrar_usuarios(MouseEvent mouseEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegistrarUsuarios.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 

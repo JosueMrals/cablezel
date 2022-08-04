@@ -108,7 +108,8 @@ public class BarrioController implements Initializable {
             }
         }
 
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class,
+                HibernateUtil.getSessionFactory());
 
         String nombre_barrio = txtNombreBarrio.getText();
         String descripcion = txtDescripcionBarrio.getText();

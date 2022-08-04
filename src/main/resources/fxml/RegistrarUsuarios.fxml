@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="361.0" prefWidth="745.0" stylesheets="@../css/RegistrarUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.RegistrarUsuarios">
+<AnchorPane prefHeight="361.0" prefWidth="745.0" stylesheets="@../css/RegistrarUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.UsuariosController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="745.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -28,10 +27,10 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtNombreCompleto" layoutX="150.0" layoutY="86.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre Completo" />
-                  <TextField fx:id="txtFullName" layoutX="150.0" layoutY="126.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre de Usuario" />
+                  <TextField fx:id="txtNombreUsuarios" layoutX="150.0" layoutY="126.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre de Usuario" />
                   <TextField fx:id="txtEmail" layoutX="150.0" layoutY="165.0" prefHeight="25.0" prefWidth="245.0" promptText="Email" />
-                  <PasswordField fx:id="txtFullPassword" layoutX="150.0" layoutY="207.0" prefWidth="245.0" promptText="Contraseña" />
-                  <Button fx:id="btnRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="253.0" mnemonicParsing="false" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+                  <PasswordField fx:id="txtPassword" layoutX="150.0" layoutY="207.0" prefWidth="245.0" promptText="Contraseña" />
+                  <Button fx:id="btnRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="253.0" onAction="#registarUsuario" mnemonicParsing="false" text="Registrar" textAlignment="CENTER" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
