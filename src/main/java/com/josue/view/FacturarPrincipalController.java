@@ -48,6 +48,10 @@ public class FacturarPrincipalController implements Initializable {
         clientesAutocomplete = obtenerClientes();
         TextFields.bindAutoCompletion(txtBuscarCliente, clientesAutocomplete);
         llenarClientes();
+        txtBuscarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("oldValue: " + oldValue);
+            System.out.println("newValue: " + newValue);
+        });
     }
 
     public void llenarClientes() {
