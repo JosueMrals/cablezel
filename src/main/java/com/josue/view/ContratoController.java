@@ -45,9 +45,15 @@ public class ContratoController implements Initializable {
         cbTipocontrato.setItems(tipoContratos); //Setear los tipos de contrato en el comboBox
         cbTipocontrato.setPromptText("Seleccione un tipo de contrato"); //Seleccione un tipo de contrato
         clientesAutocomplete = GlobalUtil.obtenerClientes(); //obtener los clientes de la base de datos
+        listaClientes = obtenerClientesList(); //obtener los clientes de la base de datos
         TextFields.bindAutoCompletion(txtNombreCliente,clientesAutocomplete); //AutoCompletar el campo de nombre de cliente
 
         llenarContrato(); //Llenar la tabla de contratos
+    }
+
+    private ObservableList<Cliente> obtenerClientesList() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(clienteService.getAll());
     }
 
     public void llenarContrato() {
