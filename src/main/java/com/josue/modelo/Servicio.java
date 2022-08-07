@@ -1,19 +1,13 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table (name = "servicios")
-public class Servicio extends Identificador{
-
-    @ManyToOne
-    @JoinColumn (name = "contrato_id",referencedColumnName = "id")
-    private Contrato contrato;
+public class Servicio extends Identificador implements Serializable {
 
     //Relation with DetalleFactura
-    @ManyToOne
-    @JoinColumn (name = "detalles_id", referencedColumnName = "id")
-    private DetalleFactura detalleFactura;
 
     @Column(name = "nombre")
     private String nombre;
