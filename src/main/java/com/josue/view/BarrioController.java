@@ -54,8 +54,11 @@ public class BarrioController implements Initializable {
         textoDescripcionBotones(); // colocar texto a los botones
 
     }
-    public void llenarTipoContrato() { // llenar la tabla de tipo de contrato
-        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+    public void llenarTipoContrato() {
+
+        // llenar la tabla de tipo de contrato
+        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.
+                getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("cod_tipocontrato"));
         colTipoContrato.setCellValueFactory(new PropertyValueFactory<>("tipo_contrato"));
@@ -82,7 +85,31 @@ public class BarrioController implements Initializable {
     }
 
     public void guardarBarrio() {
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+
+        //Validar que los campos no esten vacios
+        if (txtNombreBarrio.getText().isEmpty() || txtDescripcionBarrio.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Debe llenar todos los campos");
+            alert.showAndWait();
+            return;
+        }
+
+        //Validar que no se repita el nombre del barrio
+        for (Barrio barrio : listaBarrios) {
+            if (barrio.getNombre_barrio().equals(txtNombreBarrio.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("El nombre del barrio ya existe");
+                alert.showAndWait();
+                return;
+            }
+        }
+
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class,
+                HibernateUtil.getSessionFactory());
 
         String nombre_barrio = txtNombreBarrio.getText();
         String descripcion = txtDescripcionBarrio.getText();
@@ -97,7 +124,8 @@ public class BarrioController implements Initializable {
             txtNombreBarrio.clear();
             txtDescripcionBarrio.clear();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Nuevo Barrio Ingresado Correctamente." , ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Nuevo Barrio Ingresado Correctamente." ,
+                    ButtonType.OK);
             alert.showAndWait();
 
             llenarBarrio();
@@ -108,7 +136,33 @@ public class BarrioController implements Initializable {
     }
 
     public void guardarTipoContrato() {
-        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+
+        //Validar que los campos no esten vacios
+        if(txtCodigo.getText().isEmpty() || txtTipoContrato.getText().isEmpty() || txtCantidadTv.getText().isEmpty() ||
+                txtPreciocontrato.getText().isEmpty() || txtDescripcionContrato.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("No puede haber campos vacios");
+            alert.showAndWait();
+            return;
+        }
+
+        //Validar que no se repita el tipo de contrato
+        Iterable<? extends TipoContrato> listaTipoContrato = null;
+        for (TipoContrato tipoContrato : listaTipoContrato) {
+            if (tipoContrato.getTipo_contrato().equals(txtTipoContrato.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("El tipo de contrato ya existe");
+                alert.showAndWait();
+                return;
+            }
+        }
+
+        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class,
+                HibernateUtil.getSessionFactory());
 
         String cod_tipocontrato = txtCodigo.getText();
         String tipo_contrato = txtTipoContrato.getText();
@@ -132,7 +186,8 @@ public class BarrioController implements Initializable {
             txtPreciocontrato.clear();
             txtDescripcionContrato.clear();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." ,
+                    ButtonType.OK);
             alert.showAndWait();
 
             llenarTipoContrato();
