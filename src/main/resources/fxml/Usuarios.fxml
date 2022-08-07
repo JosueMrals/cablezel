@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="581.0" layoutY="29.0" prefHeight="70.0" prefWidth="106.0" text="Usuarios">
          <font>
@@ -21,7 +25,6 @@
         </columns>
       </TableView>
       <TextField layoutX="139.0" layoutY="538.0" prefHeight="25.0" prefWidth="368.0" promptText="Poxs44" />
-      <FontIcon iconLiteral="fa-search" iconSize="20" layoutX="516.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Label layoutX="139.0" layoutY="499.0" prefHeight="38.0" prefWidth="118.0" text="Buscar Usuario">
          <font>
             <Font size="16.0" />

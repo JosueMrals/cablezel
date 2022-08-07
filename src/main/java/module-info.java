@@ -7,9 +7,9 @@ module com.josue.cablezelmnv {
     requires java.naming;
 
     opens com.josue.cablezelmnv to javafx.fxml, javafx.graphics;
-    opens com.josue.view to javafx.fxml;
     opens com.josue.modelo to org.hibernate.orm.core;
     opens com.josue.reportes to jasperreports;
+    opens com.josue.view to javafx.fxml, org.hibernate.orm.core;
     requires javafx.graphicsEmpty;
     requires java.base;
     requires org.hibernate.orm.core;

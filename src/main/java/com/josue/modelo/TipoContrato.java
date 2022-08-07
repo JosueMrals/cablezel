@@ -79,4 +79,5 @@ public class TipoContrato extends Identificador implements Serializable {
     public String toString() {
         return getId() + " " + tipo_contrato;
     }
+
 }

@@ -9,6 +9,7 @@ import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import com.josue.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,16 +23,16 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-         
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 
-            BorderPane root = loader.load();
+            AnchorPane root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Interfaz Principal");
+            primaryStage.setTitle("Inicio de Sesion");
             primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
+            primaryStage.setMaximized(false);
+            primaryStage.centerOnScreen();
             primaryStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -43,9 +44,8 @@ public class Main extends Application {
         List<Usuario> clienteUsuario = clienteService.getAll();
         if (clienteUsuario != null) {
             for (Usuario c : clienteUsuario) {
-                System.out.println("Nombre: " + c.getNombres());
-                System.out.println("Apellidos: " + c.getApellidos());
-                System.out.println("Nombre de Usuario: " + c.getNick());
+                System.out.println("Nombre Completo: " + c.getNombrecompleto());
+                System.out.println("Nombre de Usuario: " + c.getNickusuario());
                 System.out.println("------------------------------------");
             }
         }
