@@ -1,11 +1,12 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tipo_contrato")
 
-public class TipoContrato extends Identificador{
+public class TipoContrato extends Identificador implements Serializable {
 
     @Column (name = "cod_tipocontrato")
     private String cod_tipocontrato;
@@ -18,6 +19,9 @@ public class TipoContrato extends Identificador{
 
     @Column (name = "cantidad_tv")
     private String cantidad_tv;
+
+    @Column (name = "precio_contrato")
+    private String precio_contrato;
 
     public TipoContrato() {
 
@@ -55,11 +59,24 @@ public class TipoContrato extends Identificador{
         this.descripcion = descripcion;
     }
 
+    public String getPrecio_contrato() {
+        return precio_contrato;
+    }
 
-    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv) {
+    public void setPrecio_contrato(String precio_contrato) {
+        this.precio_contrato = precio_contrato;
+    }
+
+    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv, String precio_contrato) {
         this.cod_tipocontrato = cod_tipoContrato;
         this.tipo_contrato = tipo_contrato;
         this.descripcion = descripcion;
         this.cantidad_tv = cantidad_tv;
+        this.precio_contrato = precio_contrato;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " " + tipo_contrato;
     }
 }

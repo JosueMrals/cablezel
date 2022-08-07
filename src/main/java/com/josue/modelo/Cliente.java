@@ -1,5 +1,8 @@
 package com.josue.modelo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,7 +25,7 @@ public class Cliente extends Identificador{
 
     //Relation to Contrato table
     @ManyToOne
-    @JoinColumn (name = "ContratoId", referencedColumnName = "id")
+    @JoinColumn(name = "ContratoId", referencedColumnName = "id")
     private Contrato contrato;
 
     public Contrato getContrato() {
@@ -115,7 +118,13 @@ public class Cliente extends Identificador{
 
     @Override
     public String toString() {
-        return "Cliente{}";
+        return "Cliente " + getId() + ": " + getPrimer_nombre() + " " + getSegundo_nombre() + " " + getPrimer_apellido() + " " + getSegundo_apellido();
+    }
+
+    public ObservableList<Cliente> getClientes() {
+        ObservableList<Cliente> obs = FXCollections.observableArrayList();
+
+        return obs;
     }
 
 

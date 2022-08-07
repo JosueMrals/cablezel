@@ -1,54 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1101.0" prefWidth="1344.0" style="-fx-border-image-width: 10; -fx-background-color: White;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="538.0" prefWidth="837.0" style="-fx-border-image-width: 10; -fx-background-color: White;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="23.0" layoutY="176.0" prefHeight="629.0" prefWidth="557.0" style="-fx-border-color: #164F95; -fx-border-width: 1; -fx-background-color: white;">
+      <Pane layoutX="8.0" layoutY="10.0" prefHeight="464.0" prefWidth="820.0" style="-fx-border-color: #164F95; -fx-border-width: 1; -fx-background-color: white;">
          <children>
-            <TextField layoutX="393.0" layoutY="58.0" prefHeight="25.0" prefWidth="118.0" promptText="Numero de factura" style="-fx-border-style: none; -fx-background-color: white;" />
-            <Label layoutX="399.0" layoutY="33.0" prefHeight="31.0" prefWidth="102.0" text="NºFactura">
+            <Label layoutX="286.0" layoutY="8.0" text="CABLEZEL" textFill="#092cda">
                <font>
-                  <Font name="System Bold" size="16.0" />
-               </font></Label>
-            <Separator layoutX="395.0" layoutY="83.0" prefHeight="0.0" prefWidth="112.0" />
-            <DatePicker layoutX="86.0" layoutY="302.0" />
-            <Label layoutX="86.0" layoutY="81.0" prefHeight="25.0" prefWidth="71.0" text="Cliente">
-               <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="Bodoni MT Black" size="38.0" />
                </font>
             </Label>
-            <TextField layoutX="83.0" layoutY="112.0" />
-            <Label layoutX="83.0" layoutY="144.0" prefHeight="25.0" prefWidth="71.0" text="Usuario">
+            <Label layoutX="264.0" layoutY="51.0" text="Prop. Victor Zeledon Martinez" textFill="#092cda">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="Bodoni MT" size="20.0" />
                </font>
             </Label>
-            <TextField layoutX="83.0" layoutY="169.0" />
+            <Label layoutX="115.0" layoutY="89.0" text="Les ofrece los Servicios de Televisión por Cable con una buena Señal" textFill="#092cda">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="123.0" layoutY="110.0" text="Dirección: Fte. a los Modulos del Mercado Municipal, Siuna RACCN" textFill="#092cda">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="234.0" layoutY="129.0" text="Ruc: 6102008480004X // Telf: 2794-2011" textFill="#092cda">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#2197ff00" height="276.0" layoutX="16.0" layoutY="177.0" stroke="#092cda" strokeType="INSIDE" strokeWidth="3.0" width="787.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Rectangle>
+            <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#7a7ddd" height="45.0" layoutX="250.0" layoutY="156.0" stroke="#092cda" strokeType="INSIDE" strokeWidth="3.0" width="299.0" />
+            <Label layoutX="275.0" layoutY="157.0" prefHeight="40.0" prefWidth="255.0" text="RECIBO DE CAJA" textFill="#2000ee">
+               <font>
+                  <Font name="Bodoni MT Black" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="225.0" text="RECIBÍ DE:" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="255.0" text="LA CANTIDAD DE:" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="347.0" text="Fecha:" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="255.0" layoutY="347.0" text="de" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="486.0" layoutY="347.0" text="del 20" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="96.0" layoutY="424.0" text="Recibí Conforme" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="570.0" layoutY="425.0" text="Entregué Conforme" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="583.0" layoutY="192.0" text="POR C$:" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="147.0" layoutY="243.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="630.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="204.0" layoutY="273.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="572.0" style="-fx-background-color: #092cda;" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#7a7ddd" height="35.0" layoutX="660.0" layoutY="185.0" stroke="#092cda" strokeType="INSIDE" strokeWidth="3.0" width="116.0" />
+            <Separator layoutX="211.0" layoutY="303.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="565.0" style="-fx-background-color: #092cda;" />
+            <Label layoutX="38.0" layoutY="285.0" text="EN CONCEPTO DE:" textFill="#092cda">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="38.0" layoutY="333.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="740.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="100.0" layoutY="363.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="150.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="280.0" layoutY="363.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="540.0" layoutY="363.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="150.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="38.0" layoutY="415.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="250.0" style="-fx-background-color: #092cda;" />
+            <Separator layoutX="527.0" layoutY="415.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="3.0" prefWidth="250.0" style="-fx-background-color: #092cda;" />
          </children></Pane>
-      <Label layoutX="549.0" layoutY="25.0" prefHeight="51.0" prefWidth="102.0" style="text: center; -fx-background-color: white;" text="Facturar" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Pane layoutX="588.0" layoutY="176.0" prefHeight="451.0" prefWidth="737.0" style="-fx-border-color: #164F95; -fx-border-width: 1;">
-         <children>
-            <Separator layoutX="14.0" layoutY="40.0" prefHeight="3.0" prefWidth="709.0" />
-         </children></Pane>
-      <Label layoutX="23.0" layoutY="145.0" prefHeight="31.0" prefWidth="557.0" style="-fx-background-color: #164F95;" text="        Datos Factura" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="588.0" layoutY="145.0" prefHeight="31.0" prefWidth="737.0" style="-fx-background-color: #164F95;" text="        Detalles Facturas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <FontIcon iconColor="WHITE" iconLiteral="fa-file-text-o" iconSize="20" layoutX="39.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <FontIcon iconColor="WHITE" iconLiteral="fa-file-text-o" iconSize="20" layoutX="600.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>

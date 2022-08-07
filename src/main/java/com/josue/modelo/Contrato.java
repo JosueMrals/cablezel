@@ -1,12 +1,12 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
-import java.text.DateFormat;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table (name = "contrato")
-
-public class Contrato extends Identificador{
+public class Contrato extends Identificador implements Serializable {
 
     //Relation to TipoContrato table
     @ManyToOne
@@ -21,20 +21,33 @@ public class Contrato extends Identificador{
         this.tipocontrato = tipocontrato;
     }
 
+    //Relation to Cliente table
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     //Contrato table
     @Column (name = "fecha_contrato")
-    private DateFormat fecha_contrato;
+    private LocalDate fecha_contrato;
 
-    @Column (name = "descripcion")
-    private String descripcion;
-
-    public DateFormat getFecha_contrato() {
+    public LocalDate getFecha_contrato() {
         return fecha_contrato;
     }
 
-    public void setFecha_contrato(DateFormat fecha_contrato) {
+    public void setFecha_contrato(LocalDate fecha_contrato) {
         this.fecha_contrato = fecha_contrato;
     }
+
+    @Column (name = "descripcion")
+    private String descripcion;
 
     public String getDescripcion() {
         return descripcion;

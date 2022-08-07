@@ -17,6 +17,9 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Created by Josue on 09/05/2016.
+ */
 public class BarrioController implements Initializable {
 
     @FXML TextField txtNombreBarrio;
@@ -28,6 +31,7 @@ public class BarrioController implements Initializable {
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
     @FXML TextField txtCantidadTv;
+    @FXML TextField txtPreciocontrato;
     @FXML TextField txtDescripcionContrato;
     @FXML TableColumn<TipoContrato, String> colCodigo;
     @FXML TableColumn<TipoContrato, String> colTipoContrato;
@@ -38,14 +42,19 @@ public class BarrioController implements Initializable {
     @FXML Button btnGuardarContrato;
     @FXML Button btnEditarContrato;
 
+    ObservableList<Barrio> listaBarrios;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
-        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tvBarrios.setItems(barrios);
 
+        llenarBarrio();  // llenar la tabla de barrios
+        llenarTipoContrato(); // llenar la tabla de tipo de contrato
+
+        colocarImagenBotones(); // colocar imagenes a los botones
+        textoDescripcionBotones(); // colocar texto a los botones
+
+    }
+    public void llenarTipoContrato() { // llenar la tabla de tipo de contrato
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("cod_tipocontrato"));
@@ -53,8 +62,25 @@ public class BarrioController implements Initializable {
         colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
-        colocarImagenBotones();
     }
+
+    public void llenarBarrio() { // llenar la tabla de barrios
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
+        listaBarrios = barrios;
+        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
+        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tvBarrios.setItems(barrios);
+    }
+
+    public ObservableList<Barrio> getListaBarrios() {
+         return listaBarrios;
+    }
+
+    public void setListaBarrios(ObservableList<Barrio> listaBarrios) {
+        this.listaBarrios = listaBarrios;
+    }
+
     public void guardarBarrio() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
 
@@ -73,6 +99,8 @@ public class BarrioController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Nuevo Barrio Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
+
+            llenarBarrio();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -85,6 +113,7 @@ public class BarrioController implements Initializable {
         String cod_tipocontrato = txtCodigo.getText();
         String tipo_contrato = txtTipoContrato.getText();
         String cantidad_tv = txtCantidadTv.getText();
+        String precio = txtPreciocontrato.getText();
         String descripcion = txtDescripcionContrato.getText();
 
         try{
@@ -92,6 +121,7 @@ public class BarrioController implements Initializable {
             tc.setCod_tipocontrato(cod_tipocontrato);
             tc.setTipo_contrato(tipo_contrato);
             tc.setCantidad_tv(cantidad_tv);
+            tc.setPrecio_contrato(precio);
             tc.setDescripcion(descripcion);
 
             tpContratoService.save(tc);
@@ -99,10 +129,14 @@ public class BarrioController implements Initializable {
             txtCodigo.clear();
             txtTipoContrato.clear();
             txtCantidadTv.clear();
+            txtPreciocontrato.clear();
             txtDescripcionContrato.clear();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." , ButtonType.OK);
             alert.showAndWait();
+
+            llenarTipoContrato();
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -115,12 +149,18 @@ public class BarrioController implements Initializable {
         URL linkGuardar = getClass().getResource("/images/floppy-disk.png");
         URL linkEditar = getClass().getResource("/images/editar.png");
 
-        Image imagenLimpiar = new Image(linkLimpiar.toString(),24,24,false,true);
-        Image imagenGuardar = new Image(linkGuardar.toString(),24,24,false,true);
-        Image imagenEditar = new Image(linkEditar.toString(),24,24,false,true);
+        Image imagenLimpiar = new Image(linkLimpiar.toString(),30,30,false,true);
+        Image imagenGuardar = new Image(linkGuardar.toString(),30,30,false,true);
+        Image imagenEditar = new Image(linkEditar.toString(),30,30,false,true);
 
         btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
         btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));
         btnEditarContrato.setGraphic(new ImageView(imagenEditar));
+    }
+
+    private void textoDescripcionBotones() {
+        btnLimpiarContrato.setTooltip(new Tooltip("Limpiar"));
+        btnGuardarContrato.setTooltip(new Tooltip("Guardar"));
+        btnEditarContrato.setTooltip(new Tooltip("Editar"));
     }
 }
