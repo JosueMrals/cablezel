@@ -76,7 +76,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
          </Button>
-         <Button fx:id="btnInicio" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="#7487ab">
+         <Button fx:id="btnInicio" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#mostrar_reportes" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="#7487ab">
             <font>
                <Font size="20.0" />
             </font>

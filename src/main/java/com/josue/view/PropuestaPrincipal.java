@@ -138,4 +138,16 @@ public class PropuestaPrincipal extends Application implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void mostrar_reportes(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reportes.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
 }

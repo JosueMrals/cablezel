@@ -114,9 +114,9 @@
         </dependency>
         <!-- Reportes Dependencia -->
         <dependency>
-            <groupId>jasperreports</groupId>
+            <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>3.5.3</version>
+            <version>6.17.0</version>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
