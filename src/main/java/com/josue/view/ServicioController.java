@@ -53,7 +53,8 @@ public class ServicioController implements Initializable {
             alert.showAndWait();
         } else {
             //Validar que no se repita el tipo de servicio
-            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
+                    HibernateUtil.getSessionFactory());
             ObservableList<Servicio> servicios = FXCollections.observableArrayList(servicioService.getAll());
             for(Servicio servicio : servicios) {
                 // Validar que no se repita el tipo de servicio
