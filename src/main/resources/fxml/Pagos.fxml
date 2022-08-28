@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="717.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PagoController">
+   <children>
+      <Label layoutX="320.0" layoutY="48.0" text="Pagos">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField layoutX="110.0" layoutY="332.0" prefHeight="27.0" prefWidth="254.0" promptText="Total a pagar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <Label layoutX="117.0" layoutY="146.0" text="Usuario">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="222.0" text="Fecha del pago">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="301.0" text="Total">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="110.0" layoutY="262.0" prefHeight="27.0" prefWidth="254.0" promptText="Fecha del pago" />
+      <TextField editable="false" layoutX="110.0" layoutY="190.0" prefWidth="254.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

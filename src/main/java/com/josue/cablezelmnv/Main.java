@@ -7,7 +7,6 @@ import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
-import com.josue.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -67,7 +66,6 @@ public class Main extends Application {
                 System.out.println("Codigo del Contrato: " + tc.getCod_tipocontrato());
                 System.out.println("Tipo del Contrato: " + tc.getTipo_contrato());
                 System.out.println("Cantidad de Televisores: " + tc.getCantidad_tv());
-                System.out.println("Precio del Contrato: " + tc.getPrecio_contrato());
                 System.out.println("Descripcion del barrio: " + tc.getDescripcion());
                 System.out.println("--------------------------------------------------------");
             }

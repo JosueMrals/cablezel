@@ -45,7 +45,7 @@ public class ServicioController implements Initializable {
     public void guardarServicio() {
         //Validar que los campos no esten vacios
         if(txtNombre.getText().isEmpty() || txtDescripcion.getText().isEmpty() ||
-                txtPrecio.getText().isEmpty()) {
+            txtPrecio.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error al guardar el servicio");

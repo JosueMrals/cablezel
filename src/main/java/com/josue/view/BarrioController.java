@@ -27,11 +27,9 @@ public class BarrioController implements Initializable {
     @FXML TableView<Barrio> tvBarrios;
     @FXML TableColumn<Barrio, String> colNombreBarrio;
     @FXML TableColumn<Barrio, String > colDescripcionBarrio;
-
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
     @FXML TextField txtCantidadTv;
-    @FXML TextField txtPreciocontrato;
     @FXML TextField txtDescripcionContrato;
     @FXML TableColumn<TipoContrato, String> colCodigo;
     @FXML TableColumn<TipoContrato, String> colTipoContrato;
@@ -41,22 +39,22 @@ public class BarrioController implements Initializable {
     @FXML Button btnLimpiarContrato;
     @FXML Button btnGuardarContrato;
     @FXML Button btnEditarContrato;
-
+    @FXML Button btnGuardarBarrio;
     ObservableList<Barrio> listaBarrios;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        llenarBarrio();  // llenar la tabla de barrios
-        llenarTipoContrato(); // llenar la tabla de tipo de contrato
+        llenarBarrio();
+        llenarTipoContrato();
 
-        colocarImagenBotones(); // colocar imagenes a los botones
-        textoDescripcionBotones(); // colocar texto a los botones
-
+        colocarImagenBotones();
     }
+    /**
+     * Metodo llenar la tabla de tipo de contrato
+     * @author Josue
+     */
     public void llenarTipoContrato() {
-
-        // llenar la tabla de tipo de contrato
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.
                 getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
@@ -66,7 +64,10 @@ public class BarrioController implements Initializable {
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
     }
-
+    /**
+     * Metodo para llenar la tabla de barrios
+     * @author Josue
+     */
     public void llenarBarrio() { // llenar la tabla de barrios
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
@@ -75,15 +76,10 @@ public class BarrioController implements Initializable {
         colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvBarrios.setItems(barrios);
     }
-
-    public ObservableList<Barrio> getListaBarrios() {
-         return listaBarrios;
-    }
-
-    public void setListaBarrios(ObservableList<Barrio> listaBarrios) {
-        this.listaBarrios = listaBarrios;
-    }
-
+    /**
+     * Metodo para guardar un barrio
+     * @author Josue
+     */
     public void guardarBarrio() {
 
         //Validar que los campos no esten vacios
@@ -95,8 +91,6 @@ public class BarrioController implements Initializable {
             alert.showAndWait();
             return;
         }
-
-        //Validar que no se repita el nombre del barrio
         for (Barrio barrio : listaBarrios) {
             if (barrio.getNombre_barrio().equals(txtNombreBarrio.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -134,12 +128,13 @@ public class BarrioController implements Initializable {
             alert.showAndWait();
         }
     }
-
+    /**
+     * Metodo para guardar un tipo de contrato
+     * @author Josue
+     */
     public void guardarTipoContrato() {
-
-        //Validar que los campos no esten vacios
         if(txtCodigo.getText().isEmpty() || txtTipoContrato.getText().isEmpty() || txtCantidadTv.getText().isEmpty() ||
-                txtPreciocontrato.getText().isEmpty() || txtDescripcionContrato.getText().isEmpty()) {
+                txtDescripcionContrato.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
@@ -147,27 +142,12 @@ public class BarrioController implements Initializable {
             alert.showAndWait();
             return;
         }
-
-        //Validar que no se repita el tipo de contrato
-        Iterable<? extends TipoContrato> listaTipoContrato = null;
-        for (TipoContrato tipoContrato : listaTipoContrato) {
-            if (tipoContrato.getTipo_contrato().equals(txtTipoContrato.getText())) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("El tipo de contrato ya existe");
-                alert.showAndWait();
-                return;
-            }
-        }
-
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class,
                 HibernateUtil.getSessionFactory());
 
         String cod_tipocontrato = txtCodigo.getText();
         String tipo_contrato = txtTipoContrato.getText();
         String cantidad_tv = txtCantidadTv.getText();
-        String precio = txtPreciocontrato.getText();
         String descripcion = txtDescripcionContrato.getText();
 
         try{
@@ -175,7 +155,6 @@ public class BarrioController implements Initializable {
             tc.setCod_tipocontrato(cod_tipocontrato);
             tc.setTipo_contrato(tipo_contrato);
             tc.setCantidad_tv(cantidad_tv);
-            tc.setPrecio_contrato(precio);
             tc.setDescripcion(descripcion);
 
             tpContratoService.save(tc);
@@ -183,7 +162,6 @@ public class BarrioController implements Initializable {
             txtCodigo.clear();
             txtTipoContrato.clear();
             txtCantidadTv.clear();
-            txtPreciocontrato.clear();
             txtDescripcionContrato.clear();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tipo de Contrato Ingresado Correctamente." ,
@@ -198,24 +176,36 @@ public class BarrioController implements Initializable {
         }
 
     }
-
+    /**
+     * Metodo para colocar imagen a los botones
+     * @author Josue
+     */
     private void colocarImagenBotones() {
         URL linkLimpiar = getClass().getResource("/images/dust.png");
         URL linkGuardar = getClass().getResource("/images/floppy-disk.png");
         URL linkEditar = getClass().getResource("/images/editar.png");
+        URL linkGuardarBarrio = getClass().getResource("/images/floppy-disk.png");
+
+        assert linkLimpiar != null;
+        assert linkGuardar != null;
+        assert linkEditar != null;
 
         Image imagenLimpiar = new Image(linkLimpiar.toString(),30,30,false,true);
         Image imagenGuardar = new Image(linkGuardar.toString(),30,30,false,true);
         Image imagenEditar = new Image(linkEditar.toString(),30,30,false,true);
 
+        assert linkGuardarBarrio != null;
+        Image imagenGuardarBarrio = new Image(linkGuardarBarrio.toString(),30,30,false,true);
+
         btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
         btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));
         btnEditarContrato.setGraphic(new ImageView(imagenEditar));
-    }
+        btnGuardarBarrio.setGraphic(new ImageView(imagenGuardarBarrio));
 
-    private void textoDescripcionBotones() {
         btnLimpiarContrato.setTooltip(new Tooltip("Limpiar"));
         btnGuardarContrato.setTooltip(new Tooltip("Guardar"));
         btnEditarContrato.setTooltip(new Tooltip("Editar"));
+        btnGuardarBarrio.setTooltip(new Tooltip("Guardar"));
     }
+
 }

@@ -64,13 +64,13 @@ public class ClientesController implements Initializable {
         colNombre.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
                         + " " + param.getValue().getSegundo_nombre() + " " +
-                        param.getValue().getPrimer_apellido() + " " + param.getValue().getSegundo_apellido())
+                        param.getValue().getPrimer_apellido() + " " +
+                        param.getValue().getSegundo_apellido())
         );
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
         tvClientes.setItems(clientes);
-
     }
 
     public void registrarClientes() {
@@ -102,7 +102,6 @@ public class ClientesController implements Initializable {
             }
 
             // Obtener los datos del formulario
-
             String numcedula = txtNumCedula.getText();
             String primernombre = txtPrimerNombre.getText();
             String segundonombre = txtSegundoNombre.getText();

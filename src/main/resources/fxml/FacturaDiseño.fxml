@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="538.0" prefWidth="837.0" style="-fx-border-image-width: 10; -fx-background-color: White;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="538.0" prefWidth="837.0" style="-fx-border-image-width: 10; -fx-background-color: White;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="8.0" layoutY="10.0" prefHeight="464.0" prefWidth="820.0" style="-fx-border-color: #164F95; -fx-border-width: 1; -fx-background-color: white;">
          <children>
@@ -25,7 +26,7 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="123.0" layoutY="110.0" text="Dirección: Fte. a los Modulos del Mercado Municipal, Siuna RACCN" textFill="#092cda">
+            <Label layoutX="131.0" layoutY="110.0" text="Dirección: Fte. a los Modulos del Mercado Municipal, Siuna RACCN" textFill="#092cda">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>

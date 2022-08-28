@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="581.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.FacturaSecundaria">
+<AnchorPane prefHeight="581.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturaSecundariaController">
    <children>
       <Pane prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: #cccccc;" />
       <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
