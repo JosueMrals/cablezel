@@ -78,14 +78,16 @@ public class UsuariosController implements Initializable {
                     txtEmail.setText("");
                     txtPassword.setText("");
 
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El usuario se insertó correctamente.",
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                            "Info: El usuario se insertó correctamente.",
                             ButtonType.OK);
                     alert.showAndWait();
 
                     registarUsuario();
 
                 } catch (Exception e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(),
+                            ButtonType.OK);
                     alert.showAndWait();
                 }
             }

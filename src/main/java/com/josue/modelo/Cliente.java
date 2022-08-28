@@ -1,8 +1,5 @@
 package com.josue.modelo;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +12,7 @@ public class Cliente extends Identificador{
     @JoinColumn(name = "BarrioId", referencedColumnName = "id")
     private Barrio barrio;
 
-    public Barrio getBarrio() {
-        return barrio;
-    }
+    public Barrio getBarrio() { return barrio; }
 
     public void setBarrio(Barrio barrio) {
         this.barrio = barrio;
@@ -112,20 +107,11 @@ public class Cliente extends Identificador{
         this.direccion = direccion;
     }
 
-    public Cliente(){
-
-    }
+    public Cliente(){ }
 
     @Override
     public String toString() {
         return "Cliente " + getId() + ": " + getPrimer_nombre() + " " + getSegundo_nombre() + " " + getPrimer_apellido() + " " + getSegundo_apellido();
     }
-
-    public ObservableList<Cliente> getClientes() {
-        ObservableList<Cliente> obs = FXCollections.observableArrayList();
-
-        return obs;
-    }
-
 
 }

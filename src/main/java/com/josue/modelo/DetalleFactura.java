@@ -1,13 +1,24 @@
 package com.josue.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "detalles_facturas")
 
 public class DetalleFactura extends Identificador{
+
+    //Relation with Servicio table
+    @ManyToOne
+    @JoinColumn(name = "ServicioId", referencedColumnName = "id")
+    private Servicio servicio;
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
 
     @Column (name = "total_pagar")
     private Float total_pagar;

@@ -23,6 +23,9 @@
         <mapping class="com.josue.modelo.DetalleFactura"/>
         <mapping class="com.josue.modelo.Factura"/>
         <mapping class="com.josue.modelo.Contrato"/>
+        <mapping class="com.josue.modelo.Servicio"/>
+        <mapping class="com.josue.modelo.Pago"/>
+        <mapping class="com.josue.modelo.DetallePago"/>
 
     </session-factory>
 </hibernate-configuration>

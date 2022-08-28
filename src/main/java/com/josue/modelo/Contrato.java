@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table (name = "contrato")
 public class Contrato extends Identificador implements Serializable {
 
-    //Relation to TipoContrato table
+    /** Relation to Cliente table */
     @ManyToOne
     @JoinColumn(name = "tipocontrato_id", referencedColumnName = "cod_tipocontrato")
     private TipoContrato tipocontrato;
@@ -21,7 +21,7 @@ public class Contrato extends Identificador implements Serializable {
         this.tipocontrato = tipocontrato;
     }
 
-    //Relation to Cliente table
+    /** Relation to Cliente table */
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
@@ -33,10 +33,12 @@ public class Contrato extends Identificador implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    //Contrato table
+    /** Contrato table */
     @Column (name = "fecha_contrato")
     private LocalDate fecha_contrato;
+
+    @Column (name = "descripcion")
+    private String descripcion;
 
     public LocalDate getFecha_contrato() {
         return fecha_contrato;
@@ -46,9 +48,6 @@ public class Contrato extends Identificador implements Serializable {
         this.fecha_contrato = fecha_contrato;
     }
 
-    @Column (name = "descripcion")
-    private String descripcion;
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -57,6 +56,14 @@ public class Contrato extends Identificador implements Serializable {
         this.descripcion = descripcion;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Contrato{" +
+                "id=" + getId() +
+                ", tipocontrato=" + tipocontrato +
+                ", cliente=" + cliente +
+                ", fecha_contrato=" + fecha_contrato +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
 }

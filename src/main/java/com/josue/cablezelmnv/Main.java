@@ -2,14 +2,11 @@ package com.josue.cablezelmnv;
 
 import java.io.IOException;
 import java.util.List;
-import com.josue.modelo.Barrio;
-import com.josue.modelo.Cliente;
-import com.josue.modelo.TipoContrato;
-import com.josue.modelo.Usuario;
+
+import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
-import com.josue.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -69,7 +66,6 @@ public class Main extends Application {
                 System.out.println("Codigo del Contrato: " + tc.getCod_tipocontrato());
                 System.out.println("Tipo del Contrato: " + tc.getTipo_contrato());
                 System.out.println("Cantidad de Televisores: " + tc.getCantidad_tv());
-                System.out.println("Precio del Contrato: " + tc.getPrecio_contrato());
                 System.out.println("Descripcion del barrio: " + tc.getDescripcion());
                 System.out.println("--------------------------------------------------------");
             }
@@ -87,6 +83,19 @@ public class Main extends Application {
                 System.out.println("Segundo Apellido: " + cli.getSegundo_apellido());
                 System.out.println("Direccion: " + cli.getDireccion());
                 System.out.println("Numero de telefono: " + cli.getNum_telefono());
+                System.out.println("--------------------------------------------------------");
+            }
+        }
+
+        //Show all Servicios
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+        List<Servicio> clienteServicio = servicioService.getAll();
+        if (clienteServicio != null) {
+            for (Servicio s : clienteServicio) {
+                System.out.println("Codigo del Servicio: " + s.getId());
+                System.out.println("Nombre del Servicio: " + s.getNombre());
+                System.out.println("Descripcion del Servicio: " + s.getDescripcion());
+                System.out.println("Precio del Servicio: " + s.getPrecio());
                 System.out.println("--------------------------------------------------------");
             }
         }

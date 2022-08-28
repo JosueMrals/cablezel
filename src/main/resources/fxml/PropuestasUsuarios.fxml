@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<AnchorPane prefHeight="717.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+    <BorderPane layoutX="6.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <left>
+          <Pane prefHeight="717.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
+              <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+                  <font>
+                      <Font name="Arial Black" size="22.0" />
+                  </font>
+              </Label>
+              <Label layoutX="85.0" layoutY="130.0" prefHeight="49.0" prefWidth="85.0" text="Admin" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+              </Label>
+              <FontIcon iconColor="#fffdfd" iconLiteral="fa-user-circle-o" iconSize="70" layoutX="78.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="72.0" />
+              <Button fx:id="btnConfig" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnSalir" alignment="BASELINE_LEFT" contentDisplay="BOTTOM" layoutX="5.0" layoutY="667.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnFacturar" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnContratos" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnClientes" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="256.0" mnemonicParsing="false" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnInicio" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Button fx:id="btnServicios" alignment="BASELINE_LEFT" contentDisplay="TOP" layoutX="5.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#mostrar_servicios" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" styleClass="texto" stylesheets="@../css/style.css" text="Servicios" textAlignment="CENTER" textFill="#7487ab">
+                  <font>
+                      <Font size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+          </Pane>
+        </left>
+    </BorderPane>
+</AnchorPane>

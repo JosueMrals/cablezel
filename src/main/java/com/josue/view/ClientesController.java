@@ -64,79 +64,91 @@ public class ClientesController implements Initializable {
         colNombre.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
                         + " " + param.getValue().getSegundo_nombre() + " " +
-                        param.getValue().getPrimer_apellido() + " " + param.getValue().getSegundo_apellido())
+                        param.getValue().getPrimer_apellido() + " " +
+                        param.getValue().getSegundo_apellido())
         );
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
         colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
         tvClientes.setItems(clientes);
-
     }
 
-    public void registrarClientes(){
+    public void registrarClientes() {
 
         //Validar que los campos no esten vacios
-        if(txtNumCedula.getText().isEmpty() || txtPrimerNombre.getText().isEmpty() || txtPrimerApellido.
+        if (txtNumCedula.getText().isEmpty() || txtPrimerNombre.getText().isEmpty() || txtPrimerApellido.
                 getText().isEmpty() || txtDireccion.getText().isEmpty() || txtNumTelefono.getText().isEmpty()
-                || cbBarrio.getValue() == null){
+                || cbBarrio.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error al registrar cliente");
             alert.setContentText("Por favor, complete todos los campos");
             alert.showAndWait();
-            return;
-        }
 
-        // Obtener los datos del formulario
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class,
-                HibernateUtil.getSessionFactory());
+        } else {
+            // Validar que no se repita el numero de cedula
+            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                    getSessionFactory());
+            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            for (Cliente cliente : clientes) {
+                if (cliente.getNum_cedula().equals(txtNumCedula.getText())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error al registrar cliente");
+                    alert.setContentText("El numero de cedula ya existe");
+                    alert.showAndWait();
+                    return;
+                }
+            }
 
-        String numcedula = txtNumCedula.getText();
-        String primernombre = txtPrimerNombre.getText();
-        String segundonombre = txtSegundoNombre.getText();
-        String primerapellido = txtPrimerApellido.getText();
-        String segundo_apellido = txtSegundoApellido.getText();
-        String direccion = txtDireccion.getText();
-        Barrio barrio = cbBarrio.getValue();
-        String numtelefono = txtNumTelefono.getText();
+            // Obtener los datos del formulario
+            String numcedula = txtNumCedula.getText();
+            String primernombre = txtPrimerNombre.getText();
+            String segundonombre = txtSegundoNombre.getText();
+            String primerapellido = txtPrimerApellido.getText();
+            String segundo_apellido = txtSegundoApellido.getText();
+            String direccion = txtDireccion.getText();
+            Barrio barrio = cbBarrio.getValue();
+            String numtelefono = txtNumTelefono.getText();
 
-        // Crear el cliente
-        try{
-            Cliente cl = new Cliente();
+            // Crear el cliente
+            try {
+                Cliente cl = new Cliente();
 
-            cl.setNum_cedula(numcedula);
-            cl.setPrimer_nombre(primernombre);
-            cl.setSegundo_nombre(segundonombre);
-            cl.setPrimer_apellido(primerapellido);
-            cl.setSegundo_apellido(segundo_apellido);
-            cl.setDireccion(direccion);
-            cl.setBarrio(barrio);
-            cl.setNum_telefono(numtelefono);
+                cl.setNum_cedula(numcedula);
+                cl.setPrimer_nombre(primernombre);
+                cl.setSegundo_nombre(segundonombre);
+                cl.setPrimer_apellido(primerapellido);
+                cl.setSegundo_apellido(segundo_apellido);
+                cl.setDireccion(direccion);
+                cl.setBarrio(barrio);
+                cl.setNum_telefono(numtelefono);
 
-            // Guardar el cliente
-            clienteService.save(cl);
+                // Guardar el cliente
+                clienteService.save(cl);
 
-            // Limpiar el formulario
-            txtNumCedula.clear();
-            txtPrimerNombre.clear();
-            txtSegundoNombre.clear();
-            txtSegundoApellido.clear();
-            txtPrimerApellido.clear();
-            txtSegundoApellido.clear();
-            txtDireccion.clear();
-            cbBarrio.getSelectionModel().clearSelection();
-            txtNumTelefono.clear();
+                // Limpiar el formulario
+                txtNumCedula.clear();
+                txtPrimerNombre.clear();
+                txtSegundoNombre.clear();
+                txtSegundoApellido.clear();
+                txtPrimerApellido.clear();
+                txtSegundoApellido.clear();
+                txtDireccion.clear();
+                cbBarrio.getSelectionModel().clearSelection();
+                txtNumTelefono.clear();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente." ,
-                    ButtonType.OK);
-            alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente.",
+                        ButtonType.OK);
+                alert.showAndWait();
 
-            llenarClientes();
+                llenarClientes();
 
 
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
         }
     }
 

@@ -18,10 +18,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class PropuestaPrincipal extends Application implements Initializable {
-     // crear una variable static para los registros con Log4j en el sistema
     static final Logger logger = LogManager.getLogger(PropuestaPrincipal.class);
 
     public BorderPane panelPadre;
+    public Button btnServicios;
     @FXML Button btnConfig;
     @FXML Button btnReportes;
     @FXML Button btnInicio;
@@ -94,6 +94,30 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public void mostrar_contratos(MouseEvent mouseEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Contratos.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
+
+    public void mostrar_servicios(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Servicio.fxml"));
+            Pane registrarse = loader.load();
+            panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
+
+    public void mostrar_reportes(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reportes.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 

@@ -31,7 +31,6 @@ public class ContratoController implements Initializable {
     @FXML TableColumn<Contrato, String> colDescripcion;
     @FXML TableColumn<Contrato, String> colTipo;
     @FXML TableColumn<Contrato, String> colCliente;
-    // se crea variable con el mismo nombre que el FXML
     @FXML TableView<Contrato> tvContratos;
 
     String[] clientesAutocomplete = {};
@@ -135,7 +134,7 @@ public class ContratoController implements Initializable {
     catch(Exception e)
 
         {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error al registrar el contrato" +
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al registrar el contrato" +
                     e.getMessage(), ButtonType.OK); //Crear una alerta de confirmación
             alert.showAndWait(); //Mostrar el mensaje de confirmación
 

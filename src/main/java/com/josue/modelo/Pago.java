@@ -7,11 +7,20 @@ import javax.persistence.*;
 
 public class Pago extends Identificador{
 
+    //Relation with Usuario
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
     @Column (name = "fecha_pago")
     private String fecha_pago;
 
     @Column(name = "total_pagar")
     private Float total_pagar;
+
+    public Pago() { }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
     public String getFecha_pago() {
         return fecha_pago;
@@ -28,6 +37,5 @@ public class Pago extends Identificador{
     public void setTotal_pagar(Float total_pagar) {
         this.total_pagar = total_pagar;
     }
-
 
 }
