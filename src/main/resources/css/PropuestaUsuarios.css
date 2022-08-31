@@ -1,0 +1,29 @@
+#btPrincipalClientes {
+    -fx-font-size: 22px;
+    -fx-background-color: #16b5f1;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalContratos {
+    -fx-font-size: 22px;
+    -fx-background-color: #C40000;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalFacturar {
+    -fx-font-size: 22px;
+    -fx-background-color: #0064B8;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalServicios {
+    -fx-font-size: 22px;
+    -fx-background-color: #1CB800;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalConfig {
+    -fx-font-size: 22px;
+    -fx-background-color: #D2DF00;
+    -fx-text-fill: #ffffff;
+}

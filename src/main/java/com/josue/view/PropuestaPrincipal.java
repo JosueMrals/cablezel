@@ -26,6 +26,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     @FXML Button btnReportes;
     @FXML Button btnInicio;
     @FXML Button btnClientes;
+    @FXML Button btnCli;
     @FXML Button btnContratos;
     @FXML Button btnUsuarios;
     @FXML Button btnFacturar;
@@ -41,13 +42,25 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     }
 
-
-    public void mostrar_clientes(MouseEvent mouseEvent) {
+    public void mostrar_clientes() {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
+
+    public void clientes( MouseEvent mouseEvent) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
+            Pane clientes = loader.load();
+            panelPadre.setCenter(clientes);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,15 +151,5 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_reportes(MouseEvent mouseEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reportes.fxml"));
-            Pane registrarse = loader.load();
-            panelPadre.setCenter(registrarse);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        }
-    }
 }

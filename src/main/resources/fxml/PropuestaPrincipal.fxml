@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+
 <BorderPane fx:id="panelPadre" minHeight="717.0" minWidth="1366.0" prefHeight="717.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
    <left>
       <Pane minHeight="717.0" minWidth="240.0" prefHeight="717.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">

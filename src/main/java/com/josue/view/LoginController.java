@@ -73,13 +73,27 @@ public class LoginController implements Initializable {
 
     }
 
-
     public void mostrarPrincipal(ActionEvent actionEvent) {
         try {
             // ocultar la ventana actual
             ((Node)actionEvent.getSource()).getScene().getWindow().hide();
             //Cargar el archivo fxml y crear un nuevo stage para mostrar el formulario principal
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public void mostrarOtro(ActionEvent actionEvent) {
+        try {
+            // ocultar la ventana actual
+            ((Node)actionEvent.getSource()).getScene().getWindow().hide();
+            //Cargar el archivo fxml y crear un nuevo stage para mostrar el formulario principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

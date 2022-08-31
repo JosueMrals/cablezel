@@ -8,55 +8,61 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="1203.0" stylesheets="@../css/Servicio.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ServicioController">
-   <children>
-      <TextField fx:id="txtNombre" layoutX="141.0" layoutY="140.0" prefHeight="27.0" prefWidth="254.0" promptText="Nombre del Servicio">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtPrecio" layoutX="141.0" layoutY="202.0" prefHeight="27.0" prefWidth="254.0" promptText="Precio del Servicio">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtDescripcion" layoutX="141.0" layoutY="261.0" prefHeight="27.0" prefWidth="254.0" promptText="Descripcion">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
-      <Label layoutX="142.0" layoutY="115.0" text="Nombre del Servicio">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="142.0" layoutY="177.0" text="Precio del servicio">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="142.0" layoutY="236.0" text="Descripcion">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="324.0" layoutY="42.0" text="Servicios">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="298.0" layoutY="313.0" text="Lista de Servicios">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tvServicios" layoutX="142.0" layoutY="359.0" prefHeight="200.0" prefWidth="733.0">
-        <columns>
-          <TableColumn fx:id="colNombre" editable="false" maxWidth="180.0" prefWidth="180.0" resizable="false" sortable="false" text="Nombre del Servicio" />
-          <TableColumn fx:id="colDescripcion" editable="false" maxWidth="400.0" minWidth="4.0" prefWidth="400.0" resizable="false" sortable="false" text="Descripcion" />
-            <TableColumn fx:id="colPrecio" editable="false" maxWidth="151.0" prefWidth="151.0" resizable="false" sortable="false" text="Precio del Servicio" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnGuardar" layoutX="441.0" layoutY="262.0" mnemonicParsing="false" onAction="#guardarServicio" prefHeight="37.0" prefWidth="108.0" text="Guardar" />
-   </children>
+<AnchorPane prefHeight="717.0" prefWidth="1203.0" stylesheets="@../css/Servicio.css" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ServicioController">
+   <TextField fx:id="txtNombre" layoutX="141.0" layoutY="140.0" prefHeight="27.0" prefWidth="254.0"
+              promptText="Nombre del Servicio">
+      <font>
+         <Font size="13.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="txtPrecio" layoutX="141.0" layoutY="202.0" prefHeight="27.0" prefWidth="254.0"
+              promptText="Precio del Servicio">
+      <font>
+         <Font size="13.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="txtDescripcion" layoutX="141.0" layoutY="261.0" prefHeight="27.0" prefWidth="254.0"
+              promptText="Descripcion">
+      <font>
+         <Font size="13.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="142.0" layoutY="115.0" text="Nombre del Servicio">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Label>
+   <Label layoutX="142.0" layoutY="177.0" text="Precio del servicio">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Label>
+   <Label layoutX="142.0" layoutY="236.0" text="Descripcion">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Label>
+   <Label layoutX="324.0" layoutY="42.0" text="Servicios">
+      <font>
+         <Font size="26.0"/>
+      </font>
+   </Label>
+   <Label layoutX="298.0" layoutY="313.0" text="Lista de Servicios">
+      <font>
+         <Font size="26.0"/>
+      </font>
+   </Label>
+   <TableView fx:id="tvServicios" layoutX="142.0" layoutY="359.0" prefHeight="200.0" prefWidth="733.0">
+      <columns>
+         <TableColumn fx:id="colNombre" editable="false" maxWidth="180.0" prefWidth="180.0" resizable="false"
+                      sortable="false" text="Nombre del Servicio"/>
+         <TableColumn fx:id="colDescripcion" editable="false" maxWidth="400.0" minWidth="4.0" prefWidth="400.0"
+                      resizable="false" sortable="false" text="Descripcion"/>
+         <TableColumn fx:id="colPrecio" editable="false" maxWidth="151.0" prefWidth="151.0" resizable="false"
+                      sortable="false" text="Precio del Servicio"/>
+      </columns>
+   </TableView>
+   <Button fx:id="btnGuardar" layoutX="441.0" layoutY="262.0" mnemonicParsing="false" onAction="#guardarServicio"
+           prefHeight="37.0" prefWidth="108.0" text="Guardar"/>
 </AnchorPane>
