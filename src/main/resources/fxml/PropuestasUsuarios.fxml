@@ -6,15 +6,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="1366.0" stylesheets="@../css/PropuestaUsuarios.css" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
-    <BorderPane layoutX="6.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <BorderPane fx:id="panelPadre" minHeight="717.0" minWidth="1366.0" prefHeight="717.0" prefWidth="1366.0"
+                xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
         <left>
           <Pane prefHeight="717.0" prefWidth="240.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
               <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER"
@@ -136,7 +133,7 @@
               <Button fx:id="btPrincipalClientes" onMouseClicked="#clientes" alignment="BASELINE_LEFT" layoutX="41.0" layoutY="166.0"
                       mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Clientes">
                  <graphic>
-                     <ImageView fx:id="imgClientes" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                          <Image url="@../images/nuevos/clasificacion1.png"/>
                      </ImageView>
                  </graphic>
@@ -147,7 +144,7 @@
               <Button fx:id="btPrincipalFacturar" alignment="BASELINE_LEFT" layoutX="41.0" layoutY="359.0"
                       mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Facturar">
                  <graphic>
-                     <ImageView fx:id="imgClientes2" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                          <Image url="@../images/nuevos/cuenta1.png"/>
                      </ImageView>
                  </graphic>
@@ -155,7 +152,7 @@
               <Button fx:id="btPrincipalContratos" alignment="BASELINE_LEFT" layoutX="41.0" layoutY="263.0"
                       mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Contratos">
                  <graphic>
-                     <ImageView fx:id="imgClientes1" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                          <Image url="@../images/nuevos/contrato.png"/>
                      </ImageView>
                  </graphic>
@@ -163,7 +160,7 @@
               <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="490.0" layoutY="169.0"
                       mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Servicios">
                  <graphic>
-                     <ImageView fx:id="imgClientes3" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                          <Image url="@../images/nuevos/servicios-digitales.png"/>
                      </ImageView>
                  </graphic>
@@ -171,7 +168,7 @@
               <Button fx:id="btPrincipalConfig" alignment="BASELINE_LEFT" layoutX="490.0" layoutY="266.0"
                       mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Configuraciones">
                  <graphic>
-                     <ImageView fx:id="imgClientes4" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                          <Image url="@../images/nuevos/configuracion.png"/>
                      </ImageView>
                  </graphic>
@@ -179,4 +176,3 @@
           </Pane>
       </center>
     </BorderPane>
-</AnchorPane>

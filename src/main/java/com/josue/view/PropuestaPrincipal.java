@@ -22,6 +22,11 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     public BorderPane panelPadre;
     public Button btnServicios;
+    public Button btPrincipalConfig;
+    public Button btPrincipalServicios;
+    public Button btPrincipalContratos;
+    public Button btPrincipalFacturar;
+    public Button btPrincipalClientes;
     @FXML Button btnConfig;
     @FXML Button btnReportes;
     @FXML Button btnInicio;
