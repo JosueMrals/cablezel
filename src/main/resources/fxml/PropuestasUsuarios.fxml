@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -13,190 +12,202 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="panelPadre" minHeight="717.0" minWidth="1366.0" prefHeight="717.0" prefWidth="1366.0" stylesheets="@../css/PropuestaUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+<BorderPane minHeight="717.0" minWidth="1366.0" prefHeight="874.0" prefWidth="1414.0" stylesheets="@../css/PropuestaUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
         <left>
-      <AnchorPane prefHeight="49.0" style="-fx-background-color: #20325C;" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <children>
-                <Pane prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: #20325C;" AnchorPane.bottomAnchor="530.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="519.0" prefWidth="240.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets />
+                </BorderPane.margin>
+                <Pane prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="530.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <ImageView fitHeight="79.0" fitWidth="144.0" layoutX="75.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../images/nuevos/antena.png" />
                     </ImageView>
-                    <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+                    <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                         <font>
                             <Font name="Arial Black" size="22.0" />
                         </font>
                     </Label>
-                    <Label layoutX="82.0" layoutY="138.0" text="Admin" textAlignment="CENTER" textFill="#7487ab" textOverrun="CENTER_ELLIPSIS">
+                    <Label layoutX="52.0" layoutY="137.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                         <font>
                             <Font size="20.0" />
                         </font>
                     </Label>
                 </Pane>
-            <VBox layoutY="188.0" prefHeight="49.0" prefWidth="240.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="188.0">
-               <children>
-                       <Button fx:id="btnConfig" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="239.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
+                <VBox layoutY="188.0" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="188.0">
+                    <Button fx:id="btnFacturar" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
                         <graphic>
                             <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/configuraciones.png" />
+                                <Image url="@../images/nuevos/factura.png" />
                             </ImageView>
                         </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-                       <Button fx:id="btnFacturar" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_facturar" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Facturar" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        <graphic>
-                            <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/cuenta.png" />
-                            </ImageView>
-                        </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-                       <Button fx:id="btnContratos" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
+                    </Button>
+                    <Button fx:id="btnContratos" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_contratos" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Contratos" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
                         <graphic>
                             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../images/nuevos/contrato2.png" />
                             </ImageView>
                         </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-                       <Button fx:id="btnCli" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#clientes" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/clasificacion.png" />
-                            </ImageView>
-                        </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-                       <Button fx:id="btnServicios" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_servicios" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Servicios" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        <graphic>
-                            <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/servicios-digitales1.png" />
-                            </ImageView>
-                        </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-               </children>
-            </VBox>
-            <VBox prefHeight="49.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                       <Button fx:id="btnSalir" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="230.0" style="-fx-background-color: #20325C;" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="#7487ab">
-                           <font>
-                               <Font size="20.0" />
-                           </font>
-                           <cursor>
-                               <Cursor fx:constant="HAND" />
-                           </cursor>
-                        <graphic>
-                            <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/salida.png" />
-                            </ImageView>
-                        </graphic>
-                     <styleClass>
-                        <String fx:value="texto" />
-                        <String fx:value="Items" />
-                     </styleClass>
-                       </Button>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-        </left>
-      <center>
-          <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <AnchorPane prefHeight="717.0" prefWidth="1127.0">
-            <children>
-                    <Label layoutX="14.0" layoutY="137.0" text="PANEL PRINCIPAL">
-                       <font>
-                           <Font name="Arial Black" size="25.0" />
-                       </font>
-                    </Label>
-                    <Button fx:id="btPrincipalClientes" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#clientes" prefHeight="55.0" prefWidth="424.0" text="Clientes">
-                       <graphic>
-                           <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/nuevos/clasificacion1.png" />
-                           </ImageView>
-                       </graphic>
+                    </Button>
+                    <Button fx:id="btnCli" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_clientes" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Clientes" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
                         <cursor>
                             <Cursor fx:constant="HAND" />
                         </cursor>
+                        <graphic>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/nuevos/clientes.png" />
+                            </ImageView>
+                        </graphic>
                     </Button>
-                    <Button fx:id="btPrincipalFacturar" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="396.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Facturar">
-                       <graphic>
-                           <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/nuevos/cuenta1.png" />
-                           </ImageView>
-                       </graphic>
+                    <Button fx:id="btnServicios" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_servicios" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Servicios" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <graphic>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/nuevos/servicios.png" />
+                            </ImageView>
+                        </graphic>
                     </Button>
-                    <Button fx:id="btPrincipalContratos" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="302.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Contratos">
-                       <graphic>
-                           <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/nuevos/contrato.png" />
-                           </ImageView>
-                       </graphic>
+                    <Button fx:id="btnConfig" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <graphic>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/nuevos/configuracion.png" />
+                            </ImageView>
+                        </graphic>
                     </Button>
-                    <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="302.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Servicios">
-                       <graphic>
-                           <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/nuevos/servicios-digitales.png" />
-                           </ImageView>
-                       </graphic>
+                </VBox>
+                <VBox prefHeight="49.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <Button fx:id="btnSalir" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <graphic>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/nuevos/cerrar-sesion.png" />
+                            </ImageView>
+                        </graphic>
                     </Button>
-                    <Button fx:id="btPrincipalConfig" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="208.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Configuraciones">
-                       <graphic>
-                           <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/nuevos/configuracion.png" />
-                           </ImageView>
-                       </graphic>
-                    </Button>
-            </children>
-         </AnchorPane>
-          </Pane>
+                </VBox>
+            </AnchorPane>
+        </left>
+      <center>
+      <BorderPane fx:id="panelPadre" BorderPane.alignment="CENTER">
+         <center>
+             <AnchorPane prefHeight="717.0" prefWidth="1203.0">
+                 <AnchorPane prefHeight="717.0" prefWidth="1203.0" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <Label layoutX="14.0" layoutY="20.0" text="PANEL PRINCIPAL">
+                         <font>
+                             <Font name="Arial Black" size="25.0" />
+                         </font>
+                     </Label>
+                     <Button fx:id="btPrincipalClientes" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#mostrar_clientes" prefHeight="55.0" prefWidth="424.0" text="Clientes" textFill="WHITE">
+                         <graphic>
+                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <Image url="@../images/nuevos/clasificacion1.png" />
+                             </ImageView>
+                         </graphic>
+                         <cursor>
+                             <Cursor fx:constant="HAND" />
+                         </cursor>
+                         <font>
+                             <Font name="System Bold" size="22.0" />
+                         </font>
+                     </Button>
+                     <Button fx:id="btPrincipalFacturar" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="286.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Facturar" textFill="WHITE">
+                         <graphic>
+                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <Image url="@../images/nuevos/cuenta1.png" />
+                             </ImageView>
+                         </graphic>
+                         <font>
+                             <Font name="System Bold" size="22.0" />
+                         </font>
+                     </Button>
+                     <Button fx:id="btPrincipalContratos" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="181.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Contratos" textFill="WHITE">
+                         <graphic>
+                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <Image url="@../images/nuevos/contrato.png" />
+                             </ImageView>
+                         </graphic>
+                         <font>
+                             <Font name="System Bold" size="22.0" />
+                         </font>
+                     </Button>
+                     <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="181.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Servicios" textFill="WHITE">
+                         <graphic>
+                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <Image url="@../images/nuevos/servicios-digitales.png" />
+                             </ImageView>
+                         </graphic>
+                         <font>
+                             <Font name="System Bold" size="22.0" />
+                         </font>
+                     </Button>
+                     <Button fx:id="btPrincipalConfig" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="72.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" text="Configuraciones" textFill="WHITE">
+                         <graphic>
+                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <Image url="@../images/nuevos/configuracion1.png" />
+                             </ImageView>
+                         </graphic>
+                         <font>
+                             <Font name="System Bold" size="22.0" />
+                         </font>
+                     </Button>
+                 </AnchorPane>
+             </AnchorPane>
+         </center>
+         <top>
+             <AnchorPane prefHeight="62.0" prefWidth="1174.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
+                 <Pane layoutY="13.0" prefHeight="60.0" prefWidth="1174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+             </AnchorPane>
+         </top>
+         <bottom>
+             <AnchorPane prefHeight="55.0" prefWidth="1126.0" styleClass="CentralFoot" BorderPane.alignment="CENTER">
+                 <Label alignment="BASELINE_LEFT" layoutX="979.0" layoutY="19.0" text="Version Septiembre 2022" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="14.0">
+                  <font>
+                     <Font name="System Bold" size="15.0" />
+                  </font></Label>
+                 <Label alignment="BASELINE_LEFT" layoutX="274.0" layoutY="16.0" text="Todos los derechos reservados." AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="274.0">
+                  <font>
+                     <Font name="System Bold" size="15.0" />
+                  </font></Label>
+                 <Label alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="19.0" text="Copyright © 2022" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="14.0">
+                  <font>
+                     <Font name="System Bold" size="15.0" />
+                  </font></Label>
+                 <Label alignment="BASELINE_LEFT" layoutX="146.0" layoutY="16.0" text="Marca Registrada" textFill="#005dff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="146.0">
+                  <font>
+                     <Font name="System Bold" size="15.0" />
+                  </font></Label>
+             </AnchorPane>
+         </bottom>
+      </BorderPane>
       </center>
     </BorderPane>

@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -43,7 +41,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
     }
 
@@ -60,20 +58,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void clientes( MouseEvent mouseEvent) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
-            Pane clientes = loader.load();
-            panelPadre.setCenter(clientes);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        }
-    }
-
-    public void mostrar_facturar(MouseEvent mouseEvent) {
+    public void mostrar_facturar() {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FacturarPrincipal.fxml"));
@@ -87,7 +72,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     }
 
-    public void mostrar_gestiones(MouseEvent mouseEvent) {
+    public void mostrar_gestiones() {
         try {
             FXMLLoader Loader = new FXMLLoader(getClass().getResource("/fxml/Configuraciones.fxml"));
             Pane configuraciones = Loader.load();
@@ -98,7 +83,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_usuarios(MouseEvent mouseEvent) {
+    public void mostrar_usuarios() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegistrarUsuarios.fxml"));
             Pane registrarse = loader.load();
@@ -109,7 +94,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_contratos(MouseEvent mouseEvent) {
+    public void mostrar_contratos() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Contratos.fxml"));
             Pane registrarse = loader.load();
@@ -121,7 +106,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_servicios(MouseEvent mouseEvent) {
+    public void mostrar_servicios() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Servicio.fxml"));
             Pane registrarse = loader.load();
@@ -133,7 +118,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_reportes(MouseEvent mouseEvent) {
+    public void mostrar_reportes() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Reportes.fxml"));
             Pane registrarse = loader.load();
@@ -144,17 +129,5 @@ public class PropuestaPrincipal extends Application implements Initializable {
             logger.error(e.getMessage());
         }
     }
-
-    public void login(MouseEvent mouseEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-            AnchorPane registrarse = loader.load();
-            panelPadre.setCenter(registrarse);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

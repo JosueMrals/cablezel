@@ -28,3 +28,8 @@
     -fx-border-color: white;
     -fx-border-width: 0px 0px 0px 5px;
 }
+
+.CentralFoot {
+    -fx-border-color: #445664;
+    -fx-border-width: 3px 0px 0px 0px;
+}
