@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -49,6 +50,8 @@ public class LoginController implements Initializable {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (Exception e) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);

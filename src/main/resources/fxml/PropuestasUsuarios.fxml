@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="717.0" minWidth="1366.0" prefHeight="874.0" prefWidth="1414.0" stylesheets="@../css/PropuestaUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
+<BorderPane fx:id="panePrincipal" minHeight="717.0" minWidth="1366.0" prefHeight="820.0" prefWidth="1366.0" stylesheets="@../css/PropuestaUsuarios.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PropuestaPrincipal">
         <left>
-            <AnchorPane prefHeight="519.0" prefWidth="240.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="paneSlide" prefHeight="519.0" prefWidth="240.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
                 <BorderPane.margin>
                     <Insets />
                 </BorderPane.margin>
@@ -120,8 +120,8 @@
       <center>
       <BorderPane fx:id="panelPadre" BorderPane.alignment="CENTER">
          <center>
-             <AnchorPane prefHeight="717.0" prefWidth="1203.0">
-                 <AnchorPane prefHeight="717.0" prefWidth="1203.0" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+             <AnchorPane prefHeight="720.0" prefWidth="1126.0">
+                 <AnchorPane prefHeight="717.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <Label layoutX="14.0" layoutY="20.0" text="PANEL PRINCIPAL">
                          <font>
                              <Font name="Arial Black" size="25.0" />
@@ -184,12 +184,37 @@
              </AnchorPane>
          </center>
          <top>
-             <AnchorPane prefHeight="62.0" prefWidth="1174.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
-                 <Pane layoutY="13.0" prefHeight="60.0" prefWidth="1174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+             <AnchorPane fx:id="centralTop" prefHeight="50.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btMostrar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Mostrar menu" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btOcultar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Ocultar menu" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
              </AnchorPane>
          </top>
          <bottom>
-             <AnchorPane prefHeight="55.0" prefWidth="1126.0" styleClass="CentralFoot" BorderPane.alignment="CENTER">
+             <AnchorPane fx:id="centralBottom" prefHeight="50.0" style="-fx-background-color: white;" styleClass="CentralFoot" BorderPane.alignment="CENTER">
                  <Label alignment="BASELINE_LEFT" layoutX="979.0" layoutY="19.0" text="Version Septiembre 2022" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="14.0">
                   <font>
                      <Font name="System Bold" size="15.0" />

@@ -1,10 +1,12 @@
 package com.josue.view;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -12,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +22,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     static final Logger logger = LogManager.getLogger(PropuestaPrincipal.class);
 
     public BorderPane panelPadre;
+    public BorderPane panePrincipal;
     public Button btnServicios;
     public Button btPrincipalConfig;
     public Button btPrincipalServicios;
@@ -34,10 +38,53 @@ public class PropuestaPrincipal extends Application implements Initializable {
     @FXML Button btnUsuarios;
     @FXML Button btnFacturar;
     @FXML Button btnSalir;
+    @FXML Button btMostrar;
+    @FXML Button btOcultar;
+    @FXML AnchorPane paneSlide;
+    @FXML AnchorPane centralBottom;
+    @FXML AnchorPane centralTop;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnSalir.setOnMouseClicked(event -> System.exit(0));
+        ocultarPanel();
+        mostrarPanel();
+        paneSlide.setTranslateX(-0);
+        panelPadre.setTranslateX(0);
+    }
 
+    private void mostrarPanel() {
+        btMostrar.setOnMouseClicked (event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(javafx.util.Duration.seconds(0.4));
+            slide.setNode(panePrincipal);
+            slide.setToX(-240);
+            slide.play();
+            panePrincipal.setTranslateX(0);
+            slide.setOnFinished(event1 -> {
+                Stage stage = (Stage) panePrincipal.getScene().getWindow();
+                stage.setMaximized(false);
+                btMostrar.setVisible(false);
+                btOcultar.setVisible(true);
+            });
+        });
+    }
+
+    private void ocultarPanel(){
+        btOcultar.setOnMouseClicked (event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(javafx.util.Duration.seconds(0.4));
+            slide.setNode(panePrincipal);
+            slide.setToX(0);
+            slide.play();
+            panePrincipal.setTranslateX(-240);
+            slide.setOnFinished(event1 -> {
+                Stage stage = (Stage) panePrincipal.getScene().getWindow();
+                stage.setMaximized(true);
+                btOcultar.setVisible(false);
+                btMostrar.setVisible(true);
+            });
+        });
     }
 
     @Override
@@ -129,5 +176,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
             logger.error(e.getMessage());
         }
     }
+
+
 
 }
