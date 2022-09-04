@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -22,7 +23,7 @@
             <content>
               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
                      <children>
-                        <Label layoutX="30.0" layoutY="160.0" prefHeight="23.0" prefWidth="130.0" text="Tipo de contrato">
+                        <Label layoutX="30.0" layoutY="160.0" prefHeight="23.0" text="Tipo de contrato">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -32,20 +33,23 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="30.0" layoutY="220.0" prefHeight="28.0" prefWidth="180.0" text="Cantidad de televisores">
+                        <Label layoutX="30.0" layoutY="220.0" prefHeight="28.0" text="Cantidad de televisores">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="86.0" layoutY="30.0" prefHeight="45.0" prefWidth="261.0" text="Tipos de Contratos">
+                        <Label layoutX="92.0" layoutY="23.0" text="Tipos de Contratos">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="25.0" />
                            </font>
                         </Label>
                         <TextField fx:id="txtTipoContrato" layoutX="25.0" layoutY="183.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese un tipo de contrato..." style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
-                           </font></TextField>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <TextField fx:id="txtCantidadTv" layoutX="20.0" layoutY="240.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
@@ -53,18 +57,24 @@
                         <TextField fx:id="txtDescripcionContrato" alignment="TOP_LEFT" layoutX="25.0" layoutY="368.0" prefHeight="75.0" prefWidth="300.0" promptText="Ingrese una descripcion...">
                            <font>
                               <Font size="16.0" />
-                           </font></TextField>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <Separator layoutX="30.0" layoutY="211.0" prefWidth="300.0" />
                         <Separator layoutX="30.0" layoutY="265.0" prefHeight="13.0" prefWidth="300.0" />
                         <TableView fx:id="tvTipoContrato" layoutX="400.0" layoutY="160.0" prefHeight="338.0" prefWidth="707.0">
                           <columns>
-                              <TableColumn fx:id="colCodigo" prefWidth="65.0" text="Codigo" />
-                            <TableColumn fx:id="colTipoContrato" prefWidth="110.0" text="Tipo de Contrato" />
-                            <TableColumn fx:id="colCantidadTv" prefWidth="120.0" text="Nro de Televisores" />
-                              <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="410.0" text="Descripcion" />
+                              <TableColumn fx:id="colCodigo" prefWidth="65.0" resizable="false" text="Codigo" />
+                            <TableColumn fx:id="colTipoContrato" prefWidth="130.0" resizable="false" text="Tipo de Contrato" />
+                            <TableColumn fx:id="colCantidadTv" prefWidth="145.0" resizable="false" text="Nro de Televisores" />
+                              <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="365.0" resizable="false" text="Descripcion" />
                           </columns>
                         </TableView>
-                        <TextField layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0" />
+                        <TextField layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="345.0">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <Label layoutX="400.0" layoutY="100.0" prefHeight="26.0" prefWidth="157.0" text="Buscar Contrato">
                            <font>
                               <Font size="16.0" />
@@ -86,7 +96,10 @@
                         <TextField fx:id="txtCodigo" layoutX="25.0" layoutY="123.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese el codigo..." style="-fx-background-color: white;">
                            <font>
                               <Font size="16.0" />
-                           </font></TextField>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <Separator layoutX="30.0" layoutY="151.0" prefWidth="300.0" />
                         <Button fx:id="btnLimpiarContrato" alignment="CENTER" layoutX="274.0" layoutY="453.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                            <cursor>
@@ -112,13 +125,16 @@
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
                         </TextField>
                         <Separator layoutX="30.0" layoutY="271.0" prefWidth="300.0" />
-                        <TextField fx:id="txtCantidadTv11" layoutX="25.0" layoutY="303.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese el servicio..." style="-fx-border-style: none; -fx-background-color: white;">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </TextField>
+                        <ComboBox fx:id="cmbServicio" layoutX="34.0" layoutY="305.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese un servicio..." style="-fx-background-color: white;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
                         <Separator layoutX="34.0" layoutY="331.0" prefWidth="300.0" />
 
                      </children>
@@ -131,9 +147,9 @@
             <content>
               <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1220.0" style="-fx-background-color: White;">
                      <children>
-                        <Label layoutX="86.0" layoutY="30.0" text="Lista de Barrios" textAlignment="CENTER">
+                        <Label layoutX="92.0" layoutY="23.0" text="Lista de Barrios" textAlignment="CENTER">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="25.0" />
                            </font>
                         </Label>
                         <Label layoutX="30.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="131.0" text="Nombre del barrio">
