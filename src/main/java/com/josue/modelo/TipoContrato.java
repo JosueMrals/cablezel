@@ -64,16 +64,15 @@ public class TipoContrato extends Identificador implements Serializable {
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv,
-                        String precio_contrato) {
+    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv) {
         this.cod_tipocontrato = cod_tipoContrato;
         this.tipo_contrato = tipo_contrato;
         this.descripcion = descripcion;
+        this.servicio = servicio;
         this.cantidad_tv = cantidad_tv;
     }
 
