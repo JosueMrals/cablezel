@@ -62,8 +62,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
             slide.play();
             panePrincipal.setTranslateX(0);
             slide.setOnFinished(event1 -> {
-                Stage stage = (Stage) panePrincipal.getScene().getWindow();
-                stage.setMaximized(false);
                 btMostrar.setVisible(false);
                 btOcultar.setVisible(true);
             });
@@ -79,13 +77,13 @@ public class PropuestaPrincipal extends Application implements Initializable {
             slide.play();
             panePrincipal.setTranslateX(-240);
             slide.setOnFinished(event1 -> {
-                Stage stage = (Stage) panePrincipal.getScene().getWindow();
-                stage.setMaximized(true);
                 btOcultar.setVisible(false);
                 btMostrar.setVisible(true);
             });
+
         });
     }
+
 
     @Override
     public void start(Stage stage) {

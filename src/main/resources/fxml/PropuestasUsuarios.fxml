@@ -118,7 +118,7 @@
             </AnchorPane>
         </left>
       <center>
-      <BorderPane fx:id="panelPadre" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="panelPadre" maxWidth="1366.0" BorderPane.alignment="CENTER">
          <center>
              <AnchorPane prefHeight="720.0" prefWidth="1126.0">
                  <AnchorPane prefHeight="717.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -184,9 +184,9 @@
              </AnchorPane>
          </center>
          <top>
-             <AnchorPane fx:id="centralTop" prefHeight="50.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="CENTER">
+             <AnchorPane fx:id="centralTop" prefHeight="50.0" style="-fx-background-color: #0a4969;" BorderPane.alignment="TOP_RIGHT">
                <children>
-                  <Button fx:id="btMostrar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Mostrar menu" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                  <Button fx:id="btMostrar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Ocultar menu" textFill="WHITE" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -198,7 +198,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btOcultar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Ocultar menu" textFill="WHITE" visible="false">
+                  <Button fx:id="btOcultar" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="49.0" style="-fx-background-color: TRANSPARENT;" text="Mostrar menu" textFill="WHITE" visible="false">
                      <font>
                         <Font size="20.0" />
                      </font>

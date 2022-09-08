@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 
 public class FacturarPrincipalController implements Initializable {
 
+    public Button btnBuscar;
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btFacturar;
     @FXML TableColumn<Contrato, String> colNumContrato;
@@ -47,12 +49,10 @@ public class FacturarPrincipalController implements Initializable {
             System.out.println("newValue: " + newValue);
         });
         tvBuscarClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        addFacturarButtonToTable();
+
     }
 
-    /**
-     * Metodo que llena la tabla de clientes
-     * @author Josh
-     */
     public void llenarClientes() {
         IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
         ObservableList<Contrato> contratos = FXCollections.observableArrayList(service.getAll());
@@ -62,16 +62,70 @@ public class FacturarPrincipalController implements Initializable {
         );
         colCliente.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getCliente().getPrimer_nombre() + " " +
-                                                    param.getValue().getCliente().getSegundo_apellido() + " " +
+                                                    param.getValue().getCliente().getSegundo_nombre() + " " +
                                                     param.getValue().getCliente().getPrimer_apellido() + " " +
                                                     param.getValue().getCliente().getSegundo_apellido())
         );
+
         tvBuscarClientes.setItems(contratos);
     }
-    /**
-     * Metodo que se ejecuta al presionar el boton facturar
-     * @author Josh
-     */
+
+    private void addFacturarButtonToTable() {
+        colAccion.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Contrato, String> call(TableColumn<Contrato, String> param) {
+                final TableCell<Contrato, String> cell = new TableCell<Contrato, String>() {
+                    final Button btn = new Button("Facturar");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(event -> {
+                                Contrato contrato = getTableView().getItems().get(getIndex());
+                                System.out.println("Contrato: " + contrato);
+                                try {
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
+                                    AnchorPane root = loader.load();
+                                    FacturarController controller = loader.getController();
+                                    controller.setContrato(contrato);
+                                    Stage stage = new Stage();
+                                    stage.setScene(new Scene(root));
+                                    stage.show();
+                                } catch (Exception e) {
+                                    Logger.getLogger(FacturarPrincipalController.class.getName()).log(Level.SEVERE, null, e);
+                                }
+                            });
+
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+    }
+
+    
+    public void buscarCliente(ActionEvent actionEvent) {
+        String nombreCliente = txtBuscarCliente.getText();
+        IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
+        ObservableList<Contrato> contratos = FXCollections.observableArrayList(service.getAll());
+        ObservableList<Contrato> contratosFiltrados = FXCollections.observableArrayList();
+        for (Contrato contrato : contratos) {
+            if ((contrato.getCliente().getPrimer_nombre() + " " + contrato.getCliente().getSegundo_nombre()
+                    + " " + contrato.getCliente().getPrimer_apellido()
+                    + " " + contrato.getCliente().getSegundo_apellido()).contains(nombreCliente))  {
+                contratosFiltrados.add(contrato);
+            }
+        }
+        tvBuscarClientes.setItems(contratosFiltrados);
+    }
+
     public void mostrarSecundaria(ActionEvent actionEvent) {
         if (obtenerDatos()) {
             try {

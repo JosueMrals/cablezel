@@ -1,12 +1,6 @@
 package com.josue.cablezelmnv;
 
 import java.io.IOException;
-import java.util.List;
-
-import com.josue.modelo.*;
-import com.josue.service.GenericServiceImpl;
-import com.josue.service.IGenericService;
-import com.josue.util.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

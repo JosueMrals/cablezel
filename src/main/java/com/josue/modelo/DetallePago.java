@@ -2,7 +2,10 @@ package com.josue.modelo;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+
+@Table(name = "detalle_pago")
 public class DetallePago extends Identificador{
 
     //Relation with Pago
