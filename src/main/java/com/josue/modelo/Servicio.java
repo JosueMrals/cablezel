@@ -37,5 +37,8 @@ public class Servicio extends Identificador implements Serializable {
         this.precio = precio;
     }
 
-
+    @Override
+    public String toString() {
+        return  getNombre();
+    }
 }

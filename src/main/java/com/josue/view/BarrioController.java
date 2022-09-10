@@ -1,10 +1,12 @@
 package com.josue.view;
 
 import com.josue.modelo.Barrio;
+import com.josue.modelo.Servicio;
 import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,11 +18,15 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 /**
  * Created by Josue on 09/05/2016.
  */
 public class BarrioController implements Initializable {
+
+    // logger log4j
+    private static final Logger logger = Logger.getLogger(String.valueOf(BarrioController.class));
 
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
@@ -30,6 +36,7 @@ public class BarrioController implements Initializable {
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
     @FXML TextField txtCantidadTv;
+    @FXML ComboBox<Servicio> cmbServicio;
     @FXML TextField txtDescripcionContrato;
     @FXML TableColumn<TipoContrato, String> colCodigo;
     @FXML TableColumn<TipoContrato, String> colTipoContrato;
@@ -41,13 +48,14 @@ public class BarrioController implements Initializable {
     @FXML Button btnEditarContrato;
     @FXML Button btnGuardarBarrio;
     ObservableList<Barrio> listaBarrios;
+    ObservableList<TipoContrato> listaTipoContrato;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         llenarBarrio();
         llenarTipoContrato();
-
+        listarServicios();
         colocarImagenBotones();
     }
     /**
@@ -55,12 +63,12 @@ public class BarrioController implements Initializable {
      * @author Josue
      */
     public void llenarTipoContrato() {
-        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.
-                getSessionFactory());
+        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("cod_tipocontrato"));
+        listaTipoContrato = tpContrato;
+        colCodigo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getCod_tipocontrato()));
         colTipoContrato.setCellValueFactory(new PropertyValueFactory<>("tipo_contrato"));
-        colCantidadTv.setCellValueFactory(new PropertyValueFactory<>("cantidad_tv"));
+        colCantidadTv.setCellValueFactory( param -> new ReadOnlyObjectWrapper<>(param.getValue().getCantidad_tv()));
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
     }
@@ -133,15 +141,6 @@ public class BarrioController implements Initializable {
      * @author Josue
      */
     public void guardarTipoContrato() {
-        if(txtCodigo.getText().isEmpty() || txtTipoContrato.getText().isEmpty() || txtCantidadTv.getText().isEmpty() ||
-                txtDescripcionContrato.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("No puede haber campos vacios");
-            alert.showAndWait();
-            return;
-        }
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class,
                 HibernateUtil.getSessionFactory());
 
@@ -149,12 +148,14 @@ public class BarrioController implements Initializable {
         String tipo_contrato = txtTipoContrato.getText();
         String cantidad_tv = txtCantidadTv.getText();
         String descripcion = txtDescripcionContrato.getText();
+        Servicio servicio = cmbServicio.getValue();
 
         try{
             TipoContrato tc = new TipoContrato();
             tc.setCod_tipocontrato(cod_tipocontrato);
             tc.setTipo_contrato(tipo_contrato);
             tc.setCantidad_tv(cantidad_tv);
+            tc.setServicio(servicio);
             tc.setDescripcion(descripcion);
 
             tpContratoService.save(tc);
@@ -176,10 +177,17 @@ public class BarrioController implements Initializable {
         }
 
     }
-    /**
-     * Metodo para colocar imagen a los botones
-     * @author Josue
-     */
+
+    public ObservableList<Servicio> obtenerServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(servicioService.getAll());
+    }
+
+    public void listarServicios() {
+        var servicios = obtenerServicios();
+        cmbServicio.setValue(null);
+        cmbServicio.setItems(servicios);
+    }
     private void colocarImagenBotones() {
         URL linkLimpiar = getClass().getResource("/images/dust.png");
         URL linkGuardar = getClass().getResource("/images/floppy-disk.png");

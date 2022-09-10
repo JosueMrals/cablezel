@@ -1,0 +1,35 @@
+#btPrincipalClientes {
+    -fx-background-color: #16b5f1;
+    -fx-text-fill: #ffffff bold;
+}
+
+#btPrincipalContratos {
+    -fx-background-color: #C40000;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalFacturar {
+    -fx-background-color: #0064B8;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalServicios {
+    -fx-background-color: #1CB800;
+    -fx-text-fill: #ffffff;
+}
+
+#btPrincipalConfig {
+    -fx-background-color: #D2DF00;
+    -fx-text-fill: #ffffff;
+}
+
+.Items:hover {
+    -fx-background-color: #146886;
+    -fx-border-color: white;
+    -fx-border-width: 0px 0px 0px 5px;
+}
+
+.CentralFoot {
+    -fx-border-color: #445664;
+    -fx-border-width: 3px 0px 0px 0px;
+}
