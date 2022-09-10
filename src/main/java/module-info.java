@@ -7,16 +7,19 @@ module com.josue.cablezelmnv {
     requires java.naming;
 
     opens com.josue.cablezelmnv to javafx.fxml, javafx.graphics;
-    opens com.josue.view to javafx.fxml;
     opens com.josue.modelo to org.hibernate.orm.core;
+    opens com.josue.reportes to jasperreports;
+    opens com.josue.view to javafx.fxml, org.hibernate.orm.core;
     requires javafx.graphicsEmpty;
     requires java.base;
     requires org.hibernate.orm.core;
     requires java.persistence;
+    requires jasperreports;
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.javafx;
-    // add icon pack modules
-    requires org.kordamp.ikonli.fontawesome;
+    requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires org.apache.logging.log4j;
+    requires java.desktop;
 
 }

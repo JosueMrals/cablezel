@@ -12,9 +12,7 @@ public class Cliente extends Identificador{
     @JoinColumn(name = "BarrioId", referencedColumnName = "id")
     private Barrio barrio;
 
-    public Barrio getBarrio() {
-        return barrio;
-    }
+    public Barrio getBarrio() { return barrio; }
 
     public void setBarrio(Barrio barrio) {
         this.barrio = barrio;
@@ -22,7 +20,7 @@ public class Cliente extends Identificador{
 
     //Relation to Contrato table
     @ManyToOne
-    @JoinColumn (name = "ContratoId", referencedColumnName = "id")
+    @JoinColumn(name = "ContratoId", referencedColumnName = "id")
     private Contrato contrato;
 
     public Contrato getContrato() {
@@ -109,14 +107,11 @@ public class Cliente extends Identificador{
         this.direccion = direccion;
     }
 
-    public Cliente(){
-
-    }
+    public Cliente(){ }
 
     @Override
     public String toString() {
-        return "Cliente{}";
+        return "Cliente " + getId() + ": " + getPrimer_nombre() + " " + getSegundo_nombre() + " " + getPrimer_apellido() + " " + getSegundo_apellido();
     }
-
 
 }

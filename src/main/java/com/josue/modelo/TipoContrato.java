@@ -1,11 +1,25 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tipo_contrato")
 
-public class TipoContrato extends Identificador{
+public class TipoContrato extends Identificador implements Serializable {
+
+    //Relation with Servicio table
+    @ManyToOne
+    @JoinColumn(name = "ServicioId", referencedColumnName = "id")
+    private Servicio servicio;
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
 
     @Column (name = "cod_tipocontrato")
     private String cod_tipocontrato;
@@ -50,16 +64,21 @@ public class TipoContrato extends Identificador{
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
 
     public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv) {
         this.cod_tipocontrato = cod_tipoContrato;
         this.tipo_contrato = tipo_contrato;
         this.descripcion = descripcion;
+        this.servicio = servicio;
         this.cantidad_tv = cantidad_tv;
     }
+
+    @Override
+    public String toString() {
+        return getId() + " " + tipo_contrato;
+    }
+
 }

@@ -7,17 +7,17 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.josue.modelo.Usuario;
-import com.josue.service.GenericServiceImpl;
-import com.josue.service.IGenericService;
-import com.josue.util.HibernateUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -26,55 +26,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class LoginController implements Initializable {
 
+    public Pane leftPane;
     /**
      * Initializes the controller class.
      */
-    @FXML TextField cjUser;
-    @FXML PasswordField cjPassword;
-    @FXML Button btnLogin;
-    @FXML Label lblError;
-    @FXML TableView<Usuario> table;
-    @FXML TableColumn<Usuario, String> colNombre;
-    @FXML TableColumn<Usuario, String> colApellidos;
-    private ObservableList<Usuario> usuarios;
-    
+    @FXML TextField txtNombreUsuario;
+    @FXML PasswordField txtPassword;
+    @FXML Button btnEntrar;
+
+    public LoginController() {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        IGenericService<Usuario> clienteService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
-
-        usuarios = FXCollections.observableArrayList(clienteService.getAll());
-        colNombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Nombres"));
-        colApellidos.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Apellidos"));
-        table.setItems(usuarios);
     }
 
-    @FXML
-    void iniciarSesion(ActionEvent evt) {
-
-        IGenericService<Usuario> usuarioService = new GenericServiceImpl<Usuario>(Usuario.class, HibernateUtil.getSessionFactory());
-        try{
-            Usuario us = new Usuario();
-            us.setNombres("Yesser");
-            us.setApellidos("Miranda");
-            us.setNick("yesser97");
-            us.setClave("12345678");
-
-            //Guardar
-            usuarioService.save(us);
-
-        }
-        catch(Exception e)
-        {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
+    public void mostrarOtro(ActionEvent actionEvent) {
+        try {
+            // ocultar la ventana actual
+            ((Node)actionEvent.getSource()).getScene().getWindow().hide();
+            //Cargar el archivo fxml y crear un nuevo stage para mostrar el formulario principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
         }
-
-    }
-
-
-    public void mostrarRegistrar(ActionEvent actionEvent) {
-
-
     }
 }

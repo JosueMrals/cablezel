@@ -1,0 +1,4 @@
+#btnLimpiarContrato, #btnGuardarContrato, #btnEditarContrato, #btnGuardarBarrio {
+    -fx-background-color: white;
+    -fx-border-style: none;
+}

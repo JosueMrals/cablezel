@@ -1,30 +1,30 @@
 package com.josue.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "detalles_facturas")
 
 public class DetalleFactura extends Identificador{
 
-    @Column (name = "cantidad_meses")
-    private Integer cantidad_meses;
+    //Relation with Servicio table
+    @ManyToOne
+    @JoinColumn(name = "ServicioId", referencedColumnName = "id")
+    private Servicio servicio;
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
 
     @Column (name = "total_pagar")
     private Float total_pagar;
 
-    @Column (name = "descricion")
+    @Column (name = "descripcion")
     private String descripcion;
-
-    public Integer getCantidad_meses() {
-        return cantidad_meses;
-    }
-
-    public void setCantidad_meses(Integer cantidad_meses) {
-        this.cantidad_meses = cantidad_meses;
-    }
 
     public Float getTotal_pagar() {
         return total_pagar;
