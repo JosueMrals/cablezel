@@ -74,7 +74,7 @@ public class FacturarPrincipalController implements Initializable {
         colAccion.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Contrato, String> call(TableColumn<Contrato, String> param) {
-                final TableCell<Contrato, String> cell = new TableCell<Contrato, String>() {
+                final TableCell<Contrato, String> cell = new TableCell<>() {
                     final Button btn = new Button("Facturar");
 
                     @Override
@@ -85,6 +85,8 @@ public class FacturarPrincipalController implements Initializable {
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
+                                btn.setStyle("-fx-background-color:  #339933");
+                                btn.setStyle("-fx-background-color:  #339933");
                                 Contrato contrato = getTableView().getItems().get(getIndex());
                                 System.out.println("Contrato: " + contrato);
                                 try {
@@ -109,9 +111,8 @@ public class FacturarPrincipalController implements Initializable {
             }
         });
     }
-
     
-    public void buscarCliente(ActionEvent actionEvent) {
+    public void buscarCliente() {
         String nombreCliente = txtBuscarCliente.getText();
         IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
         ObservableList<Contrato> contratos = FXCollections.observableArrayList(service.getAll());

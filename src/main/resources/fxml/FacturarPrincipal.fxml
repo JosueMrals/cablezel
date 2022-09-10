@@ -19,12 +19,12 @@
       <top>
          <AnchorPane prefHeight="79.0" prefWidth="1126.0" BorderPane.alignment="CENTER">
             <Pane prefHeight="127.0" prefWidth="1126.0">
-               <TextField fx:id="txtBuscarCliente" layoutX="42.0" layoutY="66.0" prefHeight="25.0" prefWidth="403.0" promptText="Buscar un cliente..." style="-fx-background-color: none;" styleClass="buscador">
+               <TextField fx:id="txtBuscarCliente" layoutX="42.0" layoutY="80.0" prefHeight="25.0" prefWidth="403.0" promptText="Buscar un cliente..." style="-fx-background-color: none;" styleClass="buscador">
                   <font>
                      <Font size="15.0" />
                   </font>
                </TextField>
-               <Button fx:id="btnBuscar" layoutX="456.0" layoutY="66.0" mnemonicParsing="false" onAction="#buscarCliente" prefHeight="25.0" style="-fx-background-color: none;">
+               <Button fx:id="btnBuscar" layoutX="456.0" layoutY="78.0" mnemonicParsing="false" onAction="#buscarCliente" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
                   <graphic>
                      <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                         <cursor>
@@ -37,11 +37,11 @@
                      <Cursor fx:constant="HAND" />
                   </cursor>
                </Button>
-               <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="42.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/nuevos/facturar.png" />
                </ImageView>
             </Pane>
-            <Label layoutX="96.0" layoutY="13.0" text="Facturar ">
+            <Label layoutX="96.0" layoutY="18.0" text="Facturación">
                <font>
                   <Font size="30.0" />
                </font>
@@ -61,13 +61,9 @@
                   </columns>
                </TableView>
                <ScrollPane layoutX="20.0" layoutY="329.0" prefHeight="200.0" prefWidth="1085.0">
-                 <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1070.0">
-                        <children>
-                           <Pane prefHeight="200.0" prefWidth="1070.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        </children>
-                     </AnchorPane>
-                 </content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1070.0">
+                     <Pane prefHeight="200.0" prefWidth="1070.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </AnchorPane>
                </ScrollPane>
                <Button fx:id="btFacturar" layoutX="1018.0" layoutY="541.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #339933;" text="Facturar" textFill="WHITE">
                   <font>
