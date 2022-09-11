@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.josue.util.GlobalUtil;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * Created by Josue on 09/05/2021.
@@ -22,6 +24,12 @@ import java.util.ResourceBundle;
  * </p>
  */
 public class ClientesController implements Initializable {
+    
+    public TextField txtBuscarCedula;
+    public TextField txtBuscarNombre;
+    public Button btnRecargar;
+    public Button btnBuscarNombre;
+    public Button btnBuscarCedula;
     @FXML TextField txtNumCedula;
     @FXML TextField txtPrimerNombre;
     @FXML TextField txtSegundoNombre;
@@ -37,6 +45,9 @@ public class ClientesController implements Initializable {
     @FXML TableColumn<Cliente, String> colTelefono;
     @FXML TableView<Cliente> tvClientes;
 
+    String[] clientesAutocomplete = {};
+    String[] cedulaAutocomplete = {};
+
     /**
      * Initializes the controller class.
      * @author Josue
@@ -45,6 +56,31 @@ public class ClientesController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listarBarrios();
         llenarClientes();
+        autoCompletarNombre();
+        autoCompletarCedula();
+
+    }
+
+    public void autoCompletarNombre() {
+        clientesAutocomplete = GlobalUtil.obtenerClientes();
+        TextFields.bindAutoCompletion(txtBuscarNombre, clientesAutocomplete);
+        llenarClientes();
+        txtBuscarNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("oldValue " + oldValue);
+            System.out.println("newValue " + newValue);
+        });
+        tvClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    public void autoCompletarCedula() {
+        cedulaAutocomplete = GlobalUtil.obtenerCedula();
+        TextFields.bindAutoCompletion(txtBuscarCedula, cedulaAutocomplete);
+        llenarClientes();
+        txtBuscarNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("oldValue " + oldValue);
+            System.out.println("newValue " + newValue);
+        });
+        tvClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void listarBarrios(){
@@ -62,7 +98,7 @@ public class ClientesController implements Initializable {
         ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
         colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
         colNombre.setCellValueFactory(
-                param -> new ReadOnlyObjectWrapper(param.getValue().getPrimer_nombre()
+                param -> new ReadOnlyObjectWrapper<>(param.getValue().getPrimer_nombre()
                         + " " + param.getValue().getSegundo_nombre() + " " +
                         param.getValue().getPrimer_apellido() + " " +
                         param.getValue().getSegundo_apellido())
@@ -152,15 +188,42 @@ public class ClientesController implements Initializable {
         }
     }
 
-    /**
-     * Obtiene los barrios de la base de datos
-     * @return ObservableList<Barrio>
-     * @author Yesser
-     */
+    public void buscarCedula() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                getSessionFactory());
+        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+        ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
+        for (Cliente cliente : clientes) {
+            if (cliente.getNum_cedula().equals(txtBuscarCedula.getText())) {
+                clientesFiltrados.add(cliente);
+            }
+        }
+        tvClientes.setItems(clientesFiltrados);
+    }
+
+    public void buscarNombre() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                getSessionFactory());
+        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+        ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
+        for (Cliente cliente : clientes) {
+            if ((cliente.getPrimer_nombre() + " " + cliente.getSegundo_nombre()
+                + " " + cliente.getPrimer_apellido() + " " + cliente.getSegundo_apellido())
+                    .equals(txtBuscarNombre.getText())) {
+                clientesFiltrados.add(cliente);
+            }
+        }
+        tvClientes.setItems(clientesFiltrados);
+    }
+
     public ObservableList<Barrio> obtenerBarrios() {
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.
                 getSessionFactory());
         return FXCollections.observableArrayList(barrioService.getAll());
+    }
+
+    public void recargar() {
+        llenarClientes();
     }
 
 }
