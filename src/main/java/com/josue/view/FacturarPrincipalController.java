@@ -114,11 +114,13 @@ public class FacturarPrincipalController implements Initializable {
     
     public void buscarCliente() {
         String nombreCliente = txtBuscarCliente.getText();
-        IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
+        IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.
+                getSessionFactory());
         ObservableList<Contrato> contratos = FXCollections.observableArrayList(service.getAll());
         ObservableList<Contrato> contratosFiltrados = FXCollections.observableArrayList();
         for (Contrato contrato : contratos) {
-            if ((contrato.getCliente().getPrimer_nombre() + " " + contrato.getCliente().getSegundo_nombre()
+            if ((contrato.getCliente().getPrimer_nombre()
+                    + " " + contrato.getCliente().getSegundo_nombre()
                     + " " + contrato.getCliente().getPrimer_apellido()
                     + " " + contrato.getCliente().getSegundo_apellido()).contains(nombreCliente))  {
                 contratosFiltrados.add(contrato);
@@ -126,6 +128,7 @@ public class FacturarPrincipalController implements Initializable {
         }
         tvBuscarClientes.setItems(contratosFiltrados);
     }
+
 
     public void mostrarSecundaria(ActionEvent actionEvent) {
         if (obtenerDatos()) {

@@ -23,6 +23,11 @@
     -fx-text-fill: #ffffff;
 }
 
+#btPrincipalReportes {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: #ffffff;
+}
+
 .Items:hover {
     -fx-background-color: #146886;
     -fx-border-color: white;
