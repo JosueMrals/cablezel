@@ -58,18 +58,17 @@ public class ClientesController implements Initializable {
         llenarClientes();
         autoCompletarNombre();
         autoCompletarCedula();
-
     }
 
     public void autoCompletarNombre() {
-        clientesAutocomplete = GlobalUtil.obtenerClientes();
-        TextFields.bindAutoCompletion(txtBuscarNombre, clientesAutocomplete);
-        llenarClientes();
-        txtBuscarNombre.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("oldValue " + oldValue);
-            System.out.println("newValue " + newValue);
-        });
-        tvClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            clientesAutocomplete = GlobalUtil.obtenerClientes();
+            TextFields.bindAutoCompletion(txtBuscarNombre, clientesAutocomplete);
+            llenarClientes();
+            txtBuscarNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+                System.out.println("oldValue " + oldValue);
+                System.out.println("newValue " + newValue);
+            });
+            tvClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void autoCompletarCedula() {
@@ -189,31 +188,39 @@ public class ClientesController implements Initializable {
     }
 
     public void buscarCedula() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
-                getSessionFactory());
-        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
-        ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
-        for (Cliente cliente : clientes) {
-            if (cliente.getNum_cedula().equals(txtBuscarCedula.getText())) {
-                clientesFiltrados.add(cliente);
+        if (txtBuscarCedula.getText() != null) {
+            llenarClientes();
+        } else {
+            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                    getSessionFactory());
+            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
+            for (Cliente cliente : clientes) {
+                if (cliente.getNum_cedula().equals(txtBuscarCedula.getText())) {
+                    clientesFiltrados.add(cliente);
+                }
             }
+            tvClientes.setItems(clientesFiltrados);
         }
-        tvClientes.setItems(clientesFiltrados);
     }
 
     public void buscarNombre() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
-                getSessionFactory());
-        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
-        ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
-        for (Cliente cliente : clientes) {
-            if ((cliente.getPrimer_nombre() + " " + cliente.getSegundo_nombre()
-                + " " + cliente.getPrimer_apellido() + " " + cliente.getSegundo_apellido())
-                    .equals(txtBuscarNombre.getText())) {
-                clientesFiltrados.add(cliente);
+        if (txtBuscarNombre.getText() != null) {
+            llenarClientes();
+        } else {
+            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
+                    getSessionFactory());
+            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
+            for (Cliente cliente : clientes) {
+                if ((cliente.getPrimer_nombre() + " " + cliente.getSegundo_nombre()
+                        + " " + cliente.getPrimer_apellido() + " " + cliente.getSegundo_apellido())
+                        .equals(txtBuscarNombre.getText())) {
+                    clientesFiltrados.add(cliente);
+                }
             }
+            tvClientes.setItems(clientesFiltrados);
         }
-        tvClientes.setItems(clientesFiltrados);
     }
 
     public ObservableList<Barrio> obtenerBarrios() {
@@ -223,6 +230,8 @@ public class ClientesController implements Initializable {
     }
 
     public void recargar() {
+        txtBuscarNombre.clear();
+        txtBuscarCedula.clear();
         llenarClientes();
     }
 

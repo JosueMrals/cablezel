@@ -99,21 +99,6 @@
                             </ImageView>
                         </graphic>
                     </Button>
-            <Button fx:id="btnReportes" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#mostrar_reportes" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Reportes" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/nuevos/informe-de-ganancias.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
                 </VBox>
                 <VBox prefHeight="49.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <Button fx:id="btnSalir" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="WHITE">
@@ -133,7 +118,7 @@
             </AnchorPane>
         </left>
       <center>
-      <BorderPane fx:id="panelPadre" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="panelPadre" maxWidth="1366.0" BorderPane.alignment="CENTER">
          <center>
              <AnchorPane prefHeight="720.0" prefWidth="1126.0">
                  <AnchorPane prefHeight="717.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -195,18 +180,6 @@
                              <Font name="System Bold" size="22.0" />
                          </font>
                      </Button>
-                  <Button fx:id="btPrincipalReportes" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#mostrar_reportes" prefHeight="55.0" prefWidth="424.0" text="Reportes" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/nuevos/reporte%20(1).png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Button>
                  </AnchorPane>
              </AnchorPane>
          </center>
@@ -246,7 +219,7 @@
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
-                 <Label alignment="BASELINE_LEFT" layoutX="290.0" layoutY="11.0" text="Todos los derechos reservados." AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="290.0">
+                 <Label alignment="BASELINE_LEFT" layoutX="332.0" layoutY="13.0" text="Todos los derechos reservados." AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="332.0">
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
@@ -254,7 +227,7 @@
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
-                 <Label alignment="BASELINE_LEFT" layoutX="153.0" layoutY="11.0" text="Marca Registrada" textFill="#005dff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="153.0">
+                 <Label alignment="BASELINE_LEFT" layoutX="174.0" layoutY="13.0" text="Marca Registrada" textFill="#005dff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="174.0">
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
