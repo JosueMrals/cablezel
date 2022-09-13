@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 public class FacturarPrincipalController implements Initializable {
 
     public Button btnBuscar;
+    public ListView<Contrato> lvContratosPagar;
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btFacturar;
     @FXML TableColumn<Contrato, String> colNumContrato;
@@ -36,8 +38,9 @@ public class FacturarPrincipalController implements Initializable {
     @FXML TableColumn<Contrato, String> colPrecioContrato;
     @FXML TextField txtBuscarCliente;
     @FXML TableView<Contrato> tvBuscarClientes;
-
     String[] clientesAutocomplete = {};
+
+    Integer iteradorBoton = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +53,9 @@ public class FacturarPrincipalController implements Initializable {
         });
         tvBuscarClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         addFacturarButtonToTable();
+
+        eliminarFila();
+
 
     }
 
@@ -70,13 +76,14 @@ public class FacturarPrincipalController implements Initializable {
         tvBuscarClientes.setItems(contratos);
     }
 
+
     private void addFacturarButtonToTable() {
         colAccion.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Contrato, String> call(TableColumn<Contrato, String> param) {
+                Integer iterador = 0;
                 final TableCell<Contrato, String> cell = new TableCell<>() {
                     final Button btn = new Button("Facturar");
-
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -85,21 +92,12 @@ public class FacturarPrincipalController implements Initializable {
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                btn.setStyle("-fx-background-color:  #339933");
-                                btn.setStyle("-fx-background-color:  #339933");
                                 Contrato contrato = getTableView().getItems().get(getIndex());
                                 System.out.println("Contrato: " + contrato);
-                                try {
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
-                                    AnchorPane root = loader.load();
-                                    FacturarController controller = loader.getController();
-                                    controller.setContrato(contrato);
-                                    Stage stage = new Stage();
-                                    stage.setScene(new Scene(root));
-                                    stage.show();
-                                } catch (Exception e) {
-                                    Logger.getLogger(FacturarPrincipalController.class.getName()).log(Level.SEVERE, null, e);
-                                }
+                                lvContratosPagar.getItems().add(contrato);
+
+                                //hide current row of tableview
+                                getTableView().getItems().remove(getIndex());
                             });
 
                             setGraphic(btn);
@@ -111,7 +109,25 @@ public class FacturarPrincipalController implements Initializable {
             }
         });
     }
-    
+
+    public void eliminarFila() {
+        lvContratosPagar.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                // get contrato
+                Contrato contratoSeleccionado = lvContratosPagar.getSelectionModel().getSelectedItem();
+
+                // agregar de nuevo al table view
+                tvBuscarClientes.getItems().add(contratoSeleccionado);
+
+                // agregar el boton facturar a esta fila
+                addFacturarButtonToTable();
+
+                lvContratosPagar.getItems().remove(lvContratosPagar.getSelectionModel()
+                        .getSelectedItem());
+            }
+        });
+    }
+
     public void buscarCliente() {
         String nombreCliente = txtBuscarCliente.getText();
         IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.

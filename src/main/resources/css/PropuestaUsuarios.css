@@ -33,6 +33,11 @@
     -fx-border-color: white;
     -fx-border-width: 0px 0px 0px 5px;
 }
+.Principal:hover {
+    -fx-background-color: #146886;
+    -fx-border-color: white;
+    -fx-border-width: 0px 0px 0px 30px;
+}
 
 .CentralFoot {
     -fx-border-color: #445664;

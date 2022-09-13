@@ -1,10 +1,8 @@
 package com.josue.modelo;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-
+@Entity
 @Table(name = "detalle_pago")
 public class DetallePago extends Identificador{
 
@@ -47,5 +45,15 @@ public class DetallePago extends Identificador{
         this.detalleFactura = detalleFactura;
     }
 
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
 }
