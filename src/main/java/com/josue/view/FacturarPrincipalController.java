@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 public class FacturarPrincipalController implements Initializable {
 
     public Button btnBuscar;
+    public ListView<Contrato> lvContratosPagar;
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btFacturar;
     @FXML TableColumn<Contrato, String> colNumContrato;
@@ -85,21 +86,10 @@ public class FacturarPrincipalController implements Initializable {
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                btn.setStyle("-fx-background-color:  #339933");
-                                btn.setStyle("-fx-background-color:  #339933");
                                 Contrato contrato = getTableView().getItems().get(getIndex());
                                 System.out.println("Contrato: " + contrato);
-                                try {
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturar.fxml"));
-                                    AnchorPane root = loader.load();
-                                    FacturarController controller = loader.getController();
-                                    controller.setContrato(contrato);
-                                    Stage stage = new Stage();
-                                    stage.setScene(new Scene(root));
-                                    stage.show();
-                                } catch (Exception e) {
-                                    Logger.getLogger(FacturarPrincipalController.class.getName()).log(Level.SEVERE, null, e);
-                                }
+                                lvContratosPagar.getItems().add(contrato);
+                                btn.setDisable(true);
                             });
 
                             setGraphic(btn);
@@ -111,7 +101,7 @@ public class FacturarPrincipalController implements Initializable {
             }
         });
     }
-    
+
     public void buscarCliente() {
         String nombreCliente = txtBuscarCliente.getText();
         IGenericService<Contrato> service = new GenericServiceImpl<>(Contrato.class, HibernateUtil.

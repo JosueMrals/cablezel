@@ -17,12 +17,6 @@ import java.util.ResourceBundle;
 import com.josue.util.GlobalUtil;
 import org.controlsfx.control.textfield.TextFields;
 
-/**
- * Created by Josue on 09/05/2021.
- * <p>
- *     Clase que controla la vista de clientes.
- * </p>
- */
 public class ClientesController implements Initializable {
     
     public TextField txtBuscarCedula;

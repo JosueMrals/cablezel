@@ -157,9 +157,9 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <cursor>
-                  <Cursor fx:constant="HAND"/>
+                  <Cursor fx:constant="HAND" />
                </cursor>
-               <Image url="@../images/lupa.png"/>
+               <Image url="@../images/lupa.png" />
             </ImageView>
          </graphic>
          <cursor>
