@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +38,9 @@ public class FacturarPrincipalController implements Initializable {
     @FXML TableColumn<Contrato, String> colPrecioContrato;
     @FXML TextField txtBuscarCliente;
     @FXML TableView<Contrato> tvBuscarClientes;
-
     String[] clientesAutocomplete = {};
+
+    Integer iteradorBoton = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,6 +53,9 @@ public class FacturarPrincipalController implements Initializable {
         });
         tvBuscarClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         addFacturarButtonToTable();
+
+        eliminarFila();
+
 
     }
 
@@ -71,13 +76,14 @@ public class FacturarPrincipalController implements Initializable {
         tvBuscarClientes.setItems(contratos);
     }
 
+
     private void addFacturarButtonToTable() {
         colAccion.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Contrato, String> call(TableColumn<Contrato, String> param) {
+                Integer iterador = 0;
                 final TableCell<Contrato, String> cell = new TableCell<>() {
                     final Button btn = new Button("Facturar");
-
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -89,7 +95,9 @@ public class FacturarPrincipalController implements Initializable {
                                 Contrato contrato = getTableView().getItems().get(getIndex());
                                 System.out.println("Contrato: " + contrato);
                                 lvContratosPagar.getItems().add(contrato);
-                                btn.setDisable(true);
+
+                                //hide current row of tableview
+                                getTableView().getItems().remove(getIndex());
                             });
 
                             setGraphic(btn);
@@ -98,6 +106,24 @@ public class FacturarPrincipalController implements Initializable {
                     }
                 };
                 return cell;
+            }
+        });
+    }
+
+    public void eliminarFila() {
+        lvContratosPagar.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                // get contrato
+                Contrato contratoSeleccionado = lvContratosPagar.getSelectionModel().getSelectedItem();
+
+                // agregar de nuevo al table view
+                tvBuscarClientes.getItems().add(contratoSeleccionado);
+
+                // agregar el boton facturar a esta fila
+                addFacturarButtonToTable();
+
+                lvContratosPagar.getItems().remove(lvContratosPagar.getSelectionModel()
+                        .getSelectedItem());
             }
         });
     }
