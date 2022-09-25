@@ -44,6 +44,8 @@ public class FacturarPrincipalController implements Initializable {
     @FXML TableView<Contrato> tvBuscarClientes;
     String[] clientesAutocomplete = {};
 
+    FacturarPrincipalController facturarPrincipalController = this;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clientesAutocomplete = GlobalUtil.obtenerClientes();
@@ -161,14 +163,32 @@ public class FacturarPrincipalController implements Initializable {
         tvBuscarClientes.setItems(contratosFiltrados);
     }
 
-
-
     public void mostrarSecundaria(ActionEvent actionEvent) {
-        if (obtenerDatos()) {
+        if (tvContratosPagar.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se ha seleccionado ningun contrato");
+            alert.setContentText("Por favor seleccione un contrato para facturar");
+            alert.showAndWait();
+        } else {
             try {
-                ((Node)actionEvent.getSource()).getScene().getWindow();
+                ((Node) actionEvent.getSource()).getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FacturaSecundaria.fxml"));
                 AnchorPane root = loader.load();
+
+                FacturaSecundariaController facturaSecundariaController = loader.getController();
+                facturaSecundariaController.recibirDatos(facturarPrincipalController, tvContratosPagar.getItems());
+                facturaSecundariaController.colN1.setCellValueFactory(new PropertyValueFactory<>("id"));
+                facturaSecundariaController.colN2.setCellValueFactory(
+                        param -> new ReadOnlyObjectWrapper<>(param.getValue().getTipocontrato().getTipo_contrato())
+                );
+                facturaSecundariaController.colN3.setCellValueFactory(
+                        param -> new ReadOnlyObjectWrapper<>(param.getValue().getCliente().getPrimer_nombre() + " " +
+                                param.getValue().getCliente().getSegundo_nombre() + " " +
+                                param.getValue().getCliente().getPrimer_apellido() + " " +
+                                param.getValue().getCliente().getSegundo_apellido())
+                );
+
                 Stage stage = new Stage();
                 stage.setTitle("Facturar");
                 stage.setScene(new Scene(root));
@@ -179,15 +199,11 @@ public class FacturarPrincipalController implements Initializable {
         }
     }
 
-    public boolean obtenerDatos(){
-        if (tvBuscarClientes.getSelectionModel().getSelectedItems() != null) {
-            ObservableList<Contrato> contratos = FXCollections.observableArrayList(tvBuscarClientes.getSelectionModel()
-                    .getSelectedItems());
-            for (Contrato contrato : contratos) {
-                System.out.println("Contrato seleccionado: " + contrato.getCliente().getPrimer_nombre());
-            }
-        }
-        return false;
+    public ObservableList<Contrato> obtenerDatos() {
+        ObservableList<Contrato> contratos = tvContratosPagar.getItems();
+        return contratos;
     }
+
+
 
 }
