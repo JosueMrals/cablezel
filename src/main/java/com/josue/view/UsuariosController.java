@@ -7,10 +7,8 @@ import com.josue.util.HibernateUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 public class UsuariosController implements Initializable {
 
@@ -52,7 +50,6 @@ public class UsuariosController implements Initializable {
                 alert.setHeaderText("Error al registrar usuario");
                 alert.setContentText("El nombre completo ya existe");
                 alert.showAndWait();
-                return;
             } else {
 
                 //Obtener los datos del formulario
