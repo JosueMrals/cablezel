@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "detalle_pago")
+
 public class DetallePago extends Identificador{
 
     //Relation with Pago

@@ -3,8 +3,7 @@ package com.josue.view;
 import com.josue.modelo.Contrato;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +15,9 @@ public class FacturaSecundariaController implements Initializable {
     public TableColumn<Contrato, String> colN2;
     public TableColumn<Contrato, String > colN3;
     public TableColumn<Contrato, String > colN4;
+    public Button btFacturar;
+    public TextArea txtDireccion;
+    public TextField txtCliente;
     FacturarPrincipalController facturarPrincipalController;
 
     @Override
@@ -27,5 +29,6 @@ public class FacturaSecundariaController implements Initializable {
         tvMostrarContratos.setItems(datos);
         this.facturarPrincipalController = facturarPrincipalController;
     }
+
 
 }

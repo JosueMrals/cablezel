@@ -66,4 +66,5 @@ public class Contrato extends Identificador implements Serializable {
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
+
 }

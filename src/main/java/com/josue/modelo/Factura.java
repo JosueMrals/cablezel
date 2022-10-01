@@ -15,6 +15,7 @@ public class Factura extends Identificador{
 
     public Cliente getCliente() {return cliente;}
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
+
     //Relation to Usuario table
     @ManyToOne
     @JoinColumn (name = "usuario_id", referencedColumnName = "id")
@@ -84,4 +85,5 @@ public class Factura extends Identificador{
     public void setFecha_factura(DateFormat fecha_factura) {
         this.fecha_factura = fecha_factura;
     }
+
 }

@@ -204,6 +204,4 @@ public class FacturarPrincipalController implements Initializable {
         return contratos;
     }
 
-
-
 }
