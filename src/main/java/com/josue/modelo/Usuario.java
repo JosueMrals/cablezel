@@ -63,6 +63,11 @@ public class Usuario extends Identificador {
 
     @Override
     public String toString() {
-        return "Usuario{}";
+        return "Usuario{" +
+                "nombrecompleto='" + nombrecompleto + '\'' +
+                ", nickusuario='" + nickusuario + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
