@@ -7,6 +7,15 @@ import javax.persistence.*;
 
 public class DetalleFactura extends Identificador{
 
+    //Relation with Factura
+    @ManyToOne
+    @JoinColumn (name = "factura_id", referencedColumnName = "id")
+    private Factura factura;
+
+    public Factura getFactura() {return factura;}
+
+    public void setFactura(Factura factura) {this.factura = factura;}
+
     //Relation with Servicio table
     @ManyToOne
     @JoinColumn(name = "ServicioId", referencedColumnName = "id")

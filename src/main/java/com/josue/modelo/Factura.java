@@ -15,6 +15,7 @@ public class Factura extends Identificador{
 
     public Cliente getCliente() {return cliente;}
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
+
     //Relation to Usuario table
     @ManyToOne
     @JoinColumn (name = "usuario_id", referencedColumnName = "id")
@@ -28,23 +29,7 @@ public class Factura extends Identificador{
         this.usuario = usuario;
     }
 
-    ///Relation to DetallesFacturas table
-    @ManyToOne
-    @JoinColumn (name = "detalles_id", referencedColumnName = "id")
-    private DetalleFactura detalleFactura;
-
-    public DetalleFactura getDetalleFactura() {
-        return detalleFactura;
-    }
-
-    public void setDetalleFactura(DetalleFactura detalleFactura) {
-        this.detalleFactura = detalleFactura;
-    }
-
     //Factura table
-    @Column (name = "num_factura", unique = true)
-    private Integer num_factura;
-
     @Column (name = "total")
     private Float total;
 
@@ -59,14 +44,6 @@ public class Factura extends Identificador{
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public Integer getNum_factura() {
-        return num_factura;
-    }
-
-    public void setNum_factura(Integer num_factura) {
-        this.num_factura = num_factura;
     }
 
     public Float getTotal() {
@@ -84,4 +61,5 @@ public class Factura extends Identificador{
     public void setFecha_factura(DateFormat fecha_factura) {
         this.fecha_factura = fecha_factura;
     }
+
 }

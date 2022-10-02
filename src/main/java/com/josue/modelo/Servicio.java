@@ -7,8 +7,6 @@ import java.io.Serializable;
 @Table (name = "servicios")
 public class Servicio extends Identificador implements Serializable {
 
-    //Relation with DetalleFactura
-
     @Column(name = "nombre")
     private String nombre;
 

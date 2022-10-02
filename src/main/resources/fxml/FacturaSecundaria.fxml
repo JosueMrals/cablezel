@@ -3,9 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,76 +14,117 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="581.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturaSecundariaController">
-   <children>
-      <Pane prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: #cccccc;" />
-      <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
-         <content>
-            <Pane prefHeight="648.0" prefWidth="825.0" style="-fx-border-style: none;">
-               <children>
-                  <Pane layoutX="11.0" layoutY="9.0" prefHeight="208.0" prefWidth="795.0" style="-fx-border-color: #666666;">
-                     <children>
-                        <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" prefHeight="20.0" prefWidth="111.0" style="-fx-background-color: #666666;" text="Cliente y Fecha" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="35.0" text="Cliente" />
-                        <Label layoutX="20.0" layoutY="89.0" text="Direccion" />
-                        <ComboBox fx:id="cbCliente" blendMode="DARKEN" cache="true" layoutX="22.0" layoutY="57.0" prefHeight="26.0" prefWidth="254.0" promptText="Seleccione un cliente">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ComboBox>
-                        <TextArea fx:id="txtDireccion" accessibleRole="TEXT_FIELD" layoutX="22.0" layoutY="113.0" prefHeight="68.0" prefWidth="254.0" promptText="Ingrese una direccion">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextArea>
-                        <Label layoutX="418.0" layoutY="35.0" text="Fecha de ultima factura" />
-                        <Label layoutX="604.0" layoutY="35.0" text="No. de Factura" />
-                        <TextField editable="false" layoutX="606.0" layoutY="59.0" promptText="Numero de Factura">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
-                        <Label layoutX="418.0" layoutY="89.0" text="Nota descriptiva" />
-                        <TextField editable="false" layoutX="420.0" layoutY="58.0" prefHeight="26.0" prefWidth="155.0" promptText="Ultima fecha" />
-                        <TextArea layoutX="418.0" layoutY="113.0" prefHeight="68.0" prefWidth="355.0" promptText="Ingrese una nota descriptiva" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="11.0" layoutY="240.0" prefHeight="238.0" prefWidth="795.0" style="-fx-border-color: #666666;">
-                     <children>
-                        <Label alignment="CENTER" layoutX="20.0" layoutY="11.0" prefHeight="20.0" prefWidth="152.0" style="-fx-background-color: #666666;" text="Contrato del Cliente" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="39.0" text="Contrato" />
-                        <ComboBox layoutX="22.0" layoutY="61.0" prefHeight="27.0" prefWidth="343.0" promptText="Seleccione un contrato" />
-                        <Label layoutX="376.0" layoutY="39.0" text="Mes a pagar" />
-                        <ComboBox blendMode="DARKEN" layoutX="378.0" layoutY="61.0" prefHeight="26.0" prefWidth="167.0" promptText="Mes a pagar" visibleRowCount="12" />
-                     </children>
-                  </Pane>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Pane>
-         </content>
-      </ScrollPane>
-      <Pane layoutY="42.0" prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: white;">
-         <children>
-            <Label layoutX="13.0" layoutY="8.0" text="Nueva Factura">
+   <Pane prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: #cccccc;" />
+   <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
+      <Pane prefHeight="499.0" prefWidth="825.0" style="-fx-border-style: none;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <Pane layoutX="11.0" layoutY="9.0" prefHeight="208.0" prefWidth="795.0" style="-fx-border-color: #666666;">
+            <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" prefHeight="20.0" prefWidth="111.0" style="-fx-background-color: #666666;" text="Cliente y Fecha" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="17.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="677.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" style="-fx-background-color: #66ccff;" text="Factura Completa" textFill="WHITE">
+            <Label layoutX="20.0" layoutY="35.0" text="Cliente">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font size="13.0" />
                </font>
-            </Button>
-         </children>
+            </Label>
+            <Label layoutX="20.0" layoutY="89.0" text="Direccion">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtDireccion" accessibleRole="TEXT_FIELD" layoutX="22.0" layoutY="113.0" prefHeight="68.0" prefWidth="355.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextArea>
+            <Label layoutX="418.0" layoutY="35.0" text="Fecha de ultima factura">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="604.0" layoutY="35.0" text="No. de Factura">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField editable="false" layoutX="606.0" layoutY="59.0">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="418.0" layoutY="89.0" text="Nota descriptiva">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField editable="false" layoutX="420.0" layoutY="58.0" prefHeight="26.0" prefWidth="155.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <TextArea layoutX="418.0" layoutY="113.0" prefHeight="68.0" prefWidth="355.0" promptText="Escriba una nota (Opcional)">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextArea>
+            <TextField fx:id="txtCliente" layoutX="22.0" layoutY="59.0" prefHeight="25.0" prefWidth="355.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </Pane>
+         <Pane layoutX="11.0" layoutY="240.0" prefHeight="238.0" prefWidth="795.0" style="-fx-border-color: #666666;">
+            <Label alignment="CENTER" layoutX="20.0" layoutY="11.0" prefHeight="20.0" prefWidth="152.0" style="-fx-background-color: #666666;" text="Contrato del Cliente" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="39.0" text="Direccion de Contrato">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="376.0" layoutY="39.0" text="Mes a pagar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="686.0" layoutY="39.0" text="Costo">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tvMostrarContratos" layoutX="20.0" layoutY="69.0" prefHeight="150.0" prefWidth="748.0">
+              <columns>
+                <TableColumn fx:id="colN1" prefWidth="110.0" text="N. Contrato" />
+                <TableColumn fx:id="colN2" prefWidth="118.0" text="Tipo Contrato" />
+                  <TableColumn fx:id="colN3" prefWidth="407.0" text="Cliente" />
+                  <TableColumn fx:id="colN4" prefWidth="112.0" text="Precio" />
+              </columns>
+            </TableView>
+         </Pane>
       </Pane>
-   </children>
+   </ScrollPane>
+   <Pane layoutY="42.0" prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: white;">
+      <Label layoutX="13.0" layoutY="8.0" text="Nueva Factura">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="btFacturar" alignment="CENTER" layoutX="677.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" style="-fx-background-color: #66ccff;" text="Factura Completa" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </Pane>
 </AnchorPane>

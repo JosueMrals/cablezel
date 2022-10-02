@@ -7,6 +7,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.josue.modelo.Usuario;
+import com.josue.service.GenericServiceImpl;
+import com.josue.service.IGenericService;
+import com.josue.util.HibernateUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,25 +40,66 @@ public class LoginController implements Initializable {
     @FXML PasswordField txtPassword;
     @FXML Button btnEntrar;
 
+    Usuario usuario;
+
     public LoginController() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        usuario = new Usuario();
     }
 
     public void mostrarOtro(ActionEvent actionEvent) {
-        try {
-            // ocultar la ventana actual
-            ((Node)actionEvent.getSource()).getScene().getWindow().hide();
-            //Cargar el archivo fxml y crear un nuevo stage para mostrar el formulario principal
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+
+        if (txtNombreUsuario.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al iniciar sesion");
+            alert.setContentText("Por favor, complete todos los campos");
+            alert.showAndWait();
+        } else {
+
+            String nick = txtNombreUsuario.getText();
+            String password = txtPassword.getText();
+
+            if (getUsuariobyNick(nick, password)) {
+                try {
+                    ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (Exception e) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al iniciar sesión");
+                alert.setContentText("Usuario o contraseña incorrectos");
+                alert.showAndWait();
+            }
+
         }
     }
+
+    public boolean getUsuariobyNick(String nick, String password) {
+        ObservableList<Usuario> usuarios = obtenerUsuarios();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNickusuario().equals(nick) && usuario.getPassword().equals(password)) {
+                this.usuario = usuario;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ObservableList<Usuario> obtenerUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(usuarioService.getAll());
+    }
+
 }

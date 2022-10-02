@@ -5,10 +5,6 @@ import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GlobalUtil {
 
@@ -24,6 +20,16 @@ public class GlobalUtil {
         for (int i = 0; i < listaClientes.size(); i++) {
             clientes[i] = listaClientes.get(i).getPrimer_nombre() + " " + listaClientes.get(i).getSegundo_nombre()
                     + " " + listaClientes.get(i).getPrimer_apellido() + " " + listaClientes.get(i).getSegundo_apellido();
+        }
+        return clientes;
+    }
+
+    public static String[] obtenerCedula() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        ObservableList<Cliente> listaClientesCedula = FXCollections.observableArrayList(clienteService.getAll());
+        String[] clientes = new String[listaClientesCedula.size()];
+        for (int i = 0; i < listaClientesCedula.size(); i++) {
+            clientes[i] = listaClientesCedula.get(i).getNum_cedula();
         }
         return clientes;
     }
