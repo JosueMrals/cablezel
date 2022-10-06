@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import com.josue.util.GlobalUtil;
 import org.controlsfx.control.textfield.TextFields;
 
-public abstract class ClientesController implements Initializable {
+public class ClientesController implements Initializable {
     
     public TextField txtBuscarCedula;
     public TextField txtBuscarNombre;

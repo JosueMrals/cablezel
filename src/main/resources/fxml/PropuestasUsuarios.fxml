@@ -261,7 +261,7 @@
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
-                 <Label alignment="BASELINE_LEFT" layoutX="332.0" layoutY="13.0" text="Todos los derechos reservados." AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="332.0">
+                 <Label alignment="BASELINE_LEFT" layoutX="284.0" layoutY="11.0" text="Todos los derechos reservados." AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="284.0">
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
@@ -269,7 +269,7 @@
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>
-                 <Label alignment="BASELINE_LEFT" layoutX="174.0" layoutY="13.0" text="Marca Registrada" textFill="#005dff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="174.0">
+                 <Label alignment="BASELINE_LEFT" layoutX="150.0" layoutY="11.0" text="Marca Registrada" textFill="#005dff" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="150.0">
                   <font>
                      <Font name="System Bold" size="15.0" />
                   </font></Label>

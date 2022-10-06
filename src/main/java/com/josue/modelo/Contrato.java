@@ -10,7 +10,7 @@ public class Contrato extends Identificador implements Serializable {
 
     /** Relation to Cliente table */
     @ManyToOne
-    @JoinColumn(name = "tipocontrato_id", referencedColumnName = "cod_tipocontrato")
+    @JoinColumn(name = "tipocontrato_id", referencedColumnName = "id")
     private TipoContrato tipocontrato;
 
     public TipoContrato getTipocontrato() {

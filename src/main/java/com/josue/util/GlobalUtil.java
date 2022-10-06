@@ -34,4 +34,14 @@ public class GlobalUtil {
         return clientes;
     }
 
+    /**
+     * crear metodo estatico que retorna una lista de clientes
+     *
+     * @return ObservableList<Cliente>
+     */
+    public static ObservableList<Cliente> obtenerClientesObservableList() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(clienteService.getAll());
+    }
+
 }

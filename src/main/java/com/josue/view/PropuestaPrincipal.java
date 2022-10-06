@@ -49,15 +49,12 @@ public class PropuestaPrincipal extends Application implements Initializable {
         btnSalir.setOnMouseClicked(event -> System.exit(0));
         ocultarPanel();
         mostrarPanel();
-        // generar facturas del dia en estado pendiente e insertar en la tabla de facturas
-        // generarFacturas();
         generarFacturas();
         paneSlide.setTranslateX(-0);
         panelPadre.setTranslateX(0);
     }
 
     private void generarFacturas() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -102,9 +99,8 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Clientes.fxml"));
-            Pane registrarse = loader.load();
-            panelPadre.setCenter(registrarse);
-
+            Pane clientes = loader.load();
+            panelPadre.setCenter(clientes);
         } catch (IOException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -114,7 +110,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public void mostrar_facturar() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FacturarPrincipal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturacion.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 

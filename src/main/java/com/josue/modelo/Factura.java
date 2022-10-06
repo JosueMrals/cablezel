@@ -1,7 +1,7 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
-import java.text.DateFormat;
+import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "facturas")
@@ -34,7 +34,7 @@ public class Factura extends Identificador{
     private Float total;
 
     @Column (name = "fecha_factura")
-    private DateFormat fecha_factura;
+    private LocalDateTime fecha_factura;
 
     @Column (name = "estado")
     private String estado;
@@ -54,11 +54,11 @@ public class Factura extends Identificador{
         this.total = total;
     }
 
-    public DateFormat getFecha_factura() {
+    public LocalDateTime getFecha_factura() {
         return fecha_factura;
     }
 
-    public void setFecha_factura(DateFormat fecha_factura) {
+    public void setFecha_factura(LocalDateTime fecha_factura) {
         this.fecha_factura = fecha_factura;
     }
 

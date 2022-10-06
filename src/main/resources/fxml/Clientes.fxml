@@ -12,190 +12,197 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="1126" style="-fx-background-color: White;" stylesheets="@../css/Clientes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ClientesController">
-   <AnchorPane layoutX="6.0" layoutY="6.0">
-      <TextField fx:id="txtNumCedula" layoutX="30.0" layoutY="120.0" prefHeight="25.0" prefWidth="387.0" promptText="610-060700-1004J" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <TextField fx:id="txtPrimerNombre" layoutX="30.0" layoutY="170.0" prefHeight="25.0" prefWidth="387.0" promptText="Josue" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <Label layoutX="30.0" layoutY="150.0" text="Primer nombre">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtSegundoNombre" layoutX="30.0" layoutY="220.0" prefHeight="25.0" prefWidth="387.0" promptText="Nun" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <TextField fx:id="txtPrimerApellido" layoutX="30.0" layoutY="270.0" prefHeight="25.0" prefWidth="387.0" promptText="Morales" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <Label layoutX="30.0" layoutY="200.0" text="Segundo nombre">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="30.0" layoutY="250.0" text="Primer apellido">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtSegundoApellido" layoutX="30.0" layoutY="320.0" prefHeight="25.0" prefWidth="387.0" promptText="Salgado" style="-fx-background-color: White;" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <TextField fx:id="txtNumTelefono" layoutX="500.0" layoutY="177.0" prefHeight="25.0" prefWidth="387.0" promptText="8829 - 1866" styleClass="barra">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <Label layoutX="30.0" layoutY="300.0" text="Segundo Apellido ">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="500.0" layoutY="157.0" text="Numero de telefono">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="30.0" layoutY="100.0" text="Numero de cedula">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="96.0" layoutY="18.0" text="Nuevo Cliente">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <TextArea id="txtDireccion" fx:id="txtDireccion" layoutX="500.0" layoutY="230.0" prefHeight="76.0" prefWidth="387.0">
-         <font>
-            <Font size="13.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextArea>
-      <Label layoutX="500.0" layoutY="207.0" text="Direccion">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="500.0" layoutY="100.0" text="Barrio de habitacion">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cbBarrio" layoutX="500.0" layoutY="120.0" prefHeight="25.0" prefWidth="387.0" promptText="Seleccione un barrio" styleClass="barra" visibleRowCount="100">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ComboBox>
-      <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" stylesheets="@../css/style.css">
-         <columns>
-            <TableColumn fx:id="colCedula" prefWidth="143.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
-            <TableColumn fx:id="colNombre" prefWidth="255.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />
-            <TableColumn fx:id="colDireccion" prefWidth="226.0" resizable="false" style="-fx-background-color: White;" text="Direccion" />
-            <TableColumn fx:id="colBarrio" prefWidth="268.0" resizable="false" style="-fx-background-color: White;" text="Barrio" />
-            <TableColumn fx:id="colTelefono" prefWidth="190.0" resizable="false" style="-fx-background-color: White;" text="Nº de Telefono" />
-         </columns>
-      </TableView>
-      <Button layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <AnchorPane layoutX="30.0" layoutY="446.0">
+<AnchorPane prefHeight="717" prefWidth="1126" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ClientesController">
+   <TextField fx:id="txtNumCedula" layoutX="30.0" layoutY="123.0" prefHeight="25.0" prefWidth="387.0" promptText="610-060700-1004J" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <TextField fx:id="txtPrimerNombre" layoutX="30.0" layoutY="172.0" prefHeight="25.0" prefWidth="387.0" promptText="Josue" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <Label layoutX="30.0" layoutY="150.0" text="Primer nombre">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <TextField fx:id="txtSegundoNombre" layoutX="30.0" layoutY="222.0" prefHeight="25.0" prefWidth="387.0" promptText="Nun" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <TextField fx:id="txtPrimerApellido" layoutX="30.0" layoutY="272.0" prefHeight="25.0" prefWidth="387.0" promptText="Morales" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <Label layoutX="30.0" layoutY="200.0" text="Segundo nombre">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="30.0" layoutY="250.0" text="Primer apellido">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <TextField fx:id="txtSegundoApellido" layoutX="30.0" layoutY="324.0" prefHeight="25.0" prefWidth="387.0" promptText="Salgado" style="-fx-background-color: White;" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <TextField fx:id="txtNumTelefono" layoutX="500.0" layoutY="179.0" prefHeight="25.0" prefWidth="387.0" promptText="8829 - 1866" styleClass="barra">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <Label layoutX="30.0" layoutY="300.0" text="Segundo Apellido ">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="500.0" layoutY="157.0" text="Numero de telefono">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="30.0" layoutY="100.0" text="Numero de cedula">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="96.0" layoutY="18.0" text="Nuevo Cliente">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Label>
+   <TextArea id="txtDireccion" fx:id="txtDireccion" layoutX="500.0" layoutY="230.0" prefHeight="76.0" prefWidth="387.0">
+      <font>
+         <Font size="13.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextArea>
+   <Label layoutX="500.0" layoutY="207.0" text="Direccion">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="500.0" layoutY="100.0" text="Barrio de habitacion">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="cbBarrio" layoutX="500.0" layoutY="122.0" prefHeight="25.0" prefWidth="387.0" promptText="Seleccione un barrio" styleClass="barra" visibleRowCount="100">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </ComboBox>
+   <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" stylesheets="@../css/style.css">
+      <columns>
+         <TableColumn fx:id="colCedula" prefWidth="143.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
+         <TableColumn fx:id="colNombre" prefWidth="255.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />
+         <TableColumn fx:id="colDireccion" prefWidth="226.0" resizable="false" style="-fx-background-color: White;" text="Direccion" />
+         <TableColumn fx:id="colBarrio" prefWidth="268.0" resizable="false" style="-fx-background-color: White;" text="Barrio" />
+         <TableColumn fx:id="colTelefono" prefWidth="190.0" resizable="false" style="-fx-background-color: White;" text="Nº de Telefono" />
+      </columns>
+   </TableView>
+   <Button layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font>
+   </Button>
+   <AnchorPane layoutX="30.0" layoutY="446.0">
+      <children>
          <TextField fx:id="txtBuscarCedula" prefHeight="28.0" prefWidth="202.0" promptText="Buscar por numero de cedula" styleClass="barra">
             <font>
                <Font name="System Bold" size="13.0" />
             </font>
          </TextField>
-      </AnchorPane>
-      <Label layoutX="30.0" layoutY="421.0" text="Listado de Clientes">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Separator layoutX="30.0" layoutY="394.0" prefHeight="5.0" prefWidth="1000.0" style="-fx-background-color: black;" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/datos-del-usuario.png" />
-      </ImageView>
-      <Button fx:id="btnBuscarCedula" layoutX="241.0" layoutY="444.0" mnemonicParsing="false" onAction="#buscarCedula" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <Image url="@../images/lupa.png" />
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TextField fx:id="txtBuscarNombre" layoutX="290.0" layoutY="447.0" prefHeight="28.0" prefWidth="378.0" promptText="Buscar por nombre completo" styleClass="barra">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </TextField>
-      <Button fx:id="btnBuscarNombre" layoutX="673.0" layoutY="445.0" mnemonicParsing="false" onAction="#buscarNombre" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <Image url="@../images/lupa.png" />
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="btnRecargar" layoutX="997.0" layoutY="441.0" mnemonicParsing="false" onAction="#buscarNombre" onMouseClicked="#recargar" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <Image url="@../images/actualizar.png" />
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      </children>
    </AnchorPane>
-</Pane>
+   <Label layoutX="30.0" layoutY="421.0" text="Listado de Clientes">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+   <Separator layoutX="30.0" layoutY="394.0" prefHeight="5.0" prefWidth="1000.0" style="-fx-background-color: black;" />
+   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/datos-del-usuario.png" />
+      </image>
+   </ImageView>
+   <Button fx:id="btnBuscarCedula" layoutX="241.0" layoutY="444.0" mnemonicParsing="false" onAction="#buscarCedula" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
+      <graphic>
+         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <image>
+               <Image url="@../images/lupa.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <TextField fx:id="txtBuscarNombre" layoutX="290.0" layoutY="447.0" prefHeight="28.0" prefWidth="378.0" promptText="Buscar por nombre completo" styleClass="barra">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font>
+   </TextField>
+   <Button fx:id="btnBuscarNombre" layoutX="673.0" layoutY="445.0" mnemonicParsing="false" onAction="#buscarNombre" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
+      <graphic>
+         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <image>
+               <Image url="@../images/lupa.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <Button fx:id="btnRecargar" layoutX="997.0" layoutY="441.0" mnemonicParsing="false" onAction="#buscarNombre" onMouseClicked="#recargar" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
+      <graphic>
+         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <image>
+               <Image url="@../images/actualizar.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+</AnchorPane>

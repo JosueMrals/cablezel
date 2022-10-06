@@ -7,9 +7,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.josue.modelo.Cliente;
 import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
+import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -33,21 +34,55 @@ import javafx.stage.StageStyle;
 public class LoginController implements Initializable {
 
     public Pane leftPane;
-    /**
-     * Initializes the controller class.
-     */
     @FXML TextField txtNombreUsuario;
     @FXML PasswordField txtPassword;
     @FXML Button btnEntrar;
 
     Usuario usuario;
+    ObservableList<Cliente> clientes = FXCollections.observableArrayList();
 
     public LoginController() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        crearUsuario();
         usuario = new Usuario();
+
+        clientes = GlobalUtil.obtenerClientesObservableList();
+
+    }
+
+    public ObservableList<Usuario> obtenerUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(usuarioService.getAll());
+    }
+
+    public boolean getUsuariobyNick(String nick, String password) {
+        ObservableList<Usuario> usuarios = obtenerUsuarios();
+        for (Usuario us : usuarios) {
+            if (us.getNickusuario().equals(nick) && us.getPassword().equals(password)) {
+                this.usuario = us;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void crearUsuario() {
+        ObservableList<Usuario> usuarios = obtenerUsuarios();
+        if (usuarios.isEmpty()) {
+            Usuario usuario = new Usuario();
+            usuario.setNombrecompleto("Josue Morales");
+            usuario.setNickusuario("josue");
+            usuario.setPassword("1234");
+            usuario.setEmail("josue@gmail.com");
+
+            IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
+                    .getSessionFactory());
+            usuarioService.save(usuario);
+        }
     }
 
     public void mostrarOtro(ActionEvent actionEvent) {
@@ -81,25 +116,11 @@ public class LoginController implements Initializable {
                 alert.setContentText("Usuario o contraseña incorrectos");
                 alert.showAndWait();
             }
-
         }
     }
 
-    public boolean getUsuariobyNick(String nick, String password) {
-        ObservableList<Usuario> usuarios = obtenerUsuarios();
-        for (Usuario usuario : usuarios) {
-            if (usuario.getNickusuario().equals(nick) && usuario.getPassword().equals(password)) {
-                this.usuario = usuario;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public ObservableList<Usuario> obtenerUsuarios() {
-        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(usuarioService.getAll());
+    public Usuario getCurrentUser(){
+        return this.usuario;
     }
 
 }
