@@ -16,7 +16,7 @@ class ContratoControllerTest {
      */
 
     @Test
-    void registrarContratos() {
+    public void registrarContratos() {
         Servicio servicio = new Servicio("Internet", "Servicio de Internet", "1000");
 
         TipoContrato tipoContrato = new TipoContrato("C_Arren", "Contrato de arrendamiento",

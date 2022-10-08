@@ -175,7 +175,6 @@
                     <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                     <argLine>--add-opens com.josue.cablezelmnv/com.josue.modelo=ALL-UNNAMED</argLine>
                     <argLine>--add-opens com.josue.cablezelmnv/com.josue.view=ALL-UNNAMED</argLine>
-                    <argLine>--add-opens /com.josue.controlador=ALL-UNNAMED</argLine>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
