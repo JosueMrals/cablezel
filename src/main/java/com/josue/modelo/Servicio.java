@@ -16,6 +16,16 @@ public class Servicio extends Identificador implements Serializable {
     @Column (name = "precio")
     private Float precio;
 
+    public Servicio(String nombre, String descripcion, String precio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = Float.parseFloat(precio);
+    }
+
+    public Servicio() {
+
+    }
+
     public String getNombre() {
         return nombre;
     }

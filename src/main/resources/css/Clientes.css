@@ -1,5 +1,7 @@
-.barra {
-    -fx-border-color: #000000;
-    -fx-border-width: 0px 0px 1.1px 0px;
+.labels {
     -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: black;
+    -fx-padding: 0 0 0.5px -0.5px;
 }

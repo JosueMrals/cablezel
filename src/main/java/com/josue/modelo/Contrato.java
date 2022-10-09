@@ -13,6 +13,18 @@ public class Contrato extends Identificador implements Serializable {
     @JoinColumn(name = "tipocontrato_id", referencedColumnName = "id")
     private TipoContrato tipocontrato;
 
+    public Contrato(TipoContrato tipoContrato, LocalDate fecha, String descripcion, Cliente cliente) {
+        this.tipocontrato = tipoContrato;
+        this.fecha_contrato = fecha;
+        this.descripcion = descripcion;
+        this.cliente = cliente;
+
+    }
+
+    public Contrato() {
+
+    }
+
     public TipoContrato getTipocontrato() {
         return tipocontrato;
     }
@@ -59,11 +71,10 @@ public class Contrato extends Identificador implements Serializable {
     @Override
     public String toString() {
         return "Contrato{" +
-                "id=" + getId() +
-                ", tipocontrato=" + tipocontrato +
+                "tipocontrato=" + tipocontrato +
                 ", cliente=" + cliente +
                 ", fecha_contrato=" + fecha_contrato +
-                ", descripcion='" + descripcion + '\'' +
+                ", descripcion=" + descripcion +
                 '}';
     }
 

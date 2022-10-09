@@ -60,46 +60,57 @@
                </top>
                <center>
                   <AnchorPane prefHeight="268.0" prefWidth="1126.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Pane prefHeight="590.0" prefWidth="1126.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <TableView fx:id="tvBuscarClientes" layoutX="19.0" layoutY="9.0" prefHeight="239.0" prefWidth="1087.0" styleClass="BuscarClientes">
-                                 <columns>
-                                    <TableColumn fx:id="colUsuario" maxWidth="209.0" prefWidth="209.0" resizable="false" text="Usuario" />
-                                    <TableColumn fx:id="colCliente" maxWidth="592.0" prefWidth="344.0" resizable="false" text="Cliente" />
-                                    <TableColumn fx:id="colFecha" maxWidth="358.0" prefWidth="184.0" resizable="false" text="Fecha de Pago" />
-                                    <TableColumn fx:id="colEstado" maxWidth="563.0" prefWidth="135.0" resizable="false" text="Estado" />
-                                    <TableColumn fx:id="colTotal" maxWidth="363.0" resizable="false" text="Total" />
-                                    <TableColumn fx:id="colAccion" maxWidth="374.0" prefWidth="134.0" resizable="false" text="Accion" />
-                                 </columns>
-                              </TableView>
-                              <AnchorPane layoutX="20.0" layoutY="329.0" />
-                              <Button fx:id="btFacturar" layoutX="1018.0" layoutY="541.0" mnemonicParsing="false" onAction="#mostrarSecundaria" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #339933;" text="Facturar" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                              <Label layoutX="20.0" layoutY="279.0" text="Contratos a pagar">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <TableView fx:id="tvBuscarClientes1" layoutX="19.0" layoutY="309.0" prefHeight="239.0" prefWidth="1087.0" styleClass="BuscarClientes">
-                                 <columns>
-                                    <TableColumn fx:id="colUsuario1" maxWidth="209.0" prefWidth="209.0" resizable="false" text="Usuario" />
-                                    <TableColumn fx:id="colCliente1" maxWidth="592.0" prefWidth="344.0" resizable="false" text="Cliente" />
-                                    <TableColumn fx:id="colFecha2" maxWidth="358.0" prefWidth="184.0" resizable="false" text="Fecha de Pago" />
-                                    <TableColumn fx:id="colEstado1" maxWidth="563.0" prefWidth="135.0" resizable="false" text="Estado" />
-                                    <TableColumn fx:id="colTotal1" maxWidth="363.0" resizable="false" text="Total" />
-                                    <TableColumn fx:id="colAccion1" maxWidth="374.0" prefWidth="134.0" resizable="false" text="Accion" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </Pane>
-                     </children>
+                     <Pane prefHeight="590.0" prefWidth="1126.0" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tvBuscarClientes" layoutX="19.0" layoutY="9.0" prefHeight="239.0"
+                                   prefWidth="1087.0" styleClass="BuscarClientes">
+                           <columns>
+                              <TableColumn fx:id="colUsuario" maxWidth="209.0" prefWidth="209.0" resizable="false"
+                                           text="Usuario"/>
+                              <TableColumn fx:id="colCliente" maxWidth="592.0" prefWidth="344.0" resizable="false"
+                                           text="Cliente"/>
+                              <TableColumn fx:id="colFecha" maxWidth="358.0" prefWidth="184.0" resizable="false"
+                                           text="Fecha de Pago"/>
+                              <TableColumn fx:id="colEstado" maxWidth="563.0" prefWidth="135.0" resizable="false"
+                                           text="Estado"/>
+                              <TableColumn fx:id="colTotal" maxWidth="363.0" resizable="false" text="Total"/>
+                              <TableColumn fx:id="colAccion" maxWidth="374.0" prefWidth="134.0" resizable="false"
+                                           text="Accion"/>
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="20.0" layoutY="329.0"/>
+                        <Button fx:id="btFacturar" layoutX="1018.0" layoutY="541.0" mnemonicParsing="false"
+                                onAction="#mostrar_facturar" prefHeight="35.0" prefWidth="87.0"
+                                style="-fx-background-color: #339933;" text="Facturar" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0"/>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND"/>
+                           </cursor>
+                        </Button>
+                        <Label layoutX="20.0" layoutY="279.0" text="Contratos a pagar">
+                           <font>
+                              <Font size="20.0"/>
+                           </font>
+                        </Label>
+                        <TableView fx:id="tvBuscarClientes1" layoutX="19.0" layoutY="309.0" prefHeight="239.0"
+                                   prefWidth="1087.0" styleClass="BuscarClientes">
+                           <columns>
+                              <TableColumn fx:id="colUsuario1" maxWidth="209.0" prefWidth="209.0" resizable="false"
+                                           text="Usuario"/>
+                              <TableColumn fx:id="colCliente1" maxWidth="592.0" prefWidth="344.0" resizable="false"
+                                           text="Cliente"/>
+                              <TableColumn fx:id="colFecha2" maxWidth="358.0" prefWidth="184.0" resizable="false"
+                                           text="Fecha de Pago"/>
+                              <TableColumn fx:id="colEstado1" maxWidth="563.0" prefWidth="135.0" resizable="false"
+                                           text="Estado"/>
+                              <TableColumn fx:id="colTotal1" maxWidth="363.0" resizable="false" text="Total"/>
+                              <TableColumn fx:id="colAccion1" maxWidth="374.0" prefWidth="134.0" resizable="false"
+                                           text="Accion"/>
+                           </columns>
+                        </TableView>
+                     </Pane>
                   </AnchorPane>
                </center>
             </BorderPane>
