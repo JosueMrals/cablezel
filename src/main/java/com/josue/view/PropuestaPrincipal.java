@@ -1,7 +1,12 @@
 package com.josue.view;
 
+import com.josue.modelo.Factura;
+import com.josue.service.GenericServiceImpl;
+import com.josue.service.IGenericService;
+import com.josue.util.HibernateUtil;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,6 +60,15 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     private void generarFacturas() {
+        //Obtener los clientes con más de 30 dias de mora
+
+        String consulta = "select c.*, ct.*, tc.*, (current_date - ct.fecha_contrato) as days from clientes c " +
+                "inner join contrato ct on c.id=ct.cliente_id inner join tipo_contrato tc on ct.tipocontrato_id=tc.id " +
+                "group by c.id, ct.id, tc.id having (current_date - ct.fecha_contrato) > 30;";
+
+        // Obtener la lista de clientes con base en la consulta
+        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil.getSessionFactory());
+
 
     }
 
@@ -111,7 +125,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Facturacion.fxml"));
-            Pane registrarse = loader.load();
+            AnchorPane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 
         } catch (IOException e) {

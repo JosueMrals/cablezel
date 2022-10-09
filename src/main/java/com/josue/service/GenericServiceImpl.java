@@ -25,6 +25,11 @@ public class GenericServiceImpl<T> implements IGenericService<T> {
     }
 
     @Override
+    public T get(Class<T> cl, Long id) {
+        return (T) dao.get(cl, id);
+    }
+
+    @Override
     public T save(T object) {
         return (T) dao.save(object);
     }
@@ -61,5 +66,15 @@ public class GenericServiceImpl<T> implements IGenericService<T> {
     @Override
     public void deleteAll() {
         query("delete from " + cl.getName(), null);
+    }
+
+    @Override
+    public T getById(Long id) {
+        return dao.get(cl, id);
+    }
+
+    @Override
+    public T getId(Long i) {
+        return dao.get(cl, i);
     }
 }

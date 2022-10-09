@@ -1,5 +1,6 @@
 package com.josue.view;
 
+import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
 import com.josue.modelo.Contrato;
 import com.josue.modelo.TipoContrato;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,15 +41,54 @@ public class ContratoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        var tipoContratos = obtenerTipoContratos();
+        crearContrato();
+        listarClientes();
+        listarTipoContrato();
+        llenarContrato();
+    }
+
+    public void listarTipoContrato() {
+        var tipocontratos = obtenerTipoContratos();
+        cbTipocontrato.setItems(tipocontratos);
         cbTipocontrato.setValue(null);
-        cbTipocontrato.setItems(tipoContratos);
         cbTipocontrato.setPromptText("Seleccione un tipo de contrato");
+    }
+
+    public void listarClientes(){
         clientesAutocomplete = GlobalUtil.obtenerClientes();
         listaClientes = obtenerClientesList();
-        TextFields.bindAutoCompletion(txtNombreCliente,clientesAutocomplete);
+        TextFields.bindAutoCompletion(txtNombreCliente, clientesAutocomplete);
+    }
 
-        llenarContrato();
+    public ObservableList<Contrato> obtenerContratos() {
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(contratoService.getAll());
+    }
+
+    public void crearContrato() {
+        ObservableList<Contrato> contratos = obtenerContratos();
+
+        if (contratos.isEmpty()) {
+            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
+                    .getSessionFactory());
+            Cliente cliente = clienteService.getId(1L);
+
+            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                    .getSessionFactory());
+            TipoContrato tipoContrato = tipoContratoService.getId(1L);
+
+            Contrato contrato = new Contrato();
+            contrato.setCliente(cliente);
+            contrato.setTipocontrato(tipoContrato);
+            contrato.setFecha_contrato(LocalDate.now());
+            contrato.setDescripcion("Contrato de prueba");
+
+            IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
+                    .getSessionFactory());
+            contratoService.save(contrato);
+
+        }
     }
 
     private ObservableList<Cliente> obtenerClientesList() {

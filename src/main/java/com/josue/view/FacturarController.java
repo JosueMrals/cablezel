@@ -1,8 +1,6 @@
 package com.josue.view;
 
-import com.josue.modelo.Cliente;
 import com.josue.modelo.Factura;
-import com.josue.modelo.Usuario;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
@@ -10,21 +8,14 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.Year;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class FacturarController implements Initializable {
     public TextField txtBuscarCliente;
     public Button btnBuscar;
-    public TableView<Factura> tvBuscarFacturas;
     public TableColumn<Factura, String> colUsuario;
     public TableColumn<Factura, String> colCliente;
     public TableColumn<Factura, String> colFecha;
@@ -32,25 +23,28 @@ public class FacturarController implements Initializable {
     public TableColumn<Factura, String> colTotal;
     public TableColumn<Factura, String> colAccion;
     public Button btFacturar;
-    public TableView<Factura> tvFacturasPagar;
-    public TableColumn<Factura, String> colUsuario1;
     public TableColumn<Factura, String> colCliente1;
-    public TableColumn<Factura, String> colFecha1;
     public TableColumn<Factura, String> colEstado1;
     public TableColumn<Factura, String> colTotal1;
     public TableColumn<Factura, String> colAccion1;
-
+    public TableView<Factura> tvBuscarClientes;
+    public TableView<Factura> tvBuscarClientes1;
+    public TableColumn<Factura, String> colFecha2;
+    public TableColumn<Factura, String> colServicio;
+    public Label lblUsuario;
+    public TableColumn<Factura, String> colServicio1;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         llenarFacturas();
+        addFacturarButtonToTable();
 
     }
 
     public void llenarFacturas() {
-        IGenericService<Factura> service = new GenericServiceImpl<>(Factura.class,
+        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
                 HibernateUtil.getSessionFactory());
-        ObservableList<Factura> facturas = FXCollections.observableArrayList(service.getAll());
+        ObservableList<Factura> facturas = FXCollections.observableArrayList(facturaService.getAll());
         colUsuario.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getUsuario().getNickusuario()));
         colCliente.setCellValueFactory(
@@ -64,27 +58,34 @@ public class FacturarController implements Initializable {
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getEstado()));
         colTotal.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getTotal().toString()));
-        tvBuscarFacturas.setItems(facturas);
+        tvBuscarClientes.setItems(facturas);
     }
 
-    public ObservableList<Factura> obtenerFacturasObservableList() {
-        IGenericService<Factura> service = new GenericServiceImpl<>(Factura.class,
-                HibernateUtil.getSessionFactory());
-        return FXCollections.observableArrayList(service.getAll());
-    }
+    public void addFacturarButtonToTable() {
+        TableColumn<Factura, Void> colBtn = new TableColumn<>("Facturar");
 
-    public void crearFactura() {
-        ObservableList<Factura> facturas = obtenerFacturasObservableList();
-        if (facturas.isEmpty()) {
-            Factura factura = new Factura();
-            factura.setFecha_factura(LocalDateTime.now());
-            factura.setEstado("PENDIENTE");
-            IGenericService<Factura> service = new GenericServiceImpl<>(Factura.class,
-                    HibernateUtil.getSessionFactory());
-            service.update(factura);
-            llenarFacturas();
-        }
+        colBtn.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Facturar");
 
+            {
+                btn.setOnAction(event -> {
+                    Factura factura = getTableView().getItems().get(getIndex());
+                    System.out.println("selectedData: " + factura);
+                });
+            }
+
+            @Override
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btn);
+                }
+            }
+        });
+
+        tvBuscarClientes.getColumns().add(colBtn);
     }
 
 }
