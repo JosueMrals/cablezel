@@ -58,7 +58,54 @@ public class BarrioController implements Initializable {
         llenarTipoContrato();
         listarServicios();
         colocarImagenBotones();
+        crearBarrio();
+        crearTipoContrato();
     }
+
+    public ObservableList<Barrio> obtenerBarrios() {
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(barrioService.getAll());
+    }
+
+    public ObservableList<TipoContrato> obtenerTipoContrato() {
+        IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(tipoContratoService.getAll());
+    }
+
+    public void crearTipoContrato() {
+        ObservableList<TipoContrato> listaTipoContrato = obtenerTipoContrato();
+        if (listaTipoContrato.isEmpty()) {
+
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                    .getSessionFactory());
+            Servicio servicio = servicioService.getById(1L);
+
+            TipoContrato tipoContrato = new TipoContrato();
+            tipoContrato.setCod_tipocontrato("1");
+            tipoContrato.setTipo_contrato("Mensual");
+            tipoContrato.setCantidad_tv("1");
+            tipoContrato.setDescripcion("Contrato mensual");
+            tipoContrato.setServicio(servicio);
+            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                    .getSessionFactory());
+            tipoContratoService.save(tipoContrato);
+        }
+    }
+
+    public void crearBarrio() {
+        ObservableList<Barrio> listaBarrios = obtenerBarrios();
+        if (listaBarrios.isEmpty()) {
+            Barrio barrio = new Barrio();
+            barrio.setNombre_barrio("Barrio 1");
+            barrio.setDescripcion("Descripcion Barrio 1");
+            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                    .getSessionFactory());
+            barrioService.save(barrio);
+        }
+    }
+
     /**
      * Metodo llenar la tabla de tipo de contrato
      * @author Josue

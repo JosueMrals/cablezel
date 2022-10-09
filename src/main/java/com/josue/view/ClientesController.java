@@ -48,10 +48,42 @@ public class ClientesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        crearClientes();
         listarBarrios();
         llenarClientes();
         autoCompletarNombre();
         autoCompletarCedula();
+    }
+
+    public ObservableList<Cliente> getClientes() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(clienteService.getAll());
+    }
+
+    public void crearClientes(){
+        ObservableList<Cliente> clientes = getClientes();
+
+        if (clientes.isEmpty()) {
+
+            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                    .getSessionFactory());
+            Barrio barrio = barrioService.getId(1L);
+
+            Cliente cliente = new Cliente();
+            cliente.setNum_cedula("610-170101-1003M");
+            cliente.setPrimer_nombre("Josue");
+            cliente.setSegundo_nombre("Naun");
+            cliente.setPrimer_apellido("Morales");
+            cliente.setSegundo_apellido("Alvarez");
+            cliente.setDireccion("Por la panaderia");
+            cliente.setBarrio(barrio);
+            cliente.setNum_telefono("5726-3856");
+
+            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
+                    .getSessionFactory());
+            clienteService.save(cliente);
+        }
     }
 
     public void autoCompletarNombre() {
@@ -77,11 +109,9 @@ public class ClientesController implements Initializable {
     }
 
     public void listarBarrios(){
-        // Inicializar el comboBox de barrios
         var barrios = obtenerBarrios();
         cbBarrio.setValue(null);
         cbBarrio.setItems(barrios);
-
         cbBarrio.setPromptText("Seleccione un barrio");
     }
 
