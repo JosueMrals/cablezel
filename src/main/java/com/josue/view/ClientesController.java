@@ -116,9 +116,7 @@ public class ClientesController implements Initializable {
     }
 
     public void llenarClientes() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
-                getSessionFactory());
-        ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+        ObservableList<Cliente> clientes = getClientes();
         colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
         colNombre.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getPrimer_nombre()
@@ -148,7 +146,7 @@ public class ClientesController implements Initializable {
             // Validar que no se repita el numero de cedula
             IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
                     getSessionFactory());
-            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            ObservableList<Cliente> clientes = getClientes();
             for (Cliente cliente : clientes) {
                 if (cliente.getNum_cedula().equals(txtNumCedula.getText())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -215,9 +213,7 @@ public class ClientesController implements Initializable {
         if (txtBuscarCedula.getText() != null) {
             llenarClientes();
         } else {
-            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
-                    getSessionFactory());
-            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            ObservableList<Cliente> clientes = getClientes();
             ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
             for (Cliente cliente : clientes) {
                 if (cliente.getNum_cedula().equals(txtBuscarCedula.getText())) {
@@ -232,9 +228,7 @@ public class ClientesController implements Initializable {
         if (txtBuscarNombre.getText() != null) {
             llenarClientes();
         } else {
-            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.
-                    getSessionFactory());
-            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.getAll());
+            ObservableList<Cliente> clientes = getClientes();
             ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
             for (Cliente cliente : clientes) {
                 if ((cliente.getPrimer_nombre() + " " + cliente.getSegundo_nombre()

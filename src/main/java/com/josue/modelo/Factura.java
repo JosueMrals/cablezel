@@ -1,7 +1,7 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table (name = "facturas")
@@ -34,7 +34,7 @@ public class Factura extends Identificador{
     private Float total;
 
     @Column (name = "fecha_factura")
-    private LocalDateTime fecha_factura;
+    private LocalDate fecha_factura;
 
     @Column (name = "estado")
     private String estado;
@@ -54,11 +54,11 @@ public class Factura extends Identificador{
         this.total = total;
     }
 
-    public LocalDateTime getFecha_factura() {
+    public LocalDate getFecha_factura() {
         return fecha_factura;
     }
 
-    public void setFecha_factura(LocalDateTime fecha_factura) {
+    public void setFecha_factura(LocalDate fecha_factura) {
         this.fecha_factura = fecha_factura;
     }
 
