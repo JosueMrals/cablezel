@@ -45,7 +45,7 @@ public class FacturarController implements Initializable {
         IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
                 HibernateUtil.getSessionFactory());
         ObservableList<Factura> facturas = FXCollections.observableArrayList(facturaService.getAll());
-        colUsuario.setCellValueFactory(
+        colServicio.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getUsuario().getNickusuario()));
         colCliente.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(param.getValue().getCliente().getPrimer_nombre()
