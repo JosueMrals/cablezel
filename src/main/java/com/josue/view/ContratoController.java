@@ -1,13 +1,11 @@
 package com.josue.view;
 
-import com.josue.modelo.Barrio;
-import com.josue.modelo.Cliente;
-import com.josue.modelo.Contrato;
-import com.josue.modelo.TipoContrato;
+import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
+import com.josue.util.ManejadorUsuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,12 +39,35 @@ public class ContratoController implements Initializable {
 
     ObservableList<Cliente> listaClientes;
 
+    Cliente clienteSeleccionado;
+    Usuario usuario;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         crearContrato();
         listarClientes();
         listarTipoContrato();
         llenarContrato();
+        ManejadorUsuario manejador = ManejadorUsuario.getInstance();
+        usuario = manejador.getUsuario();
+
+        Servicio servicio = obtenerServicioContrato();
+        System.out.println("Servicio: " + servicio.getNombre());
+
+    }
+
+    //Obtener el servicio de nombre contrato
+    public Servicio obtenerServicioContrato() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                .getSessionFactory());
+        String consulta = "select s from Servicio s where nombre = :nombre";
+        Map<String, Object> parametros = Map.of("nombre", "contrato");
+        List<Servicio> servicios = servicioService.query(consulta, parametros);
+        if(servicios.size() > 0) {
+            return servicios.get(0);
+        }
+        return null;
+
     }
 
     public void listarTipoContrato() {
@@ -74,8 +97,8 @@ public class ContratoController implements Initializable {
                     .getSessionFactory());
             Cliente cliente = clienteService.getId(1L);
 
-            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
-                    .getSessionFactory());
+            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class,
+                    HibernateUtil.getSessionFactory());
             TipoContrato tipoContrato = tipoContratoService.getId(1L);
 
             Contrato contrato = new Contrato();
@@ -92,12 +115,14 @@ public class ContratoController implements Initializable {
     }
 
     private ObservableList<Cliente> obtenerClientesList() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
+                .getSessionFactory());
         return FXCollections.observableArrayList(clienteService.getAll());
     }
 
     public void llenarContrato() {
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
+                .getSessionFactory());
         ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
@@ -145,6 +170,7 @@ public class ContratoController implements Initializable {
             if ((c.getPrimer_nombre() + " " + c.getSegundo_nombre() + " " + c.getPrimer_apellido() + " " +
                     c.getSegundo_apellido()).equals(nombreCliente)) {
                 cliente = c;
+                clienteSeleccionado = c;
             }
         }
 

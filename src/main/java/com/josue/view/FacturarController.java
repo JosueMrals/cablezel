@@ -47,6 +47,12 @@ public class FacturarController implements Initializable {
         return FXCollections.observableArrayList(detalleFacturaService.getAll());
     }
 
+    public ObservableList<Servicio> obtenerServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(servicioService.getAll());
+    }
+
     public void crearFactura() {
         ObservableList<DetalleFactura> detalleFactura = getDetalleFactura();
 

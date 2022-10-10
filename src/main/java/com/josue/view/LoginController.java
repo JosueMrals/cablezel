@@ -13,6 +13,7 @@ import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
+import com.josue.util.ManejadorUsuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -99,6 +100,8 @@ public class LoginController implements Initializable {
             String password = txtPassword.getText();
 
             if (getUsuariobyNick(nick, password)) {
+                ManejadorUsuario manejador = ManejadorUsuario.getInstance();
+                manejador.setUsuario(usuario);
                 try {
                     ((Node) actionEvent.getSource()).getScene().getWindow().hide();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
@@ -119,8 +122,5 @@ public class LoginController implements Initializable {
         }
     }
 
-    public Usuario getCurrentUser(){
-        return this.usuario;
-    }
 
 }

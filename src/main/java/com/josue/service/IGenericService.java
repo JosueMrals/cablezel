@@ -11,4 +11,5 @@ public interface IGenericService<T> extends IGenericDAO<T> {
     T getById(Long id);
 
     T getId(Long i);
+
 }
