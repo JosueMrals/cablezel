@@ -50,4 +50,13 @@ public class DetalleFactura extends Identificador{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String toString(){
+        return "DetalleFactura{" +
+                "servicio=" + servicio +
+                ", factura=" + factura +
+                ", total a pagar=" + total_pagar +
+                ", descripcion=" + descripcion +
+                '}';
+    }
 }

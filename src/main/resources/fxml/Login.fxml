@@ -14,43 +14,38 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="597.0" maxWidth="745.0" prefHeight="246.0" prefWidth="745.0"
-            stylesheets="@../css/Login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.josue.view.LoginController">
-   <BorderPane prefHeight="597.0" prefWidth="745.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane id="AnchorPane" maxHeight="597.0" maxWidth="745.0" prefHeight="246.0" prefWidth="745.0" stylesheets="@../css/Login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.LoginController">
+   <BorderPane prefHeight="597.0" prefWidth="745.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <Pane fx:id="leftPane" prefHeight="597.0" prefWidth="232.0" BorderPane.alignment="CENTER">
-            <ImageView fitHeight="192.0" fitWidth="177.0" layoutX="28.0" layoutY="24.0" pickOnBounds="true"
-                       preserveRatio="true"/>
+            <ImageView fitHeight="221.0" fitWidth="216.0" layoutX="8.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pixel%20cablezel.png" />
+               </image>
+            </ImageView>
          </Pane>
       </left>
       <center>
          <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <Label layoutX="183.0" layoutY="27.0" text="Inicio de Sesion" textFill="#8a8888">
                <font>
-                  <Font size="24.0"/>
+                  <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNombreUsuario" layoutX="145.0" layoutY="62.0" prefHeight="25.0" prefWidth="245.0"
-                       promptText="Nombre de Usuario"/>
-            <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="105.0" prefHeight="25.0" prefWidth="245.0"
-                           promptText="Contraseña"/>
-            <Hyperlink layoutX="145.0" layoutY="146.0" text="Olvidé mi contraseña"/>
-            <Button fx:id="btnEntrar" layoutX="338.0" layoutY="145.0" mnemonicParsing="false" onAction="#mostrarOtro"
-                    text="Entrar" textFill="WHITE">
+            <TextField fx:id="txtNombreUsuario" layoutX="145.0" layoutY="62.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre de Usuario" />
+            <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="105.0" prefHeight="25.0" prefWidth="245.0" promptText="Contraseña" />
+            <Hyperlink layoutX="145.0" layoutY="146.0" text="Olvidé mi contraseña" />
+            <Button fx:id="btnEntrar" layoutX="338.0" layoutY="145.0" mnemonicParsing="false" onAction="#mostrarOtro" text="Entrar" textFill="WHITE">
                <cursor>
-                  <Cursor fx:constant="HAND"/>
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Separator layoutX="55.0" layoutY="208.0" prefHeight="0.0" prefWidth="400.0"/>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="104.0" layoutY="62.0" pickOnBounds="true"
-                       preserveRatio="true">
-               <Image url="@../images/login/users.png"/>
+            <Separator layoutX="55.0" layoutY="208.0" prefHeight="0.0" prefWidth="400.0" />
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="104.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/users.png" />
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="105.0" layoutY="105.0" pickOnBounds="true"
-                       preserveRatio="true">
-               <Image url="@../images/login/lock.png"/>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="105.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/lock.png" />
             </ImageView>
          </Pane>
       </center>

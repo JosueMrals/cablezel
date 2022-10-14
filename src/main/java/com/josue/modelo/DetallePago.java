@@ -20,19 +20,6 @@ public class DetallePago extends Identificador{
         this.pago = pago;
     }
 
-    //Relation with Factura
-    @ManyToOne
-    @JoinColumn(name = "factura_id", referencedColumnName = "id")
-    private Factura factura;
-
-    public Factura getFactura() {
-        return factura;
-    }
-
-    public void setFactura(Factura factura) {
-        this.factura = factura;
-    }
-
     //Relation with DetalleFactura
     @ManyToOne
     @JoinColumn(name = "detalle_factura_id", referencedColumnName = "id")

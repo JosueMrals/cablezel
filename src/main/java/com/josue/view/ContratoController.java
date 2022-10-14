@@ -18,12 +18,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 
 public class ContratoController implements Initializable {
+
+    // Lector de registro de Log4j
+    private static final Logger LOGGER = Logger.getLogger(ContratoController.class.getName());
 
     @FXML DatePicker dpFechacontrato;
     @FXML TextArea txtDescripcion;
@@ -41,6 +45,7 @@ public class ContratoController implements Initializable {
 
     Cliente clienteSeleccionado;
     Usuario usuario;
+    Servicio servicioSeleccionado;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,10 +55,62 @@ public class ContratoController implements Initializable {
         llenarContrato();
         ManejadorUsuario manejador = ManejadorUsuario.getInstance();
         usuario = manejador.getUsuario();
+        validarServicio();
+    }
 
-        Servicio servicio = obtenerServicioContrato();
-        System.out.println("Servicio: " + servicio.getNombre());
+    public void crearServicio(Long valor) {
+        Servicio serv = new Servicio();
+        serv.setNombre("contrato");
+        serv.setDescripcion("Servicio de contratos");
+        serv.setPrecio(700.0f);
 
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
+                HibernateUtil.getSessionFactory());
+        servicioService.save(serv);
+        servicioSeleccionado = servicioService.getById(valor);
+    }
+
+    private void validarServicio() {
+        ObservableList<Servicio> servicios = GlobalUtil.obtenerServicios();
+        if(servicios.isEmpty()) {
+            crearServicio(1l);
+            System.out.println("Servicio creado: " + servicioSeleccionado);
+        } else {
+            servicioSeleccionado = obtenerServicioContrato();
+            LOGGER.info("Servicio obtenido: " + servicioSeleccionado);
+            if(servicioSeleccionado == null) {
+                // Resolver problema de servicio con autoincrement
+                crearServicio(1l + servicios.size());
+                LOGGER.info("Servicio creado: " + servicioSeleccionado);
+            }
+        }
+    }
+
+    public void crearFactura() {
+        Factura factura = new Factura();
+        factura.setFecha_factura(LocalDate.now());
+        factura.setTotal(servicioSeleccionado.getPrecio());
+        factura.setUsuario(usuario);
+        factura.setEstado("pendiente");
+        factura.setCliente(clienteSeleccionado);
+        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
+                HibernateUtil.getSessionFactory());
+        facturaService.save(factura);
+
+        //Obtener factura creada
+        Factura facturaCreada = facturaService.getById(factura.getId());
+        System.out.println("Factura creada: " + facturaCreada);
+
+        //Crear detalle de factura
+        DetalleFactura detalleFactura = new DetalleFactura();
+        detalleFactura.setDescripcion(servicioSeleccionado.getDescripcion());
+        detalleFactura.setFactura(facturaCreada);
+        detalleFactura.setServicio(servicioSeleccionado);
+        detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
+
+        IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
+                HibernateUtil.getSessionFactory());
+        detalleFacturaService.save(detalleFactura);
     }
 
     //Obtener el servicio de nombre contrato
@@ -126,22 +183,12 @@ public class ContratoController implements Initializable {
         ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colTipo.setCellValueFactory(
-                new Callback<>() {
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
-                        return new ReadOnlyObjectWrapper(param.getValue().getTipocontrato().getTipo_contrato());
-                    }
-                }
-        );
-        colCliente.setCellValueFactory(
-                new Callback<>() {
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Contrato, String> param) {
-                        return new ReadOnlyObjectWrapper(param.getValue().getCliente().toString());
-                    }
-                }
-        );
+        colTipo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTipocontrato()
+                .getTipo_contrato()));
+        colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente()
+                .getPrimer_nombre() + " " + cellData.getValue().getCliente().getSegundo_nombre()
+                + " " + cellData.getValue().getCliente().getPrimer_apellido()
+                + " " + cellData.getValue().getCliente().getSegundo_apellido()));
         tvContratos.setItems(listaContratos);
     }
 
@@ -189,7 +236,7 @@ public class ContratoController implements Initializable {
             txtNombreCliente.setText(null);
 
             llenarContrato();
-
+            crearFactura();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente",
                     ButtonType.OK);
             alert.show();

@@ -1,6 +1,7 @@
 package com.josue.util;
 
 import com.josue.modelo.Cliente;
+import com.josue.modelo.Servicio;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
@@ -42,6 +43,12 @@ public class GlobalUtil {
     public static ObservableList<Cliente> obtenerClientesObservableList() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
         return FXCollections.observableArrayList(clienteService.getAll());
+    }
+
+    public static ObservableList<Servicio> obtenerServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(servicioService.getAll());
     }
 
 }

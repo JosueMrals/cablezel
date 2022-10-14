@@ -51,4 +51,15 @@ public class Factura extends Identificador{
         this.fecha_factura = fecha_factura;
     }
 
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "id=" + getId() +
+                "cliente=" + cliente +
+                ", usuario=" + usuario +
+                ", total=" + total +
+                ", fecha_factura=" + fecha_factura +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

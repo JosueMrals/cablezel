@@ -3,8 +3,7 @@ package com.josue.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "clientes")
-
+@Table(name = "clientes")
 public class Cliente extends Identificador{
 
     //Relation to Barrio table
