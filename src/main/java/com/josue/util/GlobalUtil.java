@@ -1,7 +1,9 @@
 package com.josue.util;
 
+import com.josue.modelo.Barrio;
 import com.josue.modelo.Cliente;
 import com.josue.modelo.Servicio;
+import com.josue.modelo.TipoContrato;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
@@ -49,6 +51,51 @@ public class GlobalUtil {
         IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
                 .getSessionFactory());
         return FXCollections.observableArrayList(servicioService.getAll());
+    }
+
+    public static ObservableList<TipoContrato> obtenerTipoContratos() {
+        IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(tipoContratoService.getAll());
+    }
+
+    public static void  crearTipoContrato() {
+        ObservableList<TipoContrato> listaTipoContrato = obtenerTipoContratos();
+        if (listaTipoContrato.isEmpty()) {
+
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                    .getSessionFactory());
+            Servicio servicio = servicioService.getById(1L);
+
+            TipoContrato tipoContrato = new TipoContrato();
+            tipoContrato.setCod_tipocontrato("1");
+            tipoContrato.setTipo_contrato("Mensual");
+            tipoContrato.setCantidad_tv("1");
+            tipoContrato.setDescripcion("Contrato mensual");
+            tipoContrato.setServicio(servicio);
+            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                    .getSessionFactory());
+            tipoContratoService.save(tipoContrato);
+        }
+    }
+
+
+    public static ObservableList<Barrio> obtenerBarrios() {
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(barrioService.getAll());
+    }
+
+    public static void crearBarrio() {
+        ObservableList<Barrio> listaBarrios = obtenerBarrios();
+        if (listaBarrios.isEmpty()) {
+            Barrio barrio = new Barrio();
+            barrio.setNombre_barrio("Barrio 1");
+            barrio.setDescripcion("Descripcion Barrio 1");
+            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                    .getSessionFactory());
+            barrioService.save(barrio);
+        }
     }
 
 }

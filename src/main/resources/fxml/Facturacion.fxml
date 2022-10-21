@@ -24,7 +24,7 @@
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="btnBuscar" layoutX="456.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
+                  <Button fx:id="btnBuscar" layoutX="456.0" layoutY="78.0" mnemonicParsing="false" onAction="#buscarCliente" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <cursor>
@@ -58,7 +58,7 @@
                         <TableColumn fx:id="colFecha" maxWidth="358.0" prefWidth="184.0" resizable="false" text="Fecha de Pago" />
                         <TableColumn fx:id="colEstado" maxWidth="563.0" prefWidth="135.0" resizable="false" text="Estado" />
                         <TableColumn fx:id="colTotal" maxWidth="363.0" resizable="false" text="Total" />
-                        <TableColumn fx:id="colAccion" maxWidth="374.0" prefWidth="134.0" resizable="false" text="Accion" />
+                        <TableColumn fx:id="colAccion" maxWidth="374.0" prefWidth="133.0" resizable="false" text="Accion" />
                      </columns>
                   </TableView>
                   <AnchorPane layoutX="20.0" layoutY="329.0" />
@@ -82,7 +82,7 @@
                         <TableColumn fx:id="colFecha2" maxWidth="358.0" prefWidth="184.0" resizable="false" text="Fecha de Pago" />
                         <TableColumn fx:id="colEstado1" maxWidth="563.0" prefWidth="135.0" resizable="false" text="Estado" />
                         <TableColumn fx:id="colTotal1" maxWidth="363.0" resizable="false" text="Total" />
-                        <TableColumn fx:id="colAccion1" maxWidth="374.0" prefWidth="134.0" resizable="false" text="Accion" />
+                        <TableColumn fx:id="colAccion1" maxWidth="374.0" prefWidth="133.0" resizable="false" text="Accion" />
                      </columns>
                   </TableView>
                </Pane>

@@ -210,13 +210,14 @@ public class ClientesController implements Initializable {
     }
 
     public void buscarCedula() {
-        if (txtBuscarCedula.getText() != null) {
+        String cedulaCliente = txtBuscarCedula.getText();
+        if (txtBuscarCedula.getText() == null) {
             llenarClientes();
         } else {
             ObservableList<Cliente> clientes = getClientes();
             ObservableList<Cliente> clientesFiltrados = FXCollections.observableArrayList();
             for (Cliente cliente : clientes) {
-                if (cliente.getNum_cedula().equals(txtBuscarCedula.getText())) {
+                if (cliente.getNum_cedula().contains(cedulaCliente)) {
                     clientesFiltrados.add(cliente);
                 }
             }
@@ -225,7 +226,8 @@ public class ClientesController implements Initializable {
     }
 
     public void buscarNombre() {
-        if (txtBuscarNombre.getText() != null) {
+        String nombreCliente = txtBuscarNombre.getText();
+        if (txtBuscarNombre.getText() == null) {
             llenarClientes();
         } else {
             ObservableList<Cliente> clientes = getClientes();
@@ -233,7 +235,7 @@ public class ClientesController implements Initializable {
             for (Cliente cliente : clientes) {
                 if ((cliente.getPrimer_nombre() + " " + cliente.getSegundo_nombre()
                         + " " + cliente.getPrimer_apellido() + " " + cliente.getSegundo_apellido())
-                        .equals(txtBuscarNombre.getText())) {
+                        .contains(nombreCliente)) {
                     clientesFiltrados.add(cliente);
                 }
             }

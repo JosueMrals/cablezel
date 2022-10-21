@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -30,7 +29,8 @@ import org.apache.logging.log4j.Logger;
 
 public class PropuestaPrincipal extends Application implements Initializable {
     static final Logger logger = LogManager.getLogger(PropuestaPrincipal.class);
-    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(ContratoController.class.getName());
+    private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger
+            (ContratoController.class.getName());
 
     public BorderPane panelPadre;
     public BorderPane panePrincipal;
@@ -81,48 +81,84 @@ public class PropuestaPrincipal extends Application implements Initializable {
                 "inner join tipo_contrato tc on ct.tipocontrato_id=tc.id group by c.id, ct.id, tc.id having " +
                 "(current_date - ct.fecha_contrato) > 30";
 
-        String consultaHQL = "FROM " + Cliente.class.getName() + " c inner join " + Contrato.class.getName() + " ct on c.id=ct.cliente_id " +
-                "inner join " + TipoContrato.class.getName() + " tc on ct.tipocontrato_id=tc.id group by c.id, ct.id, tc.id having " +
+        String consultaHQL = "FROM " + Cliente.class.getName() + " c inner join " + Contrato.class.getName()
+                + " ct on c.id=ct.cliente_id inner join " + TipoContrato.class.getName()
+                + " tc on ct.tipocontrato_id=tc.id group by c.id, ct.id, tc.id having " +
                 "(current_date - ct.fecha_contrato) > 30";
 
-        Map<String, Object> parametros = null;
-
         // Obtener la lista de clientes con base en la consulta
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
                 .getSessionFactory());
         try {
-            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.consultarClientes(consultaHQL,
-                    parametros));
+            ObservableList<Contrato> contratos = contratoService.getAll().stream().filter(contrato -> {
+                LocalDate fechaContrato = contrato.getFecha_contrato();
+                LocalDate fechaActual = LocalDate.now();
+                return fechaActual.minusDays(30).isAfter(fechaContrato);
+            }).collect(FXCollections::observableArrayList, ObservableList::add, ObservableList::addAll);
+
+            ObservableList<Cliente> clientes = FXCollections.observableArrayList();
+
+            contratos.forEach(contrato -> {
+                Cliente cliente = contrato.getCliente();
+                if (!clientes.contains(cliente)) {
+                    clientes.add(cliente);
+                }
+            });
+
+            // Obtener todas facturados
+            ObservableList<Factura> facturas = FXCollections.observableArrayList();
+            IGenericService<Factura> facturaServicio = new GenericServiceImpl<>(Factura.class, HibernateUtil
+                    .getSessionFactory());
+            facturas.addAll(facturaServicio.getAll());
+
+            // Obtener clientes que ya han sido facturados
+            ObservableList<Cliente> clientesFacturados = FXCollections.observableArrayList();
+            facturas.forEach(factura -> {
+                Cliente cliente = factura.getCliente();
+                if (!clientesFacturados.contains(cliente)) {
+                    clientesFacturados.add(cliente);
+                }
+            });
+
+            // Obtener clientes que no han sido facturados
+            ObservableList<Cliente> clientesNoFacturados = FXCollections.observableArrayList();
             clientes.forEach(cliente -> {
-                logger.info("Cliente: " + cliente);
-                // Crear la factura
-                Factura factura = new Factura();
-                factura.setUsuario(usuario);
-                factura.setCliente(cliente);
-                factura.setFecha_factura(LocalDate.now());
-                factura.setTotal(0f);
-                factura.setEstado("pendiente");
+                if (!clientesFacturados.contains(cliente)) {
+                    clientesNoFacturados.add(cliente);
+                }
+            });
 
-                // Guardar la factura
-                IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil
-                        .getSessionFactory());
-                facturaService.save(factura);
+            //ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.consultarClientes(consultaHQL,null));
+                clientesNoFacturados.forEach(cliente -> {
+                    logger.info("Cliente: " + cliente);
+                    // Crear la factura
+                    Factura factura = new Factura();
+                    factura.setUsuario(usuario);
+                    factura.setCliente(cliente);
+                    factura.setFecha_factura(LocalDate.now());
+                    factura.setTotal(0f);
+                    factura.setEstado("pendiente");
 
-                // Obtener factura creada
-                Factura facturaCreada = facturaService.getById(factura.getId());
-                LOGGER.info("Factura creada: " + facturaCreada);
+                    // Guardar la factura
+                    IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil
+                            .getSessionFactory());
+                    facturaService.save(factura);
 
-                //  Generar detalle de factura
-                IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class, HibernateUtil
-                        .getSessionFactory());
+                    // Obtener factura creada
+                    Factura facturaCreada = facturaService.getById(factura.getId());
+                    LOGGER.info("Factura creada: " + facturaCreada);
 
-                DetalleFactura detalleFactura = new DetalleFactura();
-                detalleFactura.setFactura(facturaCreada);
-                detalleFactura.setServicio(obtenerServicioCliente(cliente, obtenerContratos()));
-                detalleFactura.setDescripcion("Servicio de internet");
-                detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
+                    //  Generar detalle de factura
+                    IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura
+                            .class,HibernateUtil.getSessionFactory());
 
-                detalleFacturaService.save(detalleFactura);
+                    DetalleFactura detalleFactura = new DetalleFactura();
+                    detalleFactura.setFactura(facturaCreada);
+                    detalleFactura.setServicio(obtenerServicioCliente(cliente, obtenerContratos()));
+                    detalleFactura.setDescripcion("Servicio de internet");
+                    detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
+
+                    detalleFacturaService.save(detalleFactura);
             });
         } catch (Exception e) {
             logger.error("Error al obtener los clientes", e);
@@ -179,7 +215,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         });
     }
-
 
     @Override
     public void start(Stage stage) {
@@ -269,7 +304,5 @@ public class PropuestaPrincipal extends Application implements Initializable {
             logger.error(e.getMessage());
         }
     }
-
-
 
 }
