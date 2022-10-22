@@ -30,34 +30,25 @@ public class ServicioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         llenarServicio();
-        crearServicio();
 
-    }
-
-    public ObservableList<Servicio> getServicios() {
-        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
-        return FXCollections.observableArrayList(servicioService.getAll());
-    }
-
-    private void crearServicio() {
-        ObservableList<Servicio> servicios = getServicios();
-        if(servicios.isEmpty()) {
-            Servicio servicio = new Servicio();
-            servicio.setNombre("Corte de servicio");
-            servicio.setDescripcion("Corte de servicio");
-            servicio.setPrecio(1000.0f);
-            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
-            servicioService.save(servicio);
-        }
     }
 
     public void llenarServicio() {
         IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
         listaServicios = FXCollections.observableArrayList(servicioService.getAll());
-        tvServicios.setItems(listaServicios);
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        if (listaServicios.size() > 0) {
+            tvServicios.setItems(listaServicios);
+            colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText("Sin datos!");
+        alert.setContentText("No hay datos en la tabla, por favor ingrese un servicio");
+        alert.showAndWait();
+
     }
 
     public void guardarServicio() {

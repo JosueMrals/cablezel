@@ -28,8 +28,7 @@ public class BarrioController implements Initializable {
 
     // logger log4j
     private static final Logger logger = Logger.getLogger(String.valueOf(BarrioController.class));
-    public TextField txtCantidadTv1;
-
+    @FXML TextField txtCantidadTv1;
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
     @FXML TableView<Barrio> tvBarrios;
@@ -59,14 +58,10 @@ public class BarrioController implements Initializable {
         llenarTipoContrato();
         listarServicios();
         colocarImagenBotones();
-        GlobalUtil.crearTipoContrato();
-        GlobalUtil.crearBarrio();
+        //GlobalUtil.crearTipoContrato();
+        //GlobalUtil.crearBarrio();
     }
 
-    /**
-     * Metodo llenar la tabla de tipo de contrato
-     * @author Josue
-     */
     public void llenarTipoContrato() {
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
         ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
@@ -221,4 +216,13 @@ public class BarrioController implements Initializable {
         btnGuardarBarrio.setTooltip(new Tooltip("Guardar"));
     }
 
+    public void verificarServicios() {
+        if (cmbServicio.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("Lista de Servicios vacía");
+            alert.setContentText("Para crear un Tipo de Contrato nuevo primero debe crear un servicio.");
+            alert.showAndWait();
+        }
+    }
 }

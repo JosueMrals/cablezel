@@ -18,16 +18,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.textfield.TextFields;
 
 public class ContratoController implements Initializable {
 
     // Lector de registro de Log4j
-    private static final Logger LOGGER = Logger.getLogger(ContratoController.class.getName());
+    private static final Logger logger = LogManager.getLogger(ContratoController.class);
 
     @FXML DatePicker dpFechacontrato;
     @FXML TextArea txtDescripcion;
@@ -49,7 +51,6 @@ public class ContratoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        crearContrato();
         listarClientes();
         listarTipoContrato();
         llenarContrato();
@@ -77,11 +78,11 @@ public class ContratoController implements Initializable {
             System.out.println("Servicio creado: " + servicioSeleccionado);
         } else {
             servicioSeleccionado = obtenerServicioContrato();
-            LOGGER.info("Servicio obtenido: " + servicioSeleccionado);
+            logger.info("Servicio obtenido: " + servicioSeleccionado);
             if(servicioSeleccionado == null) {
                 // Resolver problema de servicio con autoincrement
                 crearServicio(1l + servicios.size());
-                LOGGER.info("Servicio creado: " + servicioSeleccionado);
+                logger.info("Servicio creado: " + servicioSeleccionado);
             }
         }
     }
@@ -146,31 +147,6 @@ public class ContratoController implements Initializable {
         return FXCollections.observableArrayList(contratoService.getAll());
     }
 
-    public void crearContrato() {
-        ObservableList<Contrato> contratos = obtenerContratos();
-
-        if (contratos.isEmpty()) {
-            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
-                    .getSessionFactory());
-            Cliente cliente = clienteService.getId(1L);
-
-            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class,
-                    HibernateUtil.getSessionFactory());
-            TipoContrato tipoContrato = tipoContratoService.getId(1L);
-
-            Contrato contrato = new Contrato();
-            contrato.setCliente(cliente);
-            contrato.setTipocontrato(tipoContrato);
-            contrato.setFecha_contrato(LocalDate.now());
-            contrato.setDescripcion("Contrato de prueba");
-
-            IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
-                    .getSessionFactory());
-            contratoService.save(contrato);
-
-        }
-    }
-
     private ObservableList<Cliente> obtenerClientesList() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
                 .getSessionFactory());
@@ -178,19 +154,33 @@ public class ContratoController implements Initializable {
     }
 
     public void llenarContrato() {
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
-                .getSessionFactory());
-        ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        colTipo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTipocontrato()
-                .getTipo_contrato()));
-        colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente()
-                .getPrimer_nombre() + " " + cellData.getValue().getCliente().getSegundo_nombre()
-                + " " + cellData.getValue().getCliente().getPrimer_apellido()
-                + " " + cellData.getValue().getCliente().getSegundo_apellido()));
-        tvContratos.setItems(listaContratos);
+        try {
+            IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil.getSessionFactory());
+            ObservableList<Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
+            if (listaContratos.size() == 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al llenar la tabla de contratos");
+                alert.setContentText("Sin contratos registrados");
+                alert.showAndWait();
+                logger.error("Error al llenar la tabla de contratos", listaContratos);
+                return;
+            }
+            colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
+            colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            colTipo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTipocontrato().getTipo_contrato()));
+            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente()
+                    .getPrimer_nombre() + " " + cellData.getValue().getCliente().getSegundo_nombre()
+                    + " " + cellData.getValue().getCliente().getPrimer_apellido()
+                    + " " + cellData.getValue().getCliente().getSegundo_apellido()));
+            tvContratos.setItems(listaContratos);
+
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de contratos", e);
+        }
     }
+
+
 
     public void registrarContratos() {
 
@@ -260,5 +250,15 @@ public class ContratoController implements Initializable {
         return FXCollections.observableArrayList(tipocontratosService.getAll());
     }
 
+    public void verificarTipoContrato(MouseEvent mouseEvent) {
+        if (cbTipocontrato.getItems().size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al registrar contrato");
+            alert.setContentText("Por favor, ingrese un tipo de contrato");
+            alert.showAndWait();
+            return;
+        }
+    }
 }
 

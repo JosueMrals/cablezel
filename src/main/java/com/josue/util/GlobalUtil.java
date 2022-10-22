@@ -98,4 +98,21 @@ public class GlobalUtil {
         }
     }
 
+    public static ObservableList<Servicio> getServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(servicioService.getAll());
+    }
+
+    private static void crearServicio() {
+        ObservableList<Servicio> servicios = getServicios();
+        if(servicios.isEmpty()) {
+            Servicio servicio = new Servicio();
+            servicio.setNombre("Corte de servicio");
+            servicio.setDescripcion("Corte de servicio");
+            servicio.setPrecio(1000.0f);
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+            servicioService.save(servicio);
+        }
+    }
+
 }

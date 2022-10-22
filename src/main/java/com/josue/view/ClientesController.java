@@ -15,9 +15,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.josue.util.GlobalUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.textfield.TextFields;
 
 public class ClientesController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(ClientesController.class);
     
     public TextField txtBuscarCedula;
     public TextField txtBuscarNombre;
@@ -39,6 +42,7 @@ public class ClientesController implements Initializable {
     @FXML TableColumn<Cliente, String> colTelefono;
     @FXML TableView<Cliente> tvClientes;
 
+    Boolean hayClientes = false;
     String[] clientesAutocomplete = {};
     String[] cedulaAutocomplete = {};
 
@@ -48,42 +52,27 @@ public class ClientesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        crearClientes();
+        hayClientes = getClientes().size() > 0;
         listarBarrios();
-        llenarClientes();
+        if (hayClientes) {
+            llenarClientes();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText("No hay clientes registrados");
+            alert.setContentText("Por favor registre un nuevo cliente");
+            alert.showAndWait();
+            logger.info("No hay clientes registrados");
+        }
         autoCompletarNombre();
         autoCompletarCedula();
+
     }
 
     public ObservableList<Cliente> getClientes() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
                 .getSessionFactory());
         return FXCollections.observableArrayList(clienteService.getAll());
-    }
-
-    public void crearClientes(){
-        ObservableList<Cliente> clientes = getClientes();
-
-        if (clientes.isEmpty()) {
-
-            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
-                    .getSessionFactory());
-            Barrio barrio = barrioService.getId(1L);
-
-            Cliente cliente = new Cliente();
-            cliente.setNum_cedula("610-170101-1003M");
-            cliente.setPrimer_nombre("Josue");
-            cliente.setSegundo_nombre("Naun");
-            cliente.setPrimer_apellido("Morales");
-            cliente.setSegundo_apellido("Alvarez");
-            cliente.setDireccion("Por la panaderia");
-            cliente.setBarrio(barrio);
-            cliente.setNum_telefono("5726-3856");
-
-            IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
-                    .getSessionFactory());
-            clienteService.save(cliente);
-        }
     }
 
     public void autoCompletarNombre() {
@@ -255,4 +244,13 @@ public class ClientesController implements Initializable {
         llenarClientes();
     }
 
+    public void verificarBarrio() {
+        if (cbBarrio.getItems().size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al registrar cliente");
+            alert.setContentText("Por favor, ingrese un barrio en la base de datos.");
+            alert.showAndWait();
+        }
+    }
 }

@@ -116,7 +116,7 @@
          <Font size="16.0" />
       </font>
    </Label>
-   <ComboBox fx:id="cbBarrio" layoutX="500.0" layoutY="125.0" prefHeight="25.0" prefWidth="387.0" promptText="Seleccione un barrio" styleClass="labels" visibleRowCount="100">
+   <ComboBox fx:id="cbBarrio" layoutX="500.0" layoutY="125.0" onMouseClicked="#verificarBarrio" prefHeight="25.0" prefWidth="387.0" promptText="Seleccione un barrio" styleClass="labels" visibleRowCount="100">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor>
