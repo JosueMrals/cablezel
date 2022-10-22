@@ -36,7 +36,7 @@
          <Font size="16.0" />
       </font>
    </Label>
-   <TextField fx:id="txtSegundoNombre" layoutX="30.0" layoutY="239.0" prefHeight="25.0" prefWidth="387.0" promptText="Nun" styleClass="labels">
+   <TextField fx:id="txtSegundoNombre" layoutX="30.0" layoutY="239.0" prefHeight="25.0" prefWidth="387.0" promptText="Naun" styleClass="labels">
       <font>
          <Font size="13.0" />
       </font>
@@ -123,14 +123,15 @@
    </ComboBox>
    <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" stylesheets="@../css/style.css">
       <columns>
-         <TableColumn fx:id="colCedula" prefWidth="143.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
-         <TableColumn fx:id="colNombre" prefWidth="255.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />
-         <TableColumn fx:id="colDireccion" prefWidth="226.0" resizable="false" style="-fx-background-color: White;" text="Direccion" />
-         <TableColumn fx:id="colBarrio" prefWidth="268.0" resizable="false" style="-fx-background-color: White;" text="Barrio" />
-         <TableColumn fx:id="colTelefono" prefWidth="190.0" resizable="false" style="-fx-background-color: White;" text="Nº de Telefono" />
+         <TableColumn fx:id="colCedula" prefWidth="165.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
+         <TableColumn fx:id="colNombre" prefWidth="253.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />
+         <TableColumn fx:id="colDireccion" prefWidth="193.0" resizable="false" style="-fx-background-color: White;" text="Direccion" />
+         <TableColumn fx:id="colBarrio" prefWidth="247.0" resizable="false" style="-fx-background-color: White;" text="Barrio" />
+         <TableColumn fx:id="colTelefono" prefWidth="119.0" resizable="false" style="-fx-background-color: White;" text="Nº de Telefono" />
+         <TableColumn fx:id="colAccion" prefWidth="105.0" resizable="false" style="-fx-background-color: White;" />
       </columns>
    </TableView>
-   <Button layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
+   <Button fx:id="btnGuardar" layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
@@ -140,21 +141,17 @@
          <Font size="16.0" />
       </font>
    </Label>
-   <Separator layoutX="30.0" layoutY="394.0" prefHeight="5.0" prefWidth="1000.0" style="-fx-background-color: black;" />
+   <Separator layoutX="30.0" layoutY="394.0" prefHeight="5.0" prefWidth="1084.0" style="-fx-background-color: black;" />
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/datos-del-usuario.png" />
-      </image>
+      <Image url="@../images/datos-del-usuario.png"/>
    </ImageView>
    <Button fx:id="btnBuscarCedula" layoutX="260.0" layoutY="440.0" mnemonicParsing="false" onAction="#buscarCedula" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
       <graphic>
          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND" />
+               <Cursor fx:constant="HAND"/>
             </cursor>
-            <image>
-               <Image url="@../images/lupa.png" />
-            </image>
+            <Image url="@../images/lupa.png"/>
          </ImageView>
       </graphic>
       <cursor>
@@ -170,11 +167,9 @@
       <graphic>
          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND" />
+               <Cursor fx:constant="HAND"/>
             </cursor>
-            <image>
-               <Image url="@../images/lupa.png" />
-            </image>
+            <Image url="@../images/lupa.png"/>
          </ImageView>
       </graphic>
       <cursor>
@@ -185,11 +180,9 @@
       <graphic>
          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND" />
+               <Cursor fx:constant="HAND"/>
             </cursor>
-            <image>
-               <Image url="@../images/actualizar.png" />
-            </image>
+            <Image url="@../images/actualizar.png"/>
          </ImageView>
       </graphic>
       <cursor>
