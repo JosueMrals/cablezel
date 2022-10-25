@@ -131,9 +131,9 @@
          <TableColumn fx:id="colAccion" prefWidth="105.0" resizable="false" style="-fx-background-color: White;" />
       </columns>
    </TableView>
-   <Button fx:id="btnGuardar" layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="38.0" prefWidth="126.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
+   <Button fx:id="btnGuardar" layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
       <font>
-         <Font name="System Bold" size="18.0" />
+         <Font name="System Bold" size="16.0" />
       </font>
    </Button>
    <Label layoutX="30.0" layoutY="421.0" text="Listado de Clientes">
@@ -143,15 +143,15 @@
    </Label>
    <Separator layoutX="30.0" layoutY="394.0" prefHeight="5.0" prefWidth="1084.0" style="-fx-background-color: black;" />
    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/datos-del-usuario.png"/>
+      <Image url="@../images/datos-del-usuario.png" />
    </ImageView>
    <Button fx:id="btnBuscarCedula" layoutX="260.0" layoutY="440.0" mnemonicParsing="false" onAction="#buscarCedula" prefHeight="25.0" style="-fx-background-color: none;" styleClass="buscador">
       <graphic>
          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../images/lupa.png"/>
+            <Image url="@../images/lupa.png" />
          </ImageView>
       </graphic>
       <cursor>
@@ -167,9 +167,9 @@
       <graphic>
          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../images/lupa.png"/>
+            <Image url="@../images/lupa.png" />
          </ImageView>
       </graphic>
       <cursor>
@@ -180,9 +180,9 @@
       <graphic>
          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../images/actualizar.png"/>
+            <Image url="@../images/actualizar.png" />
          </ImageView>
       </graphic>
       <cursor>

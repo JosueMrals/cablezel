@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
         crearUsuario();
         usuario = new Usuario();
 
-        clientes = GlobalUtil.obtenerClientesObservableList();
+        clientes = GlobalUtil.getClientes();
 
     }
 

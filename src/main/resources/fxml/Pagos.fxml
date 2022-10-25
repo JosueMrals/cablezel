@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="717.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PagoController">
+<AnchorPane prefHeight="717.0" prefWidth="1203.0" stylesheets="@../css/Pagos.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PagoController">
    <children>
-      <Label layoutX="320.0" layoutY="48.0" text="Pagos">
+      <Label layoutX="196.0" layoutY="64.0" text="Pagos">
          <font>
-            <Font size="26.0" />
+            <Font size="34.0" />
          </font>
       </Label>
-      <TextField layoutX="110.0" layoutY="332.0" prefHeight="27.0" prefWidth="254.0" promptText="Total a pagar">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
-      <Label layoutX="117.0" layoutY="146.0" text="Usuario">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="117.0" layoutY="222.0" text="Fecha del pago">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="117.0" layoutY="301.0" text="Total">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <DatePicker layoutX="110.0" layoutY="262.0" prefHeight="27.0" prefWidth="254.0" promptText="Fecha del pago" />
-      <TextField editable="false" layoutX="110.0" layoutY="190.0" prefWidth="254.0">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
+      <TableView fx:id="tvPagos" layoutX="37.0" layoutY="220.0" prefHeight="333.0" prefWidth="1074.0" styleClass="BuscarClientes">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="49.0" text="Id" />
+          <TableColumn fx:id="colCliente" prefWidth="336.0" text="Cliente" />
+            <TableColumn fx:id="colServicio" prefWidth="301.0" text="Servicio" />
+            <TableColumn fx:id="colUsuario" prefWidth="148.0" text="Usuario" />
+            <TableColumn fx:id="colFecha" prefWidth="141.0" text="Fecha de Pago" />
+            <TableColumn fx:id="colTotal" prefWidth="98.0" text="Total Pagado" />
+        </columns>
+      </TableView>
+      <TextField layoutX="48.0" layoutY="142.0" prefHeight="25.0" prefWidth="192.0" promptText="Buscar cliente..." styleClass="buscadores" />
+      <TextField layoutX="283.0" layoutY="142.0" prefHeight="25.0" prefWidth="192.0" promptText="Buscar servicio..." styleClass="buscadores" />
+      <TextField layoutX="510.0" layoutY="142.0" prefHeight="25.0" prefWidth="192.0" promptText="Buscar usuario..." styleClass="buscadores" />
    </children>
 </AnchorPane>

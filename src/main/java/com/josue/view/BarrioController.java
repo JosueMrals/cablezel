@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,16 +51,66 @@ public class BarrioController implements Initializable {
     @FXML Button btnGuardarBarrio;
     ObservableList<Barrio> listaBarrios;
     ObservableList<TipoContrato> listaTipoContrato;
+    @FXML TextField txtBuscarBarrio;
+    @FXML TextField txtBuscarTC;
+    String[] barrioAutoComplete = {};
+    String[] tipoContratoAutoComplete = {};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         llenarBarrio();
         llenarTipoContrato();
         listarServicios();
-        colocarImagenBotones();
-        //GlobalUtil.crearTipoContrato();
-        //GlobalUtil.crearBarrio();
+        autoCompletarBarrio();
+        autoCompletarTipoContrato();
+    }
+
+    private void autoCompletarTipoContrato() {
+        tipoContratoAutoComplete = GlobalUtil.obtenerTipoContrato();
+        TextFields.bindAutoCompletion(txtBuscarTC, tipoContratoAutoComplete);
+        llenarBarrio();
+        tvTipoContrato.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    private void autoCompletarBarrio() {
+        barrioAutoComplete = GlobalUtil.obtenerBarrios();
+        TextFields.bindAutoCompletion(txtBuscarBarrio, barrioAutoComplete);
+        llenarBarrio();
+        tvBarrios.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    @FXML
+    private void buscarBarrio() {
+        String barrio = txtBuscarBarrio.getText();
+        if (txtBuscarBarrio.getText().isEmpty()){
+            llenarBarrio();
+        }else {
+            ObservableList<Barrio> barrios = GlobalUtil.getBarrios();
+            ObservableList<Barrio> barriosFiltrados = FXCollections.observableArrayList();
+            for (Barrio b : barrios){
+                if (b.getNombre_barrio().toLowerCase().contains(barrio.toLowerCase())){
+                    barriosFiltrados.add(b);
+                }
+            }
+            tvBarrios.setItems(barriosFiltrados);
+        }
+    }
+
+    @FXML
+    private void buscarTC() {
+        String tipoContrato = txtBuscarTC.getText();
+        if (txtBuscarTC.getText().isEmpty()){
+            llenarTipoContrato();
+        }else {
+            ObservableList<TipoContrato> tipoContratos = GlobalUtil.getTipoContratos();
+            ObservableList<TipoContrato> tipoContratosFiltrados = FXCollections.observableArrayList();
+            for (TipoContrato tc : tipoContratos){
+                if (tc.getTipo_contrato().toLowerCase().contains(tipoContrato.toLowerCase())){
+                    tipoContratosFiltrados.add(tc);
+                }
+            }
+            tvTipoContrato.setItems(tipoContratosFiltrados);
+        }
     }
 
     public void llenarTipoContrato() {
@@ -72,10 +123,7 @@ public class BarrioController implements Initializable {
         colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvTipoContrato.setItems(tpContrato);
     }
-    /**
-     * Metodo para llenar la tabla de barrios
-     * @author Josue
-     */
+
     public void llenarBarrio() { // llenar la tabla de barrios
         IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
         ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
@@ -84,10 +132,7 @@ public class BarrioController implements Initializable {
         colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tvBarrios.setItems(barrios);
     }
-    /**
-     * Metodo para guardar un barrio
-     * @author Josue
-     */
+
     public void guardarBarrio() {
 
         //Validar que los campos no esten vacios
@@ -136,10 +181,7 @@ public class BarrioController implements Initializable {
             alert.showAndWait();
         }
     }
-    /**
-     * Metodo para guardar un tipo de contrato
-     * @author Josue
-     */
+
     public void guardarTipoContrato() {
         IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class,
                 HibernateUtil.getSessionFactory());
@@ -187,33 +229,6 @@ public class BarrioController implements Initializable {
         var servicios = obtenerServicios();
         cmbServicio.setValue(null);
         cmbServicio.setItems(servicios);
-    }
-    private void colocarImagenBotones() {
-        URL linkLimpiar = getClass().getResource("/images/dust.png");
-        URL linkGuardar = getClass().getResource("/images/floppy-disk.png");
-        URL linkEditar = getClass().getResource("/images/editar.png");
-        URL linkGuardarBarrio = getClass().getResource("/images/floppy-disk.png");
-
-        assert linkLimpiar != null;
-        assert linkGuardar != null;
-        assert linkEditar != null;
-
-        Image imagenLimpiar = new Image(linkLimpiar.toString(),30,30,false,true);
-        Image imagenGuardar = new Image(linkGuardar.toString(),30,30,false,true);
-        Image imagenEditar = new Image(linkEditar.toString(),30,30,false,true);
-
-        assert linkGuardarBarrio != null;
-        Image imagenGuardarBarrio = new Image(linkGuardarBarrio.toString(),30,30,false,true);
-
-        btnLimpiarContrato.setGraphic(new ImageView(imagenLimpiar));
-        btnGuardarContrato.setGraphic(new ImageView(imagenGuardar));
-        btnEditarContrato.setGraphic(new ImageView(imagenEditar));
-        btnGuardarBarrio.setGraphic(new ImageView(imagenGuardarBarrio));
-
-        btnLimpiarContrato.setTooltip(new Tooltip("Limpiar"));
-        btnGuardarContrato.setTooltip(new Tooltip("Guardar"));
-        btnEditarContrato.setTooltip(new Tooltip("Editar"));
-        btnGuardarBarrio.setTooltip(new Tooltip("Guardar"));
     }
 
     public void verificarServicios() {

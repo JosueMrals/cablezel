@@ -1,12 +1,7 @@
-
-.labels {
-    -fx-background-color: transparent;
-    -fx-font-size: 15px;
-    -fx-border-width: 0 0 1px 0;
-    -fx-border-color: black;
-    -fx-padding: 0 0 0.5px -0.5px;
+.buscadores {
+    -fx-border-color: #000000;
+    -fx-border-width: 0px 0px 1.5px 0px;
 }
-
 .BuscarClientes .column-header-background {
     -fx-background-color: linear-gradient(to bottom, #0D54EC, #0E2556);
     -fx-border-radius: 7px 7px 0px 0px;

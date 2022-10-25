@@ -72,7 +72,7 @@ public class ContratoController implements Initializable {
     }
 
     private void validarServicio() {
-        ObservableList<Servicio> servicios = GlobalUtil.obtenerServicios();
+        ObservableList<Servicio> servicios = GlobalUtil.getServicios();
         if(servicios.isEmpty()) {
             crearServicio(1l);
             System.out.println("Servicio creado: " + servicioSeleccionado);
