@@ -9,14 +9,22 @@ import com.josue.util.ManejadorUsuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.function.Supplier;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -41,6 +49,7 @@ public class FacturarController implements Initializable {
     public TableColumn<DetalleFactura, String> colServicio1;
     String[] clientesAutocomplete = {};
     Usuario usuario;
+    FacturarController facturarController = this;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -249,7 +258,59 @@ public class FacturarController implements Initializable {
             detalleFacturaService.update(detalleFactura);
         }
 
+
     }
 
+    // Abrir ventana FacturaSecundaria
+
+    public void mostrarSecundaria(ActionEvent actionEvent) {
+        if (tvBuscarClientes1.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se ha seleccionado ningun contrato");
+            alert.setContentText("Por favor seleccione un contrato para facturar");
+            alert.showAndWait();
+        } else {
+            try {
+                ((Node) actionEvent.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FacturaSecundaria.fxml"));
+                AnchorPane root = loader.load();
+
+                FacturaSecundariaController facturaSecundariaController = loader.getController();
+                facturaSecundariaController.recibirDatos(facturarController, tvBuscarClientes1.getItems());
+                //mostrar el nombre del cliente en txtCliente
+                facturaSecundariaController.txtCliente.setText(tvBuscarClientes1.getItems().get(0)
+                        .getFactura().getCliente().getPrimer_nombre() + " " +
+                        tvBuscarClientes1.getItems().get(0).getFactura().getCliente().getSegundo_nombre() + " " +
+                        tvBuscarClientes1.getItems().get(0).getFactura().getCliente().getPrimer_apellido() + " " +
+                        tvBuscarClientes1.getItems().get(0).getFactura().getCliente().getSegundo_apellido());
+
+                facturaSecundariaController.colN1.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getServicio()
+                        .getNombre()));
+                facturaSecundariaController.colN2.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFactura()
+                        .getCliente().getPrimer_nombre()
+                        + " " + cellData.getValue().getFactura().getCliente().getSegundo_nombre()
+                        + " " + cellData.getValue().getFactura().getCliente().getPrimer_apellido()
+                        + " " + cellData.getValue().getFactura().getCliente().getSegundo_apellido())
+                );
+                facturaSecundariaController.colN3.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFactura()
+                        .getFecha_factura().toString())
+                );
+                facturaSecundariaController.colN4.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFactura()
+                        .getEstado())
+                );
+                facturaSecundariaController.colN5.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTotal_pagar()
+                        .toString())
+                );
+
+                Stage stage = new Stage();
+                stage.setTitle("Facturar");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (Exception e) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
 
 }

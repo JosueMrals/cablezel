@@ -89,27 +89,13 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="39.0" text="Direccion de Contrato">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="376.0" layoutY="39.0" text="Mes a pagar">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="686.0" layoutY="39.0" text="Costo">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tvMostrarContratos" layoutX="20.0" layoutY="69.0" prefHeight="150.0" prefWidth="748.0">
+            <TableView fx:id="tvMostrarPagos" layoutX="20.0" layoutY="43.0" prefHeight="137.0" prefWidth="748.0">
               <columns>
-                <TableColumn fx:id="colN1" prefWidth="110.0" text="N. Contrato" />
-                <TableColumn fx:id="colN2" prefWidth="118.0" text="Tipo Contrato" />
-                  <TableColumn fx:id="colN3" prefWidth="407.0" text="Cliente" />
-                  <TableColumn fx:id="colN4" prefWidth="112.0" text="Precio" />
+                <TableColumn fx:id="colN1" prefWidth="135.0" text="Servicio" />
+                <TableColumn fx:id="colN2" prefWidth="244.0" text="Cliente" />
+                  <TableColumn fx:id="colN3" prefWidth="103.0" text="Fecha de pago" />
+                  <TableColumn fx:id="colN4" prefWidth="77.0" text="Estado" />
+                  <TableColumn fx:id="colN5" prefWidth="89.0" text="Total" />
               </columns>
             </TableView>
          </Pane>
@@ -121,7 +107,12 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="btFacturar" alignment="CENTER" layoutX="677.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" style="-fx-background-color: #66ccff;" text="Factura Completa" textFill="WHITE">
+      <Button fx:id="btFacturar" alignment="CENTER" layoutX="691.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Completar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btFacturar1" alignment="CENTER" layoutX="568.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Imprimir" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -56,8 +56,8 @@
       <columns>
          <TableColumn fx:id="colNombre" editable="false" maxWidth="372.0" prefWidth="372.0" resizable="false" sortable="false" text="Nombre del Servicio" />
          <TableColumn fx:id="colDescripcion" editable="false" maxWidth="615.0" minWidth="4.0" prefWidth="516.0" resizable="false" sortable="false" text="Descripcion" />
-         <TableColumn fx:id="colPrecio" editable="false" maxWidth="465.0" prefWidth="146.0" resizable="false" sortable="false" text="Precio del Servicio" />
-         <TableColumn fx:id="colAccion" editable="false" maxWidth="352.0" prefWidth="50.0" resizable="false" sortable="false" />
+         <TableColumn fx:id="colPrecio" editable="false" maxWidth="465.0" prefWidth="139.0" resizable="false" sortable="false" text="Precio del Servicio" />
+         <TableColumn fx:id="colAccion" editable="false" maxWidth="352.0" prefWidth="55.0" resizable="false" sortable="false" />
       </columns>
    </TableView>
    <Button fx:id="btnGuardar" layoutX="429.0" layoutY="228.0" mnemonicParsing="false" onAction="#guardarServicio" prefHeight="35.0" prefWidth="115.0" text="Guardar" />

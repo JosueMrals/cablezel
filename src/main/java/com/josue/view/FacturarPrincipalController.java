@@ -44,7 +44,7 @@ public class FacturarPrincipalController implements Initializable {
     @FXML TableView<Contrato> tvBuscarClientes;
     String[] clientesAutocomplete = {};
 
-    FacturarPrincipalController facturarPrincipalController = this;
+    //FacturarController facturarController = this;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -163,7 +163,7 @@ public class FacturarPrincipalController implements Initializable {
         tvBuscarClientes.setItems(contratosFiltrados);
     }
 
-    public void mostrarSecundaria(ActionEvent actionEvent) {
+    /*public void mostrarSecundaria(ActionEvent actionEvent) {
         if (tvContratosPagar.getItems().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -177,7 +177,7 @@ public class FacturarPrincipalController implements Initializable {
                 AnchorPane root = loader.load();
 
                 FacturaSecundariaController facturaSecundariaController = loader.getController();
-                facturaSecundariaController.recibirDatos(facturarPrincipalController, tvContratosPagar.getItems());
+                //facturaSecundariaController.recibirDatos(facturarController, tvContratosPagar.getItems());
                 facturaSecundariaController.colN1.setCellValueFactory(new PropertyValueFactory<>("id"));
                 facturaSecundariaController.colN2.setCellValueFactory(
                         param -> new ReadOnlyObjectWrapper<>(param.getValue().getTipocontrato().getTipo_contrato())
@@ -197,7 +197,7 @@ public class FacturarPrincipalController implements Initializable {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-    }
+    }*/
 
     public ObservableList<Contrato> obtenerDatos() {
         ObservableList<Contrato> contratos = tvContratosPagar.getItems();

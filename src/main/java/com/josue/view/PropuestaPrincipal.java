@@ -40,6 +40,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public Button btPrincipalContratos;
     public Button btPrincipalFacturar;
     public Button btPrincipalClientes;
+    public AnchorPane panelCentral;
     @FXML Button btnConfig;
     @FXML Button btnReportes;
     @FXML Button btnInicio;
@@ -183,6 +184,11 @@ public class PropuestaPrincipal extends Application implements Initializable {
             }
         }
         return servicio;
+    }
+
+    @FXML
+    private void mostrarInicio() {
+
     }
 
     private void mostrarPanel() {

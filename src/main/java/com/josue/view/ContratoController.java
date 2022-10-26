@@ -16,10 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -126,6 +123,9 @@ public class ContratoController implements Initializable {
                         try {
                             IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class,
                                     HibernateUtil.getSessionFactory());
+
+                            obtenerClienteSeleccionado();
+
                             contrato.setCliente(clienteSeleccionado);
                             contrato.setTipocontrato(cbTipocontrato.getValue());
                             contrato.setFecha_contrato(dpFechacontrato.getValue());
@@ -272,8 +272,8 @@ public class ContratoController implements Initializable {
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
             colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             colTipo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTipocontrato().getTipo_contrato()));
-            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente()
-                    .getPrimer_nombre() + " " + cellData.getValue().getCliente().getSegundo_nombre()
+            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente().getPrimer_nombre()
+                    + " " + cellData.getValue().getCliente().getSegundo_nombre()
                     + " " + cellData.getValue().getCliente().getPrimer_apellido()
                     + " " + cellData.getValue().getCliente().getSegundo_apellido()));
             tvContratos.setItems(listaContratos);
@@ -345,6 +345,16 @@ public class ContratoController implements Initializable {
 
     }
 
+    public void obtenerClienteSeleccionado() {
+        String nombreCliente = txtNombreCliente.getText();
+        for (Cliente c : listaClientes) {
+            if ((c.getPrimer_nombre() + " " + c.getSegundo_nombre() + " " + c.getPrimer_apellido() + " " +
+                    c.getSegundo_apellido()).equals(nombreCliente)) {
+                clienteSeleccionado = c;
+            }
+        }
+    }
+
     public ObservableList<TipoContrato> obtenerTipoContratos() {
         IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class,
                 HibernateUtil.getSessionFactory());
@@ -362,20 +372,23 @@ public class ContratoController implements Initializable {
         }
     }
 
-    public void buscarContrato(ActionEvent actionEvent) {
-        String nombreCliente = txtNombreCliente.getText();
-        if (txtNombreCliente.getText().isEmpty()) {
+    @FXML
+    private void buscarContrato(ActionEvent actionEvent) {
+        String nombreCliente = txtBuscarContrato.getText();
+        if (txtBuscarContrato.getText().isEmpty()) {
             llenarContrato();
-        }
-        ObservableList<Contrato> listaContratos = GlobalUtil.getContratos();
-        ObservableList<Contrato> listaContratosFiltrada = FXCollections.observableArrayList();
-        for (Contrato c : listaContratos) {
-            if ((c.getCliente().getPrimer_nombre() + " " + c.getCliente().getSegundo_nombre() + " " +
-                    c.getCliente().getPrimer_apellido() + " " + c.getCliente().getSegundo_apellido()).contains(nombreCliente)) {
-                listaContratos.add(c);
+        } else {
+            ObservableList<Contrato> listaContratos = GlobalUtil.getContratos();
+            ObservableList<Contrato> listaContratosFiltrada = FXCollections.observableArrayList();
+            for (Contrato c : listaContratos) {
+                if ((c.getCliente().getPrimer_nombre() + " " + c.getCliente().getSegundo_nombre() + " " +
+                        c.getCliente().getPrimer_apellido() + " " + c.getCliente().getSegundo_apellido()).toLowerCase()
+                        .contains(nombreCliente.toLowerCase())) {
+                    listaContratosFiltrada.add(c);
+                }
             }
+            tvContratos.setItems(listaContratosFiltrada);
         }
-        tvContratos.setItems(listaContratosFiltrada);
     }
 }
 

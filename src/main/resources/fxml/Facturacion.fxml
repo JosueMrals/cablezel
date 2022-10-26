@@ -62,7 +62,7 @@
                      </columns>
                   </TableView>
                   <AnchorPane layoutX="20.0" layoutY="329.0" />
-                  <Button fx:id="btFacturar" layoutX="1018.0" layoutY="541.0" mnemonicParsing="false" onAction="#realizarPago" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #339933;" text="Facturar" textFill="WHITE">
+                  <Button fx:id="btFacturar" layoutX="993.0" layoutY="552.0" mnemonicParsing="false" onAction="#mostrarSecundaria" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #339933;" text="Facturar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
