@@ -16,6 +16,7 @@ import org.controlsfx.control.textfield.TextFields;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,7 @@ public class FacturarController implements Initializable {
 
         addFacturarButtonToTable();
         addButtonDelete();
-        crearFactura();
+        // crearFactura();
         llenarDetalleFacturas();
 
         ManejadorUsuario manejador = ManejadorUsuario.getInstance();
@@ -87,25 +88,31 @@ public class FacturarController implements Initializable {
     }
 
     public void crearFactura() {
-        ObservableList<DetalleFactura> detalleFactura = getDetalleFactura();
-        if (detalleFactura.isEmpty()) {
-            IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
-                    HibernateUtil.getSessionFactory());
-            Factura factura = facturaService.getId(1L);
+        try {
+            ObservableList<DetalleFactura> detalleFactura = getDetalleFactura();
 
-            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
-                    HibernateUtil.getSessionFactory());
-            Servicio servicio = servicioService.getId(1L);
+            if (detalleFactura.isEmpty()) {
+                IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
+                        HibernateUtil.getSessionFactory());
+                Factura factura = facturaService.getId(1L);
 
-            DetalleFactura detalleFactura1 = new DetalleFactura();
-            detalleFactura1.setFactura(factura);
-            detalleFactura1.setServicio(servicio);
-            detalleFactura1.setTotal_pagar(1000f);
-            detalleFactura1.setDescripcion("Prueba");
+                IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
+                        HibernateUtil.getSessionFactory());
+                Servicio servicio = servicioService.getId(1L);
 
-            IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
-                    HibernateUtil.getSessionFactory());
-            detalleFacturaService.save(detalleFactura1);
+                DetalleFactura detalleFactura1 = new DetalleFactura();
+                detalleFactura1.setFactura(factura);
+                detalleFactura1.setServicio(servicio);
+                detalleFactura1.setTotal_pagar(0f);
+                detalleFactura1.setDescripcion("Prueba");
+
+                IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
+                        HibernateUtil.getSessionFactory());
+                detalleFacturaService.save(detalleFactura1);
+            }
+        }
+        catch (Exception e) {
+            LOGGER.info(e.toString());
         }
     }
 
@@ -185,8 +192,8 @@ public class FacturarController implements Initializable {
     }
 
     public void realizarPago() {
-        tvBuscarClientes1.getItems().removeAll(tvBuscarClientes1.getItems());
         generarPago();
+        tvBuscarClientes1.getItems().removeAll(tvBuscarClientes1.getItems());
     }
 
     // Generar pagos a insertar
@@ -207,10 +214,7 @@ public class FacturarController implements Initializable {
                 HibernateUtil.getSessionFactory());
         pagoService.save(pago);
 
-        // Obtener el pago insertado
-        IGenericService<Pago> pagoService1 = new GenericServiceImpl<>(Pago.class,
-                HibernateUtil.getSessionFactory());
-        Pago pagoId = pagoService1.getById(pago.getId());
+        Pago pagoId = pagoService.getById(pago.getId());
 
         for (DetalleFactura detalleFactura1 : detalleFacturasPagar) {
 
