@@ -10,8 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ServicioController implements Initializable {
@@ -25,6 +28,7 @@ public class ServicioController implements Initializable {
     @FXML TableColumn<Servicio, String> colDescripcion;
     @FXML TableColumn<Servicio, String> colPrecio;
     @FXML TableColumn<Servicio, String> colAccion;
+    @FXML TextField txtBuscarServicio;
 
     ObservableList<Servicio> listaServicios;
 
@@ -36,8 +40,7 @@ public class ServicioController implements Initializable {
 
     private void addButtonEdit() {
         colAccion.setCellFactory(param -> new TableCell<>() {
-            private final Button btnEditar = new Button("Editar");
-
+            private final Button btnEditar = new Button();
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -45,17 +48,64 @@ public class ServicioController implements Initializable {
                     setGraphic(null);
                     setText(null);
                 } else {
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    btnEditar.setGraphic(imageView);
+                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+
                     btnEditar.setOnAction(event -> {
                         Servicio servicio = getTableView().getItems().get(getIndex());
                         txtNombre.setText(servicio.getNombre());
                         txtDescripcion.setText(servicio.getDescripcion());
                         txtPrecio.setText(String.valueOf(servicio.getPrecio()));
+                        btnGuardar.setText("Actualizar");
+
+                        btnGuardar.setOnAction(event1 -> {
+                            actualizarServicio(servicio);
+                            llenarServicio();
+                            recargarServicio();
+                        });
                     });
                     setGraphic(btnEditar);
                     setText(null);
                 }
             }
+
+            private void actualizarServicio(Servicio servicio) {
+                try {
+                    IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+                    servicio.setNombre(txtNombre.getText());
+                    servicio.setDescripcion(txtDescripcion.getText());
+                    servicio.setPrecio((float) Double.parseDouble(txtPrecio.getText()));
+                    servicioService.update(servicio);
+
+                    txtNombre.clear();
+                    txtDescripcion.clear();
+                    txtPrecio.clear();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Servicio actualizado correctamente", ButtonType.OK);
+                    alert.showAndWait();
+
+                    btnGuardar.setText("Guardar");
+                    btnGuardar.setOnAction(event -> {
+                        guardarServicio();
+                        llenarServicio();
+                        tvServicios.refresh();
+                    });
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al actualizar el servicio", ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
         });
+    }
+
+    public void recargarServicio() {
+        txtBuscarServicio.clear();
+        llenarServicio();
+        tvServicios.refresh();
     }
 
     public void llenarServicio() {
