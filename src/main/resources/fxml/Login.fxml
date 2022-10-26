@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="597.0" maxWidth="745.0" prefHeight="246.0" prefWidth="745.0" stylesheets="@../css/Login.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.LoginController">
-   <BorderPane prefHeight="597.0" prefWidth="745.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane id="AnchorPane" maxHeight="597.0" maxWidth="783.0" prefHeight="316.0" prefWidth="783.0" stylesheets="@../css/Login.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.LoginController">
+   <BorderPane prefHeight="316.0" prefWidth="783.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
-         <Pane fx:id="leftPane" prefHeight="597.0" prefWidth="232.0" BorderPane.alignment="CENTER">
-            <ImageView fitHeight="221.0" fitWidth="216.0" layoutX="8.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <Pane fx:id="leftPane" prefHeight="325.0" prefWidth="264.0" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="180.0" fitWidth="253.0" layoutX="8.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/pixel%20cablezel.png" />
                </image>
@@ -19,24 +27,33 @@
       </left>
       <center>
          <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <Label layoutX="183.0" layoutY="27.0" text="Inicio de Sesion" textFill="#8a8888">
+            <Label layoutX="161.0" layoutY="42.0" text="Inicio de Sesion" textFill="#8a8888">
                <font>
-                  <Font size="24.0" />
+                  <Font size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNombreUsuario" layoutX="145.0" layoutY="62.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre de Usuario" />
-            <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="105.0" prefHeight="25.0" prefWidth="245.0" promptText="Contraseña" />
-            <Hyperlink layoutX="145.0" layoutY="146.0" text="Olvidé mi contraseña" />
-            <Button fx:id="btnEntrar" defaultButton="true" layoutX="338.0" layoutY="145.0" mnemonicParsing="false" onAction="#mostrarOtro" text="Entrar" textFill="WHITE">
+            <TextField fx:id="txtNombreUsuario" layoutX="145.0" layoutY="99.0" prefHeight="25.0" prefWidth="245.0" promptText="Nombre de Usuario">
+               <font>
+                  <Font size="13.0" />
+               </font></TextField>
+            <PasswordField fx:id="txtPassword" layoutX="145.0" layoutY="142.0" prefHeight="25.0" prefWidth="245.0" promptText="Contraseña">
+               <font>
+                  <Font size="13.0" />
+               </font></PasswordField>
+            <Hyperlink layoutX="145.0" layoutY="205.0" text="Olvidé mi contraseña">
+               <font>
+                  <Font size="13.0" />
+               </font></Hyperlink>
+            <Button fx:id="btnEntrar" defaultButton="true" layoutX="314.0" layoutY="199.0" mnemonicParsing="false" onAction="#mostrarOtro" prefHeight="35.0" prefWidth="115.0" text="Entrar" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Separator layoutX="55.0" layoutY="208.0" prefHeight="0.0" prefWidth="400.0" />
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="104.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+            <Separator layoutX="55.0" layoutY="260.0" prefHeight="0.0" prefWidth="400.0" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="104.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/login/users.png" />
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="105.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="105.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/login/lock.png" />
             </ImageView>
          </Pane>

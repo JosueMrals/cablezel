@@ -123,20 +123,20 @@
    </ComboBox>
    <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" styleClass="tabla">
       <columns>
-         <TableColumn fx:id="colCedula" prefWidth="165.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
-         <TableColumn fx:id="colNombre" prefWidth="253.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />
-         <TableColumn fx:id="colDireccion" prefWidth="193.0" resizable="false" style="-fx-background-color: White;" text="Direccion" />
-         <TableColumn fx:id="colBarrio" prefWidth="247.0" resizable="false" style="-fx-background-color: White;" text="Barrio" />
-         <TableColumn fx:id="colTelefono" prefWidth="119.0" resizable="false" style="-fx-background-color: White;" text="Nº de Telefono" />
-         <TableColumn fx:id="colAccion" prefWidth="105.0" resizable="false" style="-fx-background-color: White;" />
+         <TableColumn fx:id="colCedula" prefWidth="165.0" resizable="false" text="Nº de Cedula" />
+         <TableColumn fx:id="colNombre" prefWidth="253.0" resizable="false" text="Nombre Completo" />
+         <TableColumn fx:id="colDireccion" prefWidth="193.0" resizable="false" text="Direccion" />
+         <TableColumn fx:id="colBarrio" prefWidth="247.0" resizable="false" text="Barrio" />
+         <TableColumn fx:id="colTelefono" prefWidth="119.0" resizable="false" text="Nº de Telefono" />
+         <TableColumn fx:id="colAccion" prefWidth="105.0" resizable="false" />
       </columns>
    </TableView>
-   <Button fx:id="btnGuardar" layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textFill="WHITE">
+   <Button fx:id="btnGuardar" layoutX="917.0" layoutY="126.0" mnemonicParsing="false" onAction="#registrarClientes" prefHeight="35.0" prefWidth="115.0" styleClass="botones" text="Guardar" textFill="WHITE">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>
    </Button>
-   <Label layoutX="30.0" layoutY="421.0" text="Listado de Clientes">
+   <Label layoutX="30.0" layoutY="413.0" text="Listado de Clientes">
       <font>
          <Font size="16.0" />
       </font>

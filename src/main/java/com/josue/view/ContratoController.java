@@ -10,16 +10,17 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
@@ -49,6 +50,13 @@ public class ContratoController implements Initializable {
     Usuario usuario;
     Servicio servicioSeleccionado;
 
+    @FXML TextField txtBuscarContrato;
+    @FXML Button btnBuscarContrato;
+    @FXML TableColumn<Contrato, String> colAccion;
+    @FXML Button btnGuardar;
+
+    String[] contratosAutocomplete = {};
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listarClientes();
@@ -57,6 +65,101 @@ public class ContratoController implements Initializable {
         ManejadorUsuario manejador = ManejadorUsuario.getInstance();
         usuario = manejador.getUsuario();
         validarServicio();
+        addButtonEdit();
+        autoCompletarContrato();
+    }
+
+    private void autoCompletarContrato() {
+        contratosAutocomplete = GlobalUtil.obtenerContratos();
+        TextFields.bindAutoCompletion(txtBuscarContrato, contratosAutocomplete);
+        llenarContrato();
+        tvContratos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    private void addButtonEdit() {
+        colAccion.setCellFactory(new Callback<TableColumn<Contrato, String>, TableCell<Contrato, String>>() {
+            @Override
+            public TableCell<Contrato, String> call(TableColumn<Contrato, String> param) {
+                final TableCell<Contrato, String> cell = new TableCell<Contrato, String>() {
+                    final Button btnEditar = new Button();
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                            ImageView imageView = new ImageView(image);
+                            imageView.setFitHeight(20);
+                            imageView.setFitWidth(20);
+                            btnEditar.setGraphic(imageView);
+                            btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+
+                            btnEditar.setOnAction(event -> {
+                                Contrato contrato = getTableView().getItems().get(getIndex());
+                                txtNombreCliente.setText(contrato.getCliente().getPrimer_nombre() + " " +
+                                        contrato.getCliente().getSegundo_nombre() + " " +
+                                        contrato.getCliente().getPrimer_apellido() + " " +
+                                        contrato.getCliente().getSegundo_apellido());
+                                cbTipocontrato.setValue(contrato.getTipocontrato());
+                                dpFechacontrato.setValue(contrato.getFecha_contrato());
+                                txtDescripcion.setText(contrato.getDescripcion());
+                                btnGuardar.setText("Actualizar");
+
+                                btnGuardar.setOnAction(event1 -> {
+                                    actualizarContrato(contrato);
+                                    llenarContrato();
+                                    recargarContrato();
+                                });
+                            });
+                            setGraphic(btnEditar);
+                            setText(null);
+                        }
+                    }
+
+                    private void actualizarContrato(Contrato contrato) {
+                        try {
+                            IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class,
+                                    HibernateUtil.getSessionFactory());
+
+                            obtenerClienteSeleccionado();
+
+                            contrato.setCliente(clienteSeleccionado);
+                            contrato.setTipocontrato(cbTipocontrato.getValue());
+                            contrato.setFecha_contrato(dpFechacontrato.getValue());
+                            contrato.setDescripcion(txtDescripcion.getText());
+                            contratoService.update(contrato);
+
+                            txtNombreCliente.clear();
+                            cbTipocontrato.setPromptText("Seleccione un tipo de contrato");
+                            dpFechacontrato.setValue(LocalDate.now());
+                            txtDescripcion.clear();
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Contrato actualizado correctamente", ButtonType.OK);
+                            alert.showAndWait();
+
+                            btnGuardar.setText("Guardar");
+                            btnGuardar.setOnAction(event -> {
+                                registrarContratos();
+                                llenarContrato();
+                                recargarContrato();
+                            });
+                        } catch (Exception e) {
+                            logger.error("Error al actualizar contrato", e);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+    }
+
+    public void recargarContrato() {
+        txtBuscarContrato.clear();
+        llenarContrato();
+        tvContratos.refresh();
     }
 
     public void crearServicio(Long valor) {
@@ -169,8 +272,8 @@ public class ContratoController implements Initializable {
             colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha_contrato"));
             colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             colTipo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTipocontrato().getTipo_contrato()));
-            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente()
-                    .getPrimer_nombre() + " " + cellData.getValue().getCliente().getSegundo_nombre()
+            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getCliente().getPrimer_nombre()
+                    + " " + cellData.getValue().getCliente().getSegundo_nombre()
                     + " " + cellData.getValue().getCliente().getPrimer_apellido()
                     + " " + cellData.getValue().getCliente().getSegundo_apellido()));
             tvContratos.setItems(listaContratos);
@@ -179,8 +282,6 @@ public class ContratoController implements Initializable {
             logger.error("Error al llenar la tabla de contratos", e);
         }
     }
-
-
 
     public void registrarContratos() {
 
@@ -244,6 +345,16 @@ public class ContratoController implements Initializable {
 
     }
 
+    public void obtenerClienteSeleccionado() {
+        String nombreCliente = txtNombreCliente.getText();
+        for (Cliente c : listaClientes) {
+            if ((c.getPrimer_nombre() + " " + c.getSegundo_nombre() + " " + c.getPrimer_apellido() + " " +
+                    c.getSegundo_apellido()).equals(nombreCliente)) {
+                clienteSeleccionado = c;
+            }
+        }
+    }
+
     public ObservableList<TipoContrato> obtenerTipoContratos() {
         IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class,
                 HibernateUtil.getSessionFactory());
@@ -258,6 +369,25 @@ public class ContratoController implements Initializable {
             alert.setContentText("Por favor, ingrese un tipo de contrato");
             alert.showAndWait();
             return;
+        }
+    }
+
+    @FXML
+    private void buscarContrato(ActionEvent actionEvent) {
+        String nombreCliente = txtBuscarContrato.getText();
+        if (txtBuscarContrato.getText().isEmpty()) {
+            llenarContrato();
+        } else {
+            ObservableList<Contrato> listaContratos = GlobalUtil.getContratos();
+            ObservableList<Contrato> listaContratosFiltrada = FXCollections.observableArrayList();
+            for (Contrato c : listaContratos) {
+                if ((c.getCliente().getPrimer_nombre() + " " + c.getCliente().getSegundo_nombre() + " " +
+                        c.getCliente().getPrimer_apellido() + " " + c.getCliente().getSegundo_apellido()).toLowerCase()
+                        .contains(nombreCliente.toLowerCase())) {
+                    listaContratosFiltrada.add(c);
+                }
+            }
+            tvContratos.setItems(listaContratosFiltrada);
         }
     }
 }
