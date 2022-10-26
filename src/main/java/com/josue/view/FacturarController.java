@@ -244,8 +244,17 @@ public class FacturarController implements Initializable {
         for (DetalleFactura detalleFactura1 : detalleFacturasPagar) {
             IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
                     HibernateUtil.getSessionFactory());
+            IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
+                    HibernateUtil.getSessionFactory());
             DetalleFactura detalleFactura = detalleFacturaService.getById(detalleFactura1.getId());
-            detalleFactura.getFactura().setEstado("pagada");
+            Factura factura = detalleFactura.getFactura();
+            factura.setEstado("Pagada");
+
+            // Actualizar el estado de la factura
+            facturaService.update(factura);
+
+            // Actualizar el estado del detalle factura
+            detalleFactura.setFactura(factura);
             detalleFacturaService.update(detalleFactura);
         }
 
