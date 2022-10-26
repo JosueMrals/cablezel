@@ -24,13 +24,38 @@ public class ServicioController implements Initializable {
     @FXML TableColumn<Servicio, String> colNombre;
     @FXML TableColumn<Servicio, String> colDescripcion;
     @FXML TableColumn<Servicio, String> colPrecio;
+    @FXML TableColumn<Servicio, String> colAccion;
 
     ObservableList<Servicio> listaServicios;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         llenarServicio();
+        addButtonEdit();
+    }
 
+    private void addButtonEdit() {
+        colAccion.setCellFactory(param -> new TableCell<>() {
+            private final Button btnEditar = new Button("Editar");
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    btnEditar.setOnAction(event -> {
+                        Servicio servicio = getTableView().getItems().get(getIndex());
+                        txtNombre.setText(servicio.getNombre());
+                        txtDescripcion.setText(servicio.getDescripcion());
+                        txtPrecio.setText(String.valueOf(servicio.getPrecio()));
+                    });
+                    setGraphic(btnEditar);
+                    setText(null);
+                }
+            }
+        });
     }
 
     public void llenarServicio() {

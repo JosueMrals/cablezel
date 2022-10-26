@@ -287,8 +287,8 @@ public class ClientesController implements Initializable {
                                 txtDireccion.setText(cliente.getDireccion());
                                 cbBarrio.setValue(cliente.getBarrio());
                                 txtNumTelefono.setText(cliente.getNum_telefono());
-
                                 btnGuardar.setText("Actualizar");
+
                                 btnGuardar.setOnAction(event1 -> {
                                     actualizarCliente(cliente);
                                     llenarClientes();

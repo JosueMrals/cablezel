@@ -121,7 +121,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </ComboBox>
-   <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" stylesheets="@../css/style.css">
+   <TableView fx:id="tvClientes" layoutX="30.0" layoutY="480.0" prefHeight="225.0" prefWidth="1084.0" styleClass="tabla">
       <columns>
          <TableColumn fx:id="colCedula" prefWidth="165.0" resizable="false" style="-fx-background-color: White;" text="Nº de Cedula" />
          <TableColumn fx:id="colNombre" prefWidth="253.0" resizable="false" style="-fx-background-color: White;" text="Nombre Completo" />

@@ -52,11 +52,6 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtCantidadTv" layoutX="20.0" layoutY="240.0" prefHeight="25.0" prefWidth="300.0" style="-fx-border-style: none; -fx-background-color: white;">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
             <TextField fx:id="txtDescripcionContrato" alignment="TOP_LEFT" layoutX="30.0" layoutY="368.0" prefHeight="75.0" prefWidth="300.0" promptText="Ingrese una descripcion..." styleClass="labels">
                <font>
                   <Font size="16.0" />
@@ -70,7 +65,8 @@
                   <TableColumn fx:id="colCodigo" prefWidth="65.0" resizable="false" text="Codigo" />
                   <TableColumn fx:id="colTipoContrato" prefWidth="130.0" resizable="false" text="Tipo de Contrato" />
                   <TableColumn fx:id="colCantidadTv" prefWidth="145.0" resizable="false" text="Nro de Televisores" />
-                  <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="358.0" resizable="false" text="Descripcion" />
+                  <TableColumn fx:id="colDescripcionTipoContrato" prefWidth="316.0" resizable="false" text="Descripcion" />
+                  <TableColumn fx:id="colAccion" prefWidth="50.0" resizable="false" />
                </columns>
             </TableView>
             <TextField fx:id="txtBuscarTC" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un tipo de contrato" styleClass="labels">
@@ -105,7 +101,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCantidadTv1" layoutX="30.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese la cantidad de televisores..." styleClass="labels">
+            <TextField fx:id="txtCantidadTv" layoutX="30.0" layoutY="243.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese la cantidad de televisores..." styleClass="labels">
                <font>
                   <Font size="16.0" />
                </font>
@@ -163,7 +159,8 @@
             <TableView fx:id="tvBarrios" layoutX="400.0" layoutY="155.0" prefHeight="338.0" prefWidth="707.0" styleClass="BuscarClientes">
                <columns>
                   <TableColumn fx:id="colNombreBarrio" prefWidth="212.0" resizable="false" text="Nombre del Barrio" />
-                  <TableColumn fx:id="colDescripcionBarrio" prefWidth="494.0" resizable="false" text="Descripcion del Barrio" />
+                  <TableColumn fx:id="colDescripcionBarrio" prefWidth="441.0" resizable="false" text="Descripcion del Barrio" />
+                  <TableColumn fx:id="colAccion1" prefWidth="50.0" resizable="false" />
                </columns>
 
             </TableView>
