@@ -330,7 +330,7 @@ public class FacturarController implements Initializable {
                         .toString())
                 );
 
-                facturaSecundariaController.recibirDatos(facturarController, datos, totalFactura);
+                facturaSecundariaController.recibirDatos(facturarController, datos);
 
                 // se realiza un pago antes de pasar a la otra ventana
                 //realizarPago();

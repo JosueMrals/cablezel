@@ -47,16 +47,21 @@ public class FacturaSecundariaController implements Initializable {
 
     }
 
-    public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos, float total){
+    public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos){
         logger.info("Recibiendo datos de la factura principal");
         logger.info("Datos recibidos: " + datos);
         tvMostrarPagos.setItems(datos);
-        this.total = total;
         this.facturarController = facturarPrincipalController;
 
+        // obtener el total de la factura desde datos
+        for (DetalleFactura detalleFactura : datos) {
+            total += detalleFactura.getTotal_pagar();
+        }
+
+
         lbTotal.setText(String.valueOf(total));
-        lbDescuento.setText(String.valueOf(total * 0.10));
-        lbSubTotal.setText(String.valueOf(total - (total * 0.10)));
+        lbDescuento.setText(String.valueOf(0.0));
+        lbSubTotal.setText(String.valueOf(total ));
 
     }
 
@@ -64,6 +69,14 @@ public class FacturaSecundariaController implements Initializable {
     public void btCompletarClick(ActionEvent actionEvent) {
         // pagar
         facturarController.realizarPago();
+
+        // alertar de pago realizado
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pago realizado");
+        alert.setHeaderText("Pago realizado");
+        alert.setContentText("El pago se ha realizado correctamente");
+        alert.showAndWait();
+
         // cerrar la ventana actual
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
