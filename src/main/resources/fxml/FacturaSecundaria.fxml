@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="581.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturaSecundariaController">
-   <Pane prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: #cccccc;" />
+<AnchorPane prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.FacturaSecundariaController">
+   <Pane prefHeight="41.0" prefWidth="1126.0" style="-fx-background-color: #cccccc;" />
    <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
-      <Pane prefHeight="499.0" prefWidth="825.0" style="-fx-border-style: none;">
+      <Pane prefHeight="633.0" prefWidth="1121.0" style="-fx-border-style: none;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-         <Pane layoutX="11.0" layoutY="9.0" prefHeight="208.0" prefWidth="795.0" style="-fx-border-color: #666666;">
+         <Pane layoutX="11.0" layoutY="9.0" prefHeight="175.0" prefWidth="1093.0" style="-fx-border-color: #666666;">
             <Label alignment="CENTER" layoutX="20.0" layoutY="7.0" prefHeight="20.0" prefWidth="111.0" style="-fx-background-color: #666666;" text="Cliente y Fecha" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -29,7 +29,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtDireccion" accessibleRole="TEXT_FIELD" layoutX="22.0" layoutY="113.0" prefHeight="68.0" prefWidth="355.0">
+            <TextArea fx:id="txtDireccion" accessibleRole="TEXT_FIELD" layoutX="22.0" layoutY="113.0" prefHeight="41.0" prefWidth="583.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -37,17 +37,17 @@
                   <Font size="13.0" />
                </font>
             </TextArea>
-            <Label layoutX="418.0" layoutY="35.0" text="Fecha de ultima factura">
+            <Label layoutX="631.0" layoutY="35.0" text="Fecha de ultima factura">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="604.0" layoutY="35.0" text="No. de Factura">
+            <Label layoutX="905.0" layoutY="35.0" text="No. de Factura">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField editable="false" layoutX="606.0" layoutY="59.0">
+            <TextField fx:id="txtNumFactura" editable="false" layoutX="905.0" layoutY="58.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -55,57 +55,101 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-            <Label layoutX="418.0" layoutY="89.0" text="Nota descriptiva">
+            <Label layoutX="632.0" layoutY="89.0" text="Nota descriptiva">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField editable="false" layoutX="420.0" layoutY="58.0" prefHeight="26.0" prefWidth="155.0">
+            <TextField fx:id="txtFechaFactura" editable="false" layoutX="631.0" layoutY="59.0" prefHeight="27.0" prefWidth="259.0">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextArea layoutX="418.0" layoutY="113.0" prefHeight="68.0" prefWidth="355.0" promptText="Escriba una nota (Opcional)">
+            <TextArea layoutX="632.0" layoutY="113.0" prefHeight="41.0" prefWidth="435.0" promptText="Escriba una nota (Opcional)">
                <font>
                   <Font size="13.0" />
                </font>
             </TextArea>
-            <TextField fx:id="txtCliente" layoutX="22.0" layoutY="59.0" prefHeight="25.0" prefWidth="355.0">
+            <TextField fx:id="txtCliente" layoutX="22.0" layoutY="59.0" prefHeight="27.0" prefWidth="582.0">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
          </Pane>
-         <Pane layoutX="11.0" layoutY="240.0" prefHeight="238.0" prefWidth="795.0" style="-fx-border-color: #666666;">
+         <Pane layoutX="11.0" layoutY="200.0" prefHeight="248.0" prefWidth="1093.0" style="-fx-border-color: #666666;">
             <Label alignment="CENTER" layoutX="20.0" layoutY="11.0" prefHeight="20.0" prefWidth="152.0" style="-fx-background-color: #666666;" text="Contrato del Cliente" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="tvMostrarPagos" layoutX="20.0" layoutY="43.0" prefHeight="137.0" prefWidth="748.0">
+            <TableView fx:id="tvMostrarPagos" layoutX="20.0" layoutY="43.0" prefHeight="185.0" prefWidth="1054.0">
               <columns>
-                <TableColumn fx:id="colN1" prefWidth="135.0" text="Servicio" />
-                <TableColumn fx:id="colN2" prefWidth="244.0" text="Cliente" />
-                  <TableColumn fx:id="colN3" prefWidth="103.0" text="Fecha de pago" />
-                  <TableColumn fx:id="colN4" prefWidth="77.0" text="Estado" />
-                  <TableColumn fx:id="colN5" prefWidth="89.0" text="Total" />
+                <TableColumn fx:id="colN1" prefWidth="260.0" text="Servicio" />
+                <TableColumn fx:id="colN2" prefWidth="269.0" text="Cliente" />
+                  <TableColumn fx:id="colN3" prefWidth="128.0" text="Fecha de pago" />
+                  <TableColumn fx:id="colN4" prefWidth="252.0" text="Estado" />
+                  <TableColumn fx:id="colN5" prefWidth="127.0" text="Total" />
               </columns>
             </TableView>
          </Pane>
+         <Pane layoutX="14.0" layoutY="465.0" prefHeight="143.0" prefWidth="1093.0" style="-fx-border-color: #666666;">
+            <children>
+               <Label alignment="CENTER" layoutX="20.0" layoutY="11.0" prefHeight="20.0" prefWidth="152.0" style="-fx-background-color: #666666;" text="Detalles Generales" textFill="WHITE">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="731.0" layoutY="31.0" style="-fx-font-weight: bold;" text="Subtotal">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+               <Label layoutX="719.0" layoutY="62.0" style="-fx-font-weight: bold;" text="Descuento">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+               <Label layoutX="746.0" layoutY="102.0" style="-fx-font-weight: bold;" text="Total">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+               <Label fx:id="lbSubTotal" layoutX="803.0" layoutY="31.0" text="C$ 0.0">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+               <Label fx:id="lbDescuento" layoutX="817.0" layoutY="62.0" text="0">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+               <Label fx:id="lbTotal" layoutX="806.0" layoutY="102.0" text="C$ 0.0">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Label>
+            </children>
+         </Pane>
       </Pane>
    </ScrollPane>
-   <Pane layoutY="42.0" prefHeight="41.0" prefWidth="837.0" style="-fx-background-color: white;">
-      <Label layoutX="13.0" layoutY="8.0" text="Nueva Factura">
+   <Pane layoutY="42.0" prefHeight="41.0" prefWidth="1126.0" style="-fx-background-color: white;">
+      <Label layoutX="14.0" layoutY="7.0" text="Nueva Factura">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="btFacturar" alignment="CENTER" layoutX="691.0" layoutY="5.0" mnemonicParsing="false" onAction="#btCompletarClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Completar" textFill="WHITE">
+      <Button fx:id="btFacturar" alignment="CENTER" layoutX="985.0" layoutY="6.0" mnemonicParsing="false" onAction="#btCompletarClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Completar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="btImprimir" alignment="CENTER" layoutX="568.0" layoutY="5.0" mnemonicParsing="false" onAction="#btImprimirClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Imprimir" textFill="WHITE">
+      <Button fx:id="btImprimir" alignment="CENTER" layoutX="856.0" layoutY="6.0" mnemonicParsing="false" onAction="#btImprimirClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Imprimir" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btImprimir1" alignment="CENTER" layoutX="728.0" layoutY="5.0" mnemonicParsing="false" onAction="#btImprimirClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

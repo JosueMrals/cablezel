@@ -2,6 +2,7 @@ package com.josue.view;
 
 import com.josue.modelo.Contrato;
 import com.josue.modelo.DetalleFactura;
+import com.josue.reportes.Reportes;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class FacturaSecundariaController implements Initializable {
@@ -30,18 +32,31 @@ public class FacturaSecundariaController implements Initializable {
     public Button btImprimir;
     public TextArea txtDireccion;
     public TextField txtCliente;
+    public TextField txtNumFactura;
+    public TextField txtFechaFactura;
+    public TextField txtNota;
+    public Label lbTotal;
+    public Label lbDescuento;
+    public Label lbSubTotal;
     FacturarController facturarController;
+
+    float total;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos){
+    public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos, float total){
         logger.info("Recibiendo datos de la factura principal");
         logger.info("Datos recibidos: " + datos);
         tvMostrarPagos.setItems(datos);
+        this.total = total;
         this.facturarController = facturarPrincipalController;
+
+        lbTotal.setText(String.valueOf(total));
+        lbDescuento.setText(String.valueOf(total * 0.10));
+        lbSubTotal.setText(String.valueOf(total - (total * 0.10)));
 
     }
 
@@ -55,6 +70,32 @@ public class FacturaSecundariaController implements Initializable {
         stage.close();
     }
 
-    public void btImprimirClick(ActionEvent actionEvent) {
+    public void btImprimirClick(ActionEvent actionEvent) throws Exception {
+        // HashMap para los parametros del reporte
+        HashMap<String, Object> parametros = new HashMap<>();
+
+        // obtener los datos de los detalles de la factura
+        ObservableList<DetalleFactura> detalles = tvMostrarPagos.getItems();
+
+        // obtener el cliente
+        String cliente = txtCliente.getText();
+        String direccion = txtDireccion.getText();
+
+        // obtener la factura
+        String factura = txtNumFactura.getText();
+
+        // obtener la fecha
+        String fecha = txtFechaFactura.getText();
+
+        // establecer los parametros
+        parametros.put("cliente", cliente);
+        parametros.put("direccion", direccion);
+        parametros.put("factura", factura);
+        parametros.put("fecha", fecha);
+        parametros.put("detalles", detalles);
+
+        // imprimir el reporte
+        Reportes.generarReporte("reportes/Productos.jrxml", parametros);
+
     }
 }

@@ -51,6 +51,8 @@ public class FacturarController implements Initializable {
     Usuario usuario;
     FacturarController facturarController = this;
 
+    public float totalFactura = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clientesAutocomplete = GlobalUtil.obtenerClientes();
@@ -244,10 +246,12 @@ public class FacturarController implements Initializable {
                     HibernateUtil.getSessionFactory());
             detallePagoService.save(detallePago);
         }
-
+        totalFactura = totalPagar;
         // Actualizar el total a pagar
         pagoId.setTotal_pagar(totalPagar);
         pagoService.update(pagoId);
+
+
 
         // Actualizar el estado de la factura
         for (DetalleFactura detalleFactura1 : detalleFacturasPagar) {
@@ -292,9 +296,21 @@ public class FacturarController implements Initializable {
                         tvBuscarClientes1.getItems().get(0).getFactura().getCliente().getPrimer_apellido() + " " +
                         tvBuscarClientes1.getItems().get(0).getFactura().getCliente().getSegundo_apellido();
 
+                // obtener fecha de factura
+                String fechaFactura = tvBuscarClientes1.getItems().get(0).getFactura().getFecha_factura().toString();
+
+                // Obtener el total a pagar
+
                 FacturaSecundariaController facturaSecundariaController = loader.getController();
                 //mostrar el nombre del cliente en txtCliente
                 facturaSecundariaController.txtCliente.setText(clientePagado);
+                //mostrar la fecha de la factura en txtFecha
+                facturaSecundariaController.txtFechaFactura.setText(fechaFactura);
+
+
+                // establecer el id de factura
+                String idFactura = String.valueOf(tvBuscarClientes1.getItems().get(0).getFactura().getId());
+                facturaSecundariaController.txtNumFactura.setText(idFactura);
 
                 facturaSecundariaController.colN1.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getServicio()
                         .getNombre()));
@@ -314,10 +330,10 @@ public class FacturarController implements Initializable {
                         .toString())
                 );
 
-                facturaSecundariaController.recibirDatos(facturarController, datos);
+                facturaSecundariaController.recibirDatos(facturarController, datos, totalFactura);
 
                 // se realiza un pago antes de pasar a la otra ventana
-                realizarPago();
+                //realizarPago();
 
                 Stage stage = new Stage();
                 stage.setTitle("Facturar");
