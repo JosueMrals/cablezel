@@ -1,11 +1,10 @@
 package com.josue.modelo;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-
+@Entity
 @Table(name = "detalle_pago")
+
 public class DetallePago extends Identificador{
 
     //Relation with Pago
@@ -21,19 +20,6 @@ public class DetallePago extends Identificador{
         this.pago = pago;
     }
 
-    //Relation with Factura
-    @ManyToOne
-    @JoinColumn(name = "factura_id", referencedColumnName = "id")
-    private Factura factura;
-
-    public Factura getFactura() {
-        return factura;
-    }
-
-    public void setFactura(Factura factura) {
-        this.factura = factura;
-    }
-
     //Relation with DetalleFactura
     @ManyToOne
     @JoinColumn(name = "detalle_factura_id", referencedColumnName = "id")
@@ -47,5 +33,15 @@ public class DetallePago extends Identificador{
         this.detalleFactura = detalleFactura;
     }
 
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
 }

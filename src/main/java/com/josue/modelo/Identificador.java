@@ -34,4 +34,5 @@ public abstract class Identificador {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
 }

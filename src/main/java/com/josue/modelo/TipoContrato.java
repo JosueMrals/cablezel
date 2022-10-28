@@ -68,7 +68,8 @@ public class TipoContrato extends Identificador implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion, String cantidad_tv) {
+    public TipoContrato(String cod_tipoContrato, String tipo_contrato, String descripcion,
+                        Servicio servicio, String cantidad_tv) {
         this.cod_tipocontrato = cod_tipoContrato;
         this.tipo_contrato = tipo_contrato;
         this.descripcion = descripcion;
@@ -78,7 +79,7 @@ public class TipoContrato extends Identificador implements Serializable {
 
     @Override
     public String toString() {
-        return getId() + " " + tipo_contrato;
+        return tipo_contrato;
     }
 
 }

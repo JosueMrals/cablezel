@@ -5,71 +5,103 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ContratoController">
+<AnchorPane prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Contratos.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ContratoController">
    <children>
-      <Label layoutX="102.0" layoutY="33.0" text="Contrato ">
+      <Label layoutX="96.0" layoutY="18.0" text="Contrato ">
          <font>
-            <Font size="24.0" />
+            <Font size="30.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="107.0" text="Fecha de contrato ">
+      <Label layoutX="30.0" layoutY="214.0" text="Fecha de contrato ">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNombreCliente" layoutX="30.0" layoutY="265.0" prefHeight="27.0" prefWidth="374.0">
+      <TextField fx:id="txtNombreCliente" layoutX="30.0" layoutY="125.0" prefHeight="27.0" prefWidth="374.0" promptText="Josue Naun Morales Alvarez" styleClass="labels">
          <font>
             <Font size="16.0" />
          </font></TextField>
-      <Label layoutX="30.0" layoutY="235.0" text="Nombre del cliente ">
+      <Label layoutX="30.0" layoutY="100.0" text="Nombre del cliente ">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dpFechacontrato" layoutX="30.0" layoutY="134.0" prefHeight="27.0" prefWidth="316.0">
+      <DatePicker fx:id="dpFechacontrato" layoutX="30.0" layoutY="239.0" prefHeight="27.0" prefWidth="387.0" promptText="Seleccione una fecha" styleClass="labels">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></DatePicker>
-      <TextArea fx:id="txtDescripcion" layoutX="30.0" layoutY="338.0" prefHeight="84.0" prefWidth="374.0">
+      <TextArea fx:id="txtDescripcion" layoutX="30.0" layoutY="296.0" prefHeight="84.0" prefWidth="387.0" promptText="Descripcion (Opcional)" styleClass="labels">
          <font>
             <Font size="16.0" />
          </font></TextArea>
-      <Label layoutX="30.0" layoutY="310.0" text="Descripcion ">
+      <Label layoutX="30.0" layoutY="271.0" text="Descripcion ">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="170.0" text="Tipo de Contrato">
+      <Label layoutX="30.0" layoutY="157.0" text="Tipo de Contrato">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbTipocontrato" layoutX="30.0" layoutY="201.0" prefHeight="25.0" prefWidth="316.0">
+      <ComboBox fx:id="cbTipocontrato" layoutX="30.0" layoutY="182.0" onMouseClicked="#verificarTipoContrato" prefHeight="25.0" prefWidth="387.0" promptText="Selecione un tipo de contrato" styleClass="labels">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <Button layoutX="246.0" layoutY="441.0" mnemonicParsing="false" onAction="#registrarContratos" prefHeight="43.0" prefWidth="158.0" text="Agregar contrato ">
+      <Button fx:id="btnGuardar" layoutX="428.0" layoutY="342.0" mnemonicParsing="false" onAction="#registrarContratos" prefHeight="35.0" prefWidth="115.0" styleClass="botones" text="Agregar">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <TableView fx:id="tvContratos" layoutX="456.0" layoutY="107.0" pickOnBounds="false" prefHeight="379.0" prefWidth="638.0">
+      <TableView fx:id="tvContratos" layoutX="30.0" layoutY="481.0" pickOnBounds="false" prefHeight="215.0" prefWidth="1084.0" styleClass="tabla">
         <columns>
-          <TableColumn fx:id="colFecha" prefWidth="113.0" text="Fecha" />
-          <TableColumn fx:id="colTipo" prefWidth="106.0" text="Tipo" />
-            <TableColumn fx:id="colCliente" prefWidth="203.0" text="Cliente" />
-            <TableColumn fx:id="colDescripcion" prefWidth="215.0" text="Descripcion" />
+          <TableColumn fx:id="colFecha" editable="false" prefWidth="181.0" text="Fecha" />
+          <TableColumn fx:id="colTipo" editable="false" prefWidth="162.0" text="Tipo de contrato" />
+            <TableColumn fx:id="colCliente" editable="false" prefWidth="303.0" text="Cliente" />
+            <TableColumn fx:id="colDescripcion" editable="false" prefWidth="385.0" text="Descripcion" />
+            <TableColumn fx:id="colAccion" editable="false" prefWidth="51.0" />
         </columns>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TableView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="36.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/nuevos/contrato.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="30.0" layoutY="402.0" prefHeight="5.0" prefWidth="1084.0" style="-fx-background-color: black;" />
+      <Label layoutX="30.0" layoutY="415.0" text="Lista de los contratos">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBuscarContrato" layoutX="30.0" layoutY="443.0" prefWidth="387.0" promptText="Buscar un contrato para un cliente" styleClass="labels">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnBuscarContrato" layoutX="434.0" layoutY="442.0" mnemonicParsing="false" onAction="#buscarContrato" style="-fx-background-color: none;">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

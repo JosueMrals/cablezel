@@ -1,22 +1,13 @@
 package com.josue.util;
 
-import com.josue.modelo.Cliente;
+import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GlobalUtil {
 
-    /**
-     * crear metodo estatico que retorna una lista de clientes
-     *
-     * @return string[]
-     */
     public static String[] obtenerClientes() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
         ObservableList<Cliente> listaClientes = FXCollections.observableArrayList(clienteService.getAll());
@@ -26,6 +17,77 @@ public class GlobalUtil {
                     + " " + listaClientes.get(i).getPrimer_apellido() + " " + listaClientes.get(i).getSegundo_apellido();
         }
         return clientes;
+    }
+
+    public static String[] obtenerCedula() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        ObservableList<Cliente> listaClientesCedula = FXCollections.observableArrayList(clienteService.getAll());
+        String[] clientes = new String[listaClientesCedula.size()];
+        for (int i = 0; i < listaClientesCedula.size(); i++) {
+            clientes[i] = listaClientesCedula.get(i).getNum_cedula();
+        }
+        return clientes;
+    }
+
+    public static String[] obtenerBarrios() {
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Barrio> listaBarrios = FXCollections.observableArrayList(barrioService.getAll());
+        String[] barrios = new String[listaBarrios.size()];
+        for (int i = 0; i < listaBarrios.size(); i++) {
+            barrios[i] = listaBarrios.get(i).getNombre_barrio();
+        }
+        return barrios;
+    }
+
+    public static String[] obtenerTipoContrato() {
+        IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+        ObservableList<TipoContrato> listaTipoContrato = FXCollections.observableArrayList(tipoContratoService.getAll());
+        String[] tipoContrato = new String[listaTipoContrato.size()];
+        for (int i = 0; i < listaTipoContrato.size(); i++) {
+            tipoContrato[i] = listaTipoContrato.get(i).getTipo_contrato();
+        }
+        return tipoContrato;
+    }
+
+    public static String[] obtenerContratos() {
+        IGenericService< Contrato> contratoService = new GenericServiceImpl<>( Contrato.class, HibernateUtil.getSessionFactory());
+        ObservableList< Contrato> listaContratos = FXCollections.observableArrayList(contratoService.getAll());
+        String[] contratos = new String[listaContratos.size()];
+        for (int i = 0; i < listaContratos.size(); i++) {
+            contratos[i] = listaContratos.get(i).getCliente().getPrimer_nombre() + " " + listaContratos.get(i).getCliente().getSegundo_nombre()
+                    + " " + listaContratos.get(i).getCliente().getPrimer_apellido() + " " + listaContratos.get(i).getCliente().getSegundo_apellido();
+        }
+        return contratos;
+    }
+
+
+    public static ObservableList<Cliente> getClientes() {
+        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(clienteService.getAll());
+    }
+
+    public static ObservableList<Servicio> getServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(servicioService.getAll());
+    }
+
+    public static ObservableList<TipoContrato> getTipoContratos() {
+        IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(tipoContratoService.getAll());
+    }
+
+    public static ObservableList<Barrio> getBarrios() {
+        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(barrioService.getAll());
+    }
+
+    public static ObservableList<Contrato> getContratos() {
+        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(contratoService.getAll());
     }
 
 }

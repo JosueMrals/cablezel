@@ -1,5 +1,6 @@
 package com.josue.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 public class PagoController implements Initializable {
@@ -10,5 +11,7 @@ public class PagoController implements Initializable {
     }
 
 
+    public void imprimirPagos(ActionEvent actionEvent) {
 
+    }
 }

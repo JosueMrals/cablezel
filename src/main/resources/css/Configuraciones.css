@@ -1,4 +1,90 @@
-#btnLimpiarContrato, #btnGuardarContrato, #btnEditarContrato, #btnGuardarBarrio {
-    -fx-background-color: white;
-    -fx-border-style: none;
+#btnGuardarContrato {
+    -fx-text-fill: white;
+    -fx-padding: 0.5em 1.5em;
+    -fx-font-size: 15px;
+    -fx-border-radius: 0.5em;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, 6, 6);
+}
+
+#btnGuardarContrato:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, -5, -5);
+}
+
+.labels {
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: black;
+    -fx-padding: 0 0 0.5px -0.5px;
+}
+
+.BuscarClientes .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #0D54EC, #0E2556);
+    -fx-border-radius: 7px 7px 0px 0px;
+    -fx-padding: 0 0 5px 0;
+}
+
+.BuscarClientes {
+    -fx-background-color: transparent;
+}
+
+.BuscarClientes .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.BuscarClientes .corner {
+    -fx-background-color: transparent;
+}
+
+.BuscarClientes .column-header {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-background-color: #FFFFFF;
+}
+
+.BuscarClientes .table-row-cell {
+    -fx-font-size: 14px;
+}
+
+.BuscarClientes .table-row-cell:hover {
+    -fx-background-color: #595F6C;
+    -fx-text-background-color: red;
+}
+
+.BuscarClientes .table-row-cell:odd {
+    -fx-background-color: #93f9b911;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.BuscarClientes .table-row-cell:even {
+    -fx-background-color: #1dbbdd11;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.BuscarClientes .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.BuscarClientes .virtual-flow .scroll-bar:vertical,
+.BuscarClientes .virtual-flow .scroll-bar:vertical .track,
+.BuscarClientes .virtual-flow .scroll-bar:vertical .track-background,
+.BuscarClientes .virtual-flow .scroll-bar:horizontal,
+.BuscarClientes .virtual-flow .scroll-bar:horizontal .track,
+.BuscarClientes .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.BuscarClientes .virtual-flow .scroll-bar .increment-button,
+.BuscarClientes .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.BuscarClientes .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #0D54EC, #0E2556);
 }

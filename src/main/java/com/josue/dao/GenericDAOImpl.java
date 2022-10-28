@@ -18,9 +18,14 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 
     @Override
     public T get(Class<T> cl, Integer id) {
+        return null;
+    }
+
+    @Override
+    public T get(Class<T> cl, Long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        T element = (T) session.get(cl, id);
+        T element = session.get(cl, id);
         session.getTransaction().commit();
         return element;
     }
@@ -73,4 +78,5 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 
         return result;
     }
+
 }

@@ -3,8 +3,7 @@ package com.josue.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "clientes")
-
+@Table(name = "clientes")
 public class Cliente extends Identificador{
 
     //Relation to Barrio table
@@ -16,19 +15,6 @@ public class Cliente extends Identificador{
 
     public void setBarrio(Barrio barrio) {
         this.barrio = barrio;
-    }
-
-    //Relation to Contrato table
-    @ManyToOne
-    @JoinColumn(name = "ContratoId", referencedColumnName = "id")
-    private Contrato contrato;
-
-    public Contrato getContrato() {
-        return contrato;
-    }
-
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
     }
 
     //Cliente table
@@ -111,7 +97,21 @@ public class Cliente extends Identificador{
 
     @Override
     public String toString() {
-        return "Cliente " + getId() + ": " + getPrimer_nombre() + " " + getSegundo_nombre() + " " + getPrimer_apellido() + " " + getSegundo_apellido();
+        return getPrimer_nombre() + " "
+                + getSegundo_nombre() + " " + getPrimer_apellido() + " "
+                + getSegundo_apellido();
+    }
+    public Cliente(Barrio barrioId, String num_cedula, String primer_nombre,
+                   String segundo_nombre, String primer_apellido, String segundo_apellido, String direccion,
+                   String num_telefono) {
+        this.barrio = barrioId;
+        this.num_cedula = num_cedula;
+        this.primer_nombre = primer_nombre;
+        this.segundo_nombre = segundo_nombre;
+        this.primer_apellido = primer_apellido;
+        this.segundo_apellido = segundo_apellido;
+        this.direccion = direccion;
+        this.num_telefono = num_telefono;
     }
 
 }

@@ -1,10 +1,10 @@
 package com.josue.modelo;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table (name = "pagos")
-
 public class Pago extends Identificador{
 
     //Relation with Usuario
@@ -13,7 +13,7 @@ public class Pago extends Identificador{
     private Usuario usuario;
 
     @Column (name = "fecha_pago")
-    private String fecha_pago;
+    private LocalDate fecha_pago;
 
     @Column(name = "total_pagar")
     private Float total_pagar;
@@ -22,11 +22,11 @@ public class Pago extends Identificador{
     public Usuario getUsuario() { return usuario; }
     public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
-    public String getFecha_pago() {
+    public LocalDate getFecha_pago() {
         return fecha_pago;
     }
 
-    public void setFecha_pago(String fecha_pago) {
+    public void setFecha_pago(LocalDate fecha_pago) {
         this.fecha_pago = fecha_pago;
     }
 
@@ -36,6 +36,19 @@ public class Pago extends Identificador{
 
     public void setTotal_pagar(Float total_pagar) {
         this.total_pagar = total_pagar;
+    }
+
+    public String toString(){
+        return "Pago{" +
+                "id=" + getId() +
+                ", usuario=" + usuario +
+                ", fecha_pago=" + fecha_pago +
+                ", total_pagar=" + total_pagar +
+                '}';
+    }
+
+    public Pago getMe(){
+        return this;
     }
 
 }
