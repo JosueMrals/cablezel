@@ -101,7 +101,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
             contratos.forEach(contrato -> {
                 Cliente cliente = contrato.getCliente();
-                if (!clientes.contains(cliente)) {
+                if (!clientes.contains(cliente) && contrato.getTipocontrato().getServicio().getNombre().equals("TV MENSUAL")) {
                     clientes.add(cliente);
                 }
             });
@@ -116,7 +116,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
             ObservableList<Cliente> clientesFacturados = FXCollections.observableArrayList();
             facturas.forEach(factura -> {
                 Cliente cliente = factura.getCliente();
-                if (!clientesFacturados.contains(cliente)) {
+                if (!clientesFacturados.contains(cliente) && factura.getEstado().equals("Pagada")) {
                     clientesFacturados.add(cliente);
                 }
             });
@@ -124,7 +124,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
             // Obtener clientes que no han sido facturados
             ObservableList<Cliente> clientesNoFacturados = FXCollections.observableArrayList();
             clientes.forEach(cliente -> {
-                if (!clientesFacturados.contains(cliente)) {
+                if (clientesFacturados.contains(cliente) && !clientesNoFacturados.contains(cliente) && clientes.contains(cliente)) {
                     clientesNoFacturados.add(cliente);
                 }
             });
@@ -156,7 +156,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
                     DetalleFactura detalleFactura = new DetalleFactura();
                     detalleFactura.setFactura(facturaCreada);
                     detalleFactura.setServicio(obtenerServicioCliente(cliente, obtenerContratos()));
-                    detalleFactura.setDescripcion("Servicio de internet");
+                    detalleFactura.setDescripcion("mensual");
                     detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
 
                     detalleFacturaService.save(detalleFactura);

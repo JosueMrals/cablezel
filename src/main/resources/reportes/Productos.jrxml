@@ -37,6 +37,8 @@
 		</conditionalStyle>
 	</style>
 	<subDataset name="DatasetFacturas" uuid="3356b10b-7487-4707-9a09-b84eba6a0ac5">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
@@ -50,8 +52,8 @@
 		<![CDATA[Select clientes.primer_nombre from clientes]]>
 	</queryString>
 	<field name="cliente" class="java.lang.String"/>
-	<field name="Factura" class="java.lang.Long"/>
-	<field name="Usuario" class="java.lang.String"/>
+	<field name="factura" class="java.lang.Long"/>
+	<field name="usuario" class="java.lang.String"/>
 	<field name="subtotal" class="java.lang.String"/>
 	<field name="descuento" class="java.lang.String"/>
 	<field name="total" class="java.lang.String"/>
@@ -106,14 +108,15 @@
 				<reportElement x="600" y="21" width="100" height="30" uuid="37164657-f8db-48de-996f-196d471744e6"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="30" y="0" width="110" height="89" uuid="da20ae1b-05b5-4153-b699-3e36db51aed2"/>
-				<imageExpression><![CDATA["cablezel.png"]]></imageExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="20" y="-8" width="110" height="89" uuid="da20ae1b-05b5-4153-b699-3e36db51aed2"/>
+				<imageExpression><![CDATA["/Users/desarrollo-web/IdeaProjects/cablezel/src/main/resources/images/cable zel.png"]]></imageExpression>
 			</image>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="229" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
 			<staticText>
 				<reportElement x="550" y="20" width="60" height="25" uuid="4470273d-ddc7-4d12-96b9-102ce4562047"/>
 				<textElement textAlignment="Center">
@@ -128,13 +131,6 @@
 				</textElement>
 				<text><![CDATA[Cliente : ____________________]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="270" y="7" width="180" height="25" uuid="dccfb46a-dbd0-4c74-a346-af0dce828800"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RECIBO DE CAJA]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="98" y="12" width="154" height="21" uuid="232270d3-1b1b-4bc4-bed7-5e60370e1d45"/>
 				<textElement>
@@ -147,7 +143,7 @@
 				<textElement>
 					<font size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Factura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{factura}]]></textFieldExpression>
 			</textField>
 			<componentElement>
 				<reportElement x="10" y="60" width="733" height="149" uuid="3450a6c8-5bad-439c-b6ab-c309693b6fe7">
@@ -221,6 +217,15 @@
 				</jr:table>
 			</componentElement>
 		</band>
+		<band height="50">
+			<staticText>
+				<reportElement x="270" y="7" width="180" height="25" uuid="dccfb46a-dbd0-4c74-a346-af0dce828800"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE CAJA]]></text>
+			</staticText>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="96" splitType="Stretch">
@@ -245,7 +250,7 @@
 			</staticText>
 			<textField>
 				<reportElement x="60" y="62" width="100" height="20" uuid="3752ea5c-3a1d-434e-bbfa-90e907aa8629"/>
-				<textFieldExpression><![CDATA[$F{Usuario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="628" y="21" width="100" height="17" uuid="46bb8268-4b66-44d2-8817-cc004d8a8d4c"/>
@@ -257,7 +262,7 @@
 			</textField>
 			<textField>
 				<reportElement x="629" y="60" width="100" height="17" uuid="f684e1a8-23ab-48a4-98ea-89c6bb826c39"/>
-				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

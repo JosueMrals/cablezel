@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table (name = "pagos")
-
 public class Pago extends Identificador{
 
     //Relation with Usuario
@@ -37,6 +36,19 @@ public class Pago extends Identificador{
 
     public void setTotal_pagar(Float total_pagar) {
         this.total_pagar = total_pagar;
+    }
+
+    public String toString(){
+        return "Pago{" +
+                "id=" + getId() +
+                ", usuario=" + usuario +
+                ", fecha_pago=" + fecha_pago +
+                ", total_pagar=" + total_pagar +
+                '}';
+    }
+
+    public Pago getMe(){
+        return this;
     }
 
 }

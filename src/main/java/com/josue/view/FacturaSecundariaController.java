@@ -40,6 +40,8 @@ public class FacturaSecundariaController implements Initializable {
     public Label lbSubTotal;
     FacturarController facturarController;
 
+    public HashMap<String, Object> parametrosFactura = new HashMap<>();
+
     float total;
 
     @Override
@@ -106,9 +108,15 @@ public class FacturaSecundariaController implements Initializable {
         parametros.put("factura", factura);
         parametros.put("fecha", fecha);
         parametros.put("detalles", detalles);
+        parametros.put("total", total);
+        parametros.put("descuento", 0.0);
+        parametros.put("subtotal", total);
+
+        // establecer los parametros de la factura
+        parametrosFactura = parametros;
 
         // imprimir el reporte
-        Reportes.generarReporte("reportes/Productos.jrxml", parametros);
+        //Reportes.generarReporte("reportes/Productos.jrxml", parametrosFactura);
 
     }
 }
