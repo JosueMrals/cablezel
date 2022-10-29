@@ -122,15 +122,17 @@
             <Button fx:id="btBuscarTC" layoutX="745.0" layoutY="119.0" mnemonicParsing="false" onAction="#buscarTC" prefWidth="25.0" style="-fx-background-color: none;">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/lupa.png" />
-                     </image>
+                     <Image url="@../images/lupa.png"/>
                   </ImageView>
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true"
+                       preserveRatio="true">
+               <Image url="@../images/caja-de-texto.png"/>
+            </ImageView>
 
          </AnchorPane>
       </Tab>
@@ -192,6 +194,36 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true"
+                       preserveRatio="true">
+               <Image url="@../images/mapa-de-la-ciudad.png"/>
+            </ImageView>
+         </AnchorPane>
+      </Tab>
+      <Tab text="Usuarios">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true"
+                       preserveRatio="true">
+               <Image url="@../images/programador.png"/>
+            </ImageView>
+            <Label layoutX="92.0" layoutY="23.0" text="Lista de Usuarios" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0"/>
+               </font>
+            </Label>
+         </AnchorPane>
+      </Tab>
+      <Tab text="Respaldo">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="16.0" pickOnBounds="true"
+                       preserveRatio="true">
+               <Image url="@../images/base-de-datos.png"/>
+            </ImageView>
+            <Label layoutX="92.0" layoutY="23.0" text="Respaldo" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0"/>
+               </font>
+            </Label>
          </AnchorPane>
       </Tab>
    </TabPane>

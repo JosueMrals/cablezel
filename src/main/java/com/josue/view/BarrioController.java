@@ -31,6 +31,7 @@ public class BarrioController implements Initializable {
 
     // logger log4j
     private static final Logger logger = Logger.getLogger(String.valueOf(BarrioController.class));
+    public Button btBuscarTC;
     @FXML TextField txtCantidadTv1;
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
