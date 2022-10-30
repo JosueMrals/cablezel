@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
       <Tab text="Tipos de Contratos">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
@@ -78,7 +78,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <Button fx:id="btnGuardarContrato" layoutX="217.0" layoutY="453.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnGuardarContrato" layoutX="217.0" layoutY="453.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="35.0" prefWidth="115.0" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -170,7 +170,7 @@
 
             </TableView>
             <TextField fx:id="txtBuscarBarrio" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un barrio" styleClass="labels" />
-            <Button fx:id="btnGuardarBarrio" layoutX="220.0" layoutY="274.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnGuardarBarrio" layoutX="220.0" layoutY="274.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarBarrio" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
