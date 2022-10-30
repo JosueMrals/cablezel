@@ -5,6 +5,12 @@ import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GlobalUtil {
 
@@ -127,5 +133,21 @@ public class GlobalUtil {
                 .getSessionFactory());
         return FXCollections.observableArrayList(detallePagoService.getAll());
     }
+
+    // Mostrar reportes
+    public static void mostrarReportes(String ruta, String titulo) {
+        FXMLLoader fxmlLoader = new FXMLLoader(GlobalUtil.class.getResource(ruta));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setTitle(titulo);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 }

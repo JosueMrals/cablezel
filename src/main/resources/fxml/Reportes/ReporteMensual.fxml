@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="717.0" prefWidth="1203.0" stylesheets="@../../css/Pagos.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.PagoController">
-    <Label layoutX="92.0" layoutY="23.0" text="Reporte Diario ">
+    <Label layoutX="92.0" layoutY="23.0" text="Reporte Mensual">
         <font>
             <Font size="25.0" />
         </font>
@@ -30,13 +30,13 @@
     <TextField fx:id="txtBuscarCliente" layoutX="37.0" layoutY="101.0" prefHeight="25.0" prefWidth="250.0" promptText="Buscar cliente..." styleClass="labels" />
     <TextField fx:id="txtBuscarServicio" layoutX="360.0" layoutY="101.0" prefHeight="25.0" prefWidth="250.0" promptText="Buscar servicio..." styleClass="labels" />
     <TextField fx:id="txtBuscarUsuario" layoutX="668.0" layoutY="101.0" prefHeight="25.0" prefWidth="250.0" promptText="Buscar usuario..." styleClass="labels" />
-    <Button fx:id="btImprimirPagos" layoutX="982.0" layoutY="97.0" mnemonicParsing="false" onAction="#imprimirPagosDiarios" prefHeight="35.0" prefWidth="173.0" style="-fx-background-color: #1CB800;" text="Imprimir" textFill="#f8f5f5">
+    <Button fx:id="btImprimirPagos" layoutX="982.0" layoutY="97.0" mnemonicParsing="false" onAction="#imprimirPagosMensual" prefHeight="35.0" prefWidth="173.0" style="-fx-background-color: #1CB800;" text="Imprimir" textFill="#f8f5f5">
         <font>
             <Font name="System Bold" size="16.0" />
         </font>
     </Button>
     <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../images/programador.png" />
+        <Image url="@../../images/calendario.png" />
     </ImageView>
     <Button fx:id="btBuscarCliente" layoutX="287.0" layoutY="97.0" mnemonicParsing="false" onAction="#buscarCliente" prefWidth="25.0" style="-fx-background-color: none;">
         <graphic>

@@ -1,5 +1,6 @@
 package com.josue.view;
 
+import com.josue.util.GlobalUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,4 +40,7 @@ public class ReportesController {
         stage.show();
     }
 
+    public void reportesMensual() {
+        GlobalUtil.mostrarReportes("/fxml/Reportes/ReporteMensual.fxml", "Reportes Mensuales");
+    }
 }

@@ -193,4 +193,62 @@ public class PagoController implements Initializable {
             logger.error("Error al llenar la tabla de pagos", e);
         }
     }
+
+    public void imprimirPagosDiarios() throws Exception {
+        HashMap<String, Object> parametros = new HashMap<>();
+
+        ObservableList<DetallePago> detallePagos = GlobalUtil.getDetallePago();
+        ObservableList<Pago> pagosDiarios = FXCollections.observableArrayList();
+        for (DetallePago dp : detallePagos) {
+            if (dp.getPago().getFecha_pago().equals(LocalDate.now())) {
+                pagosDiarios.add(dp.getPago());
+            }
+        }
+        logger.info("Pagos: " + pagosDiarios);
+
+        URL urlLogo = ReportesController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
+        URL olas = ReportesController.class.getClassLoader().getResource( "reportes/waves.jpg") ;
+        BufferedImage urlImage = null;
+        BufferedImage urlImage2 = null;
+        try {
+            urlImage = ImageIO.read(urlLogo);
+            urlImage2 = ImageIO.read(olas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        parametros.put("logo", urlImage);
+        parametros.put("olas", urlImage2);
+
+        Reportes.generarReporte("reportes/Diario.jrxml", parametros, new JRBeanCollectionDataSource(pagosDiarios));
+    }
+
+    public void imprimirPagosMensual() throws Exception {
+        HashMap<String, Object> parametros = new HashMap<>();
+
+        ObservableList<DetallePago> detallePagos = GlobalUtil.getDetallePago();
+        ObservableList<Pago> pagosMensuales = FXCollections.observableArrayList();
+        for (DetallePago dp : detallePagos) {
+            if (dp.getPago().getFecha_pago().getMonth().equals(LocalDate.now().getMonth())) {
+                pagosMensuales.add(dp.getPago());
+            }
+        }
+        logger.info("Pagos: " + pagosMensuales);
+
+        URL urlLogo = ReportesController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
+        URL olas = ReportesController.class.getClassLoader().getResource( "reportes/waves.jpg") ;
+        BufferedImage urlImage = null;
+        BufferedImage urlImage2 = null;
+        try {
+            urlImage = ImageIO.read(urlLogo);
+            urlImage2 = ImageIO.read(olas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        parametros.put("logo", urlImage);
+        parametros.put("olas", urlImage2);
+
+        Reportes.generarReporte("reportes/Mensual.jrxml", parametros, new JRBeanCollectionDataSource(pagosMensuales));
+    }
 }
