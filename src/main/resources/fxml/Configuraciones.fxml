@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
       <Tab text="Tipos de Contratos">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
@@ -273,6 +274,11 @@
                   <Font size="25.0" />
                </font>
             </Label>
+            <ToggleButton fx:id="tbConfigurarServidor" layoutX="812.0" layoutY="29.0" mnemonicParsing="false" onAction="#tbConfigurarServidor" prefHeight="45.0" prefWidth="201.0" style="-fx-background-color: #1CB800;" text="Configurar Servidor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </ToggleButton>
          </AnchorPane>
       </Tab>
    </TabPane>

@@ -8,16 +8,22 @@ import com.josue.util.HibernateUtil;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -31,6 +37,7 @@ public class BarrioController implements Initializable {
     // logger log4j
     private static final Logger logger = LogManager.getLogger(BarrioController.class);
     public Button btBuscarTC;
+    public ToggleButton tbConfigurarServidor;
     public TextField txtUsuario;
     public ComboBox<Rol> cbRol;
     public TableView<Rol> tvRoles;
@@ -522,6 +529,20 @@ public class BarrioController implements Initializable {
             if (u.getNickusuario().equals(usuario)) {
                 usuarioSeleccionado = u;
             }
+        }
+    }
+
+    public void tbConfigurarServidor(ActionEvent actionEvent) {
+        // abrir ConfiguracionSGBD.fxml en un nuevo Stage
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ConfiguracionesSGBD.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Configuración del Servidor");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
