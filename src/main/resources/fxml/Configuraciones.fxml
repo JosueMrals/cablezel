@@ -169,7 +169,7 @@
 
             </TableView>
             <TextField fx:id="txtBuscarBarrio" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un barrio" styleClass="labels" />
-            <Button fx:id="btnGuardarBarrio" layoutX="220.0" layoutY="274.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnGuardarBarrio" layoutX="220.0" layoutY="274.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarTipoContrato" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
