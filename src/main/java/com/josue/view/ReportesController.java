@@ -1,29 +1,13 @@
 package com.josue.view;
 
-import com.josue.modelo.Pago;
-import com.josue.reportes.Reportes;
-import com.josue.service.GenericServiceImpl;
-import com.josue.service.IGenericService;
-import com.josue.util.HibernateUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.ImageInput;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 
 public class ReportesController {
@@ -37,19 +21,12 @@ public class ReportesController {
     }
 
     public void mostrarPagos(MouseEvent mouseEvent) throws Exception {
-        HashMap<String, Object> parametros = new HashMap<>();
-
-        IGenericService<Pago> pagoService = new GenericServiceImpl<>(Pago.class, HibernateUtil
-                .getSessionFactory());
-        ObservableList<Pago> pagos = FXCollections.observableArrayList(pagoService.getAll());
-        log.info("Pagos: " + pagos);
-
-        URL urlLogo = ReportesController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
-        BufferedImage urlImage = ImageIO.read(urlLogo);
-
-        parametros.put("logo", urlImage);
-
-        Reportes.generarReporte("reportes/Pagos.jrxml", parametros, new JRBeanCollectionDataSource(pagos));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Pagos.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Pagos");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 }
