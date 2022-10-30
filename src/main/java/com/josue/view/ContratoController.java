@@ -210,6 +210,8 @@ public class ContratoController implements Initializable {
         IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
                 HibernateUtil.getSessionFactory());
         detalleFacturaService.save(detalleFactura);
+
+
     }
 
     //Obtener el servicio de nombre contrato
