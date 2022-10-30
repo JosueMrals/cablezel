@@ -37,9 +37,7 @@ public class UsuariosController implements Initializable {
             alert.setHeaderText("Error al registrar usuario");
             alert.setContentText("Por favor, complete todos los campos");
             alert.showAndWait();
-            return;
         } else {
-
             //Validar que los datos no se repitan
             IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.
                     getSessionFactory());
@@ -51,7 +49,6 @@ public class UsuariosController implements Initializable {
                 alert.setContentText("El nombre completo ya existe");
                 alert.showAndWait();
             } else {
-
                 //Obtener los datos del formulario
                 String nombrecompleto = txtNombreCompleto.getText();
                 String nombreusuario = txtNombreUsuarios.getText();

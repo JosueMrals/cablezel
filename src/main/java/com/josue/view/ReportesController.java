@@ -1,6 +1,5 @@
 package com.josue.view;
 
-import com.josue.modelo.Contrato;
 import com.josue.modelo.Pago;
 import com.josue.reportes.Reportes;
 import com.josue.service.GenericServiceImpl;
@@ -9,8 +8,6 @@ import com.josue.util.HibernateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.effect.ImageInput;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.logging.log4j.LogManager;
@@ -18,9 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
 import java.net.URL;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class ReportesController {

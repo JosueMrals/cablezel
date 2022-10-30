@@ -1,8 +1,6 @@
 package com.josue.view;
 
-import com.josue.modelo.Barrio;
-import com.josue.modelo.Servicio;
-import com.josue.modelo.TipoContrato;
+import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.GlobalUtil;
@@ -17,12 +15,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by Josue on 09/05/2016.
@@ -30,8 +29,19 @@ import java.util.logging.Logger;
 public class BarrioController implements Initializable {
 
     // logger log4j
-    private static final Logger logger = Logger.getLogger(String.valueOf(BarrioController.class));
+    private static final Logger logger = LogManager.getLogger(BarrioController.class);
     public Button btBuscarTC;
+    public TextField txtUsuario;
+    public ComboBox<Rol> cbRol;
+    public TableView<Rol> tvRoles;
+    public TableColumn<Rol, String> colNick;
+    public TableColumn<Rol, String> colRol;
+    public TableColumn<Rol, String> colDescripcion;
+    public TableColumn<Rol, String> colAccion2;
+    public TextField txtBuscarUsuario;
+    public Button btnBuscarUsuario;
+    public TextArea txtDescripcion;
+    public Button btnGuardarRol;
     @FXML TextField txtCantidadTv1;
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
@@ -56,18 +66,26 @@ public class BarrioController implements Initializable {
     @FXML TextField txtBuscarTC;
     String[] barrioAutoComplete = {};
     String[] tipoContratoAutoComplete = {};
+    String[] rolAutoComplete = {};
     @FXML TableColumn<TipoContrato, String> colAccion;
     @FXML TableColumn<Barrio, String> colAccion1;
+
+    Usuario usuarioSeleccionado;
+    ObservableList<Usuario> listaUsuarios;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         llenarBarrio();
         llenarTipoContrato();
         listarServicios();
+        llenarRoles();
         autoCompletarBarrio();
         autoCompletarTipoContrato();
         addButtonEdit();
         addButtonEditBarrios();
+        autoCompletarRol();
+        verificarServicios();
+        listarUsuarios();
     }
 
     private void addButtonEditBarrios() {
@@ -148,6 +166,26 @@ public class BarrioController implements Initializable {
         txtBuscarTC.clear();
         llenarTipoContrato();
         tvTipoContrato.refresh();
+    }
+
+    public void recargarRol() {
+        txtBuscarUsuario.clear();
+        llenarRoles();
+        tvRoles.refresh();
+    }
+
+    private void llenarRoles() {
+        try {
+            IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil.getSessionFactory());
+            ObservableList<Rol> listaRoles = FXCollections.observableArrayList(rolService.getAll());
+            colNick.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getUsuario().getNickusuario()));
+            colRol.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getNombre()));
+            colDescripcion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getDescripcion()));
+            tvRoles.setItems(listaRoles);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de roles", e);
+        }
+
     }
 
     private void addButtonEdit() {
@@ -242,6 +280,34 @@ public class BarrioController implements Initializable {
         TextFields.bindAutoCompletion(txtBuscarBarrio, barrioAutoComplete);
         llenarBarrio();
         tvBarrios.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    private void autoCompletarRol() {
+        rolAutoComplete = GlobalUtil.obtenerUsuarios();
+        TextFields.bindAutoCompletion(txtBuscarUsuario, rolAutoComplete);
+        llenarRoles();
+        tvRoles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
+    @FXML
+    private void buscarRol() {
+        String rol = txtBuscarUsuario.getText();
+        if (rol.isEmpty()) {
+            llenarRoles();
+        } else {
+            try {
+                ObservableList<Rol> roles = GlobalUtil.getRoles();
+                ObservableList<Rol> rolesFiltrados = FXCollections.observableArrayList();
+                for (Rol r : roles) {
+                    if (r.getNombre().toLowerCase().contains(rol.toLowerCase())) {
+                        rolesFiltrados.add(r);
+                    }
+                }
+                tvRoles.setItems(rolesFiltrados);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -386,6 +452,49 @@ public class BarrioController implements Initializable {
 
     }
 
+    public void listarUsuarios() {
+        rolAutoComplete = GlobalUtil.obtenerUsuarios();
+        listaUsuarios = GlobalUtil.getUsuarios();
+        TextFields.bindAutoCompletion(txtUsuario, rolAutoComplete);
+    }
+
+    @FXML
+    public void guardarRol() {
+        IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class,
+                HibernateUtil.getSessionFactory());
+
+        String usuario = txtUsuario.getText();
+        String roll = String.valueOf(cbRol.getValue());
+        String descripcion = txtDescripcion.getText();
+
+        Usuario usuario1 = null;
+        for (Usuario usuario2 : listaUsuarios) {
+            if (usuario2.getNickusuario().equals(usuario)) {
+                usuario1 = usuario2;
+                usuarioSeleccionado = usuario1;
+            }
+        }
+
+        try{
+            Rol rol = new Rol();
+            rol.setUsuario(usuario1);
+            rol.setNombre(roll);
+            rol.setDescripcion(descripcion);
+            rolService.save(rol);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Rol Ingresado Correctamente." ,
+                    ButtonType.OK);
+            alert.showAndWait();
+
+            llenarRoles();
+
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+
+    }
+
     public ObservableList<Servicio> obtenerServicios() {
         IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
         return FXCollections.observableArrayList(servicioService.getAll());
@@ -404,6 +513,15 @@ public class BarrioController implements Initializable {
             alert.setHeaderText("Lista de Servicios vacía");
             alert.setContentText("Para crear un Tipo de Contrato nuevo primero debe crear un servicio.");
             alert.showAndWait();
+        }
+    }
+
+    public void obtenerUsuarioSeleccionado() {
+        String usuario = txtUsuario.getText();
+        for (Usuario u : listaUsuarios) {
+            if (u.getNickusuario().equals(usuario)) {
+                usuarioSeleccionado = u;
+            }
         }
     }
 }

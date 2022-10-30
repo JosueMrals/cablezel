@@ -92,7 +92,7 @@ public class ClientesController implements Initializable {
     }
 
     public void listarBarrios(){
-        var barrios = obtenerBarrios();
+        var barrios = GlobalUtil.getBarrios();
         cbBarrio.setValue(null);
         cbBarrio.setItems(barrios);
         cbBarrio.setPromptText("Seleccione un barrio");
@@ -224,12 +224,6 @@ public class ClientesController implements Initializable {
             }
             tvClientes.setItems(clientesFiltrados);
         }
-    }
-
-    public ObservableList<Barrio> obtenerBarrios() {
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.
-                getSessionFactory());
-        return FXCollections.observableArrayList(barrioService.getAll());
     }
 
     public void recargar() {

@@ -1,8 +1,6 @@
 package com.josue.view;
 
-import com.josue.modelo.Contrato;
 import com.josue.modelo.DetalleFactura;
-import com.josue.reportes.Reportes;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;

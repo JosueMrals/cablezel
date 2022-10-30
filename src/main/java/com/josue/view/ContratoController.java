@@ -7,7 +7,6 @@ import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,22 +40,18 @@ public class ContratoController implements Initializable {
     @FXML TableColumn<Contrato, String> colTipo;
     @FXML TableColumn<Contrato, String> colCliente;
     @FXML TableView<Contrato> tvContratos;
-
-    String[] clientesAutocomplete = {};
-
     ObservableList<Cliente> listaClientes;
-
     Cliente clienteSeleccionado;
     Usuario usuario;
     Servicio servicioSeleccionado;
-
     @FXML TextField txtBuscarContrato;
     @FXML Button btnBuscarContrato;
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btnGuardar;
 
+    // Autocompletar
     String[] contratosAutocomplete = {};
-
+    String[] clientesAutocomplete = {};
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listarClientes();
@@ -232,7 +227,7 @@ public class ContratoController implements Initializable {
     }
 
     public void listarTipoContrato() {
-        var tipocontratos = obtenerTipoContratos();
+        var tipocontratos = GlobalUtil.getTipoContratos();
         cbTipocontrato.setItems(tipocontratos);
         cbTipocontrato.setValue(null);
         cbTipocontrato.setPromptText("Seleccione un tipo de contrato");
@@ -240,20 +235,8 @@ public class ContratoController implements Initializable {
 
     public void listarClientes(){
         clientesAutocomplete = GlobalUtil.obtenerClientes();
-        listaClientes = obtenerClientesList();
+        listaClientes = GlobalUtil.getClientes();
         TextFields.bindAutoCompletion(txtNombreCliente, clientesAutocomplete);
-    }
-
-    public ObservableList<Contrato> obtenerContratos() {
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(contratoService.getAll());
-    }
-
-    private ObservableList<Cliente> obtenerClientesList() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(clienteService.getAll());
     }
 
     public void llenarContrato() {
@@ -353,12 +336,6 @@ public class ContratoController implements Initializable {
                 clienteSeleccionado = c;
             }
         }
-    }
-
-    public ObservableList<TipoContrato> obtenerTipoContratos() {
-        IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class,
-                HibernateUtil.getSessionFactory());
-        return FXCollections.observableArrayList(tipocontratosService.getAll());
     }
 
     public void verificarTipoContrato(MouseEvent mouseEvent) {

@@ -19,6 +19,16 @@ public class GlobalUtil {
         return clientes;
     }
 
+    public static String[] obtenerServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Servicio> listaServicios = FXCollections.observableArrayList(servicioService.getAll());
+        String[] servicios = new String[listaServicios.size()];
+        for (int i = 0; i < listaServicios.size(); i++) {
+            servicios[i] = listaServicios.get(i).getNombre();
+        }
+        return servicios;
+    }
+
     public static String[] obtenerCedula() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
         ObservableList<Cliente> listaClientesCedula = FXCollections.observableArrayList(clienteService.getAll());
@@ -60,6 +70,16 @@ public class GlobalUtil {
         return contratos;
     }
 
+    public static String[] obtenerUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.getSessionFactory());
+        ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList(usuarioService.getAll());
+        String[] usuarios = new String[listaUsuarios.size()];
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            usuarios[i] = listaUsuarios.get(i).getNickusuario();
+        }
+        return usuarios;
+    }
+
 
     public static ObservableList<Cliente> getClientes() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
@@ -88,6 +108,24 @@ public class GlobalUtil {
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
                 .getSessionFactory());
         return FXCollections.observableArrayList(contratoService.getAll());
+    }
+
+    public static ObservableList<Rol> getRoles() {
+        IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(rolService.getAll());
+    }
+
+    public static ObservableList<Usuario> getUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(usuarioService.getAll());
+    }
+
+    public static ObservableList<DetallePago> getDetallePago() {
+        IGenericService<DetallePago> detallePagoService = new GenericServiceImpl<>(DetallePago.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(detallePagoService.getAll());
     }
 
 }
