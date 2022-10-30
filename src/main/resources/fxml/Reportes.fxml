@@ -98,7 +98,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="39.0" layoutY="497.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="424.0" style="-fx-background-color: #1CB800;" styleClass="Principal" text="Reporte diario" textFill="WHITE">
+            <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="39.0" layoutY="497.0" mnemonicParsing="false" onAction="#pagosDelDia" prefHeight="55.0" prefWidth="424.0" style="-fx-background-color: #1CB800;" styleClass="Principal" text="Reporte diario" textFill="WHITE">
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>

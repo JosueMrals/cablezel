@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 
@@ -53,6 +54,7 @@ public class PagoController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         llenarPagos();
+        llenarPagosDiarios();
         autocompletarCliente();
         autocompletarServicio();
         autocompletarUsuario();
@@ -166,5 +168,29 @@ public class PagoController implements Initializable {
         parametros.put("logo", urlImage);
 
         Reportes.generarReporte("reportes/Pagos.jrxml", parametros, new JRBeanCollectionDataSource(pagos));
+    }
+
+    public void llenarPagosDiarios() {
+        ObservableList<DetallePago> detallePagos = GlobalUtil.getDetallePago();
+        ObservableList<DetallePago> pagosDiarios = FXCollections.observableArrayList();
+        for (DetallePago dp : detallePagos) {
+            if (dp.getPago().getFecha_pago().equals(LocalDate.now())) {
+                pagosDiarios.add(dp);
+            }
+        }
+        try {
+            colId.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getId().toString()));
+            colCliente.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getDetalleFactura().getFactura().getCliente().getPrimer_nombre()
+                    + " " + cellData.getValue().getDetalleFactura().getFactura().getCliente().getSegundo_nombre()
+                    + " " + cellData.getValue().getDetalleFactura().getFactura().getCliente().getPrimer_apellido()
+                    + " " + cellData.getValue().getDetalleFactura().getFactura().getCliente().getSegundo_apellido()));
+            colServicio.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getDetalleFactura().getServicio().getNombre()));
+            colUsuario.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getPago().getUsuario().getNickusuario()));
+            colFecha.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getPago().getFecha_pago().toString()));
+            colTotal.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>( cellData.getValue().getDetalleFactura().getTotal_pagar().toString()));
+            tvPagos.setItems(pagosDiarios);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de pagos", e);
+        }
     }
 }
