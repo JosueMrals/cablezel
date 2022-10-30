@@ -161,7 +161,7 @@ public class ContratoController implements Initializable {
         Servicio serv = new Servicio();
         serv.setNombre("contrato");
         serv.setDescripcion("Servicio de contratos");
-        serv.setPrecio(700.0f);
+        serv.setPrecio(1080.0f);
 
         IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
                 HibernateUtil.getSessionFactory());
