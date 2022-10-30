@@ -49,6 +49,8 @@ public class ContratoController implements Initializable {
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btnGuardar;
 
+    Contrato contratoSeleccionado;
+
     // Autocompletar
     String[] contratosAutocomplete = {};
     String[] clientesAutocomplete = {};
@@ -211,6 +213,46 @@ public class ContratoController implements Initializable {
                 HibernateUtil.getSessionFactory());
         detalleFacturaService.save(detalleFactura);
 
+        // obtener la cantidad de cantidad de tv de tipo de contrato
+        int cantidad = Integer.parseInt(contratoSeleccionado.getTipocontrato().getCantidad_tv());
+
+        // crear factura de tv
+        Factura facturaTv = new Factura();
+        facturaTv.setFecha_factura(LocalDate.now());
+        facturaTv.setUsuario(usuario);
+        facturaTv.setTotal(0.0f);
+        facturaTv.setEstado("pendiente");
+        facturaTv.setCliente(clienteSeleccionado);
+        IGenericService<Factura> facturaTvService = new GenericServiceImpl<>(Factura.class,
+                HibernateUtil.getSessionFactory());
+        facturaTvService.save(facturaTv);
+
+        //Obtener factura creada
+        Factura facturaTvCreada = facturaTvService.getById(facturaTv.getId());
+        System.out.println("Factura creada: " + facturaTvCreada);
+
+        // total de factura TV
+        float total = 0;
+
+        //Crear facturas de servicios de tv instaladas
+        for(int i = 0; i < cantidad; i++) {
+            //Crear detalle de factura
+            DetalleFactura detalleFacturaTv = new DetalleFactura();
+            detalleFacturaTv.setDescripcion("Servicio de tv");
+            detalleFacturaTv.setFactura(facturaTvCreada);
+            detalleFacturaTv.setServicio(contratoSeleccionado.getTipocontrato().getServicio());
+            detalleFacturaTv.setTotal_pagar(contratoSeleccionado.getTipocontrato().getServicio().getPrecio());
+
+            total += contratoSeleccionado.getTipocontrato().getServicio().getPrecio();
+
+            IGenericService<DetalleFactura> detalleFacturaTvService = new GenericServiceImpl<>(DetalleFactura.class,
+                    HibernateUtil.getSessionFactory());
+            detalleFacturaTvService.save(detalleFacturaTv);
+        }
+
+        // actualizar factura con el total de la factura
+        facturaTvCreada.setTotal(total);
+        facturaTvService.update(facturaTvCreada);
 
     }
 
@@ -306,6 +348,9 @@ public class ContratoController implements Initializable {
 
             contratoService.save(co);
 
+            // obtener el contrato recien creado
+            contratoSeleccionado = contratoService.getById(co.getId());
+
             dpFechacontrato.setValue(null);
             txtDescripcion.setText(null);
             cbTipocontrato.setValue(null);
@@ -316,7 +361,6 @@ public class ContratoController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente",
                     ButtonType.OK);
             alert.show();
-
         }
 
     catch(Exception e)
