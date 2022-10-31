@@ -646,7 +646,7 @@ public class BarrioController implements Initializable {
                 logger.info("El fichero existe");
                 StringBuffer fechaArchivo = new StringBuffer();
                 fechaArchivo.append(directorio);
-                fechaArchivo.append("\\");
+                fechaArchivo.append(File.separator);
                 fechaArchivo.append("respaldo" +LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH_mm_ss")));
                 fechaArchivo.append(".sql");
                 logger.info("Fecha del archivo: " + fechaArchivo.toString());

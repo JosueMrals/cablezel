@@ -18,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.criteria.Predicate;
 import java.awt.*;
@@ -28,6 +30,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ConfiguracionSistemaController implements Initializable {
+
+    // crear log de log4j
+    private static final Logger logger = LogManager.getLogger(ConfiguracionSistemaController.class);
     public TextField txtServidor;
     public TextField txtRespaldo;
     public TextField txtPuerto;
@@ -39,6 +44,9 @@ public class ConfiguracionSistemaController implements Initializable {
     public Button btConfigurar;
     public Button btCancelar;
     public ImageView ivAbrirDirectorioFichero;
+    public ImageView ivAbrirDirectorioServidorRespaldo;
+    public TextField txtHerramientaRespaldo;
+    public ImageView ivActivarEdicion;
 
     private Boolean activado = false;
 
@@ -98,6 +106,10 @@ public class ConfiguracionSistemaController implements Initializable {
                     txtRespaldo.setText(configuracionSistema.getValor());
                     txtRespaldo.setEditable(false);
                     break;
+                case "herramientaRespaldo":
+                    txtHerramientaRespaldo.setText(configuracionSistema.getValor());
+                    txtHerramientaRespaldo.setEditable(false);
+                    break;
             }
         });
         return true;
@@ -121,7 +133,7 @@ public class ConfiguracionSistemaController implements Initializable {
         // validar campos vacios
         if (txtServidor.getText().isEmpty() || txtRespaldo.getText().isEmpty() || txtPuerto.getText().isEmpty() ||
                 txtHost.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty() ||
-                txtBaseDatos.getText().isEmpty()) {
+                txtBaseDatos.getText().isEmpty() || txtHerramientaRespaldo.getText().isEmpty()) {
             // mostrar una alerta al usuario
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -139,6 +151,7 @@ public class ConfiguracionSistemaController implements Initializable {
             String usuario = txtUsuario.getText();
             String clave = txtClave.getText();
             String baseDatos = txtBaseDatos.getText();
+            String herramientaRespaldo = txtHerramientaRespaldo.getText();
 
             // guardar en el archivo de configuracion
             IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
@@ -152,13 +165,26 @@ public class ConfiguracionSistemaController implements Initializable {
             configuracionSistemas.add(new ConfiguracionSistema("usuario", usuario));
             configuracionSistemas.add(new ConfiguracionSistema("clave", clave));
             configuracionSistemas.add(new ConfiguracionSistema("baseDatos", baseDatos));
+            configuracionSistemas.add(new ConfiguracionSistema("herramientaRespaldo", herramientaRespaldo));
 
             if (!activado){
+                logger.info("Guardando configuracion del sistema");
+                logger.info("Servidor: " + configuracionSistemas);
                 // guardar en la base de datos
                 configuracionSistemas.forEach(configuracionSistemaService::save);
                 manejadorUsuario.setServidorConfigurado(true);
+                // cerrar la ventana
+                Stage stage = (Stage) btConfigurar.getScene().getWindow();
+                stage.close();
             } else {
+                logger.info("Actualizando configuracion del sistema");
+                logger.info("Servidor: " + configuracionSistemas);
+                // actualizar en la base de datos
                 configuracionSistemas.forEach(configuracionSistemaService::update);
+                manejadorUsuario.setServidorConfigurado(true);
+                // cerrar la ventana
+                Stage stage = (Stage) btConfigurar.getScene().getWindow();
+                stage.close();
             }
         }
 
@@ -171,6 +197,10 @@ public class ConfiguracionSistemaController implements Initializable {
     }
 
     public void abrirDirectorioFichero(MouseEvent mouseEvent) {
+        // obtener el nombre del control del click
+        String nombreControl = ((Node) mouseEvent.getSource()).getId();
+        logger.info("Nombre del control: " + nombreControl);
+
         // obtener el ejecutable del servidor
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar ejecutable del servidor");
@@ -180,7 +210,14 @@ public class ConfiguracionSistemaController implements Initializable {
 
         if (ficheroSeleccionado != null) {
             System.out.println("Fichero seleccionado: " + ficheroSeleccionado.getAbsolutePath());
-            txtServidor.setText(ficheroSeleccionado.getAbsolutePath());
+            switch (nombreControl) {
+                case "ivAbrirDirectorioServidor":
+                    txtServidor.setText(ficheroSeleccionado.getAbsolutePath());
+                    break;
+                case "ivAbrirDirectorioServidorRespaldo":
+                    txtHerramientaRespaldo.setText(ficheroSeleccionado.getAbsolutePath());
+                    break;
+            }
         }
     }
 
@@ -188,6 +225,7 @@ public class ConfiguracionSistemaController implements Initializable {
         if (activado) {
             // activar la edicion de los campos
             txtServidor.setEditable(true);
+            txtHerramientaRespaldo.setEditable(true);
             txtPuerto.setEditable(true);
             txtHost.setEditable(true);
             txtUsuario.setEditable(true);
@@ -207,6 +245,7 @@ public class ConfiguracionSistemaController implements Initializable {
         } else {
             // desactivar la edicion de los campos
             txtServidor.setEditable(false);
+            txtHerramientaRespaldo.setEditable(false);
             txtPuerto.setEditable(false);
             txtHost.setEditable(false);
             txtUsuario.setEditable(false);
