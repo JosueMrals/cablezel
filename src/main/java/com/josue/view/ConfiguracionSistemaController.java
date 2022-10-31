@@ -45,8 +45,8 @@ public class ConfiguracionSistemaController implements Initializable {
     public Button btCancelar;
     public ImageView ivAbrirDirectorioFichero;
     public ImageView ivAbrirDirectorioServidorRespaldo;
-    public TextField txtHerramientaRespaldo;
     public ImageView ivActivarEdicion;
+    public TextField txtHerramientaRestaurar;
 
     private Boolean activado = false;
 
@@ -107,8 +107,8 @@ public class ConfiguracionSistemaController implements Initializable {
                     txtRespaldo.setEditable(false);
                     break;
                 case "herramientaRespaldo":
-                    txtHerramientaRespaldo.setText(configuracionSistema.getValor());
-                    txtHerramientaRespaldo.setEditable(false);
+                    txtHerramientaRestaurar.setText(configuracionSistema.getValor());
+                    txtHerramientaRestaurar.setEditable(false);
                     break;
             }
         });
@@ -133,7 +133,7 @@ public class ConfiguracionSistemaController implements Initializable {
         // validar campos vacios
         if (txtServidor.getText().isEmpty() || txtRespaldo.getText().isEmpty() || txtPuerto.getText().isEmpty() ||
                 txtHost.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty() ||
-                txtBaseDatos.getText().isEmpty() || txtHerramientaRespaldo.getText().isEmpty()) {
+                txtBaseDatos.getText().isEmpty() || txtHerramientaRestaurar.getText().isEmpty()) {
             // mostrar una alerta al usuario
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -151,7 +151,7 @@ public class ConfiguracionSistemaController implements Initializable {
             String usuario = txtUsuario.getText();
             String clave = txtClave.getText();
             String baseDatos = txtBaseDatos.getText();
-            String herramientaRespaldo = txtHerramientaRespaldo.getText();
+            String herramientaRespaldo = txtHerramientaRestaurar.getText();
 
             // guardar en el archivo de configuracion
             IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
@@ -215,7 +215,7 @@ public class ConfiguracionSistemaController implements Initializable {
                     txtServidor.setText(ficheroSeleccionado.getAbsolutePath());
                     break;
                 case "ivAbrirDirectorioServidorRespaldo":
-                    txtHerramientaRespaldo.setText(ficheroSeleccionado.getAbsolutePath());
+                    txtHerramientaRestaurar.setText(ficheroSeleccionado.getAbsolutePath());
                     break;
             }
         }
@@ -225,7 +225,7 @@ public class ConfiguracionSistemaController implements Initializable {
         if (activado) {
             // activar la edicion de los campos
             txtServidor.setEditable(true);
-            txtHerramientaRespaldo.setEditable(true);
+            txtHerramientaRestaurar.setEditable(true);
             txtPuerto.setEditable(true);
             txtHost.setEditable(true);
             txtUsuario.setEditable(true);
@@ -245,7 +245,7 @@ public class ConfiguracionSistemaController implements Initializable {
         } else {
             // desactivar la edicion de los campos
             txtServidor.setEditable(false);
-            txtHerramientaRespaldo.setEditable(false);
+            txtHerramientaRestaurar.setEditable(false);
             txtPuerto.setEditable(false);
             txtHost.setEditable(false);
             txtUsuario.setEditable(false);

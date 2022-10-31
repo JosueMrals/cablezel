@@ -13,12 +13,15 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
@@ -58,6 +61,7 @@ public class BarrioController implements Initializable {
     public Button btBuscarRespaldo;
     public Button btGenerar;
     public ComboBox cbBuscarRespaldo;
+    public ImageView ivBuscarRespaldo;
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
     @FXML TableView<Barrio> tvBarrios;
@@ -88,6 +92,14 @@ public class BarrioController implements Initializable {
     Usuario usuarioSeleccionado;
     ObservableList<Usuario> listaUsuarios;
     ObservableList<ConfiguracionSistema> configuracionSistemas;
+    String herramientaRespaldo = "";
+    String herramienta = "";
+    String host = "";
+    String puerto = "";
+    String usuario = "";
+    String password = "";
+    String baseDatos = "";
+    String directorio = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,6 +121,34 @@ public class BarrioController implements Initializable {
         IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
         configuracionSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
         if (configuracionSistemas.size() > 0) {
+            // cargar configuracion de manera individual
+            for (ConfiguracionSistema configuracionSistema : configuracionSistemas) {
+                if (configuracionSistema.getNombre().equals("servidor")) {
+                    herramienta = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("host")) {
+                    host = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("puerto")) {
+                    puerto = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("usuario")) {
+                    usuario = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("clave")) {
+                    password = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("baseDatos")) {
+                    baseDatos = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("respaldo")) {
+                    directorio = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("herramientaRespaldo")) {
+                    herramientaRespaldo = configuracionSistema.getValor();
+                }
+            }
+
             tbConfigurarServidor.setSelected(true);
         } else {
             tbConfigurarServidor.setSelected(false);
@@ -588,6 +628,17 @@ public class BarrioController implements Initializable {
     }
 
     public void generarNuevoRespaldo(ActionEvent actionEvent) {
+        // comprobar si ha seleccionado una ruta de respaldo
+        if (cbBuscarRespaldo.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha seleccionado una ruta de respaldo");
+            alert.setContentText("Debe seleccionar una ruta de respaldo.\n" +
+                    "Si no tiene una ruta de respaldo, debe crear una nueva.\n" +
+                    "Para crear una nueva ruta de respaldo, debe ir a la opción de Configuración del Servidor.");
+            alert.showAndWait();
+            return;
+        }
         try {
             Runtime runtime = Runtime.getRuntime();
             Process process = null;
@@ -595,38 +646,6 @@ public class BarrioController implements Initializable {
             InputStreamReader inputStreamReader = null;
             BufferedReader reader = null;
             String line = null;
-
-            String herramienta = "";
-            String host = "";
-            String puerto = "";
-            String usuario = "";
-            String password = "";
-            String baseDatos = "";
-            String directorio = "";
-
-            for (ConfiguracionSistema configuracionSistema : configuracionSistemas) {
-                if (configuracionSistema.getNombre().equals("servidor")) {
-                    herramienta = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("host")) {
-                    host = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("puerto")) {
-                    puerto = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("usuario")) {
-                    usuario = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("clave")) {
-                    password = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("baseDatos")) {
-                    baseDatos = configuracionSistema.getValor();
-                }
-                if (configuracionSistema.getNombre().equals("respaldo")) {
-                    directorio = configuracionSistema.getValor();
-                }
-            }
 
             //herramienta = herramienta.replace("\\", "\\\\");
             //directorio = directorio.replace("\\", "\\\\");
@@ -660,7 +679,7 @@ public class BarrioController implements Initializable {
                 }
                 runtime = Runtime.getRuntime();
                 processBuilder = new ProcessBuilder( herramienta, "-f", fechaArchivo.toString(),
-                        "-F", "c", "-Z", "9","-v","-h", host, "-U", usuario, baseDatos);
+                        "-F", "c","-v","-h", host, "-U", usuario, baseDatos);
                 processBuilder.environment().put("PGPASSWORD", password);
                 processBuilder.redirectErrorStream(true);
                 process = processBuilder.start();
@@ -705,6 +724,98 @@ public class BarrioController implements Initializable {
 
 
     public void restaurarBaseDeDatos(ActionEvent actionEvent) {
+        // verificar herramienta de restauración
+        if(herramientaRespaldo.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha configurado la herramienta de restauracion");
+            alert.setContentText("Debe obtener una ruta de la herramienta de restauracion y un fichero.");
+            alert.showAndWait();
+            return;
+        } else {
+            if (txtBuscarRespaldo.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No se ha seleccionado un respaldo");
+                alert.setContentText("Debe seleccionar un respaldo.");
+                alert.showAndWait();
+                return;
+            }
+            try {
+                Runtime runtime = Runtime.getRuntime();
+                Process process = null;
+                ProcessBuilder processBuilder = null;
+                InputStreamReader inputStreamReader = null;
+                BufferedReader reader = null;
+                String line = null;
 
+                // obtener la ruta del fichero de respaldo
+                String rutaRespaldo = txtBuscarRespaldo.getText();
+
+                // crear el fichero y comprobar si existe
+                File fichero = new File(rutaRespaldo);
+
+                if (fichero.exists()) {
+                    logger.info("El fichero existe");
+                    runtime = Runtime.getRuntime();
+                    logger.info("Herramienta: " + herramientaRespaldo);
+                    processBuilder = new ProcessBuilder( herramientaRespaldo, "--verbose","--host="+host, "--username="+usuario,
+                            "--dbname="+baseDatos, "--port="+puerto, "--no-password", "--clean", "--format=c",  rutaRespaldo);
+                    processBuilder.environment().put("PGPASSWORD", password);
+                    processBuilder.redirectErrorStream(true);
+                    process = processBuilder.start();
+                    try{
+                        InputStream is = process.getInputStream();
+                        InputStreamReader isr = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(isr);
+                        String linel;
+                        while ((linel = br.readLine()) != null) {
+                            System.out.println(linel);
+                        }
+
+                        if (process.waitFor() == 0) {
+                            // alertar al usuario
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Información");
+                            alert.setHeaderText("Restauración generada exitosamente");
+                            alert.setContentText("La restauración se ha generado con exito");
+                            alert.showAndWait();
+                        } else {
+                            // alertar al usuario
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Restauracion no generada");
+                            alert.setContentText("La restauración no se ha generado");
+                            alert.showAndWait();
+                        }
+                    }
+                    catch (IOException e){
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                } else {
+                    logger.info("El fichero no existe");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void buscarRespaldoBD(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar respaldo");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("SQL", "*.sql")
+        );
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            txtBuscarRespaldo.setText(file.getAbsolutePath());
+        }
     }
 }

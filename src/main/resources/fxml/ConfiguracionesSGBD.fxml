@@ -123,7 +123,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtHerramientaRespaldo" layoutX="22.0" layoutY="122.0" prefHeight="27.0" prefWidth="729.0">
+            <TextField fx:id="txtHerramientaRestaurar" layoutX="22.0" layoutY="122.0" prefHeight="27.0" prefWidth="729.0">
                <font>
                   <Font size="13.0" />
                </font>
