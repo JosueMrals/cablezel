@@ -1,7 +1,16 @@
 package com.josue.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "configuracion_sistema")
 public class ConfiguracionSistema extends Identificador {
+    @Column (name = "nombre")
     private String nombre;
+
+    @Column (name = "valor")
     private String valor;
     public ConfiguracionSistema() {
     }

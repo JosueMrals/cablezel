@@ -27,6 +27,7 @@
         <mapping class="com.josue.modelo.Pago"/>
         <mapping class="com.josue.modelo.DetallePago"/>
         <mapping class="com.josue.modelo.Rol"/>
+        <mapping class="com.josue.modelo.ConfiguracionSistema"/>
 
     </session-factory>
 </hibernate-configuration>

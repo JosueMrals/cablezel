@@ -9,6 +9,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,10 +24,16 @@ import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -49,7 +56,11 @@ public class BarrioController implements Initializable {
     public Button btnBuscarUsuario;
     public TextArea txtDescripcion;
     public Button btnGuardarRol;
-    @FXML TextField txtCantidadTv1;
+    public TextField txtBuscarRespaldo;
+    public Button btRestaurar;
+    public Button btBuscarRespaldo;
+    public Button btGenerar;
+    public ComboBox cbBuscarRespaldo;
     @FXML TextField txtNombreBarrio;
     @FXML TextField txtDescripcionBarrio;
     @FXML TableView<Barrio> tvBarrios;
@@ -79,6 +90,7 @@ public class BarrioController implements Initializable {
 
     Usuario usuarioSeleccionado;
     ObservableList<Usuario> listaUsuarios;
+    ObservableList<ConfiguracionSistema> configuracionSistemas;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +105,17 @@ public class BarrioController implements Initializable {
         autoCompletarRol();
         verificarServicios();
         listarUsuarios();
+        verificarConfiguracionServidor();
+    }
+
+    private void verificarConfiguracionServidor() {
+        IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
+        configuracionSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
+        if (configuracionSistemas.size() > 0) {
+            tbConfigurarServidor.setSelected(true);
+        } else {
+            tbConfigurarServidor.setSelected(false);
+        }
     }
 
     private void addButtonEditBarrios() {
@@ -544,5 +567,115 @@ public class BarrioController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void CargarDirectorioRespaldo(Event event) {
+        // cargar la ruta del directorio en el combobox
+        IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class,
+                HibernateUtil.getSessionFactory());
+        ObservableList<ConfiguracionSistema> confSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
+        configuracionSistemas = confSistemas;
+        if (confSistemas.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha configurado el servidor");
+            alert.setContentText("Debe obtener una ruta de la herramienta de respaldo y un directorio de respaldo.");
+            alert.showAndWait();
+        } else {
+            confSistemas.forEach(configuracionSistema -> {
+                if(configuracionSistema.getNombre().equals("respaldo")) {
+                   cbBuscarRespaldo.getItems().add(configuracionSistema.getValor());
+                }
+            });
+        }
+    }
+
+    public void generarNuevoRespaldo(ActionEvent actionEvent) {
+        Runtime runtime = Runtime.getRuntime();
+        Process process = null;
+        ProcessBuilder processBuilder = null;
+        runtime = Runtime.getRuntime();
+
+        String herramienta = "";
+        String host = "";
+        String puerto = "";
+        String usuario = "";
+        String password = "";
+        String baseDatos = "";
+        String directorio = "";
+
+        for (ConfiguracionSistema configuracionSistema : configuracionSistemas) {
+            if (configuracionSistema.getNombre().equals("servidor")) {
+                herramienta = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("host")) {
+                host = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("puerto")) {
+                puerto = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("usuario")) {
+                usuario = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("clave")) {
+                password = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("baseDatos")) {
+                baseDatos = configuracionSistema.getValor();
+            }
+            if (configuracionSistema.getNombre().equals("respaldo")) {
+                directorio = configuracionSistema.getValor();
+            }
+        }
+
+        //herramienta = herramienta.replace("\\", "\\\\");
+        //directorio = directorio.replace("\\", "\\\\");
+
+        logger.info("Herramienta: " + herramienta);
+        logger.info("Host: " + host);
+        logger.info("Puerto: " + puerto);
+        logger.info("Usuario: " + usuario);
+        logger.info("Password: " + password);
+        logger.info("Base de Datos: " + baseDatos);
+        logger.info("Directorio: " + directorio);
+
+        processBuilder = new ProcessBuilder(
+                "C:\\Program Files\\PostgreSQL\\14\\bin\\pg_dumpall.exe", "--host=" + host, "--port=" + puerto, "--username=" + usuario, "--verbose", "--no-password", "--file="
+                + "C:\\backup\\respaldo" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + ".backup", baseDatos);
+
+       try{
+            final Map<String, String> env = processBuilder.environment();
+            env.put("PGPASSWORD", password);
+            process = processBuilder.start();
+
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+            process.waitFor();
+            process.destroy();
+            logger.info("Respaldo generado exitosamente");
+            logger.info(process.exitValue() + "");
+
+
+            // alertar al usuario
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText("Respaldo generado exitosamente");
+            alert.setContentText("El respaldo se ha generado en el directorio: " + directorio);
+            alert.showAndWait();
+        } catch (IOException | InterruptedException e) {
+            logger.error("Error al generar el respaldo: " + e.getMessage());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void restaurarBaseDeDatos(ActionEvent actionEvent) {
+
     }
 }
