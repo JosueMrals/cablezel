@@ -24,10 +24,7 @@ import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -591,85 +588,117 @@ public class BarrioController implements Initializable {
     }
 
     public void generarNuevoRespaldo(ActionEvent actionEvent) {
-        Runtime runtime = Runtime.getRuntime();
-        Process process = null;
-        ProcessBuilder processBuilder = null;
-        runtime = Runtime.getRuntime();
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            Process process = null;
+            ProcessBuilder processBuilder = null;
+            InputStreamReader inputStreamReader = null;
+            BufferedReader reader = null;
+            String line = null;
 
-        String herramienta = "";
-        String host = "";
-        String puerto = "";
-        String usuario = "";
-        String password = "";
-        String baseDatos = "";
-        String directorio = "";
+            String herramienta = "";
+            String host = "";
+            String puerto = "";
+            String usuario = "";
+            String password = "";
+            String baseDatos = "";
+            String directorio = "";
 
-        for (ConfiguracionSistema configuracionSistema : configuracionSistemas) {
-            if (configuracionSistema.getNombre().equals("servidor")) {
-                herramienta = configuracionSistema.getValor();
+            for (ConfiguracionSistema configuracionSistema : configuracionSistemas) {
+                if (configuracionSistema.getNombre().equals("servidor")) {
+                    herramienta = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("host")) {
+                    host = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("puerto")) {
+                    puerto = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("usuario")) {
+                    usuario = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("clave")) {
+                    password = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("baseDatos")) {
+                    baseDatos = configuracionSistema.getValor();
+                }
+                if (configuracionSistema.getNombre().equals("respaldo")) {
+                    directorio = configuracionSistema.getValor();
+                }
             }
-            if (configuracionSistema.getNombre().equals("host")) {
-                host = configuracionSistema.getValor();
-            }
-            if (configuracionSistema.getNombre().equals("puerto")) {
-                puerto = configuracionSistema.getValor();
-            }
-            if (configuracionSistema.getNombre().equals("usuario")) {
-                usuario = configuracionSistema.getValor();
-            }
-            if (configuracionSistema.getNombre().equals("clave")) {
-                password = configuracionSistema.getValor();
-            }
-            if (configuracionSistema.getNombre().equals("baseDatos")) {
-                baseDatos = configuracionSistema.getValor();
-            }
-            if (configuracionSistema.getNombre().equals("respaldo")) {
-                directorio = configuracionSistema.getValor();
-            }
-        }
 
-        //herramienta = herramienta.replace("\\", "\\\\");
-        //directorio = directorio.replace("\\", "\\\\");
+            //herramienta = herramienta.replace("\\", "\\\\");
+            //directorio = directorio.replace("\\", "\\\\");
 
-        logger.info("Herramienta: " + herramienta);
-        logger.info("Host: " + host);
-        logger.info("Puerto: " + puerto);
-        logger.info("Usuario: " + usuario);
-        logger.info("Password: " + password);
-        logger.info("Base de Datos: " + baseDatos);
-        logger.info("Directorio: " + directorio);
+            logger.info("Herramienta: " + herramienta);
+            logger.info("Host: " + host);
+            logger.info("Puerto: " + puerto);
+            logger.info("Usuario: " + usuario);
+            logger.info("Password: " + password);
+            logger.info("Base de Datos: " + baseDatos);
+            logger.info("Directorio: " + directorio);
 
-        processBuilder = new ProcessBuilder(
-                "C:\\Program Files\\PostgreSQL\\14\\bin\\pg_dumpall.exe", "--host=" + host, "--port=" + puerto, "--username=" + usuario, "--verbose", "--no-password", "--file="
-                + "C:\\backup\\respaldo" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + ".backup", baseDatos);
+            // crear el fichero y comprobar si existe
+            File fichero = new File(directorio);
 
-       try{
-            final Map<String, String> env = processBuilder.environment();
-            env.put("PGPASSWORD", password);
-            process = processBuilder.start();
+            if (fichero.exists()) {
+                logger.info("El fichero existe");
+                StringBuffer fechaArchivo = new StringBuffer();
+                fechaArchivo.append(directorio);
+                fechaArchivo.append("\\");
+                fechaArchivo.append("respaldo" +LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH_mm_ss")));
+                fechaArchivo.append(".sql");
+                logger.info("Fecha del archivo: " + fechaArchivo.toString());
+                File ficheroNuevo = new File(fechaArchivo.toString());
+                if (ficheroNuevo.exists()) {
+                    logger.info("El fichero ya existe");
+                    ficheroNuevo.delete();
+                } else {
+                    logger.info("El fichero no existe");
+                    ficheroNuevo.createNewFile();
+                }
+                runtime = Runtime.getRuntime();
+                processBuilder = new ProcessBuilder( herramienta, "-f", fechaArchivo.toString(),
+                        "-F", "c", "-Z", "9","-v","-h", host, "-U", usuario, baseDatos);
+                processBuilder.environment().put("PGPASSWORD", password);
+                processBuilder.redirectErrorStream(true);
+                process = processBuilder.start();
+                try{
+                    InputStream is = process.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String linel;
+                    while ((linel = br.readLine()) != null) {
+                        System.out.println(linel);
+                    }
 
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                    if (process.waitFor() == 0) {
+                        // alertar al usuario
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Información");
+                        alert.setHeaderText("Respaldo generado exitosamente");
+                        alert.setContentText("El respaldo se ha generado en el directorio: " + directorio);
+                        alert.showAndWait();
+                    } else {
+                        // alertar al usuario
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Respaldo no generado");
+                        alert.setContentText("El respaldo no se ha generado en el directorio: " + directorio);
+                        alert.showAndWait();
+                    }
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } else {
+                logger.info("El fichero no existe");
             }
-            reader.close();
-            process.waitFor();
-            process.destroy();
-            logger.info("Respaldo generado exitosamente");
-            logger.info(process.exitValue() + "");
-
-
-            // alertar al usuario
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Información");
-            alert.setHeaderText("Respaldo generado exitosamente");
-            alert.setContentText("El respaldo se ha generado en el directorio: " + directorio);
-            alert.showAndWait();
-        } catch (IOException | InterruptedException e) {
-            logger.error("Error al generar el respaldo: " + e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
