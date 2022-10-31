@@ -4,6 +4,7 @@ import com.josue.modelo.Usuario;
 
 public final class ManejadorUsuario {
     private Usuario usuario;
+    private Boolean servidorConfigurado;
     private static final ManejadorUsuario instance = new ManejadorUsuario();
 
     public static ManejadorUsuario getInstance() {
@@ -18,4 +19,11 @@ public final class ManejadorUsuario {
         this.usuario = usuario;
     }
 
+    public Boolean getServidorConfigurado() {
+        return servidorConfigurado;
+    }
+
+    public void setServidorConfigurado(Boolean servidorConfigurado) {
+        this.servidorConfigurado = servidorConfigurado;
+    }
 }

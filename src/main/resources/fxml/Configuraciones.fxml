@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
    <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
       <Tab text="Tipos de Contratos">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
@@ -264,7 +264,7 @@
             </Button>
          </AnchorPane>
       </Tab>
-      <Tab text="Respaldo">
+      <Tab fx:id="tpRespaldo" onSelectionChanged="#CargarDirectorioRespaldo" text="Respaldo">
          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/base-de-datos.png" />
@@ -274,11 +274,53 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <ToggleButton fx:id="tbConfigurarServidor" layoutX="812.0" layoutY="29.0" mnemonicParsing="false" onAction="#tbConfigurarServidor" prefHeight="45.0" prefWidth="201.0" style="-fx-background-color: #1CB800;" text="Configurar Servidor" textFill="WHITE">
+            <ToggleButton fx:id="tbConfigurarServidor" layoutX="897.0" layoutY="19.0" mnemonicParsing="false" onAction="#tbConfigurarServidor" prefHeight="45.0" prefWidth="201.0" style="-fx-background-color: #1CB800;" text="Configurar Servidor" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </ToggleButton>
+            <Label layoutX="203.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="212.0" text="Directorio de Respaldo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbBuscarRespaldo" layoutX="203.0" layoutY="124.0" prefHeight="30.0" prefWidth="500.0" promptText="Seleccione la ubicacion del respaldo" styleClass="labels">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Button fx:id="btGenerar" layoutX="303.0" layoutY="166.0" mnemonicParsing="false" onAction="#generarNuevoRespaldo" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #0087FF;" text="Generar Nuevo Respaldo" textFill="#f5f2f2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/base-de-datos.png" />
+            </ImageView>
+            <Label layoutX="89.0" layoutY="278.0" text="Restaurar" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="322.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="212.0" text="Respaldo">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtBuscarRespaldo" layoutX="203.0" layoutY="348.0" prefHeight="30.0" prefWidth="500.0" styleClass="labels" />
+            <Button fx:id="btRestaurar" layoutX="303.0" layoutY="388.0" mnemonicParsing="false" onAction="#restaurarBaseDeDatos" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #0087FF;" text="Restaurar base de datos" textFill="#fffefe">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="btBuscarRespaldo" layoutX="713.0" layoutY="344.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../images/lupa.png" />
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </AnchorPane>
       </Tab>
    </TabPane>

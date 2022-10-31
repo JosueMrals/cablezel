@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,10 +12,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="717.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionSistemaController">
+<AnchorPane prefHeight="420.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionSistemaController">
    <Pane prefHeight="41.0" prefWidth="860.0" style="-fx-background-color: #cccccc;" />
    <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
-      <Pane prefHeight="633.0" prefWidth="857.0" style="-fx-border-style: none;">
+      <Pane prefHeight="332.0" prefWidth="857.0" style="-fx-border-style: none;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -47,7 +45,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPuerto" editable="false" layoutX="603.0" layoutY="123.0" prefHeight="26.0" prefWidth="185.0">
+            <TextField fx:id="txtPuerto" layoutX="603.0" layoutY="123.0" prefHeight="26.0" prefWidth="185.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -55,7 +53,7 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtHost" editable="false" layoutX="24.0" layoutY="124.0" prefHeight="27.0" prefWidth="558.0">
+            <TextField fx:id="txtHost" layoutX="24.0" layoutY="124.0" prefHeight="27.0" prefWidth="558.0">
                <font>
                   <Font size="13.0" />
                </font>
@@ -65,17 +63,15 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-            <ImageView fx:id="ivAbrirDirectorioServidor" fitHeight="30.0" fitWidth="32.0" layoutX="763.0" layoutY="58.0" onMouseClicked="#abrirDirectorio" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/lapiz.png" />
-               </image>
+            <ImageView fx:id="ivAbrirDirectorioServidor" fitHeight="30.0" fitWidth="32.0" layoutX="763.0" layoutY="58.0" onMouseClicked="#abrirDirectorioFichero" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/lapiz.png" />
             </ImageView>
             <Label layoutX="25.0" layoutY="165.0" prefHeight="17.0" prefWidth="84.0" text="Usuario">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsuario" editable="false" layoutX="24.0" layoutY="188.0" prefHeight="26.0" prefWidth="233.0">
+            <TextField fx:id="txtUsuario" layoutX="24.0" layoutY="188.0" prefHeight="26.0" prefWidth="233.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -88,7 +84,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtClave" editable="false" layoutX="280.0" layoutY="187.0" prefHeight="26.0" prefWidth="270.0">
+            <TextField fx:id="txtClave" layoutX="280.0" layoutY="187.0" prefHeight="26.0" prefWidth="270.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -102,16 +98,14 @@
                </font>
             </TextField>
             <ImageView fx:id="ivAbrirDirectorioFichero" fitHeight="30.0" fitWidth="32.0" layoutX="762.0" layoutY="250.0" onMouseClicked="#abrirDirectorio" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/lapiz.png" />
-               </image>
+               <Image url="@../images/lapiz.png" />
             </ImageView>
             <Label layoutX="574.0" layoutY="164.0" prefHeight="17.0" prefWidth="84.0" text="Base de datos">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtBaseDatos" editable="false" layoutX="574.0" layoutY="187.0" prefHeight="26.0" prefWidth="218.0">
+            <TextField fx:id="txtBaseDatos" layoutX="574.0" layoutY="187.0" prefHeight="26.0" prefWidth="218.0">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -119,23 +113,11 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-         </Pane>
-         <Pane layoutX="14.0" layoutY="334.0" prefHeight="285.0" prefWidth="830.0" style="-fx-border-color: #666666;">
-            <Label alignment="CENTER" layoutX="20.0" layoutY="11.0" prefHeight="20.0" prefWidth="152.0" style="-fx-background-color: #666666;" text="Configuraciones" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tvMostrarConfiguracion" layoutX="20.0" layoutY="39.0" prefHeight="219.0" prefWidth="789.0">
-               <columns>
-                  <TableColumn fx:id="colN1" prefWidth="159.0" text="Servidor" />
-                  <TableColumn fx:id="colN2" prefWidth="134.0" text="Host" />
-                  <TableColumn fx:id="colN3" prefWidth="48.0" text="Puerto" />
-                  <TableColumn fx:id="colN4" prefWidth="198.0" text="Usuario" />
-                  <TableColumn fx:id="colN5" prefWidth="127.0" text="Clave" />
-                  <TableColumn fx:id="colN51" prefWidth="121.0" text="Base de datos" />
-               </columns>
-            </TableView>
+            <ImageView fx:id="ivActivarEdicion" fitHeight="30.0" fitWidth="32.0" layoutX="250.0" layoutY="2.0" onMouseClicked="#activarEdicion" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/lapiz.png" />
+               </image>
+            </ImageView>
          </Pane>
       </Pane>
    </ScrollPane>
