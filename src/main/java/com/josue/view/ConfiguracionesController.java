@@ -29,7 +29,6 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.io.*;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -39,34 +38,11 @@ import org.apache.logging.log4j.Logger;
 /**
  * Created by Josue on 09/05/2016.
  */
-public class BarrioController implements Initializable {
-
+public class ConfiguracionesController implements Initializable {
     // logger log4j
-    private static final Logger logger = LogManager.getLogger(BarrioController.class);
-    public Button btBuscarTC;
-    public ToggleButton tbConfigurarServidor;
-    public TextField txtUsuario;
-    public ComboBox<Rol> cbRol;
-    public TableView<Rol> tvRoles;
-    public TableColumn<Rol, String> colNick;
-    public TableColumn<Rol, String> colRol;
-    public TableColumn<Rol, String> colDescripcion;
-    public TableColumn<Rol, String> colAccion2;
-    public TextField txtBuscarUsuario;
-    public Button btnBuscarUsuario;
-    public TextArea txtDescripcion;
-    public Button btnGuardarRol;
-    public TextField txtBuscarRespaldo;
-    public Button btRestaurar;
-    public Button btBuscarRespaldo;
-    public Button btGenerar;
-    public ComboBox cbBuscarRespaldo;
-    public ImageView ivBuscarRespaldo;
-    @FXML TextField txtNombreBarrio;
-    @FXML TextField txtDescripcionBarrio;
-    @FXML TableView<Barrio> tvBarrios;
-    @FXML TableColumn<Barrio, String> colNombreBarrio;
-    @FXML TableColumn<Barrio, String > colDescripcionBarrio;
+    private static final Logger logger = LogManager.getLogger(ConfiguracionesController.class);
+    // Tipo Contratos
+    @FXML Button btBuscarTC;
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
     @FXML TextField txtCantidadTv;
@@ -81,16 +57,42 @@ public class BarrioController implements Initializable {
     @FXML Button btnGuardarBarrio;
     ObservableList<Barrio> listaBarrios;
     ObservableList<TipoContrato> listaTipoContrato;
-    @FXML TextField txtBuscarBarrio;
     @FXML TextField txtBuscarTC;
-    String[] barrioAutoComplete = {};
     String[] tipoContratoAutoComplete = {};
-    String[] rolAutoComplete = {};
     @FXML TableColumn<TipoContrato, String> colAccion;
-    @FXML TableColumn<Barrio, String> colAccion1;
 
-    Usuario usuarioSeleccionado;
-    ObservableList<Usuario> listaUsuarios;
+    //Lista de Barrios
+    @FXML TextField txtNombreBarrio;
+    @FXML TextField txtDescripcionBarrio;
+    @FXML TableView<Barrio> tvBarrios;
+    @FXML TableColumn<Barrio, String> colNombreBarrio;
+    @FXML TableColumn<Barrio, String > colDescripcionBarrio;
+    @FXML TableColumn<Barrio, String> colAccion1;
+    @FXML TextField txtBuscarBarrio;
+    String[] barrioAutoComplete = {};
+
+    // Roles
+    public TextField txtUsuario;
+    public ComboBox<Rol> cbRol;
+    public TableView<Rol> tvRoles;
+    public TableColumn<Rol, String> colNick;
+    public TableColumn<Rol, String> colRol;
+    public TableColumn<Rol, String> colDescripcion;
+    public TableColumn<Rol, String> colAccion2;
+    String[] rolAutoComplete = {};
+
+    // Respaldo
+    public ToggleButton tbConfigurarServidor;
+    public TextField txtBuscarUsuario;
+    public Button btnBuscarUsuario;
+    public TextArea txtDescripcion;
+    public Button btnGuardarRol;
+    public TextField txtBuscarRespaldo;
+    public Button btRestaurar;
+    public Button btGenerar;
+    public ComboBox cbBuscarRespaldo;
+    public ImageView ivBuscarRespaldo;
+    public Tab tpRespaldo;
     ObservableList<ConfiguracionSistema> configuracionSistemas;
     String herramientaRespaldo = "";
     String herramienta = "";
@@ -101,20 +103,36 @@ public class BarrioController implements Initializable {
     String baseDatos = "";
     String directorio = "";
 
+    // Usuarios
+    public TableView<Usuario> tvListaUsuarios;
+    public TextField txtNombreUsuario;
+    public TextField txtNickUsuario;
+    public TextField txtEmail;
+    public PasswordField txtPassword;
+    public Button btAgregarUsuarios;
+    public TableColumn<Usuario, String> colNombreUsuario;
+    public TableColumn<Usuario, String> colNickUsuario;
+    public TableColumn<Usuario, String> colEmail;
+    public TableColumn<Usuario, String> colPassword;
+    public TableColumn<Usuario, String> colAccionUsuarios;
+    Usuario usuarioSeleccionado;
+    ObservableList<Usuario> listaUsuarios;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        llenarBarrio();
-        llenarTipoContrato();
-        listarServicios();
-        llenarRoles();
+        llenarTablas();
+
         autoCompletarBarrio();
         autoCompletarTipoContrato();
-        addButtonEdit();
-        addButtonEditBarrios();
         autoCompletarRol();
-        verificarServicios();
+
+        addButtonEdit();
+
         listarUsuarios();
+        listarServicios();
+
         verificarConfiguracionServidor();
+        verificarServicios();
     }
 
     private void verificarConfiguracionServidor() {
@@ -155,93 +173,18 @@ public class BarrioController implements Initializable {
         }
     }
 
-    private void addButtonEditBarrios() {
-        colAccion1.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<Barrio, String> call(TableColumn<Barrio, String> param) {
-                final TableCell<Barrio, String> cell = new TableCell<>() {
-                    final Button btnEditar = new Button();
-
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
-                            ImageView imageView = new ImageView(image);
-                            imageView.setFitHeight(20);
-                            imageView.setFitWidth(20);
-                            btnEditar.setGraphic(imageView);
-                            btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
-
-                            btnEditar.setOnAction(event -> {
-                                Barrio barrio = getTableView().getItems().get(getIndex());
-                                txtNombreBarrio.setText(barrio.getNombre_barrio());
-                                txtDescripcionBarrio.setText(barrio.getDescripcion());
-                                btnGuardarBarrio.setText("Actualizar");
-
-                                btnGuardarBarrio.setOnAction(event1 -> {
-                                    actualizarBarrio(barrio);
-                                    llenarBarrio();
-                                    recargarBarrio();
-                                });
-                            });
-                            setGraphic(btnEditar);
-                            setText(null);
-                        }
-                    }
-
-                    private void actualizarBarrio(Barrio barrio) {
-                        try {
-                            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-                            barrio.setNombre_barrio(txtNombreBarrio.getText());
-                            barrio.setDescripcion(txtDescripcionBarrio.getText());
-                            barrioService.update(barrio);
-
-                            txtNombreBarrio.clear();
-                            txtDescripcionBarrio.clear();
-
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Barrio actualizado correctamente", ButtonType.OK);
-                            alert.showAndWait();
-
-                            btnGuardarBarrio.setText("Guardar");
-                            btnGuardarBarrio.setOnAction(event -> {
-                                guardarBarrio();
-                                llenarBarrio();
-                                tvBarrios.refresh();
-                            });
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                return cell;
-            }
-        });
-    }
-
-
     public void recargarBarrio() {
         txtBuscarBarrio.clear();
-        llenarBarrio();
+        llenarTablas();
         tvBarrios.refresh();
     }
     public void recargar() {
         txtBuscarTC.clear();
-        llenarTipoContrato();
+        llenarTablas();
         tvTipoContrato.refresh();
     }
 
-    public void recargarRol() {
-        txtBuscarUsuario.clear();
-        llenarRoles();
-        tvRoles.refresh();
-    }
-
-    private void llenarRoles() {
+    private void llenarTablas() {
         try {
             IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil.getSessionFactory());
             ObservableList<Rol> listaRoles = FXCollections.observableArrayList(rolService.getAll());
@@ -253,84 +196,240 @@ public class BarrioController implements Initializable {
             logger.error("Error al llenar la tabla de roles", e);
         }
 
+        try {
+            ObservableList<Usuario> usuarios = GlobalUtil.getUsuarios();
+            colNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("nombrecompleto"));
+            colNickUsuario.setCellValueFactory(new PropertyValueFactory<>("nickusuario"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+            tvListaUsuarios.setItems(usuarios);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de usuarios", e);
+        }
+
+        try {
+            IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
+            ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
+            listaTipoContrato = tpContrato;
+            colCodigo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getCod_tipocontrato()));
+            colTipoContrato.setCellValueFactory(new PropertyValueFactory<>("tipo_contrato"));
+            colCantidadTv.setCellValueFactory( param -> new ReadOnlyObjectWrapper<>(param.getValue().getCantidad_tv()));
+            colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            tvTipoContrato.setItems(tpContrato);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de tipo de contrato", e);
+        }
+
+        try {
+            IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+            ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
+            listaBarrios = barrios;
+            colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
+            colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            tvBarrios.setItems(barrios);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de barrios", e);
+        }
     }
 
     private void addButtonEdit() {
-        colAccion.setCellFactory(new Callback<>() {
+        colAccion.setCellFactory(param -> new TableCell<>() {
+            final Button btnEditar = new Button();
+
             @Override
-            public TableCell<TipoContrato, String> call(TableColumn<TipoContrato, String> param) {
-                final TableCell<TipoContrato, String> cell = new TableCell<>() {
-                    final Button btnEditar = new Button();
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    btnEditar.setGraphic(imageView);
+                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
 
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
-                            ImageView imageView = new ImageView(image);
-                            imageView.setFitHeight(20);
-                            imageView.setFitWidth(20);
-                            btnEditar.setGraphic(imageView);
-                            btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+                    btnEditar.setOnAction(event -> {
+                        TipoContrato tipoContrato = getTableView().getItems().get(getIndex());
+                        txtCodigo.setText(tipoContrato.getCod_tipocontrato());
+                        txtTipoContrato.setText(tipoContrato.getTipo_contrato());
+                        txtCantidadTv.setText(String.valueOf(tipoContrato.getCantidad_tv()));
+                        txtDescripcionContrato.setText(tipoContrato.getDescripcion());
+                        cmbServicio.setValue(tipoContrato.getServicio());
 
-                            btnEditar.setOnAction(event -> {
-                                TipoContrato tipoContrato = getTableView().getItems().get(getIndex());
-                                txtCodigo.setText(tipoContrato.getCod_tipocontrato());
-                                txtTipoContrato.setText(tipoContrato.getTipo_contrato());
-                                txtCantidadTv.setText(String.valueOf(tipoContrato.getCantidad_tv()));
-                                txtDescripcionContrato.setText(tipoContrato.getDescripcion());
-                                cmbServicio.setValue(tipoContrato.getServicio());
+                        btnGuardarContrato.setText("Actualizar");
 
-                                btnGuardarContrato.setText("Actualizar");
+                        btnGuardarContrato.setOnAction(event1 -> {
+                            actualizarTipoContrato(tipoContrato);
+                            llenarTablas();
+                            recargar();
+                        });
+                    });
+                    setGraphic(btnEditar);
+                    setText(null);
+                }
+            }
+            private void actualizarTipoContrato(TipoContrato tipoContrato) {
+                try {
+                    IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>
+                            (TipoContrato.class, HibernateUtil.getSessionFactory());
+                    tipoContrato.setCod_tipocontrato(txtCodigo.getText());
+                    tipoContrato.setTipo_contrato(txtTipoContrato.getText());
+                    tipoContrato.setCantidad_tv(String.valueOf(Integer.parseInt(txtCantidadTv.getText())));
+                    tipoContrato.setDescripcion(txtDescripcionContrato.getText());
+                    tipoContrato.setServicio(cmbServicio.getSelectionModel().getSelectedItem());
+                    tipoContratoService.update(tipoContrato);
 
-                                btnGuardarContrato.setOnAction(event1 -> {
-                                    actualizarTipoContrato(tipoContrato);
-                                    llenarTipoContrato();
-                                    recargar();
-                                });
-                            });
-                            setGraphic(btnEditar);
-                            setText(null);
-                        }
-                    }
+                    txtCodigo.clear();
+                    txtTipoContrato.clear();
+                    txtCantidadTv.clear();
+                    txtDescripcionContrato.clear();
+                    cmbServicio.getSelectionModel().clearSelection();
 
-                    private void actualizarTipoContrato(TipoContrato tipoContrato) {
-                        try {
-                            IGenericService<TipoContrato> tipoContratoService = new GenericServiceImpl<>
-                                    (TipoContrato.class, HibernateUtil.getSessionFactory());
-                            tipoContrato.setCod_tipocontrato(txtCodigo.getText());
-                            tipoContrato.setTipo_contrato(txtTipoContrato.getText());
-                            tipoContrato.setCantidad_tv(String.valueOf(Integer.parseInt(txtCantidadTv.getText())));
-                            tipoContrato.setDescripcion(txtDescripcionContrato.getText());
-                            tipoContrato.setServicio(cmbServicio.getSelectionModel().getSelectedItem());
-                            tipoContratoService.update(tipoContrato);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Tipo de contrato actualizado correctamente", ButtonType.OK);
+                    alert.showAndWait();
 
-                            txtCodigo.clear();
-                            txtTipoContrato.clear();
-                            txtCantidadTv.clear();
-                            txtDescripcionContrato.clear();
-                            cmbServicio.getSelectionModel().clearSelection();
+                    btnGuardarContrato.setText("Guardar");
+                    btnGuardarContrato.setOnAction(event -> {
+                        guardarTipoContrato();
+                        llenarTablas();
+                        tvTipoContrato.refresh();
+                    });
 
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Tipo de contrato actualizado correctamente", ButtonType.OK);
-                            alert.showAndWait();
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al actualizar el tipo de contrato aqui!", ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
+        });
 
-                            btnGuardarContrato.setText("Guardar");
-                            btnGuardarContrato.setOnAction(event -> {
-                                guardarTipoContrato();
-                                llenarTipoContrato();
-                                tvTipoContrato.refresh();
-                            });
+        colAccionUsuarios.setCellFactory(param -> new TableCell<>() {
+            private final Button btnEditar = new Button();
 
-                        } catch (Exception e) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al actualizar el tipo de contrato aqui!", ButtonType.OK);
-                            alert.showAndWait();
-                        }
-                    }
-                };
-                return cell;
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    // Imagen del boton
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    btnEditar.setGraphic(imageView);
+                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+
+                    btnEditar.setOnAction(event -> {
+                        Usuario usuario = getTableView().getItems().get(getIndex());
+                        txtNombreUsuario.setText(usuario.getNombrecompleto());
+                        txtEmail.setText(usuario.getEmail());
+                        txtNickUsuario.setText(usuario.getNickusuario());
+                        txtPassword.setText(usuario.getPassword());
+                        btAgregarUsuarios.setText("Actualizar");
+
+                        btAgregarUsuarios.setOnAction(event1 -> {
+                            actualizarUsuario(usuario);
+                            llenarTablas();
+                            tvListaUsuarios.refresh();
+                        });
+                    });
+                    setGraphic(btnEditar);
+                    setText(null);
+                }
+            }
+
+            private void actualizarUsuario(Usuario usuario) {
+                try {
+                    IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class,
+                            HibernateUtil.getSessionFactory());
+                    usuario.setNombrecompleto(txtNombreUsuario.getText());
+                    usuario.setEmail(txtEmail.getText());
+                    usuario.setNickusuario(txtNickUsuario.getText());
+                    usuario.setPassword(txtPassword.getText());
+                    usuarioService.update(usuario);
+
+                    txtNombreUsuario.setText("");
+                    txtEmail.setText("");
+                    txtNickUsuario.setText("");
+                    txtPassword.setText("");
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Usuario actualizado",
+                            ButtonType.OK);
+                    alert.showAndWait();
+
+                    btAgregarUsuarios.setText("Agregar");
+                    btAgregarUsuarios.setOnAction(event -> {
+                        guardarUsuarios();
+                        llenarTablas();
+                        tvListaUsuarios.refresh();
+                    });
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
+        });
+
+        colAccion1.setCellFactory(param -> new TableCell<>() {
+            final Button btnEditar = new Button();
+
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    btnEditar.setGraphic(imageView);
+                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+
+                    btnEditar.setOnAction(event -> {
+                        Barrio barrio = getTableView().getItems().get(getIndex());
+                        txtNombreBarrio.setText(barrio.getNombre_barrio());
+                        txtDescripcionBarrio.setText(barrio.getDescripcion());
+                        btnGuardarBarrio.setText("Actualizar");
+
+                        btnGuardarBarrio.setOnAction(event1 -> {
+                            actualizarBarrio(barrio);
+                            llenarTablas();
+                            recargarBarrio();
+                        });
+                    });
+                    setGraphic(btnEditar);
+                    setText(null);
+                }
+            }
+
+            private void actualizarBarrio(Barrio barrio) {
+                try {
+                    IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
+                    barrio.setNombre_barrio(txtNombreBarrio.getText());
+                    barrio.setDescripcion(txtDescripcionBarrio.getText());
+                    barrioService.update(barrio);
+
+                    txtNombreBarrio.clear();
+                    txtDescripcionBarrio.clear();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Barrio actualizado correctamente", ButtonType.OK);
+                    alert.showAndWait();
+
+                    btnGuardarBarrio.setText("Guardar");
+                    btnGuardarBarrio.setOnAction(event -> {
+                        guardarBarrio();
+                        llenarTablas();
+                        tvBarrios.refresh();
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -338,21 +437,21 @@ public class BarrioController implements Initializable {
     private void autoCompletarTipoContrato() {
         tipoContratoAutoComplete = GlobalUtil.obtenerTipoContrato();
         TextFields.bindAutoCompletion(txtBuscarTC, tipoContratoAutoComplete);
-        llenarBarrio();
+        llenarTablas();
         tvTipoContrato.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     private void autoCompletarBarrio() {
         barrioAutoComplete = GlobalUtil.obtenerBarrios();
         TextFields.bindAutoCompletion(txtBuscarBarrio, barrioAutoComplete);
-        llenarBarrio();
+        llenarTablas();
         tvBarrios.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     private void autoCompletarRol() {
         rolAutoComplete = GlobalUtil.obtenerUsuarios();
         TextFields.bindAutoCompletion(txtBuscarUsuario, rolAutoComplete);
-        llenarRoles();
+        llenarTablas();
         tvRoles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -360,7 +459,7 @@ public class BarrioController implements Initializable {
     private void buscarRol() {
         String rol = txtBuscarUsuario.getText();
         if (rol.isEmpty()) {
-            llenarRoles();
+            llenarTablas();
         } else {
             try {
                 ObservableList<Rol> roles = GlobalUtil.getRoles();
@@ -381,7 +480,7 @@ public class BarrioController implements Initializable {
     private void buscarBarrio() {
         String barrio = txtBuscarBarrio.getText();
         if (txtBuscarBarrio.getText().isEmpty()){
-            llenarBarrio();
+            llenarTablas();
         }else {
             ObservableList<Barrio> barrios = GlobalUtil.getBarrios();
             ObservableList<Barrio> barriosFiltrados = FXCollections.observableArrayList();
@@ -398,7 +497,7 @@ public class BarrioController implements Initializable {
     private void buscarTC() {
         String tipoContrato = txtBuscarTC.getText();
         if (txtBuscarTC.getText().isEmpty()){
-            llenarTipoContrato();
+            llenarTablas();
         }else {
             ObservableList<TipoContrato> tipoContratos = GlobalUtil.getTipoContratos();
             ObservableList<TipoContrato> tipoContratosFiltrados = FXCollections.observableArrayList();
@@ -409,26 +508,6 @@ public class BarrioController implements Initializable {
             }
             tvTipoContrato.setItems(tipoContratosFiltrados);
         }
-    }
-
-    public void llenarTipoContrato() {
-        IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
-        ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
-        listaTipoContrato = tpContrato;
-        colCodigo.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getCod_tipocontrato()));
-        colTipoContrato.setCellValueFactory(new PropertyValueFactory<>("tipo_contrato"));
-        colCantidadTv.setCellValueFactory( param -> new ReadOnlyObjectWrapper<>(param.getValue().getCantidad_tv()));
-        colDescripcionTipoContrato.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tvTipoContrato.setItems(tpContrato);
-    }
-
-    public void llenarBarrio() { // llenar la tabla de barrios
-        IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
-        ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
-        listaBarrios = barrios;
-        colNombreBarrio.setCellValueFactory(new PropertyValueFactory<>("nombre_barrio"));
-        colDescripcionBarrio.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tvBarrios.setItems(barrios);
     }
 
     public void guardarBarrio() {
@@ -473,7 +552,7 @@ public class BarrioController implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
 
-            llenarBarrio();
+            llenarTablas();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -510,19 +589,13 @@ public class BarrioController implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
 
-            llenarTipoContrato();
+            llenarTablas();
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
 
-    }
-
-    public void listarUsuarios() {
-        rolAutoComplete = GlobalUtil.obtenerUsuarios();
-        listaUsuarios = GlobalUtil.getUsuarios();
-        TextFields.bindAutoCompletion(txtUsuario, rolAutoComplete);
     }
 
     @FXML
@@ -553,7 +626,7 @@ public class BarrioController implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
 
-            llenarRoles();
+            llenarTablas();
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
@@ -562,13 +635,77 @@ public class BarrioController implements Initializable {
 
     }
 
-    public ObservableList<Servicio> obtenerServicios() {
-        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
-        return FXCollections.observableArrayList(servicioService.getAll());
+    public void guardarUsuarios() {
+        // Validar que los campos no esten vacios
+        if (txtNombreUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() ||
+                txtNickUsuario.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Información");
+            alert.setHeaderText("No se ha podido registrar el usuario");
+            alert.setContentText("Debe llenar todos los campos.");
+            alert.showAndWait();
+        } else {
+            // Validar que los datos no se repitan
+            IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class,
+                    HibernateUtil.getSessionFactory());
+            if (usuarioService.getAll().stream().anyMatch(u ->u.getNombrecompleto().equals(txtNombreUsuario.getText()))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No se ha podido registrar el usuario");
+                alert.setContentText("El nombre de usuario ya existe.");
+                alert.showAndWait();
+            } else if (usuarioService.getAll().stream().anyMatch(u ->u.getNickusuario().equals(txtNickUsuario.getText()))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No se ha podido registrar el usuario");
+                alert.setContentText("El nombre de usuario ya existe.");
+                alert.showAndWait();
+            } else if (usuarioService.getAll().stream().anyMatch(u ->u.getEmail().equals(txtEmail.getText()))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Información");
+                alert.setHeaderText("No se ha podido registrar el usuario");
+                alert.setContentText("El email ya existe.");
+                alert.showAndWait();
+            } else {
+                try {
+                    // Registrar el usuario
+                    Usuario usuario = new Usuario();
+                    usuario.setNombrecompleto(txtNombreUsuario.getText());
+                    usuario.setEmail(txtEmail.getText());
+                    usuario.setNickusuario(txtNickUsuario.getText());
+                    usuario.setPassword(txtPassword.getText());
+
+                    usuarioService.save(usuario);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText("Usuario registrado");
+                    alert.setContentText("El usuario se ha registrado con exito.");
+                    alert.showAndWait();
+
+                    // Limpiar los campos
+                    txtNombreUsuario.setText("");
+                    txtEmail.setText("");
+                    txtNickUsuario.setText("");
+                    txtPassword.setText("");
+
+                    llenarTablas();
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+                    alert.showAndWait();
+                }
+
+            }
+        }
+    }
+    public void listarUsuarios() {
+        rolAutoComplete = GlobalUtil.obtenerUsuarios();
+        listaUsuarios = GlobalUtil.getUsuarios();
+        TextFields.bindAutoCompletion(txtUsuario, rolAutoComplete);
     }
 
     public void listarServicios() {
-        var servicios = obtenerServicios();
+        var servicios = GlobalUtil.getServicios();
         cmbServicio.setValue(null);
         cmbServicio.setItems(servicios);
     }
@@ -580,15 +717,6 @@ public class BarrioController implements Initializable {
             alert.setHeaderText("Lista de Servicios vacía");
             alert.setContentText("Para crear un Tipo de Contrato nuevo primero debe crear un servicio.");
             alert.showAndWait();
-        }
-    }
-
-    public void obtenerUsuarioSeleccionado() {
-        String usuario = txtUsuario.getText();
-        for (Usuario u : listaUsuarios) {
-            if (u.getNickusuario().equals(usuario)) {
-                usuarioSeleccionado = u;
-            }
         }
     }
 
@@ -722,7 +850,6 @@ public class BarrioController implements Initializable {
         }
     }
 
-
     public void restaurarBaseDeDatos(ActionEvent actionEvent) {
         // verificar herramienta de restauración
         if(herramientaRespaldo.isEmpty()){
@@ -818,4 +945,8 @@ public class BarrioController implements Initializable {
             txtBuscarRespaldo.setText(file.getAbsolutePath());
         }
     }
+
+    // Usuarios
+
+
 }
