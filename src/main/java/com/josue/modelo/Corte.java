@@ -1,8 +1,12 @@
 package com.josue.modelo;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "cortes")
 public class Corte extends Identificador{
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
