@@ -13,6 +13,21 @@
     -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, -5, -5);
 }
 
+.botones {
+    -fx-text-fill: white;
+    -fx-padding: 0.5em 1.5em;
+    -fx-font-size: 15px;
+    -fx-border-radius: 0.5em;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, 6, 6);
+}
+
+.botones:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #66ccff;
+    -fx-effect: dropshadow(gaussian, #c5c5c5, 10, 0, -5, -5);
+}
+
 .labels {
     -fx-background-color: transparent;
     -fx-font-size: 15px;
