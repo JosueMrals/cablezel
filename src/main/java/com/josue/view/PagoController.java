@@ -1,8 +1,6 @@
 package com.josue.view;
 
-import com.josue.modelo.DetalleFactura;
-import com.josue.modelo.DetallePago;
-import com.josue.modelo.Pago;
+import com.josue.modelo.*;
 import com.josue.reportes.Reportes;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
@@ -11,7 +9,6 @@ import com.josue.util.HibernateUtil;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -19,14 +16,12 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.textfield.TextFields;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
-
 
 public class PagoController implements Initializable {
     // Lector de registro de Log4j
@@ -125,13 +120,16 @@ public class PagoController implements Initializable {
         serviciosAutoComplete = GlobalUtil.obtenerServicios();
         TextFields.bindAutoCompletion(txtBuscarServicio, serviciosAutoComplete);
         tvPagos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
     }
 
     private void autocompletarCliente() {
-        clientesAutoComplete = GlobalUtil.obtenerClientes();
-        TextFields.bindAutoCompletion(txtBuscarCliente, clientesAutoComplete);
-        tvPagos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        try {
+            clientesAutoComplete = GlobalUtil.obtenerClientes();
+            TextFields.bindAutoCompletion(txtBuscarCliente, clientesAutoComplete);
+            tvPagos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        } catch (Exception e) {
+            logger.error("Error al autocompletar clientes", e);
+        }
     }
 
     private void llenarPagos() {
@@ -194,6 +192,8 @@ public class PagoController implements Initializable {
         }
     }
 
+
+
     public void imprimirPagosDiarios() throws Exception {
         HashMap<String, Object> parametros = new HashMap<>();
 
@@ -233,7 +233,7 @@ public class PagoController implements Initializable {
                 pagosMensuales.add(dp.getPago());
             }
         }
-        logger.info("Pagos: " + pagosMensuales);
+        logger.info("Pagos Mensuales: " + pagosMensuales);
 
         URL urlLogo = ReportesController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
         URL olas = ReportesController.class.getClassLoader().getResource( "reportes/waves.jpg") ;
@@ -251,4 +251,5 @@ public class PagoController implements Initializable {
 
         Reportes.generarReporte("reportes/Mensual.jrxml", parametros, new JRBeanCollectionDataSource(pagosMensuales));
     }
+
 }

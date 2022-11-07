@@ -227,7 +227,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Label layoutX="30.0" layoutY="218.0" text="Descripcion del Rol">
+            <Label layoutX="30.0" layoutY="218.0" text="Nick del Usuario">
                <font>
                   <Font size="16.0" />
                </font>
@@ -248,11 +248,11 @@
                <columns>
                   <TableColumn fx:id="colNick" prefWidth="141.0" resizable="false" text="Nick del usuario" />
                   <TableColumn fx:id="colRol" prefWidth="141.0" resizable="false" text="Rol del usuario" />
-                  <TableColumn fx:id="colDescripcion" prefWidth="381.0" resizable="false" text="Descripcion del Rol" />
-                  <TableColumn fx:id="colAccion2" prefWidth="39.0" resizable="false" />
+                  <TableColumn fx:id="colDescripcion" prefWidth="516.0" resizable="false" text="Descripcion del Barrio" />
+                  <TableColumn fx:id="colAccion2" prefWidth="49.0" resizable="false" />
                </columns>
             </TableView>
-            <TextField fx:id="txtBuscarUsuario" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un nick de usuario" styleClass="labels" />
+            <TextField fx:id="txtBuscarUsuario" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un usuario" styleClass="labels" />
             <Button fx:id="btnBuscarUsuario" layoutX="745.0" layoutY="119.0" mnemonicParsing="false" onAction="#buscarRol" prefWidth="25.0" style="-fx-background-color: none;">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
