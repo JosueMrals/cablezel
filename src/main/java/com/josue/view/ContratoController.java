@@ -161,7 +161,7 @@ public class ContratoController implements Initializable {
 
     public void crearServicio(Long valor) {
         Servicio serv = new Servicio();
-        serv.setNombre("contrato");
+        serv.setNombre("CONTRATO");
         serv.setDescripcion("Servicio de contratos");
         serv.setPrecio(1080.0f);
 
@@ -358,6 +358,7 @@ public class ContratoController implements Initializable {
 
             llenarContrato();
             crearFactura();
+            crearFacturaAutomatica();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente",
                     ButtonType.OK);
             alert.show();
@@ -412,6 +413,20 @@ public class ContratoController implements Initializable {
             }
             tvContratos.setItems(listaContratosFiltrada);
         }
+    }
+
+    // Crear factura automatica
+    public void crearFacturaAutomatica() {
+        IGenericService<FacturaAutomatica> facAutoService = new GenericServiceImpl<>(FacturaAutomatica.class,
+                HibernateUtil.getSessionFactory());
+
+        FacturaAutomatica facAuto = new FacturaAutomatica();
+        facAuto.setContrato(contratoSeleccionado);
+        facAuto.setCliente(clienteSeleccionado);
+        facAuto.setFecha_factura_automatica(LocalDate.now().plusMonths(1));
+        facAuto.setCantidad_facturas(0);
+
+        facAutoService.save(facAuto);
     }
 }
 

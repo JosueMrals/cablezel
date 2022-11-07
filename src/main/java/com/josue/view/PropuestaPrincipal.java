@@ -101,7 +101,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
             contratos.forEach(contrato -> {
                 Cliente cliente = contrato.getCliente();
-                if (!clientes.contains(cliente) && contrato.getTipocontrato().getServicio().getNombre().equals("TV MENSUAL")) {
+                if (!clientes.contains(cliente) && contrato.getTipocontrato().getServicio().getNombre().equals("BASICO")) {
                     clientes.add(cliente);
                 }
             });
