@@ -18,22 +18,17 @@
                 <BorderPane.margin>
                     <Insets />
                 </BorderPane.margin>
-                <Pane prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="530.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <ImageView fitHeight="79.0" fitWidth="144.0" layoutX="75.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/nuevos/antena.png" />
+                <Pane prefHeight="235.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="585.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <ImageView fitHeight="158.0" fitWidth="257.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../images/pixel%20cablezel.png" />
                     </ImageView>
-                    <Label layoutX="51.0" layoutY="14.0" prefHeight="55.0" prefWidth="138.0" text="CABLEZEL" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-                        <font>
-                            <Font name="Arial Black" size="22.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="52.0" layoutY="137.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                    <Label layoutX="52.0" layoutY="185.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                         <font>
                             <Font size="20.0" />
                         </font>
                     </Label>
                 </Pane>
-                <VBox layoutY="188.0" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="188.0">
+                <VBox layoutY="235.0" prefHeight="528.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="235.0">
             <Button fx:id="btnInicio" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#mostrarInicio" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -96,19 +91,6 @@
                         <graphic>
                             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                 <Image url="@../images/nuevos/servicios.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="btnConfig" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="20.0" />
-                        </font>
-                        <cursor>
-                            <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../images/nuevos/configuracion.png" />
                             </ImageView>
                         </graphic>
                     </Button>
@@ -205,20 +187,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      </Button>
-                     <Button fx:id="btPrincipalConfig" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="72.0" mnemonicParsing="false" onAction="#mostrar_gestiones" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Configuraciones" textFill="WHITE">
-                         <graphic>
-                             <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <Image url="@../images/nuevos/configuracion1.png" />
-                             </ImageView>
-                         </graphic>
-                         <font>
-                             <Font name="System Bold" size="22.0" />
-                         </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     </Button>
-                  <Button fx:id="btPrincipalReportes" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="286.0" mnemonicParsing="false" onAction="#mostrar_reportes" onMouseClicked="#mostrar_reportes" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Reportes" textFill="WHITE">
+                  <Button fx:id="btPrincipalReportes" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="72.0" mnemonicParsing="false" onAction="#mostrar_reportes" onMouseClicked="#mostrar_reportes" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Reportes" textFill="WHITE">
                      <graphic>
                          <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                              <Image url="@../images/nuevos/reporte(1).png" />

@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
                 manejador.setUsuario(usuario);
                 try {
                     ((Node) actionEvent.getSource()).getScene().getWindow().hide();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
                     Parent root = loader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
