@@ -57,6 +57,7 @@
 	<subDataset name="tableDataset" uuid="ec31fede-1994-44a1-9a00-77951f43f416">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="idDetalleFactura" class="java.lang.String"/>
 		<queryString>
 			<![CDATA[SELECT detalles_facturas.id AS detallefactura,
 	servicios.nombre AS servicio,
@@ -66,7 +67,9 @@ FROM detalles_facturas
 	INNER JOIN servicios ON 
 	 detalles_facturas.servicioid = servicios.id 
 	INNER JOIN facturas ON 
-	 detalles_facturas.factura_id = facturas.id]]>
+	 detalles_facturas.factura_id = facturas.id 
+WHERE 
+	 facturas.id = $P!{idDetalleFactura} ]]>
 		</queryString>
 		<field name="detallefactura" class="java.lang.String"/>
 		<field name="servicio" class="java.lang.String"/>
@@ -80,6 +83,7 @@ FROM detalles_facturas
 	<parameter name="total" class="java.lang.Float"/>
 	<parameter name="cliente" class="java.lang.String"/>
 	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="factura" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT detalles_facturas.id AS detallefactura,
 	servicios.nombre AS servicio,
@@ -134,6 +138,20 @@ FROM detalles_facturas
 				</textElement>
 				<text><![CDATA[Direccion.: Fte. a modulos del Mercado Municipal, Siuna RACCN]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="663" y="10" width="17" height="19" uuid="60878464-dcae-4f22-8c5b-73dd77f102f0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#: _____________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="682" y="10" width="68" height="19" uuid="2cd48df4-acea-4fc9-91d4-de29f3783f8e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{factura}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageFooter>
@@ -218,7 +236,10 @@ FROM detalles_facturas
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="tableDataset" uuid="8ca34cd7-cb2e-48ca-9c6b-a9fd6a7fe320">
+					<datasetRun subDataset="tableDataset" uuid="4898277d-c1f9-4a64-a9b0-559ecfec4141">
+						<datasetParameter name="idDetalleFactura">
+							<datasetParameterExpression><![CDATA[$P{factura}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="140" uuid="ef938552-a96e-4300-894d-bcb83b762cb8">

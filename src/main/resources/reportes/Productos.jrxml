@@ -38,12 +38,7 @@
 	</style>
 	<subDataset name="DatasetFacturas" uuid="3356b10b-7487-4707-9a09-b84eba6a0ac5">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
-		<property name="com.jaspersoft.studio.data.sql.tables">
-			<![CDATA[ZmFjdHVyYXMgLDE2MiwxODcsODRhYTUxNzctMWU2Ny00MmE2LWJhNDItYjY4Y2FhODBiNjNiO3Nl
-cnZpY2lvcyAsMTYyLDE1LDIxODE3YmUzLWQ3NTgtNGJlMS1iMzcxLTViMWY5MTdkOWUyYztkZXRh
-bGxlc19mYWN0dXJhcyAsMTUsMTA4LGVlZWQ3MmI2LTBjY2UtNDY2YS1hNzJiLTUyMTBjZjA4OGFh
-Zjs=]]>
-		</property>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<parameter name="idDetalleFactura" class="java.lang.Integer"/>
 		<queryString>
 			<![CDATA[SELECT detalles_facturas.id AS detallefactura,
@@ -187,11 +182,15 @@ FROM clientes]]>
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="DatasetFacturas" uuid="7130320c-b992-4807-8a88-9bc0dc0b71cf">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
+					<datasetRun subDataset="DatasetFacturas" uuid="b0b657fe-7d61-4c99-9041-3b6fd1a4cb38">
+						<datasetParameter name="idDetalleFactura">
+							<datasetParameterExpression><![CDATA[$P{factura}]]></datasetParameterExpression>
+						</datasetParameter>
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="184" uuid="c5fe9049-ac23-407b-a05e-4081194346c8">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="184" height="30" uuid="9793bac8-d148-4d65-9856-7e5d222c72ff"/>
@@ -206,6 +205,7 @@ FROM clientes]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="8cf2bc0c-5154-4cec-978c-b7f2c80f0f7b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="d39fbafb-dc46-4aac-b3e5-41e6874b9c9e"/>
@@ -220,6 +220,7 @@ FROM clientes]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="5eeca0f9-7d1d-4464-b773-07af09c18142">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="d5b7a5a3-e3d6-440b-966f-4476939d917b"/>
@@ -234,6 +235,7 @@ FROM clientes]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="1bd84063-d2f6-47c9-a389-f38b93f20a4f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="928e5163-35f2-471c-944d-cd21b5856593"/>

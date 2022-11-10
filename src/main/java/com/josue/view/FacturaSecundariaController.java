@@ -1,7 +1,9 @@
 package com.josue.view;
 
 import com.josue.modelo.DetalleFactura;
+import com.josue.modelo.Usuario;
 import com.josue.reportes.Reportes;
+import com.josue.util.ManejadorUsuario;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -46,9 +48,13 @@ public class FacturaSecundariaController implements Initializable {
 
     float total;
 
+    Usuario usuario;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // extraer el usuario de ManejadorUsuario
+        ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+        usuario = manejadorUsuario.getUsuario();
     }
 
     public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos){
@@ -122,6 +128,7 @@ public class FacturaSecundariaController implements Initializable {
         parametros.put("direccion", direccion);
         parametros.put("factura", factura);
         parametros.put("fecha", fecha);
+        parametros.put("usuario", usuario.getNickusuario());
         parametros.put("detalles", detalles);
         parametros.put("total", total);
         parametros.put("descuento", 0);
