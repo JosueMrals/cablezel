@@ -6,12 +6,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.Glow?>
@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.BarrioController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionesController">
    <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
       <Tab text="Tipos de Contratos">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
@@ -113,7 +113,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </TextField>
-            <ComboBox fx:id="cmbServicio" layoutX="30.0" layoutY="302.0" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese un servicio..." styleClass="labels">
+            <ComboBox fx:id="cmbServicio" layoutX="30.0" layoutY="302.0" onMouseClicked="#verificarServicios" prefHeight="25.0" prefWidth="300.0" promptText="Ingrese un servicio..." styleClass="labels">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -197,71 +197,61 @@
             </ImageView>
          </AnchorPane>
       </Tab>
-      <Tab text="Usuarios">
+      <Tab text="Lista de Usuarios">
          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/programador.png" />
             </ImageView>
-            <Label layoutX="92.0" layoutY="23.0" text="Lista de Usuarios" textAlignment="CENTER">
+            <Label layoutX="92.0" layoutY="23.0" text="Registro de Usuarios" textAlignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="98.0" text="Nick del Usuario">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtUsuario" layoutX="30.0" layoutY="123.0" prefHeight="25.0" prefWidth="300.0" promptText="josue" styleClass="labels" />
-            <Label layoutX="30.0" layoutY="158.0" text="Rol del Usuario">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="cbRol" layoutX="30.0" layoutY="183.0" prefHeight="22.0" prefWidth="300.0" promptText="Elija un rol" styleClass="labels">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Administrador" />
-                        <String fx:value="Facturador" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-            <Label layoutX="30.0" layoutY="218.0" text="Nick del Usuario">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="txtDescripcion" layoutX="30.0" layoutY="243.0" prefHeight="66.0" prefWidth="300.0" promptText="Descripcion" styleClass="labels" />
-            <Button fx:id="btnGuardarRol" layoutX="220.0" layoutY="327.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#guardarRol" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #0087FF;" text="Agregar" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
+            <TextField fx:id="txtNombreUsuario" layoutX="92.0" layoutY="135.0" prefHeight="25.0" prefWidth="300.0" promptText="Nombre Completo" styleClass="labels" />
+            <TextField fx:id="txtNickUsuario" layoutX="92.0" layoutY="185.0" prefHeight="25.0" prefWidth="300.0" promptText="Nombre de Usuario" styleClass="labels" />
+            <TextField fx:id="txtEmail" layoutX="92.0" layoutY="235.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" styleClass="labels" />
+            <PasswordField fx:id="txtPassword" layoutX="92.0" layoutY="280.0" prefWidth="300.0" promptText="Contraseña" styleClass="labels" />
+            <Button fx:id="btAgregarUsuarios" alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="378.0" mnemonicParsing="false" onAction="#guardarUsuarios" style="-fx-background-color: #0087FF;" styleClass="botones" text="Agregar" textAlignment="CENTER" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <effect>
-                  <Glow />
-               </effect>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Button>
-            <TableView fx:id="tvRoles" layoutX="400.0" layoutY="155.0" prefHeight="338.0" prefWidth="707.0" styleClass="BuscarClientes">
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/users.png" />
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/lock.png" />
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/email.png" />
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/users.png" />
+            </ImageView>
+            <TableView fx:id="tvListaUsuarios" layoutX="30.0" layoutY="431.0" prefHeight="200.0" prefWidth="1084.0" styleClass="BuscarClientes">
                <columns>
-                  <TableColumn fx:id="colNick" prefWidth="141.0" resizable="false" text="Nick del usuario" />
-                  <TableColumn fx:id="colRol" prefWidth="141.0" resizable="false" text="Rol del usuario" />
-                  <TableColumn fx:id="colDescripcion" prefWidth="516.0" resizable="false" text="Descripcion del Barrio" />
-                  <TableColumn fx:id="colAccion2" prefWidth="49.0" resizable="false" />
+                  <TableColumn fx:id="colNombreUsuario" prefWidth="271.0" resizable="false" text="Nombre Completo" />
+                  <TableColumn fx:id="colNickUsuario" prefWidth="235.0" resizable="false" text="Nick de Usuario" />
+                  <TableColumn fx:id="colRolUsuario" prefWidth="152.0" resizable="false" text="Rol del Usuario" />
+                  <TableColumn fx:id="colEmail" prefWidth="231.0" resizable="false" text="Email" />
+                  <TableColumn fx:id="colPassword" prefWidth="156.0" resizable="false" text="Contraseña" />
+                  <TableColumn fx:id="colAccionUsuarios" prefWidth="36.0" resizable="false" />
                </columns>
             </TableView>
-            <TextField fx:id="txtBuscarUsuario" layoutX="400.0" layoutY="123.0" prefHeight="25.0" prefWidth="345.0" promptText="Buscar un usuario" styleClass="labels" />
-            <Button fx:id="btnBuscarUsuario" layoutX="745.0" layoutY="119.0" mnemonicParsing="false" onAction="#buscarRol" prefWidth="25.0" style="-fx-background-color: none;">
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../images/lupa.png" />
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/login/users.png" />
+            </ImageView>
+            <ComboBox fx:id="cbRol" layoutX="85.0" layoutY="328.0" prefHeight="22.0" prefWidth="300.0" promptText="Elija un rol" styleClass="labels">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Administrador" />
+                     <String fx:value="Facturador" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
          </AnchorPane>
       </Tab>
       <Tab fx:id="tpRespaldo" onSelectionChanged="#CargarDirectorioRespaldo" text="Respaldo">

@@ -31,7 +31,7 @@ public class FacturaAutomatica extends Identificador {
     public LocalDate getFecha_factura_automatica() {
         return fecha_factura_automatica;
     }
-    public void setFecha_factura_automatica(LocalDate fecha_factura_automatica) {
+public void setFecha_factura_automatica(LocalDate fecha_factura_automatica) {
         this.fecha_factura_automatica = fecha_factura_automatica;
     }
 

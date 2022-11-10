@@ -86,6 +86,10 @@ public class GlobalUtil {
         return usuarios;
     }
 
+    public static ObservableList<Factura> getFacturas() {
+        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(facturaService.getAll());
+    }
 
     public static ObservableList<Cliente> getClientes() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
@@ -116,12 +120,6 @@ public class GlobalUtil {
         return FXCollections.observableArrayList(contratoService.getAll());
     }
 
-    public static ObservableList<Rol> getRoles() {
-        IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(rolService.getAll());
-    }
-
     public static ObservableList<Usuario> getUsuarios() {
         IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
                 .getSessionFactory());
@@ -132,6 +130,18 @@ public class GlobalUtil {
         IGenericService<DetallePago> detallePagoService = new GenericServiceImpl<>(DetallePago.class, HibernateUtil
                 .getSessionFactory());
         return FXCollections.observableArrayList(detallePagoService.getAll());
+    }
+
+    public static ObservableList<FacturaAutomatica> getFacturaAutomatica() {
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(facturaAutomaticaService.getAll());
+    }
+
+    public static ObservableList<DetalleFactura> getDetalleFactura() {
+        IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(detalleFacturaService.getAll());
     }
 
     // Mostrar reportes

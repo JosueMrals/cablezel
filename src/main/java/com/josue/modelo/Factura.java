@@ -25,6 +25,13 @@ public class Factura extends Identificador{
         this.usuario = usuario;
     }
 
+    //Relation to Contrato table
+    @ManyToOne
+    @JoinColumn (name = "contrato_id", referencedColumnName = "id")
+    private Contrato contrato;
+    public Contrato getContrato() { return contrato; }
+    public void setContrato(Contrato contrato) { this.contrato = contrato; }
+
     //Factura table
     @Column (name = "total")
     private Float total;
