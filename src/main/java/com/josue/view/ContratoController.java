@@ -7,7 +7,6 @@ import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,22 +40,20 @@ public class ContratoController implements Initializable {
     @FXML TableColumn<Contrato, String> colTipo;
     @FXML TableColumn<Contrato, String> colCliente;
     @FXML TableView<Contrato> tvContratos;
-
-    String[] clientesAutocomplete = {};
-
     ObservableList<Cliente> listaClientes;
-
     Cliente clienteSeleccionado;
     Usuario usuario;
     Servicio servicioSeleccionado;
-
     @FXML TextField txtBuscarContrato;
     @FXML Button btnBuscarContrato;
     @FXML TableColumn<Contrato, String> colAccion;
     @FXML Button btnGuardar;
 
-    String[] contratosAutocomplete = {};
+    Contrato contratoSeleccionado;
 
+    // Autocompletar
+    String[] contratosAutocomplete = {};
+    String[] clientesAutocomplete = {};
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listarClientes();
@@ -164,9 +161,9 @@ public class ContratoController implements Initializable {
 
     public void crearServicio(Long valor) {
         Servicio serv = new Servicio();
-        serv.setNombre("contrato");
+        serv.setNombre("CONTRATO");
         serv.setDescripcion("Servicio de contratos");
-        serv.setPrecio(700.0f);
+        serv.setPrecio(1080.0f);
 
         IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
                 HibernateUtil.getSessionFactory());
@@ -215,6 +212,48 @@ public class ContratoController implements Initializable {
         IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
                 HibernateUtil.getSessionFactory());
         detalleFacturaService.save(detalleFactura);
+
+        // obtener la cantidad de cantidad de tv de tipo de contrato
+        int cantidad = Integer.parseInt(contratoSeleccionado.getTipocontrato().getCantidad_tv());
+
+        // crear factura de tv
+        Factura facturaTv = new Factura();
+        facturaTv.setFecha_factura(LocalDate.now());
+        facturaTv.setUsuario(usuario);
+        facturaTv.setTotal(0.0f);
+        facturaTv.setEstado("pendiente");
+        facturaTv.setCliente(clienteSeleccionado);
+        IGenericService<Factura> facturaTvService = new GenericServiceImpl<>(Factura.class,
+                HibernateUtil.getSessionFactory());
+        facturaTvService.save(facturaTv);
+
+        //Obtener factura creada
+        Factura facturaTvCreada = facturaTvService.getById(facturaTv.getId());
+        System.out.println("Factura creada: " + facturaTvCreada);
+
+        // total de factura TV
+        float total = 0;
+
+        //Crear facturas de servicios de tv instaladas
+        for(int i = 0; i < cantidad; i++) {
+            //Crear detalle de factura
+            DetalleFactura detalleFacturaTv = new DetalleFactura();
+            detalleFacturaTv.setDescripcion("Servicio de tv");
+            detalleFacturaTv.setFactura(facturaTvCreada);
+            detalleFacturaTv.setServicio(contratoSeleccionado.getTipocontrato().getServicio());
+            detalleFacturaTv.setTotal_pagar(contratoSeleccionado.getTipocontrato().getServicio().getPrecio());
+
+            total += contratoSeleccionado.getTipocontrato().getServicio().getPrecio();
+
+            IGenericService<DetalleFactura> detalleFacturaTvService = new GenericServiceImpl<>(DetalleFactura.class,
+                    HibernateUtil.getSessionFactory());
+            detalleFacturaTvService.save(detalleFacturaTv);
+        }
+
+        // actualizar factura con el total de la factura
+        facturaTvCreada.setTotal(total);
+        facturaTvService.update(facturaTvCreada);
+
     }
 
     //Obtener el servicio de nombre contrato
@@ -232,7 +271,7 @@ public class ContratoController implements Initializable {
     }
 
     public void listarTipoContrato() {
-        var tipocontratos = obtenerTipoContratos();
+        var tipocontratos = GlobalUtil.getTipoContratos();
         cbTipocontrato.setItems(tipocontratos);
         cbTipocontrato.setValue(null);
         cbTipocontrato.setPromptText("Seleccione un tipo de contrato");
@@ -240,20 +279,8 @@ public class ContratoController implements Initializable {
 
     public void listarClientes(){
         clientesAutocomplete = GlobalUtil.obtenerClientes();
-        listaClientes = obtenerClientesList();
+        listaClientes = GlobalUtil.getClientes();
         TextFields.bindAutoCompletion(txtNombreCliente, clientesAutocomplete);
-    }
-
-    public ObservableList<Contrato> obtenerContratos() {
-        IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(contratoService.getAll());
-    }
-
-    private ObservableList<Cliente> obtenerClientesList() {
-        IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(clienteService.getAll());
     }
 
     public void llenarContrato() {
@@ -321,6 +348,9 @@ public class ContratoController implements Initializable {
 
             contratoService.save(co);
 
+            // obtener el contrato recien creado
+            contratoSeleccionado = contratoService.getById(co.getId());
+
             dpFechacontrato.setValue(null);
             txtDescripcion.setText(null);
             cbTipocontrato.setValue(null);
@@ -328,10 +358,10 @@ public class ContratoController implements Initializable {
 
             llenarContrato();
             crearFactura();
+            crearFacturaAutomatica();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Contrato registrado correctamente",
                     ButtonType.OK);
             alert.show();
-
         }
 
     catch(Exception e)
@@ -353,12 +383,6 @@ public class ContratoController implements Initializable {
                 clienteSeleccionado = c;
             }
         }
-    }
-
-    public ObservableList<TipoContrato> obtenerTipoContratos() {
-        IGenericService<TipoContrato> tipocontratosService = new GenericServiceImpl<>(TipoContrato.class,
-                HibernateUtil.getSessionFactory());
-        return FXCollections.observableArrayList(tipocontratosService.getAll());
     }
 
     public void verificarTipoContrato(MouseEvent mouseEvent) {
@@ -389,6 +413,20 @@ public class ContratoController implements Initializable {
             }
             tvContratos.setItems(listaContratosFiltrada);
         }
+    }
+
+    // Crear factura automatica
+    public void crearFacturaAutomatica() {
+        IGenericService<FacturaAutomatica> facAutoService = new GenericServiceImpl<>(FacturaAutomatica.class,
+                HibernateUtil.getSessionFactory());
+
+        FacturaAutomatica facAuto = new FacturaAutomatica();
+        facAuto.setContrato(contratoSeleccionado);
+        facAuto.setCliente(clienteSeleccionado);
+        facAuto.setFecha_factura_automatica(LocalDate.now().plusMonths(1));
+        facAuto.setCantidad_facturas(0);
+
+        facAutoService.save(facAuto);
     }
 }
 

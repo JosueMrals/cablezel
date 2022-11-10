@@ -81,7 +81,7 @@ public class Reportes {
                 public void execute(Connection connection) throws SQLException {
                     try {
                         // cargar el archivo jrxml
-                        InputStream is = Reportes.class.getClassLoader().getResourceAsStream(ruta);
+                        InputStream is = getClass().getClassLoader().getResourceAsStream(ruta);
                         JasperDesign jasperDesign = JRXmlLoader.load(is);
                         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
                         // llenar el reporte con los datos
@@ -116,8 +116,5 @@ public class Reportes {
             throw e;
         }
     }
-
-
-
 
 }

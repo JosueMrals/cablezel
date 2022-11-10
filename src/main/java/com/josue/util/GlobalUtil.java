@@ -5,6 +5,12 @@ import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GlobalUtil {
 
@@ -17,6 +23,16 @@ public class GlobalUtil {
                     + " " + listaClientes.get(i).getPrimer_apellido() + " " + listaClientes.get(i).getSegundo_apellido();
         }
         return clientes;
+    }
+
+    public static String[] obtenerServicios() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+        ObservableList<Servicio> listaServicios = FXCollections.observableArrayList(servicioService.getAll());
+        String[] servicios = new String[listaServicios.size()];
+        for (int i = 0; i < listaServicios.size(); i++) {
+            servicios[i] = listaServicios.get(i).getNombre();
+        }
+        return servicios;
     }
 
     public static String[] obtenerCedula() {
@@ -60,6 +76,20 @@ public class GlobalUtil {
         return contratos;
     }
 
+    public static String[] obtenerUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil.getSessionFactory());
+        ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList(usuarioService.getAll());
+        String[] usuarios = new String[listaUsuarios.size()];
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            usuarios[i] = listaUsuarios.get(i).getNickusuario();
+        }
+        return usuarios;
+    }
+
+    public static ObservableList<Factura> getFacturas() {
+        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(facturaService.getAll());
+    }
 
     public static ObservableList<Cliente> getClientes() {
         IGenericService<Cliente> clienteService = new GenericServiceImpl<>(Cliente.class, HibernateUtil.getSessionFactory());
@@ -89,5 +119,45 @@ public class GlobalUtil {
                 .getSessionFactory());
         return FXCollections.observableArrayList(contratoService.getAll());
     }
+
+    public static ObservableList<Usuario> getUsuarios() {
+        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(usuarioService.getAll());
+    }
+
+    public static ObservableList<DetallePago> getDetallePago() {
+        IGenericService<DetallePago> detallePagoService = new GenericServiceImpl<>(DetallePago.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(detallePagoService.getAll());
+    }
+
+    public static ObservableList<FacturaAutomatica> getFacturaAutomatica() {
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(facturaAutomaticaService.getAll());
+    }
+
+    public static ObservableList<DetalleFactura> getDetalleFactura() {
+        IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class, HibernateUtil
+                .getSessionFactory());
+        return FXCollections.observableArrayList(detalleFacturaService.getAll());
+    }
+
+    // Mostrar reportes
+    public static void mostrarReportes(String ruta, String titulo) {
+        FXMLLoader fxmlLoader = new FXMLLoader(GlobalUtil.class.getResource(ruta));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setTitle(titulo);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 }

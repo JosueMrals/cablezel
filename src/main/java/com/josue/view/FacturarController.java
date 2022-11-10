@@ -6,6 +6,7 @@ import com.josue.service.IGenericService;
 import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
+import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -142,7 +141,6 @@ public class FacturarController implements Initializable {
                 .getEstado()));
         colTotal.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getTotal_pagar()
                 .toString()));
-
         tvBuscarClientes.setItems(detalleFactura);
     }
 
@@ -251,9 +249,8 @@ public class FacturarController implements Initializable {
         pagoId.setTotal_pagar(totalPagar);
         pagoService.update(pagoId);
 
-
-
         // Actualizar el estado de la factura
+        ObservableList<Factura> facturasPagadas = FXCollections.observableArrayList();
         for (DetalleFactura detalleFactura1 : detalleFacturasPagar) {
             IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
                     HibernateUtil.getSessionFactory());
@@ -265,17 +262,50 @@ public class FacturarController implements Initializable {
 
             // Actualizar el estado de la factura
             facturaService.update(factura);
+            facturasPagadas.add(factura);
 
             // Actualizar el estado del detalle factura
             detalleFactura.setFactura(factura);
             detalleFacturaService.update(detalleFactura);
         }
 
+        // Actualizar fecha en la tabla FacturaAutomatica
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica.class,
+                HibernateUtil.getSessionFactory());
+        ObservableList<FacturaAutomatica> facturasAutomaticas = GlobalUtil.getFacturaAutomatica();
+        LocalDate fechaUltimaFactura = obtenerUltimaFechaFacturasPagadas(facturasPagadas);
+        for (Factura factura : facturasPagadas) {
+            //Obtener un cliente por cada factura
+            Cliente cliente = factura.getCliente();
+            for (FacturaAutomatica facturaAutomatica : facturasAutomaticas) {
+                // Obtener el cliente de la factura automatica
+                Cliente cliente1 = facturaAutomatica.getCliente();
+                if (cliente.getId() == cliente1.getId()) {
+                    // Actualizar la fecha de la factura automatica
+                    facturaAutomatica.setFecha_factura_automatica(fechaUltimaFactura.plusMonths(1));
+                    facturaAutomatica.setCantidad_facturas(facturaAutomatica.getCantidad_facturas() - 1);
+                    facturaAutomaticaService.update(facturaAutomatica);
+                }
+            }
+        }
+    }
 
+    public LocalDate obtenerUltimaFechaFacturasPagadas(ObservableList<Factura> facturasPagadas ) {
+        // Comparación entre todas las fecha y obtener la última
+        LocalDate fechaUltimaFactura = null;
+        for (Factura factura : facturasPagadas) {
+            if (fechaUltimaFactura == null) {
+                fechaUltimaFactura = factura.getFecha_factura();
+            } else {
+                if (factura.getFecha_factura().isAfter(fechaUltimaFactura)) {
+                    fechaUltimaFactura = factura.getFecha_factura();
+                }
+            }
+        }
+        return fechaUltimaFactura;
     }
 
     // Abrir ventana FacturaSecundaria
-
     public void mostrarSecundaria(ActionEvent actionEvent) {
         if (tvBuscarClientes1.getItems().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
