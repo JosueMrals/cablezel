@@ -42,12 +42,9 @@ public class PropuestaPrincipal extends Application implements Initializable {
     public Button btPrincipalClientes;
     public AnchorPane panelCentral;
     @FXML Button btnConfig;
-    @FXML Button btnReportes;
     @FXML Button btnInicio;
-    @FXML Button btnClientes;
     @FXML Button btnCli;
     @FXML Button btnContratos;
-    @FXML Button btnUsuarios;
     @FXML Button btnFacturar;
     @FXML Button btnSalir;
     @FXML Button btMostrar;

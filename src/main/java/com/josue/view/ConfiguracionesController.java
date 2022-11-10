@@ -101,23 +101,25 @@ public class ConfiguracionesController implements Initializable {
     public TableColumn<Usuario, String> colNickUsuario;
     public TableColumn<Usuario, String> colEmail;
     public TableColumn<Usuario, String> colPassword;
+    public TableColumn<Usuario, String> colRolUsuario;
     public TableColumn<Usuario, String> colAccionUsuarios;
     Usuario usuarioSeleccionado;
     ObservableList<Usuario> listaUsuarios;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        llenarTablas();
-
         autoCompletarBarrio();
         autoCompletarTipoContrato();
+
+        llenarTablaUsuarios();
+        llenarTablaTipoContrato();
+        llenarTablaBarrios();
 
         addButtonEdit();
 
         listarServicios();
 
         verificarConfiguracionServidor();
-        verificarServicios();
     }
 
     private void verificarConfiguracionServidor() {
@@ -160,27 +162,31 @@ public class ConfiguracionesController implements Initializable {
 
     public void recargarBarrio() {
         txtBuscarBarrio.clear();
-        llenarTablas();
+        llenarTablaBarrios();
         tvBarrios.refresh();
     }
+
     public void recargar() {
         txtBuscarTC.clear();
-        llenarTablas();
+        llenarTablaTipoContrato();
         tvTipoContrato.refresh();
     }
 
-    private void llenarTablas() {
+    public void llenarTablaUsuarios() {
         try {
             ObservableList<Usuario> usuarios = GlobalUtil.getUsuarios();
             colNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("nombrecompleto"));
             colNickUsuario.setCellValueFactory(new PropertyValueFactory<>("nickusuario"));
+            colRolUsuario.setCellValueFactory(new PropertyValueFactory<>("rol"));
             colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
             colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
             tvListaUsuarios.setItems(usuarios);
         } catch (Exception e) {
             logger.error("Error al llenar la tabla de usuarios", e);
         }
+    }
 
+    public void llenarTablaTipoContrato() {
         try {
             IGenericService<TipoContrato> tpContratoService = new GenericServiceImpl<>(TipoContrato.class, HibernateUtil.getSessionFactory());
             ObservableList<TipoContrato> tpContrato = FXCollections.observableArrayList(tpContratoService.getAll());
@@ -193,7 +199,9 @@ public class ConfiguracionesController implements Initializable {
         } catch (Exception e) {
             logger.error("Error al llenar la tabla de tipo de contrato", e);
         }
+    }
 
+    private void llenarTablaBarrios() {
         try {
             IGenericService<Barrio> barrioService = new GenericServiceImpl<>(Barrio.class, HibernateUtil.getSessionFactory());
             ObservableList<Barrio> barrios = FXCollections.observableArrayList(barrioService.getAll());
@@ -236,7 +244,7 @@ public class ConfiguracionesController implements Initializable {
 
                         btnGuardarContrato.setOnAction(event1 -> {
                             actualizarTipoContrato(tipoContrato);
-                            llenarTablas();
+                            llenarTablaTipoContrato();
                             recargar();
                         });
                     });
@@ -267,7 +275,7 @@ public class ConfiguracionesController implements Initializable {
                     btnGuardarContrato.setText("Guardar");
                     btnGuardarContrato.setOnAction(event -> {
                         guardarTipoContrato();
-                        llenarTablas();
+                        llenarTablaTipoContrato();
                         tvTipoContrato.refresh();
                     });
 
@@ -303,7 +311,7 @@ public class ConfiguracionesController implements Initializable {
 
                         btnGuardarBarrio.setOnAction(event1 -> {
                             actualizarBarrio(barrio);
-                            llenarTablas();
+                            llenarTablaBarrios();
                             recargarBarrio();
                         });
                     });
@@ -328,7 +336,7 @@ public class ConfiguracionesController implements Initializable {
                     btnGuardarBarrio.setText("Guardar");
                     btnGuardarBarrio.setOnAction(event -> {
                         guardarBarrio();
-                        llenarTablas();
+                        llenarTablaBarrios();
                         tvBarrios.refresh();
                     });
 
@@ -342,14 +350,14 @@ public class ConfiguracionesController implements Initializable {
     private void autoCompletarTipoContrato() {
         tipoContratoAutoComplete = GlobalUtil.obtenerTipoContrato();
         TextFields.bindAutoCompletion(txtBuscarTC, tipoContratoAutoComplete);
-        llenarTablas();
+        llenarTablaTipoContrato();
         tvTipoContrato.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     private void autoCompletarBarrio() {
         barrioAutoComplete = GlobalUtil.obtenerBarrios();
         TextFields.bindAutoCompletion(txtBuscarBarrio, barrioAutoComplete);
-        llenarTablas();
+        llenarTablaBarrios();
         tvBarrios.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -357,7 +365,7 @@ public class ConfiguracionesController implements Initializable {
     private void buscarBarrio() {
         String barrio = txtBuscarBarrio.getText();
         if (txtBuscarBarrio.getText().isEmpty()){
-            llenarTablas();
+            llenarTablaBarrios();
         }else {
             ObservableList<Barrio> barrios = GlobalUtil.getBarrios();
             ObservableList<Barrio> barriosFiltrados = FXCollections.observableArrayList();
@@ -374,7 +382,7 @@ public class ConfiguracionesController implements Initializable {
     private void buscarTC() {
         String tipoContrato = txtBuscarTC.getText();
         if (txtBuscarTC.getText().isEmpty()){
-            llenarTablas();
+            llenarTablaTipoContrato();
         }else {
             ObservableList<TipoContrato> tipoContratos = GlobalUtil.getTipoContratos();
             ObservableList<TipoContrato> tipoContratosFiltrados = FXCollections.observableArrayList();
@@ -429,7 +437,7 @@ public class ConfiguracionesController implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
 
-            llenarTablas();
+            llenarTablaBarrios();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -466,7 +474,7 @@ public class ConfiguracionesController implements Initializable {
                     ButtonType.OK);
             alert.showAndWait();
 
-            llenarTablas();
+            llenarTablaTipoContrato();
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
@@ -531,7 +539,7 @@ public class ConfiguracionesController implements Initializable {
                     txtPassword.setText("");
                     cbRol.getSelectionModel().clearSelection();
 
-                    llenarTablas();
+                    llenarTablaUsuarios();
                 } catch (Exception e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
                     alert.showAndWait();
@@ -586,7 +594,7 @@ public class ConfiguracionesController implements Initializable {
         } else {
             confSistemas.forEach(configuracionSistema -> {
                 if(configuracionSistema.getNombre().equals("respaldo")) {
-                   cbBuscarRespaldo.getItems().add(configuracionSistema.getValor());
+                    cbBuscarRespaldo.getItems().add(configuracionSistema.getValor());
                 }
             });
         }

@@ -51,7 +51,6 @@ public class LoginController implements Initializable {
         usuario = new Usuario();
 
         clientes = GlobalUtil.getClientes();
-
     }
 
     public ObservableList<Usuario> obtenerUsuarios() {
@@ -60,10 +59,10 @@ public class LoginController implements Initializable {
         return FXCollections.observableArrayList(usuarioService.getAll());
     }
 
-    public boolean getUsuariobyNick(String nick, String password) {
+    public boolean getUsuariobyNick(String nick, String password, String rol) {
         ObservableList<Usuario> usuarios = obtenerUsuarios();
         for (Usuario us : usuarios) {
-            if (us.getNickusuario().equals(nick) && us.getPassword().equals(password)) {
+            if (us.getNickusuario().equals(nick) && us.getPassword().equals(password) && us.getRol().equals(rol)) {
                 this.usuario = us;
                 return true;
             }
@@ -77,6 +76,7 @@ public class LoginController implements Initializable {
             Usuario usuario = new Usuario();
             usuario.setNombrecompleto("Josue Morales");
             usuario.setNickusuario("josue");
+            usuario.setRol("Administrador");
             usuario.setPassword("1234");
             usuario.setEmail("josue@gmail.com");
 
@@ -95,16 +95,29 @@ public class LoginController implements Initializable {
             alert.setContentText("Por favor, complete todos los campos");
             alert.showAndWait();
         } else {
-
             String nick = txtNombreUsuario.getText();
             String password = txtPassword.getText();
 
-            if (getUsuariobyNick(nick, password)) {
+            if (getUsuariobyNick(nick, password, "Administrador")) {
                 ManejadorUsuario manejador = ManejadorUsuario.getInstance();
                 manejador.setUsuario(usuario);
                 try {
                     ((Node) actionEvent.getSource()).getScene().getWindow().hide();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (Exception e) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+                }
+            } else if (getUsuariobyNick(nick, password, "Facturador")) {
+
+                ManejadorUsuario manejador = ManejadorUsuario.getInstance();
+                manejador.setUsuario(usuario);
+                try {
+                    ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
                     Parent root = loader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
@@ -121,6 +134,5 @@ public class LoginController implements Initializable {
             }
         }
     }
-
 
 }
