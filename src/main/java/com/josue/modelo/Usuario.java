@@ -12,6 +12,9 @@ public class Usuario extends Identificador {
     @Column(name = "nickusuario", length = 40)
     private String nickusuario;
 
+    @Column(name = "rol", length = 40)
+    private String rol;
+
     @Column(name = "password", length = 40)
     private String password;
 
@@ -22,10 +25,11 @@ public class Usuario extends Identificador {
 
     }
 
-    public Usuario(String nombrecompleto, String password, String nickusuario, String email) {
+    public Usuario(String nombrecompleto, String password, String nickusuario, String rol, String email) {
         this.nombrecompleto = nombrecompleto;
         this.password = password;
         this.nickusuario = nickusuario;
+        this.rol = rol;
         this.email = email;
     }
 
@@ -61,11 +65,16 @@ public class Usuario extends Identificador {
         this.email = email;
     }
 
+    public String getRol() { return rol; }
+
+    public void setRol(String rol) { this.rol = rol; }
+
     @Override
     public String toString() {
         return "Usuario{" +
                 "nombrecompleto='" + nombrecompleto + '\'' +
                 ", nickusuario='" + nickusuario + '\'' +
+                ", rol='" + rol + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';

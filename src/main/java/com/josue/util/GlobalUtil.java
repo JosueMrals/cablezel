@@ -120,12 +120,6 @@ public class GlobalUtil {
         return FXCollections.observableArrayList(contratoService.getAll());
     }
 
-    public static ObservableList<Rol> getRoles() {
-        IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(rolService.getAll());
-    }
-
     public static ObservableList<Usuario> getUsuarios() {
         IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
                 .getSessionFactory());

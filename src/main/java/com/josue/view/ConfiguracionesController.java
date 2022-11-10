@@ -71,22 +71,8 @@ public class ConfiguracionesController implements Initializable {
     @FXML TextField txtBuscarBarrio;
     String[] barrioAutoComplete = {};
 
-    // Roles
-    public TextField txtUsuario;
-    public ComboBox<Rol> cbRol;
-    public TableView<Rol> tvRoles;
-    public TableColumn<Rol, String> colNick;
-    public TableColumn<Rol, String> colRol;
-    public TableColumn<Rol, String> colDescripcion;
-    public TableColumn<Rol, String> colAccion2;
-    String[] rolAutoComplete = {};
-
     // Respaldo
     public ToggleButton tbConfigurarServidor;
-    public TextField txtBuscarUsuario;
-    public Button btnBuscarUsuario;
-    public TextArea txtDescripcion;
-    public Button btnGuardarRol;
     public TextField txtBuscarRespaldo;
     public Button btRestaurar;
     public Button btGenerar;
@@ -109,6 +95,7 @@ public class ConfiguracionesController implements Initializable {
     public TextField txtNickUsuario;
     public TextField txtEmail;
     public PasswordField txtPassword;
+    public ComboBox<String> cbRol;
     public Button btAgregarUsuarios;
     public TableColumn<Usuario, String> colNombreUsuario;
     public TableColumn<Usuario, String> colNickUsuario;
@@ -124,11 +111,9 @@ public class ConfiguracionesController implements Initializable {
 
         autoCompletarBarrio();
         autoCompletarTipoContrato();
-        autoCompletarRol();
 
         addButtonEdit();
 
-        listarUsuarios();
         listarServicios();
 
         verificarConfiguracionServidor();
@@ -185,17 +170,6 @@ public class ConfiguracionesController implements Initializable {
     }
 
     private void llenarTablas() {
-        try {
-            IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class, HibernateUtil.getSessionFactory());
-            ObservableList<Rol> listaRoles = FXCollections.observableArrayList(rolService.getAll());
-            colNick.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getUsuario().getNickusuario()));
-            colRol.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getNombre()));
-            colDescripcion.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue().getDescripcion()));
-            tvRoles.setItems(listaRoles);
-        } catch (Exception e) {
-            logger.error("Error al llenar la tabla de roles", e);
-        }
-
         try {
             ObservableList<Usuario> usuarios = GlobalUtil.getUsuarios();
             colNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("nombrecompleto"));
@@ -304,75 +278,6 @@ public class ConfiguracionesController implements Initializable {
             }
         });
 
-        colAccionUsuarios.setCellFactory(param -> new TableCell<>() {
-            private final Button btnEditar = new Button();
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                    setText(null);
-                } else {
-                    // Imagen del boton
-                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(20);
-                    imageView.setFitWidth(20);
-                    btnEditar.setGraphic(imageView);
-                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
-
-                    btnEditar.setOnAction(event -> {
-                        Usuario usuario = getTableView().getItems().get(getIndex());
-                        txtNombreUsuario.setText(usuario.getNombrecompleto());
-                        txtEmail.setText(usuario.getEmail());
-                        txtNickUsuario.setText(usuario.getNickusuario());
-                        txtPassword.setText(usuario.getPassword());
-                        btAgregarUsuarios.setText("Actualizar");
-
-                        btAgregarUsuarios.setOnAction(event1 -> {
-                            actualizarUsuario(usuario);
-                            llenarTablas();
-                            tvListaUsuarios.refresh();
-                        });
-                    });
-                    setGraphic(btnEditar);
-                    setText(null);
-                }
-            }
-
-            private void actualizarUsuario(Usuario usuario) {
-                try {
-                    IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class,
-                            HibernateUtil.getSessionFactory());
-                    usuario.setNombrecompleto(txtNombreUsuario.getText());
-                    usuario.setEmail(txtEmail.getText());
-                    usuario.setNickusuario(txtNickUsuario.getText());
-                    usuario.setPassword(txtPassword.getText());
-                    usuarioService.update(usuario);
-
-                    txtNombreUsuario.setText("");
-                    txtEmail.setText("");
-                    txtNickUsuario.setText("");
-                    txtPassword.setText("");
-
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Usuario actualizado",
-                            ButtonType.OK);
-                    alert.showAndWait();
-
-                    btAgregarUsuarios.setText("Agregar");
-                    btAgregarUsuarios.setOnAction(event -> {
-                        guardarUsuarios();
-                        llenarTablas();
-                        tvListaUsuarios.refresh();
-                    });
-                } catch (Exception e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
-                    alert.showAndWait();
-                }
-            }
-        });
-
         colAccion1.setCellFactory(param -> new TableCell<>() {
             final Button btnEditar = new Button();
 
@@ -446,34 +351,6 @@ public class ConfiguracionesController implements Initializable {
         TextFields.bindAutoCompletion(txtBuscarBarrio, barrioAutoComplete);
         llenarTablas();
         tvBarrios.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    }
-
-    private void autoCompletarRol() {
-        rolAutoComplete = GlobalUtil.obtenerUsuarios();
-        TextFields.bindAutoCompletion(txtBuscarUsuario, rolAutoComplete);
-        llenarTablas();
-        tvRoles.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    }
-
-    @FXML
-    private void buscarRol() {
-        String rol = txtBuscarUsuario.getText();
-        if (rol.isEmpty()) {
-            llenarTablas();
-        } else {
-            try {
-                ObservableList<Rol> roles = GlobalUtil.getRoles();
-                ObservableList<Rol> rolesFiltrados = FXCollections.observableArrayList();
-                for (Rol r : roles) {
-                    if (r.getNombre().toLowerCase().contains(rol.toLowerCase())) {
-                        rolesFiltrados.add(r);
-                    }
-                }
-                tvRoles.setItems(rolesFiltrados);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @FXML
@@ -598,47 +475,10 @@ public class ConfiguracionesController implements Initializable {
 
     }
 
-    @FXML
-    public void guardarRol() {
-        IGenericService<Rol> rolService = new GenericServiceImpl<>(Rol.class,
-                HibernateUtil.getSessionFactory());
-
-        String usuario = txtUsuario.getText();
-        String roll = String.valueOf(cbRol.getValue());
-        String descripcion = txtDescripcion.getText();
-
-        Usuario usuario1 = null;
-        for (Usuario usuario2 : listaUsuarios) {
-            if (usuario2.getNickusuario().equals(usuario)) {
-                usuario1 = usuario2;
-                usuarioSeleccionado = usuario1;
-            }
-        }
-
-        try{
-            Rol rol = new Rol();
-            rol.setUsuario(usuario1);
-            rol.setNombre(roll);
-            rol.setDescripcion(descripcion);
-            rolService.save(rol);
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Rol Ingresado Correctamente." ,
-                    ButtonType.OK);
-            alert.showAndWait();
-
-            llenarTablas();
-
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
-        }
-
-    }
-
     public void guardarUsuarios() {
         // Validar que los campos no esten vacios
         if (txtNombreUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() ||
-                txtNickUsuario.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+                txtNickUsuario.getText().isEmpty() || txtPassword.getText().isEmpty() || cbRol.getItems().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("No se ha podido registrar el usuario");
@@ -674,6 +514,7 @@ public class ConfiguracionesController implements Initializable {
                     usuario.setEmail(txtEmail.getText());
                     usuario.setNickusuario(txtNickUsuario.getText());
                     usuario.setPassword(txtPassword.getText());
+                    usuario.setRol(cbRol.getValue());
 
                     usuarioService.save(usuario);
 
@@ -688,6 +529,7 @@ public class ConfiguracionesController implements Initializable {
                     txtEmail.setText("");
                     txtNickUsuario.setText("");
                     txtPassword.setText("");
+                    cbRol.getSelectionModel().clearSelection();
 
                     llenarTablas();
                 } catch (Exception e) {
@@ -697,11 +539,6 @@ public class ConfiguracionesController implements Initializable {
 
             }
         }
-    }
-    public void listarUsuarios() {
-        rolAutoComplete = GlobalUtil.obtenerUsuarios();
-        listaUsuarios = GlobalUtil.getUsuarios();
-        TextFields.bindAutoCompletion(txtUsuario, rolAutoComplete);
     }
 
     public void listarServicios() {
