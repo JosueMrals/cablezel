@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" pageWidth="793" pageHeight="540" columnWidth="753" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0712142b-42e8-4bf2-8457-ab3d34c123da">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="Y2xpZW50ZXMgLDE1LDE1LDIyMzJkN2MwLWRjOTItNGQyNy1hM2Q3LWYyZjg5MDJhYzkwNTs="/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
@@ -37,26 +37,54 @@
 		</conditionalStyle>
 	</style>
 	<subDataset name="DatasetFacturas" uuid="3356b10b-7487-4707-9a09-b84eba6a0ac5">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="idDetalleFactura" class="java.lang.Integer"/>
 		<queryString>
-			<![CDATA[]]>
+			<![CDATA[SELECT detalles_facturas.id AS detallefactura,
+	servicios.nombre AS servicio,
+	facturas.fecha_factura AS fechacorrespondiente,
+	detalles_facturas.total_pagar AS totalpagar
+FROM detalles_facturas
+	INNER JOIN servicios ON 
+	 detalles_facturas.servicioid = servicios.id 
+	INNER JOIN facturas ON 
+	 detalles_facturas.factura_id = facturas.id
+	 WHERE facturas.id= $P{idDetalleFactura}]]>
 		</queryString>
-		<field name="detallefactura" class="java.lang.String"/>
-		<field name="servicio" class="java.lang.String"/>
-		<field name="fechacorrespondiente" class="java.lang.String"/>
-		<field name="totalpagar" class="java.lang.String"/>
+		<field name="detallefactura" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="detallefactura"/>
+			<property name="com.jaspersoft.studio.field.label" value="detallefactura"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="detalles_facturas"/>
+		</field>
+		<field name="servicio" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="servicio"/>
+			<property name="com.jaspersoft.studio.field.label" value="servicio"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="servicios"/>
+		</field>
+		<field name="fechacorrespondiente" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="fechacorrespondiente"/>
+			<property name="com.jaspersoft.studio.field.label" value="fechacorrespondiente"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+		</field>
+		<field name="totalpagar" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.name" value="totalpagar"/>
+			<property name="com.jaspersoft.studio.field.label" value="totalpagar"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="detalles_facturas"/>
+		</field>
 	</subDataset>
 	<parameter name="ORACLE_REF_CURSOR" class="interface java.sql.ResultSet" isForPrompting="false"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="factura" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="subtotal" class="java.lang.Float"/>
+	<parameter name="descuento" class="java.lang.Integer"/>
+	<parameter name="total" class="java.lang.Float"/>
+	<parameter name="logo" class="java.awt.Image"/>
 	<queryString>
-		<![CDATA[Select clientes.primer_nombre from clientes]]>
+		<![CDATA[SELECT primer_nombre
+FROM clientes]]>
 	</queryString>
-	<field name="cliente" class="java.lang.String"/>
-	<field name="factura" class="java.lang.Long"/>
-	<field name="usuario" class="java.lang.String"/>
-	<field name="subtotal" class="java.lang.String"/>
-	<field name="descuento" class="java.lang.String"/>
-	<field name="total" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -110,7 +138,7 @@
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement x="20" y="-8" width="110" height="89" uuid="da20ae1b-05b5-4153-b699-3e36db51aed2"/>
-				<imageExpression><![CDATA["/Users/desarrollo-web/IdeaProjects/cablezel/src/main/resources/images/cable zel.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 		</band>
 	</columnHeader>
@@ -136,14 +164,14 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="610" y="17" width="90" height="30" uuid="53eaaf6c-2c2c-49a2-bcf4-a89f24034359"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{factura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{factura}]]></textFieldExpression>
 			</textField>
 			<componentElement>
 				<reportElement x="10" y="60" width="733" height="149" uuid="3450a6c8-5bad-439c-b6ab-c309693b6fe7">
@@ -154,11 +182,15 @@
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="DatasetFacturas" uuid="7130320c-b992-4807-8a88-9bc0dc0b71cf">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
+					<datasetRun subDataset="DatasetFacturas" uuid="b0b657fe-7d61-4c99-9041-3b6fd1a4cb38">
+						<datasetParameter name="idDetalleFactura">
+							<datasetParameterExpression><![CDATA[$P{factura}]]></datasetParameterExpression>
+						</datasetParameter>
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="184" uuid="c5fe9049-ac23-407b-a05e-4081194346c8">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="184" height="30" uuid="9793bac8-d148-4d65-9856-7e5d222c72ff"/>
@@ -173,6 +205,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="8cf2bc0c-5154-4cec-978c-b7f2c80f0f7b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="d39fbafb-dc46-4aac-b3e5-41e6874b9c9e"/>
@@ -187,6 +220,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="5eeca0f9-7d1d-4464-b773-07af09c18142">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="d5b7a5a3-e3d6-440b-966f-4476939d917b"/>
@@ -201,6 +235,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="183" uuid="1bd84063-d2f6-47c9-a389-f38b93f20a4f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement x="0" y="0" width="183" height="30" uuid="928e5163-35f2-471c-944d-cd21b5856593"/>
@@ -250,19 +285,19 @@
 			</staticText>
 			<textField>
 				<reportElement x="60" y="62" width="100" height="20" uuid="3752ea5c-3a1d-434e-bbfa-90e907aa8629"/>
-				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="628" y="21" width="100" height="17" uuid="46bb8268-4b66-44d2-8817-cc004d8a8d4c"/>
-				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="628" y="39" width="100" height="17" uuid="52c1cd3e-8dd7-48a2-8edb-71690d7d2c37"/>
-				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descuento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="629" y="60" width="100" height="17" uuid="f684e1a8-23ab-48a4-98ea-89c6bb826c39"/>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

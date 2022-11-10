@@ -1,15 +1,21 @@
 package com.josue.view;
 
 import com.josue.modelo.DetalleFactura;
+import com.josue.modelo.Usuario;
+import com.josue.reportes.Reportes;
+import com.josue.util.ManejadorUsuario;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -42,9 +48,13 @@ public class FacturaSecundariaController implements Initializable {
 
     float total;
 
+    Usuario usuario;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // extraer el usuario de ManejadorUsuario
+        ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+        usuario = manejadorUsuario.getUsuario();
     }
 
     public void recibirDatos(FacturarController facturarPrincipalController , ObservableList<DetalleFactura> datos){
@@ -100,21 +110,35 @@ public class FacturaSecundariaController implements Initializable {
         // obtener la fecha
         String fecha = txtFechaFactura.getText();
 
+        // obtener la imagen
+        URL urlLogo = FacturaSecundariaController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
+        BufferedImage urlImage = null;
+
+        try {
+            urlImage= ImageIO.read(urlLogo);
+        } catch (Exception e) {
+            logger.error("Error al obtener la imagen del logo", e);
+        }
+
+        // agregar los parametros
+        parametros.put("logo", urlImage);
+
         // establecer los parametros
         parametros.put("cliente", cliente);
         parametros.put("direccion", direccion);
         parametros.put("factura", factura);
         parametros.put("fecha", fecha);
+        parametros.put("usuario", usuario.getNickusuario());
         parametros.put("detalles", detalles);
         parametros.put("total", total);
-        parametros.put("descuento", 0.0);
+        parametros.put("descuento", 0);
         parametros.put("subtotal", total);
 
         // establecer los parametros de la factura
         parametrosFactura = parametros;
 
         // imprimir el reporte
-        //Reportes.generarReporte("reportes/Productos.jrxml", parametrosFactura);
+        Reportes.generarReporte("reportes/Factura.jrxml", parametrosFactura, new JRBeanCollectionDataSource(detalles));
 
     }
 }
