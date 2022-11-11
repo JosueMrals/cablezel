@@ -185,7 +185,7 @@
             <Button fx:id="btnBuscarServicio" layoutX="429.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: none;">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../images/lupa.png"/>
+                     <Image url="@../images/lupa.png" />
                   </ImageView>
                </graphic>
             </Button>
@@ -296,13 +296,14 @@
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/login/users.png" />
             </ImageView>
-            <TableView fx:id="tvListaUsuarios" layoutX="463.0" layoutY="135.0" prefHeight="200.0" prefWidth="613.0" styleClass="BuscarClientes">
+            <TableView fx:id="tvListaUsuarios" layoutX="36.0" layoutY="433.0" prefHeight="200.0" prefWidth="1061.0" styleClass="BuscarClientes">
                <columns>
-                  <TableColumn fx:id="colNombreUsuario" prefWidth="153.0" resizable="false" text="Nombre Completo" />
-                  <TableColumn fx:id="colNickUsuario" prefWidth="113.0" resizable="false" text="Nick de Usuario" />
-                  <TableColumn fx:id="colEmail" prefWidth="170.0" resizable="false" text="Email" />
-                  <TableColumn fx:id="colPassword" prefWidth="127.0" resizable="false" text="Contraseña" />
-                  <TableColumn fx:id="colAccionUsuarios" prefWidth="47.0" resizable="false" />
+                  <TableColumn fx:id="colNombreUsuario" prefWidth="196.0" resizable="false" text="Nombre Completo" />
+                  <TableColumn fx:id="colNickUsuario" prefWidth="146.0" resizable="false" text="Nick de Usuario" />
+                  <TableColumn fx:id="colRolUsuario" prefWidth="168.0" resizable="false" text="Rol del Usuario" />
+                  <TableColumn fx:id="colEmail" prefWidth="334.0" resizable="false" text="Email" />
+                  <TableColumn fx:id="colPassword" prefWidth="176.0" resizable="false" text="Contraseña" />
+                  <TableColumn fx:id="colAccionUsuarios" minWidth="0.0" prefWidth="36.0" resizable="false" />
                </columns>
             </TableView>
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="35.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">

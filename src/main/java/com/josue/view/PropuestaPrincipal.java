@@ -12,7 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -34,13 +37,12 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     public BorderPane panelPadre;
     public BorderPane panePrincipal;
-    public Button btnServicios;
     public Button btPrincipalConfig;
-    public Button btPrincipalServicios;
     public Button btPrincipalContratos;
     public Button btPrincipalFacturar;
     public Button btPrincipalClientes;
     public AnchorPane panelCentral;
+    public Label lbUsuario;
     @FXML Button btnConfig;
     @FXML Button btnInicio;
     @FXML Button btnCli;
@@ -59,7 +61,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnSalir.setOnMouseClicked(event -> System.exit(0));
         ocultarPanel();
         mostrarPanel();
 
@@ -74,15 +75,6 @@ public class PropuestaPrincipal extends Application implements Initializable {
     }
 
     private void generarFacturas() {
-        //Obtener los clientes con más de 30 dias de mora
-        String consulta = "select c from cliente c inner join contrato ct on c.id=ct.cliente_id " +
-                "inner join tipo_contrato tc on ct.tipocontrato_id=tc.id group by c.id, ct.id, tc.id having " +
-                "(current_date - ct.fecha_contrato) > 30";
-
-        String consultaHQL = "FROM " + Cliente.class.getName() + " c inner join " + Contrato.class.getName()
-                + " ct on c.id=ct.cliente_id inner join " + TipoContrato.class.getName()
-                + " tc on ct.tipocontrato_id=tc.id group by c.id, ct.id, tc.id having " +
-                "(current_date - ct.fecha_contrato) > 30";
 
         // Obtener la lista de clientes con base en la consulta
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
@@ -183,9 +175,33 @@ public class PropuestaPrincipal extends Application implements Initializable {
         return servicio;
     }
 
-    @FXML
-    private void mostrarInicio() {
+    //cerrar la ventana actual y mostrar la ventana de principal
+    public void cerrarVentanaPrincipal() {
+        Stage stage = (Stage) btnSalir.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestaPrincipal.fxml"));
+            Parent root = loader.load();
+            Stage stagePrincipal = new Stage();
+            stagePrincipal.setScene(new Scene(root));
+            stagePrincipal.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void cerrarVentanaUsuarios() {
+        Stage stage = (Stage) btnSalir.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropuestasUsuarios.fxml"));
+            Parent root = loader.load();
+            Stage stagePrincipal = new Stage();
+            stagePrincipal.setScene(new Scene(root));
+            stagePrincipal.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void mostrarPanel() {
@@ -261,32 +277,10 @@ public class PropuestaPrincipal extends Application implements Initializable {
         }
     }
 
-    public void mostrar_usuarios() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RegistrarUsuarios.fxml"));
-            Pane registrarse = loader.load();
-            panelPadre.setCenter(registrarse);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void mostrar_contratos() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Contratos.fxml"));
-            Pane registrarse = loader.load();
-            panelPadre.setCenter(registrarse);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        }
-    }
-
-    public void mostrar_servicios() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Servicio.fxml"));
             Pane registrarse = loader.load();
             panelPadre.setCenter(registrarse);
 
@@ -305,6 +299,20 @@ public class PropuestaPrincipal extends Application implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        }
+    }
+
+    public void cerrarSesion() {
+        Stage stage = (Stage) btnSalir.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Parent root = loader.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

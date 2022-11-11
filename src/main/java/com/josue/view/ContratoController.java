@@ -67,7 +67,7 @@ public class ContratoController implements Initializable {
     }
 
     private void autoCompletarContrato() {
-        contratosAutocomplete = GlobalUtil.obtenerContratos();
+        contratosAutocomplete = GlobalUtil.obtenerClientes();
         TextFields.bindAutoCompletion(txtBuscarContrato, contratosAutocomplete);
         llenarContrato();
         tvContratos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

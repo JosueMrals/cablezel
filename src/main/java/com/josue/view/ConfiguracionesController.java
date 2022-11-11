@@ -128,6 +128,7 @@ public class ConfiguracionesController implements Initializable {
         llenarTablaUsuarios();
         llenarTablaTipoContrato();
         llenarTablaBarrios();
+        llenarTablaServicio();
 
         addButtonEdit();
         addButtonEditarServicios();
@@ -651,21 +652,18 @@ public class ConfiguracionesController implements Initializable {
     }
 
     public void llenarTablaServicio() {
-        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
-        listaServicios = FXCollections.observableArrayList(servicioService.getAll());
-        if (listaServicios.size() > 0) {
-            tvServicios.setItems(listaServicios);
+        try {
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+            ObservableList<Servicio> servicios = FXCollections.observableArrayList(servicioService.getAll());
+            listaServicios = servicios;
             colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-            return;
+            tvServicios.setItems(servicios);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la tabla de servicios", ButtonType.OK);
+            alert.showAndWait();
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
-        alert.setHeaderText("Sin datos!");
-        alert.setContentText("No hay datos en la tabla, por favor ingrese un servicio");
-        alert.showAndWait();
-
     }
 
     public void guardarServicio() {
@@ -948,8 +946,6 @@ public class ConfiguracionesController implements Initializable {
             txtBuscarRespaldo.setText(file.getAbsolutePath());
         }
     }
-
-    // Usuarios
 
 
 }
