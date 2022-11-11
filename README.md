@@ -4,7 +4,7 @@ Un proyecto creado con el lenguaje de programación Java y Maven como gestor de 
 Este proyecto se implementa con tecnologías locales, siendo el propósito el control de la información de clientes, basado en el lenguaje de programación Java con JavaFX para el desarrollo de interfaces y el modelado de objetos de la aplicación mediante archivos XML; como parte de una arquitectura limpia se implementan patrones de diseño y arquitectónicos como: DAO y Singleton en conjunto con una herramienta de mapeo Hibernate para facilitar las transacciones con la base de datos PostgreSQL.  
 
 ## Estado del proyecto
-[![Maven Package](https://github.com/JosueMrals/cablezel/actions/workflows/maven-publish.yml/badge.svg?event=status)](https://github.com/JosueMrals/cablezel/actions/workflows/maven-publish.yml)
+[![Java CI](https://github.com/JosueMrals/cablezel/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/JosueMrals/cablezel/actions/workflows/maven-publish.yml)
 
 ## Objetivos
 - [x] Crear un proyecto con Maven y JavaFX
