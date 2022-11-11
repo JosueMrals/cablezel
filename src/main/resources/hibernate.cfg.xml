@@ -19,6 +19,7 @@
         <mapping class="com.josue.modelo.Usuario"/>
         <mapping class="com.josue.modelo.Barrio"/>
         <mapping class="com.josue.modelo.TipoContrato"/>
+        <mapping class="com.josue.modelo.Servicio"/>
         <mapping class="com.josue.modelo.Cliente"/>
         <mapping class="com.josue.modelo.DetalleFactura"/>
         <mapping class="com.josue.modelo.Factura"/>
