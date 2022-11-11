@@ -19,9 +19,7 @@
       <left>
          <Pane fx:id="leftPane" prefHeight="325.0" prefWidth="264.0" BorderPane.alignment="CENTER">
             <ImageView fitHeight="180.0" fitWidth="253.0" layoutX="8.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/pixel%20cablezel.png" />
-               </image>
+               <Image url="@../reportes/cablezel.png" />
             </ImageView>
          </Pane>
       </left>

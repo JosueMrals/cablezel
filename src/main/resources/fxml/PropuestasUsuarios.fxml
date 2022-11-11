@@ -20,7 +20,7 @@
                 </BorderPane.margin>
                 <Pane prefHeight="235.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="585.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <ImageView fitHeight="158.0" fitWidth="257.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/pixel%20cablezel.png" />
+                        <Image url="@../reportes/cablezel.png" />
                     </ImageView>
                     <Label layoutX="52.0" layoutY="185.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                         <font>
