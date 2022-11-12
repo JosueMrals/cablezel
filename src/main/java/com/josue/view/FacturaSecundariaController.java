@@ -38,7 +38,6 @@ public class FacturaSecundariaController implements Initializable {
     public TextField txtCliente;
     public TextField txtNumFactura;
     public TextField txtFechaFactura;
-    public TextField txtNota;
     public Label lbTotal;
     public Label lbDescuento;
     public Label lbSubTotal;
@@ -68,11 +67,9 @@ public class FacturaSecundariaController implements Initializable {
             total += detalleFactura.getTotal_pagar();
         }
 
-
         lbTotal.setText(String.valueOf(total));
         lbDescuento.setText(String.valueOf(0.0));
         lbSubTotal.setText(String.valueOf(total ));
-
     }
 
 
@@ -139,6 +136,8 @@ public class FacturaSecundariaController implements Initializable {
 
         // imprimir el reporte
         Reportes.generarReporte("reportes/Factura.jrxml", parametrosFactura, new JRBeanCollectionDataSource(detalles));
+
+        btCompletarClick(actionEvent);
 
     }
 }

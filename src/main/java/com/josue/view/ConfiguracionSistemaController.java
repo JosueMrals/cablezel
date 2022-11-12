@@ -1,12 +1,15 @@
 package com.josue.view;
 
 import com.josue.modelo.ConfiguracionSistema;
+import com.josue.modelo.DetalleFactura;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -52,6 +55,8 @@ public class ConfiguracionSistemaController implements Initializable {
 
     ManejadorUsuario manejadorUsuario;
 
+    ConfiguracionesController configController;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,6 +64,7 @@ public class ConfiguracionSistemaController implements Initializable {
         if(llenarTextFields()){
             ivAbrirDirectorioServidor.setDisable(true);
             ivAbrirDirectorioFichero.setDisable(true);
+            ivAbrirDirectorioServidorRespaldo.setDisable(true);
             manejadorUsuario.setServidorConfigurado(true);
             activado = true;
         } else {
@@ -72,8 +78,8 @@ public class ConfiguracionSistemaController implements Initializable {
 
     private boolean llenarTextFields() {
         IGenericService<ConfiguracionSistema> service = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
-        List<ConfiguracionSistema> configuracionSistemas = service.getAll();
-        if (configuracionSistemas.size() < 1) {
+        ObservableList<ConfiguracionSistema> configuracionSistemas = FXCollections.observableArrayList(service.getAll());
+        if (configuracionSistemas.isEmpty()) {
             return false;
         }
         configuracionSistemas.forEach(configuracionSistema -> {
@@ -157,7 +163,7 @@ public class ConfiguracionSistemaController implements Initializable {
             IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class, HibernateUtil.getSessionFactory());
 
             // crear un objeto de tipo ConfiguracionSistema
-            List<ConfiguracionSistema> configuracionSistemas = new ArrayList<>();
+            ObservableList<ConfiguracionSistema> configuracionSistemas = FXCollections.observableArrayList();
             configuracionSistemas.add(new ConfiguracionSistema("servidor", servidor));
             configuracionSistemas.add(new ConfiguracionSistema("respaldo", respaldo));
             configuracionSistemas.add(new ConfiguracionSistema("puerto", puerto));
@@ -177,17 +183,57 @@ public class ConfiguracionSistemaController implements Initializable {
                 Stage stage = (Stage) btConfigurar.getScene().getWindow();
                 stage.close();
             } else {
+                configuracionSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
+                configuracionSistemas.forEach(configuracionSistema -> {
+                    switch (configuracionSistema.getNombre()) {
+                        case "servidor":
+                            configuracionSistema.setValor(servidor);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "puerto":
+                            configuracionSistema.setValor(puerto);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "host":
+                            configuracionSistema.setValor(host);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "usuario":
+                            configuracionSistema.setValor(usuario);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "clave":
+                            configuracionSistema.setValor(clave);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "baseDatos":
+                            configuracionSistema.setValor(baseDatos);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "respaldo":
+                            configuracionSistema.setValor(respaldo);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                        case "herramientaRespaldo":
+                            configuracionSistema.setValor(herramientaRespaldo);
+                            configuracionSistemaService.update(configuracionSistema);
+                            break;
+                    }
+                });
                 logger.info("Actualizando configuracion del sistema");
                 logger.info("Servidor: " + configuracionSistemas);
-                // actualizar en la base de datos
-                configuracionSistemas.forEach(configuracionSistemaService::update);
                 manejadorUsuario.setServidorConfigurado(true);
                 // cerrar la ventana
                 Stage stage = (Stage) btConfigurar.getScene().getWindow();
+                configController.cbBuscarRespaldo.getItems().clear();
+                configController.cbBuscarRespaldo.getItems().add(respaldo);
                 stage.close();
             }
         }
+    }
 
+    public void recibirDatos(ConfiguracionesController configuracionesController){
+        configController = configuracionesController;
     }
 
     public void btCancelarClick(ActionEvent actionEvent) {
@@ -197,7 +243,7 @@ public class ConfiguracionSistemaController implements Initializable {
     }
 
     public void abrirDirectorioFichero(MouseEvent mouseEvent) {
-        // obtener el nombre del control del click
+        // obtener el nombre del control del clic
         String nombreControl = ((Node) mouseEvent.getSource()).getId();
         logger.info("Nombre del control: " + nombreControl);
 
@@ -234,7 +280,9 @@ public class ConfiguracionSistemaController implements Initializable {
             txtRespaldo.setEditable(true);
             btConfigurar.setDisable(false);
             btCancelar.setDisable(false);
-            activado = false;
+            ivAbrirDirectorioFichero.setDisable(false);
+            ivAbrirDirectorioServidor.setDisable(false);
+            ivAbrirDirectorioServidorRespaldo.setDisable(false);
 
             // alertar al usuario
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -254,7 +302,9 @@ public class ConfiguracionSistemaController implements Initializable {
             txtRespaldo.setEditable(false);
             btConfigurar.setDisable(true);
             btCancelar.setDisable(true);
-            activado = true;
+            ivAbrirDirectorioFichero.setDisable(true);
+            ivAbrirDirectorioServidor.setDisable(true);
+            ivAbrirDirectorioServidorRespaldo.setDisable(true);
 
             // alertar al usuario
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

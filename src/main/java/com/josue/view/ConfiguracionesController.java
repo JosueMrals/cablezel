@@ -23,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -92,7 +91,7 @@ public class ConfiguracionesController implements Initializable {
     public TextField txtBuscarRespaldo;
     public Button btRestaurar;
     public Button btGenerar;
-    public ComboBox cbBuscarRespaldo;
+    public ComboBox<String> cbBuscarRespaldo;
     public ImageView ivBuscarRespaldo;
     public Tab tpRespaldo;
     ObservableList<ConfiguracionSistema> configuracionSistemas;
@@ -119,6 +118,8 @@ public class ConfiguracionesController implements Initializable {
     public TableColumn<Usuario, String> colPassword;
     public TableColumn<Usuario, String> colRolUsuario;
     public TableColumn<Usuario, String> colAccionUsuarios;
+
+    ConfiguracionesController configuracionesController = this;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -724,31 +725,38 @@ public class ConfiguracionesController implements Initializable {
     public void tbConfigurarServidor(ActionEvent actionEvent) {
         // abrir ConfiguracionSGBD.fxml en un nuevo Stage
         try {
+            cbBuscarRespaldo.getItems().clear();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ConfiguracionesSGBD.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Configuración del Servidor");
             stage.setScene(new Scene(root));
+            ConfiguracionSistemaController configuracionSistemaController = loader.getController();
+            configuracionSistemaController.recibirDatos(configuracionesController);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        finally {
+            CargarDirectorioRespaldo(actionEvent);
+        }
     }
+
 
     public void CargarDirectorioRespaldo(Event event) {
         // cargar la ruta del directorio en el combobox
         IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class,
                 HibernateUtil.getSessionFactory());
-        ObservableList<ConfiguracionSistema> confSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
-        configuracionSistemas = confSistemas;
-        if (confSistemas.isEmpty()) {
+        configuracionSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
+        if (configuracionSistemas.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("No se ha configurado el servidor");
             alert.setContentText("Debe obtener una ruta de la herramienta de respaldo y un directorio de respaldo.");
             alert.showAndWait();
         } else {
-            confSistemas.forEach(configuracionSistema -> {
+            cbBuscarRespaldo.getItems().clear();
+            configuracionSistemas.forEach(configuracionSistema -> {
                 if(configuracionSistema.getNombre().equals("respaldo")) {
                     cbBuscarRespaldo.getItems().add(configuracionSistema.getValor());
                 }

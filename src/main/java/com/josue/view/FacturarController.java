@@ -193,6 +193,7 @@ public class FacturarController implements Initializable {
                         tvBuscarClientes.getItems().add(fact);
                         tvBuscarClientes1.refresh();
                         tvBuscarClientes1.getItems().remove(fact);
+                        addFacturarButtonToTable();
                     });
                     setGraphic(btnEliminar);
                 }
