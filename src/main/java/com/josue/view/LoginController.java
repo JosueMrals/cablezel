@@ -24,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -49,18 +50,11 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         crearUsuario();
         usuario = new Usuario();
-
         clientes = GlobalUtil.getClientes();
     }
 
-    public ObservableList<Usuario> obtenerUsuarios() {
-        IGenericService<Usuario> usuarioService = new GenericServiceImpl<>(Usuario.class, HibernateUtil
-                .getSessionFactory());
-        return FXCollections.observableArrayList(usuarioService.getAll());
-    }
-
     public boolean getUsuariobyNick(String nick, String password, String rol) {
-        ObservableList<Usuario> usuarios = obtenerUsuarios();
+        ObservableList<Usuario> usuarios = GlobalUtil.getUsuarios();
         for (Usuario us : usuarios) {
             if (us.getNickusuario().equals(nick) && us.getPassword().equals(password) && us.getRol().equals(rol)) {
                 this.usuario = us;
@@ -71,7 +65,7 @@ public class LoginController implements Initializable {
     }
 
     public void crearUsuario() {
-        ObservableList<Usuario> usuarios = obtenerUsuarios();
+        ObservableList<Usuario> usuarios = GlobalUtil.getUsuarios();
         if (usuarios.isEmpty()) {
             Usuario usuario = new Usuario();
             usuario.setNombrecompleto("Josue Morales");
@@ -135,4 +129,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void salir(MouseEvent mouseEvent) {
+        System.exit(0);
+    }
 }

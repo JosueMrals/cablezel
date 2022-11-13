@@ -46,26 +46,22 @@ public class ClientesController implements Initializable {
     @FXML TableColumn<Cliente, String> colTelefono;
     @FXML TableColumn<Cliente, String> colAccion;
     @FXML TableView<Cliente> tvClientes;
-    Boolean hayClientes = false;
     String[] clientesAutocomplete = {};
     String[] cedulaAutocomplete = {};
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        hayClientes = GlobalUtil.getClientes().size() > 0;
-        listarBarrios();
-        if (hayClientes) {
-            llenarClientes();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Información");
-            alert.setHeaderText("No hay clientes registrados");
-            alert.setContentText("Por favor registre un nuevo cliente");
-            alert.showAndWait();
-            logger.info("No hay clientes registrados");
-        }
+        llenarClientes();
         autoCompletarNombre();
         autoCompletarCedula();
         addButtonEditar();
+        listarBarrios();
+    }
+
+    public void listarBarrios(){
+        var barrios = GlobalUtil.getBarrios();
+        cbBarrio.setValue(null);
+        cbBarrio.setItems(barrios);
+        cbBarrio.setPromptText("Seleccione un barrio");
     }
 
     public void autoCompletarNombre() {
@@ -90,26 +86,23 @@ public class ClientesController implements Initializable {
         tvClientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    public void listarBarrios(){
-        var barrios = GlobalUtil.getBarrios();
-        cbBarrio.setValue(null);
-        cbBarrio.setItems(barrios);
-        cbBarrio.setPromptText("Seleccione un barrio");
-    }
-
     public void llenarClientes() {
-        ObservableList<Cliente> clientes = GlobalUtil.getClientes();
-        colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
-        colNombre.setCellValueFactory(
-                param -> new ReadOnlyObjectWrapper<>(param.getValue().getPrimer_nombre()
-                        + " " + param.getValue().getSegundo_nombre() + " " +
-                        param.getValue().getPrimer_apellido() + " " +
-                        param.getValue().getSegundo_apellido())
-        );
-        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
-        colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
-        tvClientes.setItems(clientes);
+        try {
+            ObservableList<Cliente> clientes = GlobalUtil.getClientes();
+            colCedula.setCellValueFactory(new PropertyValueFactory<>("num_cedula"));
+            colNombre.setCellValueFactory(
+                    param -> new ReadOnlyObjectWrapper<>(param.getValue().getPrimer_nombre()
+                            + " " + param.getValue().getSegundo_nombre() + " " +
+                            param.getValue().getPrimer_apellido() + " " +
+                            param.getValue().getSegundo_apellido())
+            );
+            colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+            colBarrio.setCellValueFactory(new PropertyValueFactory<>("barrio"));
+            colTelefono.setCellValueFactory(new PropertyValueFactory<>("num_telefono"));
+            tvClientes.setItems(clientes);
+        } catch (Exception e) {
+            logger.error("Error al llenar la tabla de clientes", e);
+        }
     }
 
     public void registrarClientes() {
@@ -174,7 +167,7 @@ public class ClientesController implements Initializable {
                 txtPrimerApellido.clear();
                 txtSegundoApellido.clear();
                 txtDireccion.clear();
-                cbBarrio.getSelectionModel().clearSelection();
+                cbBarrio.setPromptText("Seleccione un barrio");
                 txtNumTelefono.clear();
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente.",
@@ -182,7 +175,6 @@ public class ClientesController implements Initializable {
                 alert.showAndWait();
 
                 llenarClientes();
-
 
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);

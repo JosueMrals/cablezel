@@ -23,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -41,7 +40,25 @@ import org.apache.logging.log4j.Logger;
 public class ConfiguracionesController implements Initializable {
     // logger log4j
     private static final Logger logger = LogManager.getLogger(ConfiguracionesController.class);
+
+
+    // Lista de Servicios
+    @FXML TextField txtNombre;
+    @FXML TextField txtDescripcion;
+    @FXML TextField txtPrecio;
+    @FXML  Button btnGuardar;
+    @FXML TableView<Servicio> tvServicios;
+    @FXML TableColumn<Servicio, String> colNombre;
+    @FXML TableColumn<Servicio, String> colDescripcion;
+    @FXML TableColumn<Servicio, String> colPrecio;
+    @FXML TableColumn<Servicio, String> colAccionServicios;
+    @FXML TextField txtBuscarServicio;
+    @FXML Button btnBuscarServicio;
+    ObservableList<Servicio> listaServicios;
+
+
     // Tipo Contratos
+    @FXML Tab tabTC;
     @FXML Button btBuscarTC;
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
@@ -76,7 +93,7 @@ public class ConfiguracionesController implements Initializable {
     public TextField txtBuscarRespaldo;
     public Button btRestaurar;
     public Button btGenerar;
-    public ComboBox cbBuscarRespaldo;
+    public ComboBox<String> cbBuscarRespaldo;
     public ImageView ivBuscarRespaldo;
     public Tab tpRespaldo;
     ObservableList<ConfiguracionSistema> configuracionSistemas;
@@ -103,8 +120,8 @@ public class ConfiguracionesController implements Initializable {
     public TableColumn<Usuario, String> colPassword;
     public TableColumn<Usuario, String> colRolUsuario;
     public TableColumn<Usuario, String> colAccionUsuarios;
-    Usuario usuarioSeleccionado;
-    ObservableList<Usuario> listaUsuarios;
+
+    ConfiguracionesController configuracionesController = this;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,8 +131,10 @@ public class ConfiguracionesController implements Initializable {
         llenarTablaUsuarios();
         llenarTablaTipoContrato();
         llenarTablaBarrios();
+        llenarTablaServicio();
 
         addButtonEdit();
+        addButtonEditarServicios();
 
         listarServicios();
 
@@ -550,6 +569,7 @@ public class ConfiguracionesController implements Initializable {
     }
 
     public void listarServicios() {
+        cmbServicio.getItems().clear();
         var servicios = GlobalUtil.getServicios();
         cmbServicio.setValue(null);
         cmbServicio.setItems(servicios);
@@ -560,39 +580,186 @@ public class ConfiguracionesController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("Lista de Servicios vacía");
-            alert.setContentText("Para crear un Tipo de Contrato nuevo primero debe crear un servicio.");
+            alert.setContentText("Para crear un Tipo de Contrato, primero debe crear un servicio.");
             alert.showAndWait();
+        }
+    }
+
+    private void addButtonEditarServicios() {
+        colAccionServicios.setCellFactory(param -> new TableCell<>() {
+            private final Button btnEditar = new Button();
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/lapiz.png")));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    btnEditar.setGraphic(imageView);
+                    btnEditar.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+
+                    btnEditar.setOnAction(event -> {
+                        Servicio servicio = getTableView().getItems().get(getIndex());
+                        txtNombre.setText(servicio.getNombre());
+                        txtDescripcion.setText(servicio.getDescripcion());
+                        txtPrecio.setText(String.valueOf(servicio.getPrecio()));
+                        btnGuardar.setText("Actualizar");
+
+                        btnGuardar.setOnAction(event1 -> {
+                            actualizarServicio(servicio);
+                            llenarTablaServicio();
+                            recargarServicio();
+                        });
+                    });
+                    setGraphic(btnEditar);
+                    setText(null);
+                }
+            }
+
+            private void actualizarServicio(Servicio servicio) {
+                try {
+                    IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+                    servicio.setNombre(txtNombre.getText());
+                    servicio.setDescripcion(txtDescripcion.getText());
+                    servicio.setPrecio((float) Double.parseDouble(txtPrecio.getText()));
+                    servicioService.update(servicio);
+
+                    txtNombre.clear();
+                    txtDescripcion.clear();
+                    txtPrecio.clear();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Servicio actualizado correctamente", ButtonType.OK);
+                    alert.showAndWait();
+
+                    btnGuardar.setText("Guardar");
+                    btnGuardar.setOnAction(event -> {
+                        guardarServicio();
+                        llenarTablaServicio();
+                        tvServicios.refresh();
+                    });
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al actualizar el servicio", ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
+        });
+    }
+
+    public void recargarServicio() {
+        txtBuscarServicio.clear();
+        llenarTablaServicio();
+        tvServicios.refresh();
+    }
+
+    public void llenarTablaServicio() {
+        try {
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class, HibernateUtil.getSessionFactory());
+            ObservableList<Servicio> servicios = FXCollections.observableArrayList(servicioService.getAll());
+            listaServicios = servicios;
+            colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+            colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+            tvServicios.setItems(servicios);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al cargar la tabla de servicios", ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    public void guardarServicio() {
+        //Validar que los campos no esten vacios
+        if(txtNombre.getText().isEmpty() || txtDescripcion.getText().isEmpty() ||
+                txtPrecio.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error al guardar el servicio");
+            alert.setContentText("Por favor, complete todos los campos");
+            alert.showAndWait();
+        } else {
+            //Validar que no se repita el tipo de servicio
+            IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
+                    HibernateUtil.getSessionFactory());
+            ObservableList<Servicio> servicios = FXCollections.observableArrayList(servicioService.getAll());
+            for(Servicio servicio : servicios) {
+                // Validar que no se repita el tipo de servicio
+                if(servicio.getNombre().equals(txtNombre.getText())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error al guardar el servicio");
+                    alert.setContentText("El servicio ya existe");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+            try {
+                //Guardar el servicio
+                Servicio sv = new Servicio();
+                sv.setNombre(txtNombre.getText());
+                sv.setDescripcion(txtDescripcion.getText());
+                sv.setPrecio(Float.valueOf(txtPrecio.getText()));
+
+                servicioService.save(sv);
+
+                //Limpiar los campos
+                txtNombre.setText("");
+                txtDescripcion.setText("");
+                txtPrecio.setText("");
+
+                //Actualizar la tabla
+                llenarTablaServicio();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Info: El servicio se ha guardado correctamente",
+                        ButtonType.OK);
+                alert.show();
+            }catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(),
+                        ButtonType.OK);
+                alert.showAndWait();
+            }
+
         }
     }
 
     public void tbConfigurarServidor(ActionEvent actionEvent) {
         // abrir ConfiguracionSGBD.fxml en un nuevo Stage
         try {
+            cbBuscarRespaldo.getItems().clear();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ConfiguracionesSGBD.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Configuración del Servidor");
             stage.setScene(new Scene(root));
+            ConfiguracionSistemaController configuracionSistemaController = loader.getController();
+            configuracionSistemaController.recibirDatos(configuracionesController);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        finally {
+            CargarDirectorioRespaldo(actionEvent);
+        }
     }
+
 
     public void CargarDirectorioRespaldo(Event event) {
         // cargar la ruta del directorio en el combobox
         IGenericService<ConfiguracionSistema> configuracionSistemaService = new GenericServiceImpl<>(ConfiguracionSistema.class,
                 HibernateUtil.getSessionFactory());
-        ObservableList<ConfiguracionSistema> confSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
-        configuracionSistemas = confSistemas;
-        if (confSistemas.isEmpty()) {
+        configuracionSistemas = FXCollections.observableArrayList(configuracionSistemaService.getAll());
+        if (configuracionSistemas.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Información");
             alert.setHeaderText("No se ha configurado el servidor");
             alert.setContentText("Debe obtener una ruta de la herramienta de respaldo y un directorio de respaldo.");
             alert.showAndWait();
         } else {
-            confSistemas.forEach(configuracionSistema -> {
+            cbBuscarRespaldo.getItems().clear();
+            configuracionSistemas.forEach(configuracionSistema -> {
                 if(configuracionSistema.getNombre().equals("respaldo")) {
                     cbBuscarRespaldo.getItems().add(configuracionSistema.getValor());
                 }
@@ -791,7 +958,8 @@ public class ConfiguracionesController implements Initializable {
         }
     }
 
-    // Usuarios
 
-
+    public void recargarTabs(Event event) {
+        listarServicios();
+    }
 }

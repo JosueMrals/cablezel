@@ -19,9 +19,7 @@
       <left>
          <Pane fx:id="leftPane" prefHeight="325.0" prefWidth="264.0" BorderPane.alignment="CENTER">
             <ImageView fitHeight="180.0" fitWidth="253.0" layoutX="8.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/pixel%20cablezel.png" />
-               </image>
+               <Image url="@../reportes/cablezel.png" />
             </ImageView>
          </Pane>
       </left>
@@ -56,6 +54,14 @@
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="105.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/login/lock.png" />
             </ImageView>
+            <Label layoutX="499.0" layoutY="4.0" onMouseClicked="#salir" text="X" textFill="#757171">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
          </Pane>
       </center>
    </BorderPane>

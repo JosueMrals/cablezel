@@ -20,16 +20,16 @@
          </BorderPane.margin>
          <Pane prefHeight="235.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="585.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <ImageView fitHeight="158.0" fitWidth="257.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/pixel%20cablezel.png" />
+               <Image url="@../reportes/cablezel.png" />
             </ImageView>
-            <Label layoutX="52.0" layoutY="185.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <Label fx:id="lbUsuario" layoutX="52.0" layoutY="185.0" text="Administrador" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </Pane>
          <VBox layoutY="235.0" prefHeight="528.0" prefWidth="240.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="235.0">
-            <Button fx:id="btnInicio" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#mostrarInicio" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnInicio" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#cerrarVentanaPrincipal" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Inicio" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -81,19 +81,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnServicios" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_servicios" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Servicios" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../images/nuevos/servicios.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
             <Button fx:id="btnConfig" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#mostrar_gestiones" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Configuraciones" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -122,7 +109,7 @@
             </Button>
          </VBox>
          <VBox prefHeight="49.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <Button fx:id="btnSalir" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Salir" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnSalir" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="49.0" prefWidth="240.0" style="-fx-background-color: transparent;" styleClass="Items" stylesheets="@../css/style.css" text="Cerrar Sesion" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -187,19 +174,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btPrincipalServicios" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="181.0" mnemonicParsing="false" onAction="#mostrar_servicios" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Servicios" textFill="WHITE">
-                     <graphic>
-                        <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../images/nuevos/servicios-digitales.png" />
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button fx:id="btPrincipalConfig" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="72.0" mnemonicParsing="false" onAction="#mostrar_gestiones" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Configuraciones" textFill="WHITE">
                      <graphic>
                         <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -213,7 +187,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btPrincipalReportes" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="286.0" mnemonicParsing="false" onAction="#mostrar_reportes" onMouseClicked="#mostrar_reportes" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Reportes" textFill="WHITE">
+                  <Button fx:id="btPrincipalReportes" alignment="BASELINE_LEFT" layoutX="450.0" layoutY="181.0" mnemonicParsing="false" onAction="#mostrar_reportes" onMouseClicked="#mostrar_reportes" prefHeight="55.0" prefWidth="424.0" styleClass="Principal" text="Reportes" textFill="WHITE">
                      <graphic>
                         <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <Image url="@../images/nuevos/reporte(1).png" />

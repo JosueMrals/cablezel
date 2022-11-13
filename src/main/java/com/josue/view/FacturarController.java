@@ -193,6 +193,7 @@ public class FacturarController implements Initializable {
                         tvBuscarClientes.getItems().add(fact);
                         tvBuscarClientes1.refresh();
                         tvBuscarClientes1.getItems().remove(fact);
+                        addFacturarButtonToTable();
                     });
                     setGraphic(btnEliminar);
                 }
@@ -330,17 +331,24 @@ public class FacturarController implements Initializable {
                 String fechaFactura = tvBuscarClientes1.getItems().get(0).getFactura().getFecha_factura().toString();
 
                 // Obtener el total a pagar
-
                 FacturaSecundariaController facturaSecundariaController = loader.getController();
                 //mostrar el nombre del cliente en txtCliente
                 facturaSecundariaController.txtCliente.setText(clientePagado);
                 //mostrar la fecha de la factura en txtFecha
                 facturaSecundariaController.txtFechaFactura.setText(fechaFactura);
 
-
-                // establecer el id de factura
+                // establecer id de factura
                 String idFactura = String.valueOf(tvBuscarClientes1.getItems().get(0).getFactura().getId());
-                facturaSecundariaController.txtNumFactura.setText(idFactura);
+
+                // Obtener todos los id de Factura
+                ObservableList<String> idFacturas = FXCollections.observableArrayList();
+                for (DetalleFactura detalleFactura : datos) {
+                    if (!idFacturas.contains(String.valueOf(detalleFactura.getFactura().getId()))) {
+                        idFacturas.add(String.valueOf(detalleFactura.getFactura().getId()));
+                    }
+                }
+
+                facturaSecundariaController.txtNumFactura.setText(idFacturas.stream().reduce((a, b) -> a + ", " + b).get().toString());
 
                 facturaSecundariaController.colN1.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getServicio()
                         .getNombre()));
@@ -361,9 +369,6 @@ public class FacturarController implements Initializable {
                 );
 
                 facturaSecundariaController.recibirDatos(facturarController, datos);
-
-                // se realiza un pago antes de pasar a la otra ventana
-                //realizarPago();
 
                 Stage stage = new Stage();
                 stage.setTitle("Facturar");
