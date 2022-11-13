@@ -41,6 +41,7 @@ public class ConfiguracionesController implements Initializable {
     // logger log4j
     private static final Logger logger = LogManager.getLogger(ConfiguracionesController.class);
 
+
     // Lista de Servicios
     @FXML TextField txtNombre;
     @FXML TextField txtDescripcion;
@@ -57,6 +58,7 @@ public class ConfiguracionesController implements Initializable {
 
 
     // Tipo Contratos
+    @FXML Tab tabTC;
     @FXML Button btBuscarTC;
     @FXML TextField txtCodigo;
     @FXML TextField txtTipoContrato;
@@ -567,6 +569,7 @@ public class ConfiguracionesController implements Initializable {
     }
 
     public void listarServicios() {
+        cmbServicio.getItems().clear();
         var servicios = GlobalUtil.getServicios();
         cmbServicio.setValue(null);
         cmbServicio.setItems(servicios);
@@ -956,4 +959,7 @@ public class ConfiguracionesController implements Initializable {
     }
 
 
+    public void recargarTabs(Event event) {
+        listarServicios();
+    }
 }
