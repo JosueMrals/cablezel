@@ -1,9 +1,7 @@
 package com.josue.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "cortes")
@@ -19,23 +17,35 @@ public class Corte extends Identificador{
     }
 
     @ManyToOne
-    @JoinColumn(name = "servicio_id", referencedColumnName = "id")
-    private Servicio servicio;
-    public Servicio getServicio() {
-        return servicio;
+    @JoinColumn(name = "contrato_id", referencedColumnName = "id")
+    private Contrato contrato;
+    public Contrato getContrato() {
+        return contrato;
     }
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "factura_id", referencedColumnName = "id")
-    private Factura factura;
-    public Factura getFactura() {
-        return factura;
+    @Column(name = "fecha_corte")
+    private LocalDate fechaCorte;
+
+    public LocalDate getFecha_corte() {
+        return fechaCorte;
     }
-    public void setFactura(Factura factura) {
-        this.factura = factura;
+
+    public void setFecha_corte(LocalDate fechaCorte) {
+        this.fechaCorte = fechaCorte;
+    }
+
+    @Column(name = "estado")
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

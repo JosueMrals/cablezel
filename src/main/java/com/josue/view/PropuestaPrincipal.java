@@ -3,7 +3,6 @@ package com.josue.view;
 import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
-import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
 import javafx.animation.TranslateTransition;
@@ -72,7 +71,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         usuario = manejador.getUsuario();
 
         generarFacturasAutomaticas();
-
+        verificarCorte();
     }
 
     public void generarFacturasAutomaticas() {
@@ -82,7 +81,7 @@ public class PropuestaPrincipal extends Application implements Initializable {
         facturasAutomaticas.addAll(facturaAutomaticaService.getAll());
 
         facturasAutomaticas.forEach(facturaAutomatica -> {
-            if (facturaAutomatica.getFecha_factura_automatica().equals(LocalDate.now())) {
+            if (facturaAutomatica.getFecha_factura_automatica().equals(LocalDate.now()) && facturaAutomatica.getCantidad_facturas() < 3) {
                 Factura factura = new Factura();
                 factura.setFecha_factura(LocalDate.now());
                 factura.setCliente(facturaAutomatica.getCliente());
@@ -118,6 +117,49 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
             }
         });
+    }
+
+    public void verificarCorte() {
+        ObservableList<Corte> cortes = FXCollections.observableArrayList();
+        IGenericService<Corte> corteService = new GenericServiceImpl<>(Corte.class,
+                HibernateUtil.getSessionFactory());
+        try {
+            cortes.addAll(corteService.getAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ObservableList<FacturaAutomatica> facturasAutomaticas = FXCollections.observableArrayList();
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica.class,
+                HibernateUtil.getSessionFactory());
+
+        facturasAutomaticas.addAll(facturaAutomaticaService.getAll());
+
+        facturasAutomaticas.forEach(facturaAutomatica -> {
+            // Comprobar si el contrato tiene corte
+            if (!comprobarCorte(cortes, facturaAutomatica)){
+                LocalDate fechaCorte = facturaAutomatica.getFecha_factura_automatica().minusMonths(1);
+                if (facturaAutomatica.getCantidad_facturas() == 3 && fechaCorte.equals(LocalDate.now())) {
+                    Corte corte = new Corte();
+                    corte.setFecha_corte(LocalDate.now().plusDays(3));
+                    corte.setCliente(facturaAutomatica.getCliente());
+                    corte.setContrato(facturaAutomatica.getContrato());
+                    corte.setEstado("activo");
+                    IGenericService<Corte> corteService2 = new GenericServiceImpl<>(Corte.class,
+                            HibernateUtil.getSessionFactory());
+                    corteService2.save(corte);
+                }
+            }
+        });
+    }
+
+    private boolean comprobarCorte(ObservableList<Corte> cortes, FacturaAutomatica facturaAutomatica) {
+        for (Corte corte : cortes) {
+            if (corte.getContrato().getId() == facturaAutomatica.getContrato().getId() && corte.getEstado().equals("activo")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void generarFacturas() {
