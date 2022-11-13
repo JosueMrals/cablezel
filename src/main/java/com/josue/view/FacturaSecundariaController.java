@@ -4,6 +4,7 @@ import com.josue.modelo.DetalleFactura;
 import com.josue.modelo.Usuario;
 import com.josue.reportes.Reportes;
 import com.josue.util.ManejadorUsuario;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -38,7 +39,6 @@ public class FacturaSecundariaController implements Initializable {
     public TextField txtCliente;
     public TextField txtNumFactura;
     public TextField txtFechaFactura;
-    public TextField txtNota;
     public Label lbTotal;
     public Label lbDescuento;
     public Label lbSubTotal;
@@ -68,11 +68,9 @@ public class FacturaSecundariaController implements Initializable {
             total += detalleFactura.getTotal_pagar();
         }
 
-
         lbTotal.setText(String.valueOf(total));
         lbDescuento.setText(String.valueOf(0.0));
         lbSubTotal.setText(String.valueOf(total ));
-
     }
 
 
@@ -94,51 +92,59 @@ public class FacturaSecundariaController implements Initializable {
     }
 
     public void btImprimirClick(ActionEvent actionEvent) throws Exception {
-        // HashMap para los parametros del reporte
-        HashMap<String, Object> parametros = new HashMap<>();
+        String[] facturas = txtNumFactura.getText().split(",");
+        ObservableList<String> facturasImprimir = FXCollections.observableArrayList(facturas);
 
-        // obtener los datos de los detalles de la factura
-        ObservableList<DetalleFactura> detalles = tvMostrarPagos.getItems();
+        // Imprimir facturas segun los numeros de factura obtenidos
+        for (String fact : facturasImprimir) {
+            // HashMap para los parametros del reporte
+            HashMap<String, Object> parametros = new HashMap<>();
 
-        // obtener el cliente
-        String cliente = txtCliente.getText();
-        String direccion = txtDireccion.getText();
+            // obtener los datos de los detalles de la factura
+            ObservableList<DetalleFactura> detalles = tvMostrarPagos.getItems();
 
-        // obtener la factura
-        String factura = txtNumFactura.getText();
+            // obtener el cliente
+            String cliente = txtCliente.getText();
+            String direccion = txtDireccion.getText();
 
-        // obtener la fecha
-        String fecha = txtFechaFactura.getText();
+            // obtener la factura
+            String factura = txtNumFactura.getText();
 
-        // obtener la imagen
-        URL urlLogo = FacturaSecundariaController.class.getClassLoader().getResource( "reportes/cablezel.png") ;
-        BufferedImage urlImage = null;
+            // obtener la fecha
+            String fecha = txtFechaFactura.getText();
 
-        try {
-            urlImage= ImageIO.read(urlLogo);
-        } catch (Exception e) {
-            logger.error("Error al obtener la imagen del logo", e);
+            // obtener la imagen
+            URL urlLogo = FacturaSecundariaController.class.getClassLoader().getResource("reportes/cablezel.png");
+            BufferedImage urlImage = null;
+
+            try {
+                urlImage = ImageIO.read(urlLogo);
+            } catch (Exception e) {
+                logger.error("Error al obtener la imagen del logo", e);
+            }
+
+            // agregar los parametros
+            parametros.put("logo", urlImage);
+
+            // establecer los parametros
+            parametros.put("cliente", cliente);
+            parametros.put("direccion", direccion);
+            parametros.put("factura", fact);
+            parametros.put("fecha", fecha);
+            parametros.put("usuario", usuario.getNickusuario());
+            parametros.put("detalles", detalles);
+            parametros.put("total", total);
+            parametros.put("descuento", 0);
+            parametros.put("subtotal", total);
+
+            // establecer los parametros de la factura
+            parametrosFactura = parametros;
+
+            // imprimir el reporte
+            Reportes.generarReporte("reportes/Factura.jrxml", parametrosFactura, new JRBeanCollectionDataSource(detalles));
         }
 
-        // agregar los parametros
-        parametros.put("logo", urlImage);
-
-        // establecer los parametros
-        parametros.put("cliente", cliente);
-        parametros.put("direccion", direccion);
-        parametros.put("factura", factura);
-        parametros.put("fecha", fecha);
-        parametros.put("usuario", usuario.getNickusuario());
-        parametros.put("detalles", detalles);
-        parametros.put("total", total);
-        parametros.put("descuento", 0);
-        parametros.put("subtotal", total);
-
-        // establecer los parametros de la factura
-        parametrosFactura = parametros;
-
-        // imprimir el reporte
-        Reportes.generarReporte("reportes/Factura.jrxml", parametrosFactura, new JRBeanCollectionDataSource(detalles));
+        btCompletarClick(actionEvent);
 
     }
 }

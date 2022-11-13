@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="472.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionSistemaController">
+<AnchorPane prefHeight="472.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionSistemaController">
    <Pane prefHeight="41.0" prefWidth="860.0" style="-fx-background-color: #cccccc;" />
    <ScrollPane layoutY="82.0" pannable="true" prefHeight="500.0" prefWidth="837.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
       <Pane prefHeight="387.0" prefWidth="857.0" style="-fx-border-style: none;">
@@ -24,6 +25,9 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Haga click en el boton de la derecha para activar la edicion de los datos" />
+               </tooltip>
             </Label>
             <Label layoutX="20.0" layoutY="35.0" text="Herramienta de respaldo">
                <font>
@@ -65,6 +69,9 @@
             </TextField>
             <ImageView fx:id="ivAbrirDirectorioServidor" fitHeight="30.0" fitWidth="32.0" layoutX="763.0" layoutY="58.0" onMouseClicked="#abrirDirectorioFichero" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/lapiz.png" />
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <Label layoutX="23.0" layoutY="222.0" prefHeight="17.0" prefWidth="84.0" text="Usuario">
                <font>
@@ -99,6 +106,9 @@
             </TextField>
             <ImageView fx:id="ivAbrirDirectorioFichero" fitHeight="30.0" fitWidth="32.0" layoutX="760.0" layoutY="307.0" onMouseClicked="#abrirDirectorio" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/lapiz.png" />
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <Label layoutX="572.0" layoutY="221.0" prefHeight="17.0" prefWidth="84.0" text="Base de datos">
                <font>
@@ -117,6 +127,9 @@
                <image>
                   <Image url="@../images/lapiz.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <Label layoutX="20.0" layoutY="98.0" text="Herramienta de restauración">
                <font>
@@ -132,6 +145,9 @@
                <image>
                   <Image url="@../images/lapiz.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </Pane>
       </Pane>
@@ -146,11 +162,17 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btCancelar" alignment="CENTER" layoutX="587.0" layoutY="3.0" mnemonicParsing="false" onAction="#btCancelarClick" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #66ccff;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </Pane>
 </AnchorPane>

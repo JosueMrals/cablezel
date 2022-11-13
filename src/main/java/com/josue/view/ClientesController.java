@@ -54,6 +54,14 @@ public class ClientesController implements Initializable {
         autoCompletarNombre();
         autoCompletarCedula();
         addButtonEditar();
+        listarBarrios();
+    }
+
+    public void listarBarrios(){
+        var barrios = GlobalUtil.getBarrios();
+        cbBarrio.setValue(null);
+        cbBarrio.setItems(barrios);
+        cbBarrio.setPromptText("Seleccione un barrio");
     }
 
     public void autoCompletarNombre() {
@@ -159,7 +167,7 @@ public class ClientesController implements Initializable {
                 txtPrimerApellido.clear();
                 txtSegundoApellido.clear();
                 txtDireccion.clear();
-                cbBarrio.getSelectionModel().clearSelection();
+                cbBarrio.setPromptText("Seleccione un barrio");
                 txtNumTelefono.clear();
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Info: El cliente se insertó correctamente.",
@@ -167,7 +175,6 @@ public class ClientesController implements Initializable {
                 alert.showAndWait();
 
                 llenarClientes();
-
 
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Error: " + e.getMessage(), ButtonType.OK);

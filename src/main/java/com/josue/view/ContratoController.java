@@ -193,6 +193,7 @@ public class ContratoController implements Initializable {
         factura.setTotal(servicioSeleccionado.getPrecio());
         factura.setUsuario(usuario);
         factura.setEstado("pendiente");
+        factura.setContrato(contratoSeleccionado);
         factura.setCliente(clienteSeleccionado);
         IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
                 HibernateUtil.getSessionFactory());
@@ -221,6 +222,7 @@ public class ContratoController implements Initializable {
         facturaTv.setFecha_factura(LocalDate.now());
         facturaTv.setUsuario(usuario);
         facturaTv.setTotal(0.0f);
+        facturaTv.setContrato(contratoSeleccionado);
         facturaTv.setEstado("pendiente");
         facturaTv.setCliente(clienteSeleccionado);
         IGenericService<Factura> facturaTvService = new GenericServiceImpl<>(Factura.class,
