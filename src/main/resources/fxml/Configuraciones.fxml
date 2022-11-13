@@ -23,7 +23,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="717.0" prefWidth="1126.0" stylesheets="@../css/Configuraciones.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.josue.view.ConfiguracionesController">
    <TabPane layoutY="-1.0" prefHeight="717.0" prefWidth="1126.0" tabClosingPolicy="UNAVAILABLE">
-      <Tab text="Tipos de Contratos">
+      <Tab fx:id="tabTC" onSelectionChanged="#recargarTabs" text="Tipos de Contratos">
          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="717.0" prefWidth="1161.0" style="-fx-border-style: none; -fx-background-color: white;">
             <cursor>
                <Cursor fx:constant="DEFAULT" />
