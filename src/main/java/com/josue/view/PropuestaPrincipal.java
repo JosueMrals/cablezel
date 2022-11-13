@@ -3,6 +3,7 @@ package com.josue.view;
 import com.josue.modelo.*;
 import com.josue.service.GenericServiceImpl;
 import com.josue.service.IGenericService;
+import com.josue.util.GlobalUtil;
 import com.josue.util.HibernateUtil;
 import com.josue.util.ManejadorUsuario;
 import javafx.animation.TranslateTransition;
@@ -70,12 +71,56 @@ public class PropuestaPrincipal extends Application implements Initializable {
         ManejadorUsuario manejador = ManejadorUsuario.getInstance();
         usuario = manejador.getUsuario();
 
-        generarFacturas();
+        generarFacturasAutomaticas();
 
     }
 
-    private void generarFacturas() {
+    public void generarFacturasAutomaticas() {
+        ObservableList<FacturaAutomatica> facturasAutomaticas = FXCollections.observableArrayList();
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>( FacturaAutomatica.class,
+                HibernateUtil.getSessionFactory());
+        facturasAutomaticas.addAll(facturaAutomaticaService.getAll());
 
+        facturasAutomaticas.forEach(facturaAutomatica -> {
+            if (facturaAutomatica.getFecha_factura_automatica().equals(LocalDate.now())) {
+                Factura factura = new Factura();
+                factura.setFecha_factura(LocalDate.now());
+                factura.setCliente(facturaAutomatica.getCliente());
+                factura.setContrato(facturaAutomatica.getContrato());
+                factura.setTotal(facturaAutomatica.getContrato().getTipocontrato().getServicio().getPrecio());
+                factura.setEstado("pendiente");
+                factura.setUsuario(usuario);
+                IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
+                        HibernateUtil.getSessionFactory());
+                facturaService.save(factura);
+
+                // Obtener la factura ingresada
+                IGenericService<Factura> facturaService2 = new GenericServiceImpl<>(Factura.class,
+                        HibernateUtil.getSessionFactory());
+                Factura factura2 = facturaService2.getById(factura.getId());
+
+                DetalleFactura detalleFactura = new DetalleFactura();
+                detalleFactura.setFactura(factura2);
+                detalleFactura.setServicio(facturaAutomatica.getContrato().getTipocontrato().getServicio());
+                detalleFactura.setTotal_pagar(facturaAutomatica.getContrato().getTipocontrato().getServicio().getPrecio());
+                detalleFactura.setDescripcion("SERVICIO MENSUAL " + facturaAutomatica.getContrato().getTipocontrato().getServicio().getNombre());
+
+                IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
+                        HibernateUtil.getSessionFactory());
+                detalleFacturaService.save(detalleFactura);
+
+                // Actualizar las facturas automaticas
+                facturaAutomatica.setFecha_factura_automatica(facturaAutomatica.getFecha_factura_automatica().plusMonths(1));
+                facturaAutomatica.setCantidad_facturas(facturaAutomatica.getCantidad_facturas() + 1);
+                IGenericService<FacturaAutomatica> facturaAutomaticaService2 = new GenericServiceImpl<>(FacturaAutomatica.class,
+                        HibernateUtil.getSessionFactory());
+                facturaAutomaticaService2.update(facturaAutomatica);
+
+            }
+        });
+    }
+
+    private void generarFacturas() {
         // Obtener la lista de clientes con base en la consulta
         IGenericService<Contrato> contratoService = new GenericServiceImpl<>(Contrato.class, HibernateUtil
                 .getSessionFactory());
@@ -120,41 +165,101 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
             //ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteService.consultarClientes(consultaHQL,null));
                 clientesNoFacturados.forEach(cliente -> {
-                    logger.info("Cliente: " + cliente);
-                    // Crear la factura
-                    Factura factura = new Factura();
-                    factura.setUsuario(usuario);
-                    factura.setCliente(cliente);
-                    factura.setFecha_factura(LocalDate.now());
-                    factura.setTotal(0f);
-                    factura.setEstado("pendiente");
 
-                    // Guardar la factura
-                    IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil
+                    ObservableList<FacturaAutomatica> facturasAutomaticas = FXCollections.observableArrayList();
+                    IGenericService<FacturaAutomatica> facturaAutomaticaServicio = new GenericServiceImpl<>(FacturaAutomatica.class, HibernateUtil
                             .getSessionFactory());
-                    facturaService.save(factura);
 
-                    // Obtener factura creada
-                    Factura facturaCreada = facturaService.getById(factura.getId());
-                    LOGGER.info("Factura creada: " + facturaCreada);
+                    facturasAutomaticas.addAll(facturaAutomaticaServicio.getAll());
+                    Contrato contratoObtenido = obtenerContratoCliente(cliente);
 
-                    //  Generar detalle de factura
-                    IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura
-                            .class,HibernateUtil.getSessionFactory());
+                    logger.info("Cliente: " + cliente);
 
-                    DetalleFactura detalleFactura = new DetalleFactura();
-                    detalleFactura.setFactura(facturaCreada);
-                    detalleFactura.setServicio(obtenerServicioCliente(cliente, obtenerContratos()));
-                    detalleFactura.setDescripcion("mensual");
-                    detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
+                    facturasAutomaticas.forEach(facturaAutomatica -> {
 
-                    detalleFacturaService.save(detalleFactura);
+
+                        // Crear la factura
+                        Factura factura = new Factura();
+                        factura.setUsuario(usuario);
+                        factura.setCliente(cliente);
+                        factura.setFecha_factura(LocalDate.now());
+                        factura.setContrato(contratoObtenido);
+                        factura.setTotal(0.0f);
+                        factura.setEstado("pendiente");
+
+                        // Guardar la factura
+                        IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class, HibernateUtil
+                                .getSessionFactory());
+                        facturaService.save(factura);
+
+                        // Obtener factura creada
+                        Factura facturaCreada = facturaService.getById(factura.getId());
+                        LOGGER.info("Factura creada: " + facturaCreada);
+
+                        //  Generar detalle de factura
+                        IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura
+                                .class,HibernateUtil.getSessionFactory());
+
+                        DetalleFactura detalleFactura = new DetalleFactura();
+                        detalleFactura.setFactura(facturaCreada);
+                        detalleFactura.setServicio(obtenerServicioCliente(cliente, obtenerContratos()));
+                        detalleFactura.setDescripcion("mensual");
+                        detalleFactura.setTotal_pagar(servicioSeleccionado.getPrecio());
+
+                        detalleFacturaService.save(detalleFactura);
+
+                        // Actualizar el total de la factura
+                        facturaCreada.setTotal(facturaCreada.getTotal() + detalleFactura.getTotal_pagar());
+                        facturaService.update(facturaCreada);
+
+                        // Actualizar factura automatica de ese contrato y cliente
+                        actualizarFacturaAutomatica(cliente, contratoObtenido);
+                    });
+
+
+
             });
         } catch (Exception e) {
             logger.error("Error al obtener los clientes", e);
         }
 
     }
+
+    private void actualizarFacturaAutomatica(Cliente cliente, Contrato contratoObtenido) {
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica
+                .class, HibernateUtil.getSessionFactory());
+        try {
+            FacturaAutomatica facturaAutomatica = facturaAutomaticaService.getAll().stream().filter(
+                    facturaAutomatica1 -> facturaAutomatica1.getCliente().equals(cliente) &&
+                            facturaAutomatica1.getContrato().equals(contratoObtenido)).findFirst().orElse(null);
+
+            if (facturaAutomatica != null) {
+                facturaAutomatica.setCantidad_facturas(facturaAutomatica.getCantidad_facturas() + 1);
+                facturaAutomaticaService.update(facturaAutomatica);
+            }
+        } catch (Exception e) {
+            logger.error("Error al actualizar la factura automatica", e);
+        }
+    }
+
+    private Contrato obtenerContratoCliente(Cliente cliente) {
+        IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica
+                .class, HibernateUtil.getSessionFactory());
+        ObservableList<FacturaAutomatica> facturasAutomaticas = FXCollections.observableArrayList();
+        try {
+            facturasAutomaticas.addAll(facturaAutomaticaService.getAll());
+            for (FacturaAutomatica facturaAutomatica : facturasAutomaticas) {
+                if (facturaAutomatica.getCliente().equals(cliente)) {
+                    return facturaAutomatica.getContrato();
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Error al obtener las facturas automaticas", e);
+        }
+        return null;
+    }
+
+
 
     //Obtener todos los contratos
     public ObservableList<Contrato> obtenerContratos() {
