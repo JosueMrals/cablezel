@@ -22,6 +22,7 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -276,12 +277,12 @@ public class FacturarController implements Initializable {
         ObservableList<FacturaAutomatica> facturasAutomaticas = GlobalUtil.getFacturaAutomatica();
         LocalDate fechaUltimaFactura = obtenerUltimaFechaFacturasPagadas(facturasPagadas);
         for (Factura factura : facturasPagadas) {
-            //Obtener un cliente por cada factura
-            Cliente cliente = factura.getCliente();
-            for (FacturaAutomatica facturaAutomatica : facturasAutomaticas) {
+            // Obtener el contrato de la factura
+            Contrato contrato = factura.getContrato();
+            for(FacturaAutomatica facturaAutomatica : facturasAutomaticas) {
                 // Obtener el cliente de la factura automatica
-                Cliente cliente1 = facturaAutomatica.getCliente();
-                if (cliente.getId() == cliente1.getId()) {
+                Contrato contrato1 = facturaAutomatica.getContrato();
+                if (Objects.equals(contrato.getId(), contrato1.getId()) && facturaAutomatica.getCantidad_facturas() > 0) {
                     // Actualizar la fecha de la factura automatica
                     facturaAutomatica.setFecha_factura_automatica(fechaUltimaFactura.plusMonths(1));
                     facturaAutomatica.setCantidad_facturas(facturaAutomatica.getCantidad_facturas() - 1);

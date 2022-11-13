@@ -425,7 +425,7 @@ public class ContratoController implements Initializable {
         FacturaAutomatica facAuto = new FacturaAutomatica();
         facAuto.setContrato(contratoSeleccionado);
         facAuto.setCliente(clienteSeleccionado);
-        facAuto.setFecha_factura_automatica(LocalDate.now().plusMonths(1));
+        facAuto.setFecha_factura_automatica(contratoSeleccionado.getFecha_contrato().plusMonths(1));
         facAuto.setCantidad_facturas(0);
 
         facAutoService.save(facAuto);
