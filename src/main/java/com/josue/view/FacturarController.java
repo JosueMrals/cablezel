@@ -74,16 +74,18 @@ public class FacturarController implements Initializable {
 
     public void buscarCliente() {
         String nombreCliente = txtBuscarCliente.getText();
+
         IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
                 HibernateUtil.getSessionFactory());
         ObservableList<DetalleFactura> detalleFacturas = FXCollections.observableArrayList(detalleFacturaService.
                 getAll());
         ObservableList<DetalleFactura> detalleFacturasFiltradas = FXCollections.observableArrayList();
+
         for(DetalleFactura detallesFactura : detalleFacturas) {
             if((detallesFactura.getFactura().getCliente().getPrimer_nombre()
             + " " + detallesFactura.getFactura().getCliente().getSegundo_nombre()
             + " " + detallesFactura.getFactura().getCliente().getPrimer_apellido()
-            + " " + detallesFactura.getFactura().getCliente().getSegundo_apellido()).contains(nombreCliente)) {
+            + " " + detallesFactura.getFactura().getCliente().getSegundo_apellido()).contains(nombreCliente) && detallesFactura.getFactura().getEstado().equals("pendiente")) {
                 detalleFacturasFiltradas.add(detallesFactura);
             }
         }
