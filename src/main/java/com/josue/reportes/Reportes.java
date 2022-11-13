@@ -88,6 +88,7 @@ public class Reportes {
                         jp = JasperFillManager.fillReport(jasperReport, parametros, connection);
                         // mostrar el reporte
                         JasperViewer jv = new JasperViewer(jp, false);
+                        jv.setSize(1300, 1000);
                         jv.setVisible(true);
                     } catch (Exception e) {
                         log.error("Error al generar el reporte", e);
