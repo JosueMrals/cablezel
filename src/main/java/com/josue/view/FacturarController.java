@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
+import javax.swing.text.StyledEditorKit;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -215,6 +216,8 @@ public class FacturarController implements Initializable {
         // Variable para almacenar el total a pagar
         float totalPagar = 0;
 
+        Contrato contratoCortado = new Contrato();
+
         // Obtener los datos de la tabla
         ObservableList<DetalleFactura> detalleFacturasPagar = tvBuscarClientes1.getItems();
 
@@ -230,6 +233,11 @@ public class FacturarController implements Initializable {
         Pago pagoId = pagoService.getById(pago.getId());
 
         for (DetalleFactura detalleFactura1 : detalleFacturasPagar) {
+
+            // Comprobar si hay un servicio de tipo CORTE
+            if (detalleFactura1.getServicio().getNombre().equals("CORTE")) {
+                contratoCortado = detalleFactura1.getFactura().getContrato();
+            }
 
             totalPagar += detalleFactura1.getTotal_pagar();
 
@@ -273,6 +281,20 @@ public class FacturarController implements Initializable {
             detalleFacturaService.update(detalleFactura);
         }
 
+        // Actualizar el estado del corte
+        if (contratoCortado.getId() != null) {
+            IGenericService<Corte> corteService = new GenericServiceImpl<>(Corte.class,
+                    HibernateUtil.getSessionFactory());
+            ObservableList<Corte> listaCortes = GlobalUtil.getCortes();
+
+            for (Corte corte : listaCortes) {
+                if (corte.getContrato().getId() == contratoCortado.getId()) {
+                    corte.setEstado("inactivo");
+                    corteService.update(corte);
+                }
+            }
+        }
+
         // Actualizar fecha en la tabla FacturaAutomatica
         IGenericService<FacturaAutomatica> facturaAutomaticaService = new GenericServiceImpl<>(FacturaAutomatica.class,
                 HibernateUtil.getSessionFactory());
@@ -286,7 +308,11 @@ public class FacturarController implements Initializable {
                 Contrato contrato1 = facturaAutomatica.getContrato();
                 if (Objects.equals(contrato.getId(), contrato1.getId()) && facturaAutomatica.getCantidad_facturas() > 0) {
                     // Actualizar la fecha de la factura automatica
-                    facturaAutomatica.setFecha_factura_automatica(fechaUltimaFactura.plusMonths(1));
+                    if (Objects.equals(contratoCortado.getId(), contrato.getId())) {
+                        facturaAutomatica.setFecha_factura_automatica(LocalDate.now().plusMonths(1));
+                    } else {
+                        facturaAutomatica.setFecha_factura_automatica(fechaUltimaFactura.plusMonths(1));
+                    }
                     facturaAutomatica.setCantidad_facturas(facturaAutomatica.getCantidad_facturas() - 1);
                     facturaAutomaticaService.update(facturaAutomatica);
                 }

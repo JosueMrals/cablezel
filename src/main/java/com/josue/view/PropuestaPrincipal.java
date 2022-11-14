@@ -135,6 +135,8 @@ public class PropuestaPrincipal extends Application implements Initializable {
 
         facturasAutomaticas.addAll(facturaAutomaticaService.getAll());
 
+        Servicio finalServicioCorte = verificarServicioCorte();
+
         facturasAutomaticas.forEach(facturaAutomatica -> {
             // Comprobar si el contrato tiene corte
             if (!comprobarCorte(cortes, facturaAutomatica)){
@@ -148,9 +150,58 @@ public class PropuestaPrincipal extends Application implements Initializable {
                     IGenericService<Corte> corteService2 = new GenericServiceImpl<>(Corte.class,
                             HibernateUtil.getSessionFactory());
                     corteService2.save(corte);
+
+                    //Generar factura de corte
+                    Factura factura = new Factura();
+                    factura.setFecha_factura(LocalDate.now());
+                    factura.setCliente(facturaAutomatica.getCliente());
+                    factura.setContrato(facturaAutomatica.getContrato());
+                    factura.setTotal(finalServicioCorte.getPrecio());
+                    factura.setEstado("pendiente");
+                    factura.setUsuario(usuario);
+                    IGenericService<Factura> facturaService = new GenericServiceImpl<>(Factura.class,
+                            HibernateUtil.getSessionFactory());
+                    facturaService.save(factura);
+
+                    // Obtener la factura creada
+                    IGenericService<Factura> facturaService2 = new GenericServiceImpl<>(Factura.class,
+                            HibernateUtil.getSessionFactory());
+                    Factura factura2 = facturaService2.getById(factura.getId());
+
+                    DetalleFactura detalleFactura = new DetalleFactura();
+                    detalleFactura.setFactura(factura2);
+                    detalleFactura.setServicio(finalServicioCorte);
+                    detalleFactura.setTotal_pagar(finalServicioCorte.getPrecio());
+                    detalleFactura.setDescripcion("SERVICIO DE " + finalServicioCorte.getNombre());
+
+                    IGenericService<DetalleFactura> detalleFacturaService = new GenericServiceImpl<>(DetalleFactura.class,
+                            HibernateUtil.getSessionFactory());
+                    detalleFacturaService.save(detalleFactura);
                 }
             }
         });
+    }
+
+    private Servicio verificarServicioCorte() {
+        IGenericService<Servicio> servicioService = new GenericServiceImpl<>(Servicio.class,
+                HibernateUtil.getSessionFactory());
+        ObservableList<Servicio> servicios = FXCollections.observableArrayList();
+        servicios.addAll(servicioService.getAll());
+
+        Servicio servicioCorte = null;
+        for (Servicio servicio : servicios) {
+            if (servicio.getNombre().equals("CORTE")) {
+                servicioCorte = servicio;
+            }
+        }
+        if (servicioCorte == null) {
+            servicioCorte = new Servicio();
+            servicioCorte.setNombre("CORTE");
+            servicioCorte.setPrecio(360.0f);
+            servicioCorte.setDescripcion("CORTE DE SERVICIO");
+            servicioService.save(servicioCorte);
+        }
+        return servicioCorte;
     }
 
     private boolean comprobarCorte(ObservableList<Corte> cortes, FacturaAutomatica facturaAutomatica) {

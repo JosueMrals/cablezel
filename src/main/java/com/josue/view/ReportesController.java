@@ -33,6 +33,10 @@ public class ReportesController {
         GlobalUtil.mostrarReportes("/fxml/Reportes/ClientesAvisar.fxml", "Clientes a Avisar");
     }
 
+    public void cortes() {
+        GlobalUtil.mostrarReportes("/fxml/Reportes/Cortes.fxml", "Cortes");
+    }
+
 
 
 

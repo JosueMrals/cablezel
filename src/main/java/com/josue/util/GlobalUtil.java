@@ -144,6 +144,11 @@ public class GlobalUtil {
         return FXCollections.observableArrayList(detalleFacturaService.getAll());
     }
 
+    public static ObservableList<Corte> getCortes() {
+        IGenericService<Corte> corteService = new GenericServiceImpl<>(Corte.class, HibernateUtil.getSessionFactory());
+        return FXCollections.observableArrayList(corteService.getAll());
+    }
+
     // Mostrar reportes
     public static void mostrarReportes(String ruta, String titulo) {
         FXMLLoader fxmlLoader = new FXMLLoader(GlobalUtil.class.getResource(ruta));
@@ -158,6 +163,5 @@ public class GlobalUtil {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
 }
